@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Variational Autoencoders</title>
+  <title>D'Alembert's Principle</title>
 
   <!-- Link external CSS -->
   <link rel="stylesheet" href="styles.css" />
@@ -41,6 +41,73 @@
       I rate it a solid 7/10.
     </p>
 
+    <p>
+      Constraint forces are defined by the equation:
+      $$\sum_{i=1}^N \vec{F}_{c,i} \cdot \delta\vec{r}_i = 0$$
+    </p>
+
+    <p>
+      Here's the correct way to think about each of the quantities.
+      If we have a system of $N$ particles and each particle has $3$ position coordinates, 
+      then the configuration of the system (configuration in a positional sense - 
+      we don't care about the velocity of the particles) can be described by a point in configuration space, 
+      which in this case is $\mathbb{R}^{3N}$.
+    </p>
+
+    <p>
+      However, there may be constraints that restricts the possible points in configuration space 
+      that our system can be in. In the simplest case we have holonomic constraints which take the form:
+      $$C_j (\vec{r}_1, \cdots, \vec{r}_N) = 0$$
+    </p>
+
+    <p>
+      These constraints restricts our system to a high dimensional "surface" in configuration space. 
+      So for example, if $N=1$ and we had a single constraint, then we are restricted to a two dimensional surface of the full $3$ dimensional configuration space. 
+      I emphasise the word surface - even though in cases where $N > 1$ this subspace will have dimension greater than $2$, 
+      it has the geometry of a surface and not a volume. For instance, in the $N=1$ case, if the constraint had instead been to restrict our 
+      states to a sub-volume of $\mathbb{R}^3$ instead of a $2$ dimensional surface $\mathbb{R}^3$, then the constraint will probably not be holonomic! 
+      This has important consequences for how we think about virtual displacements - they must always be <b>tangent</b> to our constraint surface. 
+      In other words, considering the $N=1$ case we should not think of our constrained subspace to be a smaller volume in $\mathbb{R}^3$ and our virtual displacement 
+      as pointing inwards into that volume, because that subspace has the wrong geometry. 
+    </p>
+
+    <p>
+      A set of virtual displacements define a vector that is tangent to our constraint surface. Note that when we define a set of virtual displacements $\{\delta\vec{r}_1, \cdots, \delta\vec{r}_N \}$, 
+      the individual displacements are <b>not</b> defined in isolation - they must, together, form a valid <b>set</b> of virtual displacements. To be concrete, let's consider the case where $N=3$. 
+      Then, our configuration space is going to be $\mathbb{R}^{3 \times 3} = \mathbb{R}^9$. If we have say, two constraints, then our constraints will restrict us to a $7$ dimensional surface in this $9$ dimensional space. 
+      A valid virtual displacement will be a $9$ dimensional, infinitesimal vector that is tangent to this $7$ dimensional subspace. Of course, we can group terms together and think of our virtual displacement 
+      as a list like $\{\delta\vec{r}_1, \delta\vec{r}_2, \delta\vec{r}_3 \}$, but I think it is more general to think of it as a $9$ dimensional vector in configuration space. 
+    </p>
+
+    <p>
+      Using the same $N=3$ example, the equation $\sum_{i=1}^N \vec{F}_{c,i} \cdot \delta\vec{r}_i = 0$ tells us that the constraint force is normal to any virtual displacement we can take from a given point on the constraint surface. 
+      This <b>does not</b> mean that individual forces have to act perpendicular to the motion of individual particles (ie. $\vec{F}_{c, 1}$ has to be perpendicular to $\delta \vec{r}_1$)! 
+      Rather, it means that the $9$ dimensional force vector has to be perpendicular to the $9$ dimensional virtual displacement for our $N=3$ system. 
+      Put in another way, the net work done by all constraint forces for any set of virtual displacements must sum to $0$. However, the constraint forces can transfer energy from 
+      one part of our system to another.
+    </p>
+
+    <p>
+      Another subtlety is the following. In writing down the force equation the virtual displacements are geometric entities that have no time dependence. They are just a bunch of vectors tangent to the constraint surface. 
+      But the constraint forces $\vec{F}_{c,i}$, being forces, are defined in terms of acceleration. and you must consider an infinitesimal time interval to measure a force. 
+      So it feels weird that both of them appear in the same equation. The way to think about this is that the equation tells us a condition that any set of constraint forces acting on a system passing through that specific point in configuration space must satisfy. As the system evolves, it traces out a path in configurations space:
+      $$\vec{r}(t) = \{ \vec{r}_1(t), \cdots, \vec{r}_N(t) \}$$
+      There will be a corresponding set of constraint forces that act on the system at any point in time:
+      $$\vec{F}_{c}(t) = \{ \vec{F}_{c, 1}(t), \cdots, \vec{F}_{c, N}(t) \}$$
+      For any $t=t_0$ we must have:
+      $$\vec{F}_c(t_0) \cdot  \delta \vec{r}(t_0) = 0$$
+      where $\delta \vec{r}(t_0)$ is any small virtual displacement from $\vec{r}(t_0)$. 
+      Put this way, the constraint force no longer requires us to think "a small step ahead in time", and it too can be thought of as a purely geometric entity. 
+    </p>
+
+    <p>
+      One final point. Saying "constraint forces do no work" tells us :
+      $$\sum_{i=1}^N \vec{F}_{c,i} \cdot \text{d}\vec{r}_i = 0$$
+      Notice that in this case we don't use $\delta$. 
+      This is because these differentials represent displacements in some actual trajectory. 
+      So the condition $\sum_{i=1}^N \vec{F}_{c,i} \cdot \delta\vec{r}_i = 0$ is actually stricter than "constraint forces do no work", 
+      since whatever $\vec{F_c}$ must hold for <b>all</b> virtual displacements and not just the specific $\{ \text{d}r_1, \cdots, \text{d}r_N \}$ that was realised for its trajectory.
+    </p>
 
 </body>
 </html>
