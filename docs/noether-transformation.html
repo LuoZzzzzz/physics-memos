@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Transformations in Noether's Theorem</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Transformations in Noether's Theorem</h1>
+
+    <p>
+      In Noether's theorem, we consider a transformation of coordinates described by:
+      $$t' = t + \epsilon \tau(q_k(t), t)$$
+      $$q_i'(t') = q_i(t) + \epsilon \eta_i(q_k(t), t)$$
+    </p>
+
+    <p>
+      There is a nice geometrical way to think about this. Let us consider the configuration space with coordinate axes $q_1, \dots, q_N, t$. 
+      The evolution of our system may be described by a trajectory (line) in configuration space. 
+      Consider the vector field in configuration space given by:
+      $$\vec{X} = (\eta_1(q_k(t), t), \dots, \eta_N(q_k(t), t), \tau(q_k(t), t))$$
+      Now, imagine that we displace each point on our original trajectory by a small amount $\epsilon \vec{X}$. 
+      This produces a new trajectory in configuration space that is described by $q_1'(t'), \dots, q_N'(t')$. 
+    </p>
+
+    <p>
+      Note that in our original equations, $q_i'(t')$ is defined in terms of $t$, but its argument is $t'$. 
+      The reason is that after displacement, the point $(q_1', \dots, q_N')$ is now associated with the time $t'$, 
+      since that is where the $t$ associated with the original $(q_1, \dots, q_N)$ was displaced to.
+    </p>
+
+    <p>
+      In the B2 notes, the quantity $\bar{\eta}_i$ was defined to be the change in $q_i$ due to $\vec{X}$ <b>holding time constant</b>. 
+      Here's how everything looks geometrically:
+    </p>
+
+    <div style="text-align: center;">
+      <img src="noethertransformation.png" alt="noether transform" width="700">
+    </div>
+</body>
+</html>
