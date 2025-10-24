@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Adding a total derivative to the Lagrangian</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Adding a total derivative to the Lagrangian</h1>
+
+    <p>
+      A standard result is that the trajectory of least action is unchanged if a total time derivative is added to the Lagrangian $L$. 
+      That is, for boundary conditions $q(t_A), q(t_B)$ the trajectory of least action for the Lagrangians $L$ and $L + \frac{\text{d}f}{\text{d}t}$ are the same. 
+    </p>
+
+    <p>
+      This feels a bit off, because the action associated with the latter is given by:
+      $$S = \int_{t_A}^{t_B} L(q(t), \dot{q}(t), t) \text{dt} + [f(q(t), \dot{q}(t), t)]^{t_B}_{t_A}$$
+      And the corresponding first order change in the $f$ term is:
+      $$[\frac{\partial f}{\partial q} \delta q + \frac{\partial f}{\partial \dot{q}} \delta \dot{q}]^{t_B}_{t_A}$$
+    </p>
+
+    <p>
+      The $[\frac{\partial f}{\partial q} \delta q]^{t_B}_{t_A}$ term is certainly zero at the boundary points, but the $[\frac{\partial f}{\partial \dot{q}} \delta \dot{q}]^{t_B}_{t_A}$ term need not be zero! 
+      The reason is that even though the trajectory is fixed at the boundary points, it is free to pivot and rotate about it, and that will lead to a non-zero $\delta \dot{q}(t_A)$ or $\delta \dot{q}(t_B)$ term. 
+      Consequently, it seems that there will be a first order contribution to $\delta S$ from the $f$ term. What is the resolution?
+    </p>
+
+    <p>
+      The answer is that $f$ cannot contain $\dot{q}$. Since $L$ is a function of $q, \dot{q}, t$, any modification we make to it should also be a function of $q, \dot{q}, t$. 
+      This means that in the case of a total derivative $\frac{\text{d}f}{\text{d}t}$, we must have $\frac{\text{d}f}{\text{d}t} = \frac{\text{d}f}{\text{d}t}(q, \dot{q}, t)$. 
+      This then implies $f = f(q, t)$.  To see why, let us suppose that $f$ did in fact contain $\dot{q}$. Then the total derivative is:
+      $$\frac{\text{d}f}{\text{d}t} = \frac{\partial f}{\partial q} \dot{q} + \frac{\partial f}{\partial \dot{q}} \ddot{q} + \frac{\partial f}{\partial t}$$
+      And we see that $\frac{\text{d}f}{\text{d}t} = \frac{\text{d}f}{\text{d}t}(q, \dot{q}, \ddot{q}, t)$. This is of course, as we have said, unphysical.
+    </p>
+
+</body>
+</html>
