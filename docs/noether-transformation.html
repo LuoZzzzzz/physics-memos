@@ -46,7 +46,7 @@
       There is a nice geometrical way to think about this. Let us consider the configuration space with coordinate axes $q_1, \dots, q_N, t$. 
       The evolution of our system may be described by a trajectory (line) in configuration space. 
       Consider the vector field in configuration space given by:
-      $$\vec{X} = (\eta_1(q_k(t), t), \dots, \eta_N(q_k(t), t), \tau(q_k(t), t))$$
+      $$\vec{X} = (\eta_1(q_k, t), \dots, \eta_N(q_k, t), \tau(q_k, t))$$
       Now, imagine that we displace each point on our original trajectory by a small amount $\epsilon \vec{X}$. 
       This produces a new trajectory in configuration space that is described by $q_1'(t'), \dots, q_N'(t')$. 
     </p>
@@ -58,13 +58,17 @@
     </p>
 
     <p>
-      In the B2 notes, the quantity $\bar{\eta}_i$ was defined to be the change in $q_i$ due to $\vec{X}$ <b>holding time constant</b>. 
       Here's how everything looks geometrically:
     </p>
 
     <div style="text-align: center;">
       <img src="noethertransformation.png" alt="noether transform" width="700">
     </div>
+
+    <p>
+      In the B2 notes, the quantity $\bar{\eta}_i$ was defined to be the change in $q_i$ due to $\vec{X}$ <b>holding time constant</b>. 
+      This is the red segment in the diagram.
+    </p>
 
     <p>
       Now, imagine that we let our trajectory "flow" for a bit under the vector field $\vec{X}$. 
