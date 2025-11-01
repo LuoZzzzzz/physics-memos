@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Klein Gordon Equation and Scattering</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Klein Gordon Equation and Scattering</h1>
+
+    <p>
+      The Klein-Gordon equation (for free space) is:
+      $$(\nabla^2 - \mu^2)F(\vec{\bf{r}}) = 0$$
+      $F(\vec{\bf{r}})$ stands for some field (which in this case is just zero everywhere, I think). 
+      If we have a scatterer (a point like nucleus for example) at the origin, 
+      the interaction of the scatterer with the field will be described by the following equation:
+      $$(\nabla^2 - \mu^2)G(\vec{\bf{r}}) = \delta(\vec{\bf{r}})$$
+      The solution is the Green function of the Klein Gordon equation, and it is:
+      $$G(\vec{\bf{r}}) = \frac{e^{-\mu r}}{r}$$
+      In the above equations we have assumed that our scatterer has an interaction strength of $1$ with the Klein Gordon field. 
+    </p>
+
+    <p>
+      Therefore, the correct way to think about this entire business is: we have a scatterer somewhere, it interacts with the Klein Gordon field, this in turn produces a potential that all other particles "see". 
+    </p>
+
+    <p>
+      Now, from perturbation theory, we worked out that the coupling between the initial and final momentum states of our scattered particle (not scatterer) is:
+      $$\bra{\vec{\bf{k}}'}V\ket{\vec{\bf{k}}} = \int e^{i (\vec{\bf{k}}' - \vec{\bf{k}}) \cdot \vec{\bf{r}}} \, V(\vec{\bf{r}}) \,\text{d}^3\vec{\bf{r}}$$
+      But this is just the Fourier transform of $V(\vec{\bf{r}})$, 
+      and $V(\vec{\bf{r}})$ is the Green's function of the Klein Gordon equation! This leads to the statement: 
+      the coupling term between the final and initial states of the scattered particle is the Green's function of the Klein Gordon equation in momentum space (with argument $\vec{\bf{k}}' - \vec{\bf{k}}$). 
+      I don't know about you, but I found this rather cryptic when I first saw it. 
+    </p>
+
+    <p>
+      Here's another way of thinking about it. 
+      Suppose we worked out that $\bra{\vec{\bf{k}}'}V\ket{\vec{\bf{k}}} \propto \frac{1}{|\vec{\bf{k}}' - \vec{\bf{k}}|^2 + \mu^2}$.  
+      Then we should realise that since this is the Green's function of the Klein Gordon equation in $\vec{\bf{k}}' - \vec{\bf{k}}$ space. 
+      Since we just performed a Fourier transform of the potential $V(\vec{\bf{r}})$ to get this, $V(\vec{\bf{r}})$ should be the Green's function of the Klein Gordon equation in position space, 
+      hence the potential arises as a result of the interaction of the scatterer with the Klein Gordon field, whatever that is. 
+      I think this is the logic in the notes. 
+    </p>
+
+    <p>
+      I could be entirely wrong about this whole thing - better get a second opinion!
+    </p>
+    
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Green's Function and Scattering</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Green's Function and Scattering</h1>
+
+    <p>
+      Suppose we have a homogeneous linear differential equation:
+      $$\mathcal{L}[y, \dot{y}, \dots] = 0$$
+      Its Green's function $G(x-x')$ is then the solution to the differential equation: 
+      $$\mathcal{L}[G(x, x')] = \delta(x-x')$$
+      Why is this useful? Suppose we want to solve the differential equation:
+      $$\mathcal{L}[y, \dot{y}, \dots] = f(x)$$
+      We can take the definition of $G$ and drop integrals with respect to f(x') on both sides to get:
+      $$\int f(x') \mathcal{L}[G(x, x')] \,\text{d}x' = \int f(x') \delta(x-x') \,\text{d}x'$$
+      However, since $\mathcal{L}$ is a linear operator that acts on $x$ and not $x'$, we can bring the integral on the right hand side into the operator $\mathcal{L}$. 
+      The right hand side is simply $f(x)$. This gives:
+      $$\mathcal{L}[\int f(x') G(x, x') \,\text{d}x'] = f(x)$$
+      That tells us the solution to the above differential equation is:
+      $$y(x) = \mathcal{L}[\int f(x') G(x, x') \,\text{d}x']$$
+      Therefore, the solution of an inhomogeneous linear differential equation is the convolution of the driving term $f(x)$ with the Green's function. 
+      In other words, the Green's function can be thought of as the response of our system due to a perturbation at $x'$. 
+    </p>
+    
+    <p>
+      How does it show up in the context of scattering? Consider the free space Schrodinger equation:
+      $$(H_0 - E) \psi(\vec{\bf{r}}) = 0$$
+      If we add in a scattering potential, then the equation becomes:
+      $$(H_0 - E) \psi(\vec{\bf{r}}) = V(\vec{\bf{r}})\psi(\vec{\bf{r}})$$
+      We can treat the right hand side of the equation as a "driving" term or a perturbation to our original free space equation. 
+      Note that in this case, the right-hand side perturbation depends on our solution $\psi(\vec{\bf{r}})$, 
+      so the situation is slightly different from above, and we will end up with an integral equation for $\psi(\vec{\bf{r}})$ instead of a direct solution. 
+    </p>
+
+    <p>
+      Like before, we define the Green's function solution by:
+      $$(H_0 - E) G(\vec{\bf{r}}-\vec{\bf{r}}') = \delta(\vec{\bf{r}}-\vec{\bf{r}}')$$
+      The solution is given by:
+      $$\psi(\vec{\bf{r}}) = \psi_0(\vec{\bf{r}}) + \int G(\vec{\bf{r}}-\vec{\bf{r}}') V(\vec{\bf{r}}')\psi(\vec{\bf{r}'}) \,\text{d}^3\vec{\bf{r}}'$$
+      where $\psi_0(\vec{\bf{r}})$ is the free space solution. We can then solve for $\psi(\vec{\bf{r}})$ using an iterative approach. 
+    </p>
+
+    <p>
+      The reason we want to do this instead of solving the Schrodinger equation directly is because this method produces physical solutions.
+      The reason is that solutions to $(H_0 - E) G(\vec{\bf{r}}, \vec{\bf{r}}') = \delta(\vec{\bf{r}}-\vec{\bf{r}}')$ are not unique. 
+      There are two reasons. First, if we do not restrict $G$ to be a function of $\vec{\bf{r}}-\vec{\bf{r}}'$, 
+      then the general solution will be a combination of incoming/outgoing waves and plane waves corresponding to space solutions. 
+      Even if we enforce this restriction, $G(\vec{\bf{r}}-\vec{\bf{r}}')$ will still have degenerate solutions corresponding to incoming/outgoing waves. 
+      If we attempted to solve the Schrodinger equation directly, our solver may converge towards a solution that is a mixture of all of these waves, 
+      which is bad since we are dealing with a scattering problem a single well defined incoming state and a superposition of outgoing spherical waves. 
+      In addition, the presence of plane wave components in the final solution will mess up our boundary condition.
+    </p>
+
+    <p>
+      In our integral equation below this physical constraint is enforced because we only pick the $G(\vec{\bf{r}}-\vec{\bf{r}}')$ corresponding to outgoing waves, so our final solution will always be a single incoming wave plus a bunch of outgoing waves - therefore it remains physical. In addition, it has a nice analytical solution called the Born series. 
+    </p>
+
+</body>
+</html>
