@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Index Notation</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Index Notation</h1>
+
+    <p>
+      There are many things wrong with the following text. Plan is to highlight and fix the misconceptions slowly and write them below.
+    </p>
+
+    <p>
+      $A^\mu$: column 4-vector. Capital letters stand for vectors.
+    </p>
+    <p>
+      $a^\mu$: components of $A^\mu$. Lowercase letters stand for components.
+    </p>
+    
+    <p>
+      The scalar product of two 4-vectors is defined using a metric $g$:
+      $$A^\mu \cdot B^\mu = g_{\mu \nu} a^\mu b^\nu$$
+      $g$ is a 4 by 4 matrix. We can check that this is really just a bilinear form:
+      $$\vec{A}^T g \vec{B} = a_i (gB)_i = a_i g_{ij} b_j$$
+      $i$ is to $\mu$ is to row as $j$ is to $\nu$ is to column. In the world of matrices, two $j$s is a right multiplication to get a column vector and two $i$s is a left multiplication to get a row vector, assuming the conventional $ij$.
+    </p>
+
+    <p>
+      If we move the $\mu$ down we get the row 4-vector $A_\mu$. Its components are defined by:
+      $$a_\mu = g_{\mu \nu} a^\mu$$
+      In vector form this is:
+      $$A_\mu = (gA^\mu)^T$$
+      The first definition does not tell you anything about the shape of $A_\mu$. It seems you need both lines.
+    </p>
+
+    <p>
+      $a_\mu$ is to $A_\mu$ what $a^\mu$ is to $A^\mu$. Note that the position of the index  in the component also changes depending on the type of 4-vector. **In the world of components**, think of subscript as _left to right_ and superscript as _top to bottom_. In fact, if you think about it, $\mu$ in $a^\mu$ and $A^\mu$ do different things! In $a^\mu$ $\mu$ serves as an index - zero, one, two, three. In $A^\mu$ $\mu$ serves as an indicator that "I am a 4-vector".
+    </p>
+
+    <p>
+      Raising the indices of $g_{\mu \nu}$ gives $g^{\mu \nu}$. This is, by the definition, the $\mu$ row $\nu$ column element of $g^{-1}$. Therefore:
+      $$g^{\mu \alpha} g_{\alpha \nu} = \delta ^\mu _\nu$$
+      The LHS is just matrix multiplication in summation notation. The RHS is a 4 by 4 identity matrix. When deciphering the RHS recall that superscript means top down and subscript means left right. So $\delta ^\mu _\nu = I_{\mu \nu}$. We get to do this with $I$ because it is its own inverse. We cannot do the same with $g$. If we did then we run into trouble trying to get a symbol for components of $g^{-1}$. 
+    </p>
+
+    <p>
+      If we have a row 4-vector we can turn it back into a column 4-vector by raising its indices:
+      $$a^\mu = g^{\mu \nu} a_\nu$$
+      This looks weird because $a_\nu$ is a component of a row 4-vector; it seems we are putting a matrix before a row vector and the shapes don't match. Things are actually fine because there are no matrices here - everybody is a number. The matrix equation is:
+      $$A^\mu = g^{-1} A_\mu^T$$
+      Again, the first equation does not tell us anything about the shape of the 4-vectors. 
+    </p>
+
+
+</body>
+</html>
