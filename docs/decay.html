@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Decay Rates</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Single Channel decay</h1>
+
+    <p>
+      In time dependent perturbation, the evolution of coefficients $c_m(t)$ is given by:
+      $$\dot{c}_m(t) = -\frac{i}{\hbar} \sum_n e^{-\frac{i}{\hbar}(E_n-E_m)t} \bra{n}V(t)\ket{m} c_n(t)$$
+      This is a set of coupled first order differential equations. In principle, we can solve it numerically given initial conditions $\{c_n(0)\}$. 
+    </p>
+
+    <p>
+      However, we can also try a perturbative solution. The general process is to:
+    </p>
+
+    <ol>
+      <li>Guess a set of zero order solutions, $\{c^{(0)}_n(t)\}$.</li>
+      <li>Plug $\{c^{(0)}_n(t)\}$ into the equation for $\dot{c}_m(t)$. This turns the set of differential equations into a set of functions: $\dot{c}^{(1)}_m(t) = f^{(0)}_m(t)$.</li>
+      <li>Integrate the $\dot{c}^{(1)}_m(t) = f_m(t)$ to get our set of first order solutions $\{c^{(1)}_n(t)\}$.</li>
+      <li>We can repeat this process indefinitely - plug $\{c^{(1)}_n(t)\}$ back into the $\dot{c}_m(t)$ equations to get $\dot{c}^{(2)}_m(t) = f^{(1)}_m(t)$ and integrate to get $\{c^{(2)}_n(t)\}$, and so on.</li>
+    </ol>
+
+    <p>
+      In what follows we are concerned with the first order solution, $c^{(1)}_n(t)$. 
+    </p>
+    
+    <p>
+      Suppose our system starts out in the state $\ket{i}$, so $c_n(0) = \delta_{ni}$. Let us also use the ansatz that $c_n(t) = \delta_{ni}e^{-\frac{t}{2\tau}}$. Clearly, there is something wrong with this ansatz because the total probability across all states is not conserved with time. Therefore, we are using it with the assumption that $t \ll \tau$. Under this ansatz, the probability that the state of the system remains $\ket{i}$ when measured at time $t$ is $e^{\frac{t}{\tau}}$. Now, if the particle is not in the state $\ket{i}$, then it must be in one of the decay states $\ket{f}$. Therefore, we can say associate $\frac{1}{\tau}$ with the **rate of total decay**.
+    </p>
+    <p>
+      Here's the idea: we start with a zeroth order solution that is clearly wrong, but which captures the flavor of the decay process. We then plug it into the $\dot{c}_m(t)$ equations (which we know is exact), integrate, and hope that the first order solution that comes is a bit more correct than our zeroth order solution. Let's see what happens:
+    </p>
+
+    <p>
+      If we plug in our ansatz, we get:
+      $$\dot{c}_f(t) = -\frac{i}{\hbar} e^{-\frac{i}{\hbar}(E_f-E_i)t} \bra{f}\Delta H\ket{i} e^{-\frac{t}{2\tau}}$$
+      Integrating gives:
+      $$c_f(t) = \bra{f}\Delta H \ket{i} \frac{e^{-\frac{t}{2\tau}}e^{-\frac{i}{\hbar}(E_f-E_i)t}-1}{(E_f-E_i) + \frac{i\hbar}{2\tau}}$$
+      Now, we do something suspicious. Even though we assume that $t \ll \tau$ for the zeroth order solution, we are going to assume that putting it once through the perturbation process makes it good enough for $t \gg \tau$. Now, if we take the large $t$ limit, the exponential term in the numerator goes to zero and we have:
+      $$|c_f(t \rightarrow \infty)|^2 = \frac{|\bra{f}\Delta H \ket{i}|^2}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2}$$
+    </p>
+
+    <div style="text-align: center;">
+      <img src="decayprobs.png" alt="noether transform" width="700">
+    </div>
+
+    <p>
+      Notice that the limit of $|c_f|^2$ for large $t$ is independent of $t$. Visually, the decay process looks like the above - the probabilities associated with the decay states ($\ket{f_1}$ and $\ket{f_2}$ in the above diagram) converge to fixed values as $t$ increases. Note that the probability associated with the initial state goes does not necessarily have to go to zero. In our zeroth order solution it does go to zero, but in our first order solution it goes to $1-\text{sum of all decay probabilities} = 1-P$. Nevertheless in the limit of large $t$ everything becomes static. 
+    </p>
+
+    <p>
+      Let us now assume that there is only a single decay channel. This means that all the $\ket{f}$s and $E_f$s in the equation below are associated with the same type of decay process - the only difference is that there is a range of various different final energies so we integrate over the density of states for this channel. 
+      $$P = \int \frac{|\bra{f}\Delta H \ket{i}|^2}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2} \rho(E_f) \,\text{d}E_f$$
+      Now, if $P$ was not $1$, then the value of $|c_i(t)|^2$ does not go to zero for large $t$. A simple way to account for this is to replace our zeroth order solution $|c^{(0)}_i(t)|^2 = e^{-\frac{t}{\tau}}$ with the first order solution $|c^{(1)}_i(t)|^2 = Pe^{-\frac{t}{\tau}}+(1-P)$. This ensures that our starting probability is still $1$ while also giving the right asymptotic result. 
+    </p>
+
+    <p>
+      Expanding this for small $t$ gives $\text{pr(decay)} \approx P(1-\frac{t}{\tau}) + (1-P)$. Then, the initial rate of decay, as predicted by our sketchy first order solution is:
+      $$R = \frac{P}{\tau}$$
+      If we plug in our above expression for $P$, we get:
+      $$
+      \begin{align}
+      R 
+      &= \frac{1}{\tau} \int \frac{|\bra{f}\Delta H \ket{i}|^2}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2} \rho(E_f) \,\text{d}E_f \\
+      &= |\bra{f}\Delta H \ket{i}|^2 \rho(E_f) \int \frac{\frac{1}{\tau}}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2} \,\text{d}E_f \\
+      &= \frac{2\pi}{\hbar} |\bra{f}\Delta H \ket{i}|^2 \rho(E_f)
+      \end{align}
+      $$
+      And boom. Fermi's Golden rule. In the above equation we pulled $|\bra{f}\Delta H \ket{i}|^2$ and $\rho(E_f)$ out of the integral as we assume they do not really vary over the bandwidth of the $\frac{1}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2}$ term. For practical purposes we can take $f=i$. In the language of probabilities, we say that our decay time follows an exponential distribution with rate $R$. 
+    </p>
+
+    <p>
+      From here on, we assume $P=1$. This is, I think, quite realistic. 
+    </p>
+
+    <p>
+      If we have $\Gamma = \hbar R$ (assuming $P=1$), then:
+      $$\Gamma = 2\pi |\bra{f}\Delta H \ket{i}|^2 \rho(E_f)$$
+      What we have done up to this point is establish a formula for $\tau$ in terms of physical quantities. 
+    </p>
+
+    <h1>Multi Channel decay</h1>
+
+    <p>
+      Now, suppose there are two decay channels. The first decays into the set of states $\ket{f}$ and the second decays into the set of states $\ket{g}$. 
+    </p>
+
+    <p>
+      Let's suppose, for the sake of simplicity, that there are only two of each of the final states: $\{ \ket{f_1}, \ket{f_2} \}$ for $\ket{f}$ and $\{ \ket{g_1}, \ket{g_2} \}$ for $\ket{g}$. 
+    </p>
+
+    <p>
+      The intuition is that there are two competing decay processes, one with $\{ \ket{f_1}, \ket{f_2} \}$ as the end states and $P_f = P_{f_1} + P_{f_2}$ as the final decay probability, and another with $\{ \ket{g_1}, \ket{g_2}\}$ as the end states and $P_g = P_{g_1} + P_{g_2}$ as the final decay probability. 
+    </p>
+
+    <p>
+      The rates associated with each are $R_f$ and $R_g$ respectively:
+      $$R_f = \frac{2\pi}{\hbar} |\bra{f}\Delta H \ket{i}|^2 \rho_f(E_f)$$
+      $$R_g = \frac{2\pi}{\hbar} |\bra{g}\Delta H \ket{i}|^2 \rho_g(E_g)$$
+      Note that these are single channel rates. 
+    </p>
+
+    <p>
+      The final decay time follows the distribution $\text{min} [\text{Exp}(R_f), \text{Exp}(R_g)]$. It can be shown that this is the same as the distribution $\text{Exp}(R_f + R_g)$.  
+    </p>
+
+    <p>
+      The total rate $R$ is then given by $R = R_f + R_g$. However, by construction of our ansatz, we must also have $R = \frac{1}{\tau}$ (again we are assuming $P_f = P_g = 1$), since that is the rate at which $|c_i(t)|^2$ initially decays for both channels. Therefore:
+      $$R = \frac{1}{\tau} = \frac{2\pi}{\hbar} |\bra{f}\Delta H \ket{i}|^2 \rho_f(E_f) + \frac{2\pi}{\hbar} |\bra{g}\Delta H \ket{i}|^2 \rho_g(E_g)$$
+      If we define the partial linewidths $\Gamma_f$ and $\Gamma_g$ as:
+      $$\Gamma_f = 2\pi |\bra{f}\Delta H \ket{i}|^2 \rho_f(E_f)$$
+      $$\Gamma_g = 2\pi |\bra{g}\Delta H \ket{i}|^2 \rho_g(E_g)$$
+      Then:
+      $$\Gamma = \frac{\hbar}{\tau} = \Gamma_f + \Gamma_g$$
+    </p>
+
+    <p>
+      Note that even the two channels are different processes, they have the same $\tau$.
+    </p>
+
+    <p>
+      Here is, I think, one **WRONG** way to think about the process: 
+    </p>
+
+    <p>
+      **WRONG**
+      Instead of having $\ket{i} \rightarrow \{ \ket{f_1}, \ket{f_2} \}$ **or** $\ket{i} \rightarrow \{ \ket{g_1}, \ket{g_2} \}$, we have $\ket{i} \rightarrow \{ \ket{f_1}, \ket{f_2}, \ket{g_1}, \ket{g_2}\}$. The final decay probability is $P = P_{f_1} + P_{f_2} + P_{g_1} + P_{g_2}$. 
+    </p>
+
+    <p>
+      The reason is that the two decay channels are distinct physical processes that compete with one another, so they cannot be grouped into a single calculation. However, it does seem to give the right result. 
+    </p>
+
+    <p>
+      Again, my reasoning is probably seriously misguided, so best to clarify.
+    </p>
+
+
+</body>
+</html>
