@@ -34,7 +34,7 @@
       <a href="index.html" class="btn">Index</a>
     </nav>
 
-    <h1>Single Channel decay</h1>
+    <h1>Single Channel Decay</h1>
 
     <p>
       In time dependent perturbation, the evolution of coefficients $c_m(t)$ is given by:
@@ -112,7 +112,7 @@
       What we have done up to this point is establish a formula for $\tau$ in terms of physical quantities. 
     </p>
 
-    <h1>Multi Channel decay</h1>
+    <h1>Multi Channel Decay</h1>
 
     <p>
       Now, suppose there are two decay channels. The first decays into the set of states $\ket{f}$ and the second decays into the set of states $\ket{g}$. 
@@ -151,21 +151,29 @@
       Note that even the two channels are different processes, they have the same $\tau$.
     </p>
 
+    <h1>Quantum Mechanical View</h1>
+
     <p>
-      Here is, I think, one **WRONG** way to think about the process: 
+      How do we analyze the decay process quantum mechanically? Here is, in my opinion, what is going on:
     </p>
 
     <p>
-      **WRONG**
-      Instead of having $\ket{i} \rightarrow \{ \ket{f_1}, \ket{f_2} \}$ **or** $\ket{i} \rightarrow \{ \ket{g_1}, \ket{g_2} \}$, we have $\ket{i} \rightarrow \{ \ket{f_1}, \ket{f_2}, \ket{g_1}, \ket{g_2}\}$. The final decay probability is $P = P_{f_1} + P_{f_2} + P_{g_1} + P_{g_2}$. 
+      Suppose we have two decay channels:
+      $$A \rightarrow B_1 + C_1$$
+      $$A \rightarrow B_2 + C_2$$
+      Let us denote the states involved by $\ket{A}$, $\ket{B_1, C_1}$, $\ket{B_2, C_2}$. If these are distinct channels, then the possible final states for process $1$ will be orthogonal to the final possible states for process $2$. In other words, the final states for each of the channels, and the initial state all live in distinct and separate Hilbert spaces, which we denote $\mathcal{H}_A$, $\mathcal{H}_1$ and $\mathcal{H}_2$. 
     </p>
 
     <p>
-      The reason is that the two decay channels are distinct physical processes that compete with one another, so they cannot be grouped into a single calculation. However, it does seem to give the right result. 
+      What Hilbert space does the decay process take place in? From what I found, I think the decay takes place in the direct sum $\mathcal{H}_A \oplus \mathcal{H}_1 \oplus \mathcal{H}_2$. The initial state is $\ket{A} \oplus \ket{\text{zero}}_1 \otimes \ket{\text{zero}}_2$. In the direct sum picture, our Hamiltonian will be $d_A + d_1 + d_2$ by $d_A + d_1 + d_2$, and the state vector will have a length of $d_A + d_1 + d_2$. The diagonal blocks $d_A \times d_A$, $d_1 \times d_1$, $d_2 \times d_2$ will be the Hamiltonians in each of the individual Hilbert spaces and off-diagonal blocks tell us how the different Hilbert spaces couple to one another. 
     </p>
 
     <p>
-      Again, my reasoning is probably seriously misguided, so best to clarify.
+      The idea is as follows. Suppose that at some time, our state vector is $\ket{\psi_A} \oplus \ket{\psi_B} \oplus \ket{\psi_C}$. Then, the probability of finding the system in a state will be the norm squared of each of the respective states. Note that the individual $\ket{\psi}$s are in general unnormalized (although the whole state vector of length $d_A + d_1 + d_2$ must obviously be normalized) - this reflects the flow of probability from say, the initial state to one of the decayed states. This leads to a slightly different interpretation of $R = R_f + R_g$. Instead of having two competing processes, we now have a single "decay process" that leads to a set of final states that is described by the direct sum of two Hilbert spaces (each with its own density of states). In any case, the math comes out the same as before. 
+    </p>
+    
+    <p>
+      Another thing that came to mind was the tensor product space $\mathcal{H}_A \otimes \mathcal{H}_1 \otimes \mathcal{H}_2$. In this picture, the initial state of the system is $\ket{A} \otimes \ket{0}_1 \otimes \ket{0}_2$ where $\ket{0}$ is the vacuum state, and have a Hamiltonian with a dimension of $d_A \cdot d_1 \cdot d_2$. However, this does not feel like the right, because it implies the possibility of having something like $\ket{A} \otimes \ket{B_1, C_1}_1 \otimes \ket{0}_2$ as a measurement outcome, which makes no sense. 
     </p>
 
 
