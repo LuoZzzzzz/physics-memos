@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Some Thoughts on Quarks</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Some Thoughts on Quarks</h1>
+
+    <p>
+      At some point, we come across an equation like this:
+      $$\ket{\pi_0} = \frac{1}{\sqrt{2}}(\ket{u \bar{u}} - \ket{d\bar{d}})$$
+      The LHS is a $\pi$ meson, the RHS seems to be an entangled state in the space of two quarks. What exactly does this mean? To get a better understanding, I think we should think about the Hilbert space of a single quark. Then, we can work our way up to more complicated particles containing more than one quark by taking tensor products of individual quark Hilbert spaces.
+    </p>
+    <p>
+      If my understanding is right, the Hilbert space of a single quark is:
+      $$\mathcal{H}_{\text{quark}} = \mathcal{H}_{\text{spatial}} \otimes \mathcal{H}_{\text{spin}} \otimes \mathcal{H}_{\text{color}} \otimes \mathcal{H}_{\text{flavor}}$$
+      $\mathcal{H}_{\text{spatial}}$ is infinite dimensional; one possible basis is the position basis, $\ket{\bf{\vec{r}}}$. $\mathcal{H}_{\text{spin}}$ is two dimensional because quarks have spin $\frac{1}{2}$; the standard basis is $\{\ket{\uparrow}, \ket{\downarrow} \}$.  $\mathcal{H}_{\text{color}}$ is three dimensional; the standard basis is $\{\ket{r}, \ket{g}, \ket{b} \}$. $\mathcal{H}_{\text{flavor}}$ is six dimensional; the standard basis is $\{\ket{u}, \ket{d}, \ket{s}, \ket{c}, \ket{t}, \ket{b} \}$. Since this is a Hilbert space nothing forbids us from having a superposition of flavor or color. When we talk about types of quarks (ie. in the picture of the standard models), we are really referring to flavor/color/spin eigenstates. Sometimes we also come across this term isospin. Intuitively, its just a different basis for $\mathcal{H}_{\text{flavor}}$. 
+    </p>
+    <p>
+      A meson is a particle that is made from a quark and an antiquark. An antiquark has basis $\ket{\bf{\vec{r}}} \otimes \{\ket{\uparrow}, \ket{\downarrow} \} \otimes \{\ket{\bar{r}}, \ket{\bar{g}}, \ket{\bar{b}} \} \otimes \{\ket{\bar{u}}, \ket{\bar{d}}, \ket{\bar{s}}, \ket{\bar{c}}, \ket{\bar{t}}, \ket{\bar{b}} \}$. So the joint space is: 
+      $$\mathcal{H}_{\text{meson}} = (\mathcal{H}^{(1)}_{\text{spatial}} \otimes \mathcal{H}^{(2)}_{\text{spatial}}) \otimes (\mathcal{H}^{(1)}_{\text{spin}} \otimes \mathcal{H}^{(2)}_{\text{spin}}) \otimes (\mathcal{H}^{(1)}_{\text{color}} \otimes \mathcal{H}^{(2)}_{\overline{\text{color}}}) \otimes (\mathcal{H}^{(1)}_{\text{flavor}} \otimes \mathcal{H}^{(2)}_{\overline{\text{flavor}}})$$
+      Something like that... Now, if we look at the spin-color-flavor space, naively, this space will have a dimension of $2\times2\times3\times3\times6\times6 = 1296$. However...
+    </p>
+    
+    <h1>Color Confinement</h1>
+    <p>
+      Just as we have $\frac{1}{2} \otimes \frac{1}{2} = 0 \oplus 1$ for spin, we have $3 \otimes \bar{3} = 1 \oplus 8$ for color. We'll run through the case for spin and then move on to color. When we have two spin $\frac{1}{2}$ particles, we can add the individual spin angular momentum operators to get the total spin angular momentum operators ($S_{x/y/z}$). Just as an individual spin angular momentum operators generate rotations of its corresponding spin state about some axis, the total spin angular momentum operator generates rotations of **both** spin states about some axis at the same time. 
+    </p>
+    <p>
+      Now, focus on the singlet state. This state is invariant to rotations, in the sense that if we took the operators $S_x$, $S_y$ or $S_z$ and applied it to the $\ket{0, 0}$ we get $\ket{\text{zero}}$ - so it is impossible to "rotate" this state by performing the same rotation on both of its components. With the other states $\ket{1, -1}, \ket{1, 0}, \ket{1, 1}$ the invariance only holds for $S_z$; the other two generators $S_x$ and $S_y$ will rotate these states. That's what makes the state $\ket{0, 0}$ **rotationally invariant**. 
+    </p>
+    <p>
+      Now with color, instead of having $S_{x/y/z}$ we have the color generators (Gell-Mann matrices). By the same process as spin we can construct total color generators (by adding the generators for the quark and antiquark). Then, we look for states that are annihilated by all eight color generators. There is one such state, the color singlet, which is invariant under $SU(3)$ color transformations. The other states form an octet, which are not invariant and transform under $SU(3)$ color transformations.
+    </p>
+    <p>
+      As it turns out, there is a rule called color confinement that says that the color state of a meson must be invariant under $SU(3)$ color transformations. This means that of the nine different possible states in $1 \oplus 8$ only the singlet state is physically possible - the remaining eight octet states are forbidden. This reduces the dimension of our joint Hilbert space to $1296/9 = 144$. 
+    </p>
+    
+    <h1>Light Mesons</h1>
+    <p>
+      There are $18$ light mesons but right now we're sitting at $144$ so there's some more cutting to be done. 
+    </p>
+    <p>
+      To get to $18$, the first thing we should note is that we are only concerned with the flavors $u$, $d$ and $s$. Anything with other flavors are not considered "light". Therefore, we should change the count to $2\times2\times3\times3 = 36$. Now, concentrate on the spin part. By addition of angular momentum, the spin part can be factorized into $0 \oplus 1$. Now, even though this Hilbert space has a dimension of $4$, we are really counting the number of possible total spins when classifying mesons. Therefore, of the $36$ cases, $9$ will correspond to particles with a total spin of $0$, and the remaining $27$ will correspond to particles with a total spin of $1$, but these count as $9$ distinct spin $1$ particles since we do not care about the projection of spin along the z-axis.
+    </p>
+    
+</body>
+</html>
