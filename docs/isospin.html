@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>What is Isospin?</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>What is Isospin?</h1>
+
+    <p>
+      We know that the Hilbert space of a quark may be broken into four distinct parts: spatial, spin, color and flavor. The spin part is described by the algebra of $SU(2)$, while the color part is described by the algebra of $SU(3)$. But what are the rules for the flavor part of the state? 
+    </p>
+
+    <p>
+      If for whatever reason the system we are interested in contain only $u$ and $d$ quarks (ie. the other heavier quarks are spectators, or we are dealing with neutrons and protons which contain only $u$ and $d$ quarks), then it suffices to consider the flavor subspace spanned by $\ket{u}$ and $\ket{d}$. The algebra of this subspace may be approximated by $SU(2)$. That means that $\ket{u}$ and $\ket{d}$ behave in the exact same way as the spins $\ket{\uparrow}$ and $\ket{\downarrow}$. This model is known as isospin - the spins in this case refers to the flavors $u$ and $d$. 
+    </p>
+
+    <p>
+      Now, suppose our particle is made of three quarks. Then the flavor Hilbert space is given by $\{ \ket{u}, \ket{d} \} \otimes \{ \ket{u}, \ket{d} \} \otimes \{ \ket{u}, \ket{d} \}$. Using the same rules for addition of angular momentum, we find: $\frac{1}{2} \otimes \frac{1}{2} \otimes \frac{1}{2} = \frac{1}{2} \oplus \frac{1}{2} \oplus \frac{3}{2}$. Let's take a look at the states:
+    </p>
+
+    <table style="border-collapse: collapse; width: 100%; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Total Spin</th>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Spin Projection</th>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">State</th>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Symmetry</th>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Particle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">$3/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$+3/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\ket{uuu}$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Fully Symmetric</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\Delta^{++}$</td>
+        </tr>
+
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">$3/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$+1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\tfrac{1}{\sqrt{3}}(\ket{uud}+\ket{udu}+\ket{duu})$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Fully Symmetric</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\Delta^{+}$</td>
+        </tr>
+
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">$3/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$-1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\tfrac{1}{\sqrt{3}}(\ket{ddu}+\ket{dud}+\ket{udd})$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Fully Symmetric</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\Delta^{0}$</td>
+        </tr>
+
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">$3/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$-3/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\ket{ddd}$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Fully Symmetric</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\Delta^{-}$</td>
+        </tr>
+
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">$1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$+1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\tfrac{1}{\sqrt{6}}(2\ket{uud}-\ket{udu}-\ket{duu})$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$(1,2)$ Symmetric</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">(part of) $p$</td>
+        </tr>
+
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">$1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$-1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\tfrac{1}{\sqrt{6}}(2\ket{ddu}-\ket{dud}-\ket{udd})$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$(1,2)$ Symmetric</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">(part of) $n$</td>
+        </tr>
+
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">$1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$+1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\tfrac{1}{\sqrt{2}}(\ket{udu}-\ket{duu})$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$(1,2)$ Antisymmetric</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">(part of) $p$</td>
+        </tr>
+
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">$1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$-1/2$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$\tfrac{1}{\sqrt{2}}(\ket{dud}-\ket{udd})$</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">$(1,2)$ Antisymmetric</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">(part of) $n$</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The $3/2$ total flavor states are fully symmetric, so they can be directly attached to a particle state. This produces the four Delta resonances. For completeness, we generate the above states starting from $\ket{uuu}$. Applying the joint lowering operator gives all the isospin states down that ladder. Then, we "lateral" into adjacent ladders using Gram Schmidt.
+    </p>
+
+    <p>
+      On the other hand, the $1/2$ total flavor states have mixed symmetry - they are symmetric/antisymmetric when the flavors of the first two positions are exchanged, but not for other positions. Therefore, it seems that they cannot possibly correspond to physical particles, since the total state of a particle must be fully symmetric or antisymmetric. 
+    </p>
+
+    <p>
+      Indeed, it is not possible to construct a state in flavor Hilbert space with with a well defined isospin projection that is fully symmetric or antisymmetric. It turns out however, that it is possible to construct entangled states of flavor and spin that are fully symmetric under all particle exchanges. 
+    </p>
+
+    <p>
+      Let's start by introducing some notation. We denote the four $1/2$ total isospin states by: $\ket{F^p_{M_S}}, \ket{F^p_{M_A}}, \ket{F^n_{M_S}}, \ket{F^n_{M_A}}$ ($F$ for flavor, $M_S$ for mixed symmetric). The superscript $p$ and $n$ correspond to the isospin projection of the states; we classify an isospin projection of $+1/2$ as a proton state and an isospin projection of $-1/2$ as a neutron state. Let us also introduce corresponding spin states $\ket{S^{+1/2}_{M_S}}, \ket{S^{-1/2}_{M_A}}, \ket{S^{+1/2}_{M_S}}, \ket{S^{-1/2}_{M_A}}$ ($S$ for actual spin). We claim that the following states are fully symmetric:
+      $$\frac{1}{\sqrt{2}}(\ket{F^p_{M_S}}\ket{S^{\pm 1/2}_{M_S}}+\ket{F^p_{M_A}}\ket{S^{\pm 1/2}_{M_A}})$$
+      $$\frac{1}{\sqrt{2}}(\ket{F^n_{M_S}}\ket{S^{\pm 1/2}_{M_S}}+\ket{F^n_{M_A}}\ket{S^{\pm 1/2}_{M_A}})$$
+      So this gives two (actual) spin states for $p$ and two spin states for $n$. As a check, I have calculated $\frac{1}{\sqrt{2}}(\ket{F^p_{M_S}}\ket{S^{+ 1/2}_{M_S}}-\ket{F^p_{M_A}}\ket{S^{+ 1/2}_{M_A}})$. After simplifying things, it becomes:
+    </p>
+
+    <p style="font-size: 90%;">
+      $$
+      \propto 3(\ket{uud}\ket{\uparrow\uparrow\downarrow} + \ket{udu}\ket{\uparrow\downarrow\uparrow} 
+      + \ket{uud}\ket{\downarrow\uparrow\uparrow}) 
+      - (\ket{uud} + \ket{udu} + \ket{uud})
+      (\ket{\uparrow\uparrow\downarrow} + \ket{\uparrow\downarrow\uparrow} + \ket{\downarrow\uparrow\uparrow})
+      $$
+    </p>
+
+    <p>
+      which is easily verifiable to be fully symmetric. As an exercise we can check this for $\frac{1}{\sqrt{2}}(\ket{F^p_{M_S}}\ket{S^{- 1/2}_{M_S}}-\ket{F^p_{M_A}}\ket{S^{- 1/2}_{M_A}})$.
+    </p>
+
+    <p>
+      On each of the individual two dimensional flavor Hilbert spaces we have raising and lowering operators $I_+$ and $I_-$. We can also construct the raising and lowering operators on the joint flavor Hilbert space, its just $I^{(1)}_+ + I^{(2)}_+ + I^{(3)}_+$ and $I^{(1)}_- + I^{(2)}_- + I^{(3)}_-$ respectively. The former will raise a $n$ state with spin projection $+1/2$ to a $p$ state with spin $+1/2$ for instance, while the latter will turn a $p$ into a $n$ with the same spin. 
+    </p>
+
+
+</body>
+</html>
