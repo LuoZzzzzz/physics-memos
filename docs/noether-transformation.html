@@ -75,12 +75,16 @@
       This turns it from the black trajectory to the gray trajectory above. 
       We say that the transformation is a symmetry if the the action along the gray trajectory is the same as the action along the black trajectory. 
       Note that unlike in the derivation for the Euler-Lagrange equations, the endpoints of our trajectory can, and will change under the flow. 
-      Note, also, that we are making the above statement for all trajectories of least action. 
-      That is, we can pick any two arbitrary points, find the trajectory of least action between them, let that trajectory flow a bit under $\vec{X}$, 
-      and if $\vec{X}$ is indeed a symmetry then the action along new trajectory after the flow will remain unchanged. In other words, one can think of "flow" along $\vec{X}$ as a way of generating least action trajectories between new endpoints. 
+      Note, also, that we are making the above statement for all trajectories, not just the trajectories of least action. 
+      However, specialising the statement to trajectories of least action (satisfying Euler Lagrange equations) tells us about the existence of conserved quantities along these trajectories. 
+      For every such flow we can find, we get a conserved quantity along trajectories of least action. Is that obvious? I don't think so.
     </p>
-    <p>
-      Noether's theorem tells us that for every such "flow" $\vec{X}$, there exists a conserved quantity. Is this intuitively obvious? I don't think so.
-    </p>
+
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Summary: </b> A continuous symmetry is a vector field in extended configuration space (generalised coordinates plus time) that generates
+      an infinitesimal transformation of all trajectories such that the action along the trajectories remain the same after the transformation. This 
+      invariance guarantees the existence of a conserved quantity along physical trajectories (trajectories of least action).
+    </div>
+
 </body>
 </html>
