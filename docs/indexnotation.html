@@ -35,11 +35,51 @@
     </nav>
 
     <h1>Index Notation</h1>
-
     <p>
-      There are many things wrong with the following text. Plan is to highlight and fix the misconceptions slowly and write them below.
+      These are a sequence of personal notes on index notation. The older notes were written when I just learnt the subject so they contain a lot of misconceptions, but I keep them here for record.
     </p>
 
+    <h2>Date: 12/11/25</h2>
+    <p>
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Insight 1: </b> Whenever a Lorentz transformation appears transposed, it is because we are using the metric to move things around. All transposes should come paired with a metric. 
+    </div>
+    </p>
+
+    <p>
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Insight 2: </b> A metric remains a metric when sandwiched between a pair of transformations.
+      <br><br>
+      Therefore, the notation $g'_{\mu\nu} = \Lambda^\lambda_{\_\mu} g_{\lambda \kappa} \Lambda^\kappa_{\_\nu}$ is logically sound. $g'_{\mu\nu}$ is simply the metric used in a different frame, so it is still a tensor of rank $(0,2)$, hence both indices are lower - in agreement with the cancellation rule for indices. Note also that in this case we sum over columns of both $\Lambda^\lambda_{\_\mu}$ and $\Lambda^\kappa_{\_\nu}$. This just means that we are doing matrix multiplication with the transpose of $\Lambda^\lambda_{\_\mu}$. This brings us back to insight 1, which tells us that whenever we see a (transformation, metric) pair, the transformation on the left is implicitly assumed to be transposed. Because the transformation to the left of the metric is transposed, the summation index $\lambda$ goes in the upper position (so we sum over columns of the left $\Lambda$ as we would for regular matrix multiplication $\Lambda^T g$), and it cancels nicely with the $\lambda$ in $g$ to give a $\mu$ in the lower position. 
+    </div>
+    </p>
+
+    <p>
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Insight 3: </b> Summation indices always come in upper-lower pairs. This implicitly enforces the shape of adjacent blocks to match. Therefore, to every valid equation written in index notation there is a corresponding valid equation in matrix notation. More importantly, each index position also carries transformation meaning, and ensures that we contract tensors in a physically sensible way.</b> 
+      <br><br>
+      As an illustration, consider the product $\Lambda^T \Lambda$. This is perfectly valid as far as matrix multiplication is concerned, but physically it has no meaning. However, if we write this in matrix notation, we get: $\Lambda^\kappa_{\_\mu} \Lambda^\kappa_{\_\nu}$, and we see immediately that there is a problem because the summation indices $\kappa$ are in the wrong position and therefore cannot contract (if for whatever reason we do see this we have to interpret $\kappa$ as a free variable, not a summation variable). On the other hand, something like $\Lambda^T g \Lambda$ does make physical sense and we see that its corresponding form in index notation $\Lambda^\lambda_{\_\mu} g_{\lambda \kappa} \Lambda^\kappa_{\_\nu}$ does lead to a nice cancellation of indices.
+    </div>
+    </p>
+
+    <p>
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Insight 4: </b> To transpose a boost matrix, just flip the upper and lower indices. However, note that this only ever makes sense if the tensor to the right is a metric. 
+      <br><br>
+      The matrix multiplication $S^T T$ is well defined for any two 4 by 4 matrices $S$ and $T$, so in index notation $ST$ will be $S^\mu_{\_\kappa} T^\kappa_{\_\nu}$ while $S^T T$ will be $S^\kappa_{\_\mu} T^\kappa_{\_\nu}$. However, if $S$ and $T$ were transformations, then $S^T T$ does not have any physical meaning and this is apparent from the index mismatch. As we have noted, transposes in relativity always come with a metric next to it. That's why metrics have two lower indices - so that these lower indices can cancel properly with both upper indices to its left and right. 
+    </div>
+    </p>
+
+    <p>
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Insight 5: </b> Commutativity is enforced by order of indices.
+      <br><br>
+      In general $ST$ and $TS$ are not the same. This is also clear in index notation: $ST$ will be $S^\mu_{\_\kappa} T^\kappa_{\_\nu}$ while $TS$ will be $S^\kappa_{\_\nu} T^\mu_{\_\kappa}$. Assuming that we are to the right of the metric, the tensor with the free index in the upper position is the one that is on the left in the corresponding matrix equation.
+    </div>
+    </p>
+
+    
+    <h2>Date: 06/11/25</h2>
     <p>
       $A^\mu$: column 4-vector. Capital letters stand for vectors.
     </p>
