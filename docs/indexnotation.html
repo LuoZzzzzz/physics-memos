@@ -41,6 +41,24 @@
 
     <h2>Date: 12/11/25</h2>
     <p>
+      Always start with a metric $g$. Let us assume that we always pick a symmetric $g$. From the metric $g$ we are able to introduce the motion of a dot product, given by $A \cdot B = A^T g B$. 
+    </p>
+
+    <p>
+      We then introduce the set of transformations $\Lambda$ that leaves the dot product of two vectors unchanged. The defining property is: $\Lambda^T g \Lambda = g$. 
+    </p>
+
+    <p>
+      Now we introduce a notation that makes it easier to write the dot product. In matrix form, we note that the dot product may be written as $(g^T A)^T B$. But since $g$ is symmetric we might as well write $(gA)^T B$. Define the covariant 4-vector $A_\mu = [(gA)^T]_\mu$, and the contravariant 4-vector $A^\mu = [A]_\mu$. Square brackets highlight we are using ordinary matrix notation (in practice one should not mix matrix and index notation, but in this case we are providing a definition so we do it with care). In this notation the dot product is just $A_\mu A^\mu$. 
+    </p>
+    
+    <p>
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Note 1: </b> In general, because the metric $g$ can be whatever we want, the components of $A_\mu$ can be very different from the components of $A^\mu$. 
+    </div>
+    </p>
+
+    <p>
     <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
       <b>Insight 1: </b> Whenever a Lorentz transformation appears transposed, it is because we are using the metric to move things around. All transposes should come paired with a metric. 
     </div>
@@ -78,7 +96,56 @@
     </div>
     </p>
 
-    
+    <p>
+      Now, on to transformation matrices $\Lambda$. Let's do everything in matrix form then we will introduce the index notation. Since we are working in matrix form all vectors are 4-vectors (the notion of covariant is really a convenient way of packaging the metric and $A^T$ into a single entity), $A' = \Lambda A$. Consequently for the covariant 4-vector $(gA')^T$:
+      $$
+      \begin{align} 
+      (g A')^T & = (g \Lambda A)^T \\
+      &= (g \Lambda g^{-1} g A)^T \\
+      &= (g A)^T  (g \Lambda g^{-1})^T \\
+      &= (gA)^T (g^{-1})^T \Lambda^T g^T \\
+      &= (gA)^T g^{-1} \Lambda^T g \\
+      &= (gA)^T \Lambda^{-1}
+      \end{align} 
+      $$
+      where we have noted that the inverse of a symmetric matrix is also symmetric. The last line follows directly from the group definition $\Lambda^T g \Lambda = g$. 
+    </p>
+
+    <p>
+      Therefore under Lorentz transformation, contravariant 4-vectors transform via right multiplication (ie. the matrix acts to its right) by $\Lambda$ while covariant 4-vectors transform by left multiplication by $\Lambda^{-1}$.
+    </p>
+
+    <p>
+      In index notation, a contravariant 4-vector is transformed like: 
+      $$A'^\mu = \Lambda^\mu_{\_\nu} A^\nu$$
+      A covariant 4-vector is transformed like:
+      $$A'_\mu = (\Lambda^{-1})^\nu_{\_\mu} A_\nu = \Lambda^{\_\nu}_{\mu} A_\nu$$
+      We have defined:
+      $$\Lambda^{\_\nu}_{\mu} = (\Lambda^{-1})^\nu_{\_\mu} = g^{\nu\lambda} \Lambda^\kappa_{\_\lambda} g_{\kappa\mu}$$
+      As with $A^\mu$ and $A_\mu$, we can lower and raise $\Lambda^\mu_{\_\nu}$ and $\Lambda^{\_\mu}_\nu$ into one another using the metric $g$. This falls right out of the definition of $\Lambda^{\_\nu}_{\mu}$ above. As we can also check, the index works out nicely. Note also, that in the above notation we are really saying: 
+      $$\Lambda^{\_\nu}_{\mu} = g^{\nu\lambda} (\Lambda^T)^\lambda_{\_\kappa} g_{\kappa\mu} = g^{\nu\lambda} \Lambda^\kappa_{\_\lambda} g_{\kappa\mu}$$
+    </p>
+
+    <p>
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Note 2: </b> Note the order of the indices. The first index of $g^{\text{xx}}$ is $\nu$ because when we actually multiply $A_\nu$ by $g^{-1}$ the summation is down columns. Therefore, the summation index $\nu$ must run down columns, so its in the first position. There's some things to clarify here: if we do left to right, the order is covariant $\rightarrow$ contravariant $\rightarrow$ boost $\rightarrow$ covariant?
+    </div>
+    </p>
+
+    <p>
+      However, the first notation with $\Lambda^T$ will break our rules for cancelling indices, so instead we represent the transpose $\Lambda^T$ by swapping the positions of the $\lambda$ and $\kappa$ indices. 
+    </p>
+
+    <p>
+    <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
+      <b>Note 3: </b> Note that the left-right ordering of the indices in the transformation tensor matters a lot! If the order is (upper, left), (lower, right), then our tensor acts on contravariant 4-vectors, and if the order is (upper, right), (lower, left), then our tensor acts on covariant 4-vectors. Not only so, the matrix elements we use for the former belong to of $\Lambda$, while the matrix elements we use for the latter belong to $\Lambda ^{-1}$.
+    </div>
+    </p>
+
+    <p>
+      Overall the idea is as follows. Physically, there's really only one 4-vector at first - the contravariant one. However, we are interested in norms, so we try to make the contravariant 4-vector a friend, so that when we put them together they make the norm-squared. This friend is called the covariant 4-vector. It turns out that for the product of the contravariant and covariant 4-vectors to remain invariant, the covariant 4-vector must transform in a special way. What we have done above is to come up with a notation that automatically enforces the correct transformation properties through index positioning: upper indices transform with $\Lambda$ ($\Lambda^\mu_{\_\nu}$), lower indices transform with $\Lambda^{-1}$ ($\Lambda^{\_\mu}_\nu$), and the Einstein summation convention and cancellation rule ensures that only physically meaningful contractions (those that yield Lorentz invariants) are possible.
+    </p>
+
     <h2>Date: 06/11/25</h2>
     <p>
       $A^\mu$: column 4-vector. Capital letters stand for vectors.
