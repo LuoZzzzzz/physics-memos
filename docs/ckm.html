@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CKM Matrices</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>CKM Matrices</h1>
+
+    <p>
+      The weak force couples upper and lower leptons in the same generation. For example, it couples an electron to an electron neutrino, or an electron to an electron anti-neutrino. However, it cannot do intergenerational coupling, for example, a muon to an electron neutrino. This is reflected in the conservation of lepton numbers. By the way, it also cannot couple an electron to an electron, because both are upper.
+    </p>
+
+    <p>
+      The same business applies with quarks. For example, the weak force can couple a $u$ quark (charge $+2e/3$) to a $d$ quark (charge $-e/3$). However, it can also do intergenerational coupling - it can couple a $u$ quark to a $s$ quark. Note that in this case $u$ is the upper of the first generation, while $s$ is the lower of the second generation. So the "upper-lower" structure is still present. The reason this is the case (for both leptons and quarks) is charge conservation. If you couple a $u$ quark to a $c$ quark and produce a $W^-$ in the process your total charge goes from $+2e/3$ to $-e/3$. 
+    </p>
+
+    <p>
+      Here's the reason. Quarks in the wild (ie. in neutrons or protons) exist in mass eigenstates, denoted by $(u,c,t) \phantom{x} (d,s,b)$. These eigenstates live in the flavor Hilbert space. They are linear combinations of another set of basis states $(u',c',t') \phantom{x} (d',s',b')$ of the flavor Hilbert space which we call the weak eigenstates. The reason we call them the weak eigenstates is because in this basis the coupling matrix takes the form:
+      $$
+      C_{\text{weak}} = \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+      \end{bmatrix}
+      $$
+      For example, if I want to calculate the vertex factor of a vertex containing $u'$ and $d'$, I write $u' = (1,0,0)$ and $d' = (1,0,0)^T$, and then I calculate the following matrix product:
+      $$
+      g_{ud} = 
+      \begin{bmatrix}
+      1 & 0 & 0 
+      \end{bmatrix}
+      \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+      \end{bmatrix}
+      \begin{bmatrix}
+      1 \\
+      0 \\
+      0 
+      \end{bmatrix}
+      $$
+      which gives $1$, and that is expected since $u'$ and $d'$ are in the same generation. But, as we have said, when we have quarks in the fermion lines in Feynman diagrams those quarks are not in weak eigenstates, but mass eigenstates. So how do we calculate the vertex factor for an interaction for a vertex containing a $u$ and a $d$ quark? 
+    </p>
+
+    <p>
+      Very simple - we use change of basis matrices to write $u$ and $d$ in the weak basis, and then evaluate the matrix product in the weak basis. The $(u,c,t)$ states are related to the $(u',c',t')$ states by the unitary matrix $U_u$: 
+      $$
+      \begin{bmatrix}
+      u' \\
+      c' \\
+      t' 
+      \end{bmatrix}
+      = 
+      U_u
+      \begin{bmatrix}
+      u \\
+      c \\
+      t 
+      \end{bmatrix}
+      $$
+      Likewise, we have:
+      $$
+      \begin{bmatrix}
+      d' \\
+      s' \\
+      b' 
+      \end{bmatrix}
+      = 
+      U_d
+      \begin{bmatrix}
+      d \\
+      s \\
+      b 
+      \end{bmatrix}
+      $$
+      So if we want to calculate the vertex factor for $u$ and $d$ we do:
+      $$
+      \begin{align}
+      g_{ud} &= 
+      \begin{bmatrix}
+      1 & 0 & 0 
+      \end{bmatrix}
+      U^\dagger_u
+      \,
+      C_{\text{weak}}
+      \,
+      U_d
+      \begin{bmatrix}
+      1 \\
+      0 \\
+      0 
+      \end{bmatrix} \\
+      &= \begin{bmatrix}
+      1 & 0 & 0 
+      \end{bmatrix}
+      U^\dagger_u
+      \,
+      U_d
+      \begin{bmatrix}
+      1 \\
+      0 \\
+      0 
+      \end{bmatrix} \\
+      &= \begin{bmatrix}
+      1 & 0 & 0 
+      \end{bmatrix}
+      V_{\text{CKM}}
+      \begin{bmatrix}
+      1 \\
+      0 \\
+      0 
+      \end{bmatrix} \\
+      &= [V_{\text{CKM}}]_{11}
+      \end{align}
+      $$
+      Therefore, the $\text{CKM}$ matrix is defined as $V_{\text{CKM}} = U^\dagger_u U_d$ and its elements gives the vertex factor between upper and lower mass eigenstates in a weak interaction. Also, as a final note, the $\text{CKM}$ matrix, despite being unitary, does not describe any change of basis - if anything it should be thought of as a bilinear form. That's why you get the vertex factors by reading off it directly.
+    </p>
+
+</body>
+</html>
