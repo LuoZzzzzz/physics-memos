@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Some Notes on X-Ray Scattering</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Some Notes on X-Ray Scattering</h1>
+
+    <p>
+      Fermi's Golden Rule gives us the Laue condition:
+      $$\bra{\vec{\bf{k}}'} V \ket{\vec{\bf{k}}} = [\sum_{\vec{\bf{G}}}\delta(\vec{\bf{k}} - \vec{\bf{k}}' - \vec{\bf{G}})] \cdot \int_{\text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{x}}} \cdot V(\vec{\bf{x}}) \,\text{d}^3\vec{\bf{x}}$$
+      The potential for X-Ray scattering is:
+      $$V(\vec{\bf{x}}) = \sum_{\text{all atoms } j \text{ in lattice}} Z_j \cdot g_j(\vec{\bf{x}} - \vec{\bf{r}}_j)$$
+      Let us choose $\vec{\bf{k}} - \vec{\bf{k}}' = \vec{\bf{G}}$ for some reciprocal vector $\vec{\bf{G}}$, so the Laue condition is satisfied. Then plugging the above potential into the integral gives:
+      $$\bra{\vec{\bf{k}}'} V \ket{\vec{\bf{k}}} \propto \int_{\text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{x}}} \cdot (\sum_{j \in \text{lattice}}Z_j \cdot g_j(\vec{\bf{x}} - \vec{\bf{r}}_j)) \,\text{d}^3\vec{\bf{x}}$$
+      Somehow, this becomes:
+      $$\bra{\vec{\bf{k}}'} V \ket{\vec{\bf{k}}} \propto \sum_{j \in \text{unit cell}} e^{i \vec{\bf{G}} \cdot \vec{\bf{x}}_j}(\int_{\text{all space}} e^{i \vec{\bf{G}} \cdot \vec{\bf{r}}} \cdot Z_j \cdot g_j(\vec{\bf{r}}) \,\text{d}^3\vec{\bf{r}})$$
+      Why did the integral over the unit cell become an integral over all space, and the sum over the atoms in all space become the sum over the atoms in the unit cell?
+    </p>
+
+    <p>
+      Actually, the mathematics is pretty straightforward, and there is a nice intuition as to why we can do this switch. Here's the math first:
+      $$
+      \begin{align}
+      \bra{\vec{\bf{k}}'} V \ket{\vec{\bf{k}}} &\propto \int_{\text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{x}}} \cdot (\sum_{j \in \text{lattice}}Z_j \cdot g_j(\vec{\bf{x}} - \vec{\bf{r}}_j)) \,\text{d}^3\vec{\bf{x}} \\ 
+
+      &= \int_{\text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{x}}} \cdot (\sum_{\vec{\bf{R}} \in \text{lattice}} \sum_{\alpha \in \text{unit cell}} Z_j \cdot g_j(\vec{\bf{x}} - (\vec{\bf{R}}+\vec{\bf{y}}_\alpha))) \,\text{d}^3\vec{\bf{x}} \\
+
+      &= \int_{\text{unit cell}} \sum_{\vec{\bf{R}} \in \text{lattice}} \sum_{\alpha \in \text{unit cell}} e^{i \vec{\bf{G}}\cdot (\vec{\bf{x}}-\vec{\bf{R}})} \cdot Z_j \cdot g_j((\vec{\bf{x}} - \vec{\bf{R}})-\vec{\bf{y}}_\alpha) \,\text{d}^3\vec{\bf{x}} \\
+
+      &= \int_{\text{all space}} \sum_{\alpha \in \text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{r}}} \cdot Z_j \cdot g_j(\vec{\bf{r}} - \vec{\bf{y}}_\alpha) \,\text{d}^3\vec{\bf{r}} \\
+
+      &= \sum_{\alpha \in \text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{y}}_\alpha} \int_{\text{all space}} e^{i \vec{\bf{G}}\cdot \vec{\bf{r}}} \cdot Z_j \cdot g_j(\vec{\bf{r}}) \,\text{d}^3\vec{\bf{r}} \\
+
+      &= \sum_{j \in \text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{x}}_j} \cdot S(\vec{\bf{G}})
+      \end{align}
+      $$
+      The main math trick is to realize that $\sum_{\vec{\bf{R}}} \int_{\text{unit cell}} f(\vec{\bf{x}}\pm \vec{\bf{R}}) \,\text{d}^3\vec{\bf{x}} = \int_{\text{all space}} f(\vec{\bf{r}}) \,\text{d}^3\vec{\bf{r}}$. This is actually quite intuitive. Picture the potential of a single atom in space. We can chop this potential into tiny blocks of the primitive unit cell, then overlap these blocks over one another to get the total potential in a single unit cell. Therefore, when integrating over the potential in a single unit cell due to all atoms we are in effect integrating the potential of a single atom over all space. 
+    </p>
+
+    <h2>Connection to Selection Rules</h2> 
+
+    <p>
+      In the above equation there are a few assumptions that we have made:
+    </p>
+
+    <ol>
+      <li>$\vec{\bf{G}}$ is the reciprocal lattice of a simple cubic lattice of side $a$. When we describe $\vec{\bf{G}}$ using Miller indices $(h,k,l)$, we mean $\vec{\bf{G}} = \frac{2\pi}{a}(h,k,l)$.</li>
+      <li>For consistency with 1., the crystal itself must also have a simple cubic lattice. This means that to describe $\text{bcc}$ in our frame work we must convolve the simple cubic lattice with the basis $\{(0, 0, 0), (\frac{1}{2},\frac{1}{2},\frac{1}{2})\}$, and to describe $\text{fcc}$ we must convolve the simple cubic lattice with the basis $\{(0, 0, 0), (\frac{1}{2},\frac{1}{2},0), (\frac{1}{2},0,\frac{1}{2}), (0,\frac{1}{2},\frac{1}{2})\}$.</li>
+      <li>More of a note, but in deriving the scattering result for $\bra{\vec{\bf{k}}'} V \ket{\vec{\bf{k}}}$ we have only made the assumption that our crystal unit cells (not primitive unit cells) are simple cubic. Therefore, we expect the result in 1. and 2. to be exact.</li>
+    </ol>
+
+    <p>
+      This brings us to the idea of selection rules. If we calculate the scattering amplitude for a $\text{bcc}$ lattice, we find $S_{h,k,l} = 1 + (-1)^{(h+k+l)}$. So it is zero if $h+k+l = \text{odd}$, even though there seems to be nothing wrong with these Miller indices. The textbook provides some nice geometric intuition for this, but mathematically it is also obvious. The reason is that vectors like $\frac{2\pi}{a}(1,1,1)$ are not part of the reciprocal lattice of $\text{bcc}$! Even though we have derived Laue's condition in the context of a simple cubic lattice, it should intuitively hold for non simple cubic lattices too, in which case we expect delta peaks in the scattered intensity when $\vec{\bf{k}}' - \vec{\bf{k}} = \vec{\bf{G}}_{\text{fcc}}$, rather than $\vec{\bf{k}}' - \vec{\bf{k}} = \vec{\bf{G}}_{\text{simple cubic}}$.
+    </p>
+
+</body>
+</html>
