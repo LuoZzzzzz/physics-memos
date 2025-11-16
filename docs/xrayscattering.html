@@ -53,15 +53,10 @@
       $$
       \begin{align}
       \bra{\vec{\bf{k}}'} V \ket{\vec{\bf{k}}} &\propto \int_{\text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{x}}} \cdot (\sum_{j \in \text{lattice}}Z_j \cdot g_j(\vec{\bf{x}} - \vec{\bf{r}}_j)) \,\text{d}^3\vec{\bf{x}} \\ 
-
       &= \int_{\text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{x}}} \cdot (\sum_{\vec{\bf{R}} \in \text{lattice}} \sum_{\alpha \in \text{unit cell}} Z_j \cdot g_j(\vec{\bf{x}} - (\vec{\bf{R}}+\vec{\bf{y}}_\alpha))) \,\text{d}^3\vec{\bf{x}} \\
-
       &= \int_{\text{unit cell}} \sum_{\vec{\bf{R}} \in \text{lattice}} \sum_{\alpha \in \text{unit cell}} e^{i \vec{\bf{G}}\cdot (\vec{\bf{x}}-\vec{\bf{R}})} \cdot Z_j \cdot g_j((\vec{\bf{x}} - \vec{\bf{R}})-\vec{\bf{y}}_\alpha) \,\text{d}^3\vec{\bf{x}} \\
-
       &= \int_{\text{all space}} \sum_{\alpha \in \text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{r}}} \cdot Z_j \cdot g_j(\vec{\bf{r}} - \vec{\bf{y}}_\alpha) \,\text{d}^3\vec{\bf{r}} \\
-
       &= \sum_{\alpha \in \text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{y}}_\alpha} \int_{\text{all space}} e^{i \vec{\bf{G}}\cdot \vec{\bf{r}}} \cdot Z_j \cdot g_j(\vec{\bf{r}}) \,\text{d}^3\vec{\bf{r}} \\
-
       &= \sum_{j \in \text{unit cell}} e^{i \vec{\bf{G}}\cdot \vec{\bf{x}}_j} \cdot S(\vec{\bf{G}})
       \end{align}
       $$
@@ -82,6 +77,15 @@
 
     <p>
       This brings us to the idea of selection rules. If we calculate the scattering amplitude for a $\text{bcc}$ lattice, we find $S_{h,k,l} = 1 + (-1)^{(h+k+l)}$. So it is zero if $h+k+l = \text{odd}$, even though there seems to be nothing wrong with these Miller indices. The textbook provides some nice geometric intuition for this, but mathematically it is also obvious. The reason is that vectors like $\frac{2\pi}{a}(1,1,1)$ are not part of the reciprocal lattice of $\text{bcc}$! Even though we have derived Laue's condition in the context of a simple cubic lattice, it should intuitively hold for non simple cubic lattices too, in which case we expect delta peaks in the scattered intensity when $\vec{\bf{k}}' - \vec{\bf{k}} = \vec{\bf{G}}_{\text{fcc}}$, rather than $\vec{\bf{k}}' - \vec{\bf{k}} = \vec{\bf{G}}_{\text{simple cubic}}$.
+    </p>
+
+    <h2>Powdering</h2>
+    
+    <p>
+      In X-ray diffraction we need to powder the sample. The reason is this. If our incoming light has a fixed spatial frequency $k$, then Laue's condition is going to fix uniquely the angle that $\vec{\bf{k}}$ makes with $\vec{\bf{G}}$.
+      $\vec{\bf{G}}$ is something that is "glued" to the crystal - its orientation is entirely determined by the crystal. 
+      Therefore, to "activate" some Laue condition $\vec{\bf{k}}-\vec{\bf{k}}'=\vec{\bf{G}}$ we either need to send $\vec{\bf{k}}$ in at exactly the right orientation with respect to the crystal, or
+      we powder the crystal and send in light from a single direction so that statistically there will always be some pieces of crystal with a given $\vec{\bf{G}}$ oriented at the right direction for $\vec{\bf{k}}-\vec{\bf{k}}'=\vec{\bf{G}}$.
     </p>
 
 </body>
