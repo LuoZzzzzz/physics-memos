@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formal Derivation of Breit Wigner</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Breit Wigner</h1>
+    <p>
+      The lecture notes derive the Breit Wigner formula using a perturbative approach: start with an ansatz that has the right flavor, but otherwise quite wrong. Run it through the perturbation process once to get a first order solution with a linear rate prediction. Then calculate the rate by taking the time derivative. 
+    </p>
+
+    </p>
+      There are a few things that feel off. Firstly, we take the rate of a linear process, and then magically claim that it is also the rate of an exponential decay. Secondly, our original ansatz only held for $t \ll \tau$, but we take the limit $t \rightarrow \infty$ of our first order solution - does one round of perturbation increase our range of validity that much?
+    <p>
+
+    <h2>Step 1: The Interaction Picture</h2>
+    <p>
+      Given the following Hamiltonian:
+      $$H = H_0 + V$$
+      we consider the following trial solution:
+      $$\ket{\psi(t)}_I = \sum_n e^{\frac{i}{\hbar}E_n t} c_n(t) \ket{n}$$
+      Plugging this into the Schrodinger equation gives us the following equation for $c_n(t)$:
+    </p>
+
+
+    <h2>Step 2: Coupling Assumptions</h2>
+    <p>
+      To proceed from here, we need to introduce a few key assumptions:
+    </p>
+    <ol> 
+      <li>The system begins in the initial state $\ket{i}$.</li>
+      <li>The initial state couples to all final decay states $\ket{f}$.</li>
+      <li>The final decay states do not couple to one another: $\bra{f'} V \ket{f} = V_{f' f} = 0$.</li>
+    </ol>  
+    <p>
+      Therefore, we expect the probability to slosh around between $\ket{i}$ and the various $\ket{f}$s, but not between two final states $\ket{f}$ and $\ket{f'}$.
+    </p>
+
+    <p>
+      Small note: $V_{if} = V_{i \rightarrow f} = \bra{i} V \ket{f}$
+    </p>
+
+    <p>
+      This gives us the following pair of equations:
+      $$\dot{c}_i(t) = -\frac{i}{\hbar} \sum_f V_{if} \, e^{-\frac{i}{\hbar} (E_f - E_i) t} \, c_f(t) $$
+      $$\dot{c}_f(t) = -\frac{i}{\hbar} V_{fi} \, e^{\frac{i}{\hbar} (E_f - E_i) t} \, c_i(t)$$
+      Note given our above (physically grounded) assumptions these equations are exact. 
+    </p>  
+    
+    
+    <h2>Step 3: Solve the Equations</h2>
+    <p>
+      Integrating $\dot{c}_f(t)$ gives:
+      $$c_f(t) = -\frac{i}{\hbar} V_{fi} \int_0^t e^{\frac{i}{\hbar} (E_f - E_i) t'} \, c_i(t') \,\text{d}t'$$
+      Now, plug this into the equation for $\dot{c}_i(t)$. This gives:
+      $$
+      \begin{align}
+      \dot{c}_i(t) &= -\frac{1}{\hbar^2} \sum_f V_{if} \, e^{-\frac{i}{\hbar} (E_f - E_i) t} \cdot (V_{fi} \int_0^t e^{\frac{i}{\hbar} (E_f - E_i) t'} \, c_i(t') \,\text{d}t') \\
+      &= -\frac{1}{\hbar^2} \sum_f |V_{if}|^2 \cdot  \int_0^t e^{\frac{i}{\hbar} (E_f - E_i) (t'-t)} \, c_i(t') \,\text{d}t' \\
+      &= -\frac{1}{\hbar^2} \cdot \int_0^t (\sum_f |V_{if}|^2e^{-i \omega_{fi} (t-t')}) \, c_i(t') \,\text{d}t' \\
+      &= -\frac{1}{\hbar^2} \cdot \int_0^t \kappa (t-t') \, c_i(t') \,\text{d}t'
+      \end{align}
+      $$
+      We have made the substitutions $\omega_{fi} = \frac{1}{\hbar}(E_f-E_i)$ and $\kappa(t-t') = \sum_f |V_{if}|^2e^{-i \omega_{fi} (t-t')}$.
+    </p>
+
+    <p>
+      Here's the main idea: since $\kappa(t-t')$ is the sum of a lot of phases, it should be quite spiky at $t' = t$ and mostly zero everywhere else. Note that this may not necessarily be the case! For example, $\kappa$ could in theory have some kind of periodic structure. The exact details depend on the values of the coupling constants and energy levels. In any case, if we work with the above assumptions then we can do the following. 
+    </p>
+
+    <p>
+      First, if the variation scale of $c_f(t)$ is slow compared to the width of $\kappa(t-t')$, then we may approximate $\int_0^t \kappa (t-t') \, c_i(t') \,\text{d}t \approx c_i(t) \int_0^t \kappa (t-t') \, \text{d}t'$. 
+    </p>
+
+    <p>
+      Next, we make the substitution $\tau = t-t'$, $\text{d}\tau = -\text{d}t'$. From here, we may further approximate by increasing the limit of integration of the $\kappa$ term to $\tau = \infty$. The reason is that because $\kappa(\tau)$ has a tail that vanishes quickly, so the additional area is very small. Therefore, 
+      $$
+      \begin{align}
+      c_i(t) \int_0^t \kappa (t-t') \, \text{d}t' &= c_i(t) \int_t^0 \kappa (\tau) (-1) \cdot \text{d}\tau \\
+      &= c_i(t) \int_0^t \kappa (\tau)\cdot \text{d}\tau \\
+      &\approx c_i(t) \int_0^\infty \kappa (\tau)\cdot \text{d}\tau
+      \end{align}
+      $$
+      Therefore, our approximate differential equation for $c_i(t)$ is: 
+      $$\dot{c}_i(t) = -\frac{1}{\hbar^2} c_i(t) \cdot \int_0^\infty \kappa (\tau) \, \text{d}\tau$$
+    </p>
+
+    <h2>Step 4: Evaluate the Kernel</h2>
+    <p>
+      Now, we evaluate the kernel $\kappa$ in terms of distributions. A result from distribution theory tells us that:
+      $$\int_0^\infty e^{i\omega t} \,\text{d}t = \pi \delta(\omega) + i \mathcal{P}(\frac{1}{\omega})$$
+      The integral on the left hand side is a distribution. On its own it does not make any sense because the integral is oscillatory and never converges. It only makes sense when it appears within another integral (in this case that other integral being the summation over all final states $\sum_f$, which we may rewrite as $\int \rho(E_f) \,\text{d}E_f$ in the continuum limit).  The above relation resolves this distribution into two distributions that we are quite familiar with: the delta function and the principle value function. They are defined by:
+      $$\int f(x) \cdot \delta(x) \,\text{d}x = f(0)$$
+      $$\int f(x) \cdot \mathcal{P}(\frac{1}{x}) \,\text{d}x = \lim_{\epsilon \rightarrow 0} (\int_{-\infty}^{-\epsilon} \frac{f(x)}{x} \,\text{d}x +  \int_{\epsilon}^{\infty} \frac{f(x)}{x} \,\text{d}x)$$
+      This leads us to the following expansion for $\kappa$:
+      $$\int_0^\infty \kappa(\tau) \,\text{d}\tau = \sum_f |V_{if}|^2 \cdot [\pi\delta(\omega_{fi}) + i \mathcal{P}(\frac{1}{\omega_{}fi})]$$
+      We now make two definitions: 
+      $$\Gamma = \frac{2\pi}{\hbar} \sum_f |V_{if}|^2 \cdot \delta(\omega_{fi})$$
+      $$\Delta E = \frac{1}{\hbar} \sum_f |V_{if}|^2 \cdot \mathcal{P}(\frac{1}{\omega_{fi}})$$
+      Then, we have:
+      $$\dot{c}_i(t) = -\frac{1}{\hbar}(\frac{\Gamma}{2} + i \Delta E) \, c_i(t)$$
+      Solving this gives us:
+      $$c_i(t) = e^{-\frac{\Gamma}{2}t}e^{-i\frac{\Delta E}{\hbar}t}$$
+      Now what exactly does it mean to take the sum of many distributions? Of course that makes no sense, but as we mentioned above we can replace the summation with an integral over the density of states:
+      $$\sum_f \rightarrow \int \phantom{xx} \rho(E_f) \,\text{d}E_f$$
+      This gives us:
+      $$
+      \begin{align}
+      \Gamma &= \frac{2\pi}{\hbar} \int |V_{if}|^2 \cdot \delta(\omega_{fi}) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= \frac{2\pi}{\hbar} \int |V_{if}|^2 \cdot \hbar \delta(E_f - E_i) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= 2\pi \int |V_{if}|^2 \cdot \delta(E_f - E_i) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= 2\pi \sum_{E_f = E_i} |V_{if}|^2 \cdot \rho(E_{f_{(E_f=E_i)}})
+      \end{align} 
+      $$
+      That's Fermi's Golden Rule! To calculate the transition rate, sum the norm square of the coupling constant over all final states $\ket{f}$ that has the same energy as the initial state $\ket{i}$. Note that in this case its $E_f = E_i$, not $\ket{f} = \ket{i}$! 
+    </p>
+
+    <p>
+      Likewise, we have for $\Delta E$:
+      $$
+      \begin{align}
+      \Delta E &= \frac{1}{\hbar} \int |V_{if}|^2 \cdot \mathcal{P}(\frac{1}{\omega_{fi}}) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= \frac{1}{\hbar} \int |V_{if}|^2 \cdot \hbar\mathcal{P}(\frac{1}{E_f - E_i}) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= \int |V_{if}|^2 \cdot \mathcal{P}(\frac{1}{E_f - E_i}) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= \lim_{\epsilon \rightarrow 0} (\int_{-\infty}^{-\epsilon} \frac{|V_{if}|^2 }{E_f - E_i} \,\text{d}x +  \int_{\epsilon}^{\infty} \frac{|V_{if}|^2 }{E_f - E_i} \,\text{d}x)
+      \end{align}
+      $$
+      This looks familiar, because it is (proportional to) the integral of the Feynman diagram amplitude over all space. 
+    </p>
+
+    <p>
+      Now, if we take the norm square of $c_i(t)$, we find:
+      $$\text{pr(decayed)}(t) = |c_i(t)|^2 = e^{-\frac{\Gamma}{\hbar}t}$$
+      This is where the relation $\Gamma = \frac{\hbar}{\tau}$ actually comes from!
+    </p>
+
+    <p>
+      We can also plug the expression for $c_i(t)$ into the expression for $c_f(t)$. This gives:
+      $$
+      \begin{align}
+      c_f(t) &= -\frac{i}{\hbar} V_{fi} \int_0^t e^{\frac{i}{\hbar}(E_f - E_i)t} \, c_i(t') \,\text{d}t' \\
+      &= -\frac{i}{\hbar} V_{fi} \int_0^t e^{-\frac{\Gamma}{2\hbar}t'}e^{\frac{i}{\hbar}[\hbar \omega_{fi} - (E_f - E_i)]t'} \,\text{d}t' \\
+      &= -\frac{i}{\hbar} V_{fi} \cdot \frac{1}{-\frac{\Gamma}{2\hbar}+\frac{i}{\hbar}(E_{fi}-\Delta E)} \cdot (e^{-\frac{\Gamma}{2\hbar}t}e^{\frac{i}{\hbar}(E_{fi} - \Delta E)})
+      \end{align}
+      $$
+      Taking the norm square gives: 
+      $$\text{pr(decay into state $f$)}(t) = \frac{|V_{fi}|^2/\hbar^2}{\frac{(E_{fi}-\Delta E)^2}{\hbar^2}+\frac{\Gamma^2}{4\hbar^2}}$$
+      Which is the Breit Wigner formula. This also tells us that the mass of the resonance is effectively the sum of the "path weights" of all decay trajectories. 
+    </p>
+
+</body>
+</html>
