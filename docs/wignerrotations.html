@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wigner Rotations</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Wigner Rotations</h1>
+
+    <p>
+      <b>Note</b>: These is my summary of section $6.7$ on Thomas precession / Wigner rotations from Relativity Made Relatively Easy. The main arguments are similar, just put in my own words and with a numerical calculation at the end. Could use some diagrams. I may also have written some outright wrong things.
+    </p>
+
+    <p>
+      Consider a reference frame $S_1$ initially flying north in the lab frame $S$ with speed $v$. On the ground of the lab frame there is painted a giant square. When the $S_1$ reaches the top right vertex of the square, a man in $S_1$ "hops over" to a reference frame $S_2$ that also happens to be passing through the vertex, but in the west direction at speed $v$ in $S$. The man always tries to maintain his orientation, in the sense that when he changes reference frames, he does so by a pure boost.
+    </p>
+
+    <p>
+      Naively, one may think that when the man returns to his starting orientation, he will still be looking in parallel to the initial line. But let's analyse the situation carefully from the man's frame.
+    </p>
+
+    <p>
+      In the lab frame $S$, the reference frames $S_1$ moves north, and the reference frame $S_2$ moves west. Let us suppose also, that $S_1$ and $S_2$ have the same spatial orientation. How will the frame $S_2$ look from the perspective of frame $S_1$? As it turns out, an observer in frame $S_1$ will see the coordinate axes of frame $S_2$ rotated relative to his own coordinate axes! This means that what looks like a pure boost between $S_1$ and $S_2$ in the lab frame $S$ (in the sense that the orientations of the coordinate axes of $S_1$ and $S_2$ are the same) is in fact a pure spatial rotation plus a boost to the person in $S_1$.  That is, the person in $S_1$ has to perform the Lorentz transformation $R_{12}B_{12}$ in order to get himself into the $S_2$ that is aligned with $S_1$ in the lab frame $S$.
+    </p>
+
+    <p>
+      However, as we have said, the person in $S_1$ wants to "preserve his orientation between frame changes" and therefore limits himself only to pure boosts $B_{12}$ from $S_1$. That means that it is impossible for him to boost himself into the $S_2$ described above, as that will require a rotation in $S_1$. This also means that after the man boosts, his $S_2$ will look rotated in the lab frame $S$. 
+    </p>
+
+    <p>
+      How will the axes of the rotated $S_2$ look in $S_1$? To calculate this we need to first construct the Lorentz transformation from $S_2$ to $S_1$. This tells us how to transform $x_{S_2}$ and $y_{S_2}$ to find their appearances in $S_1$. Note that since we are concerned only with the spatial components, we can extract the Wigner rotation angle directly by factorising $L = BR$, and looking at $R$.  $R$ comes first here, because in going from $S_1$ to $S_2$ we boost then rotate, so when going the reverse direction we reverse the order: rotate then boost. We first rotate $S_2$ so that it appears aligned from $S_1$'s frame, and then boost. The associated angle is also the angle by which we rotate to get from the aligned $S_2$ in $S$ to the misaligned $S_2$. This is because the matrix $R$ acts only on the spatial part and therefore its action is the same in all frames. Note that the Wigner angle is not the angle between $x_{S_2}$ and $x_{\text{lab}}$, because for that we also need to account for the stretching due to the boost, in fact, I'm not sure if there is a simple geometric interpretation for the Wigner angle for a single transformation; however, if we were to return back to the origin, the stretching due to the boosts cancel, and we are left with the sum of the pure Wigner rotation. 
+    </p>
+
+    <p>
+      Now, to transform from $S_2$ to $S_1$, we need to first boost from $S_2$ to $S$, and then from $S$ to $S_1$. The first transformation is $B_x(+v)$, and the second transformation is $B_y(-v)$. That is, $L_{2 \rightarrow 1} = B_y(-v) B_x(+v)$. Written in matrix form: 
+      $$
+      B_x(+v) = 
+      \begin{bmatrix}
+      \gamma & -\gamma\beta & 0 \\
+      -\gamma\beta & \gamma & 0 \\
+      0 & 0 & 1
+      \end{bmatrix}
+      \phantom{xxxxx}
+      B_y(-v) = 
+      \begin{bmatrix}
+      \gamma & 0 & \gamma\beta \\
+      0 & 1 & 0 \\
+      \gamma\beta & 0 & \gamma
+      \end{bmatrix}
+      $$
+      $$
+      L = 
+      \begin{bmatrix}
+      \gamma^2 & -\gamma\beta & -\gamma^2\beta \\
+      -\gamma^2\beta & \gamma & -\gamma^2\beta^2 \\
+      -\gamma\beta & 0 & \gamma
+      \end{bmatrix}
+      $$
+      Since we can write $L=BR$ where the rotation is contained entirely within the lower 2 by 2 block of $R$, we may as well just do polar decomposition on:
+      $$M = \begin{bmatrix}
+      \gamma & -\gamma^2\beta^2 \\
+      0 & \gamma
+      \end{bmatrix}$$
+      As one may somewhat tediously prove, the polar decomposition of a matrix:
+      $$M = \begin{bmatrix}
+      A & B \\
+      0 & A
+      \end{bmatrix}$$
+      is given by:
+      $$R = \frac{1}{\sqrt{4A^2+B^2}}\begin{bmatrix}
+      2A & B \\
+      -B & 2A
+      \end{bmatrix}
+      \phantom{xxxxx}
+      P = \frac{1}{\sqrt{4A^2+B^2}}\begin{bmatrix}
+      2A^2+B^2 & AB \\
+      AB & A^2
+      \end{bmatrix}
+      $$
+      We can check that $M = PR$. 
+    </p>
+
+    <p>
+      Plugging in our above values for $A$ and $B$ we find:
+      $$R = 
+      \begin{bmatrix}
+      \cos \theta_w & \sin \theta_w \\
+      -\sin \theta_w & \cos \theta_w
+      \end{bmatrix}
+      \propto
+      \begin{bmatrix}
+      2\gamma & -\gamma^2\beta^2\\
+      -\gamma^2\beta^2 & 2\gamma
+      \end{bmatrix}
+      $$
+      Therefore, we have:
+      $$\tan \theta_w = \frac{-\gamma^2\beta^2}{2\gamma} = -\frac{\beta^2}{2\sqrt{1-\beta^2}}$$
+      And the Wigner rotation angle is:
+      $$\theta_w = -\arctan(\frac{\beta^2}{2\sqrt{1-\beta^2}})$$
+    </p>
+</body>
+</html>
