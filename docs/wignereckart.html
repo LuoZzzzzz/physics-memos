@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calculations with Wigner $3j$ and Clebsch Gordan</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Wigner $3j$ and Clebsch Gordan</h1>
+
+    <p>
+      Suppose we wish to calculate the following integral for all possible choices of $m$s:
+      $$\int Y^*(3, m_1) \cdot Y(2, m_2) \cdot Y(1, m_3) \,\text{d}\Omega$$
+      where $Y(l, m)$ are spherical harmonics. If we were to do this from zero, we will have to calculate $105$ integrals, since $m_1 \in [-3, +3]$, $m_2 \in [-2, +2]$, $m_3 \in [-1, +1]$. This is quite tedious.
+    </p>
+
+    <p>
+      Instead, we may note that $Y(2, m_2)$ is a spherical tensor. Then, the above integral is equivalent to evaluating:
+      $$\bra{l=3, m_1} Y(2, m_2) \ket{l=1, m_3}$$
+      This looks kind of like the matrix elements you encounter in perturbation theory. The Wigner Eckart theorem tells us that this is equal to: 
+    </p>
+
+    <p style="font-size: 70%;">
+      $$(l=3||Y(l=2)||l=1) \cdot (-1)^{3-m_1} \cdot 
+      \begin{pmatrix}
+      l=3 & l=2 & l=1 \\
+      -m_1 & m_2 & m_3
+      \end{pmatrix} = (l=3||Y(l=2)||l=1) \cdot \text{const} \cdot \text{Clebsch Gordan}$$
+    </p>
+    
+    <p>
+      The two by three matrix here is the Wigner $3j$ symbol, and in principle we can just look it up somewhere. But we want to find this in terms of Clebsch Gordan coefficients, so let's first clarify what a Clebsch Gordan (CG) coefficient is. 
+    </p>
+
+    <p>
+      Suppose we tensor angular momentums $J_1$ and $J_2$ to make $J$. Then, the total angular momentum states will form some basis $\ket{J, m_j}$ of the Hilbert space, while the tensor product states $\ket{J_1, m_1, J_2, m_2}$ will form another basis. This means that we can express a $\ket{J, m_j}$ state in terms of $\ket{J_1, m_1, J_2, m_2}$ states - just insert resolution of identity:
+      $$\ket{J, m_j} = \sum_{\ket{J_1, m_1, J_2, m_2}} \braket{J_1, m_1, J_2, m_2|J, m_j}\ket{J_1, m_1, J_2, m_2}$$
+      The complex amplitudes $\braket{J_1, m_1, J_2, m_2|J, m_j}$ are known as the Clebsch Gordan coefficients. To simplify notation we introduce the Clebsch Gordan symbol:
+      $$C^{j_1, j_2, J}_{m_1, m_2, M} = \braket{J_1, m_1, J_2, m_2|J, m_j}$$
+      One can think of the CG coefficients as matrix elements of a $(2j_1 + 1)(2j_2 + 1)$ by $(2j_1 + 1)(2j_2 + 1)$ unitary matrix that maps between the total angular momentum and tensor product bases. The indices ${}^{j_1, j_2}_{m_1, m_2}$ brings us down the column of the matrix while the indices ${}^J_M$ brings us across the rows of the matrix. In total there are $(2j_1 + 1)(2j_2 + 1)$ ${}^{j_1, j_2}_{m_1, m_2}$ combinations and $(2j_1 + 1)(2j_2 + 1)$ ${}^J_M$ combinations, because $(2j_1 + 1)(2j_2 + 1)$ is the dimension of the combined Hilbert space. Since most of these coefficients are zero people don't usually write the whole matrix, instead they write non-zero sub-blocks of this matrix. 
+    </p>
+
+    <p>
+      As it turns out (for some reason), the Clebsch Gordan coefficients are related to the Wigner $3j$ symbols by the following relationship:
+      $$
+      C^{j_1, j_2, J}_{m_1, m_2, M} = (-1)^{j_1-j_2+M}\cdot \sqrt{2J+1} \cdot
+      \begin{pmatrix}
+      j_1 & j_2 & J \\
+      m_1 & m_2 & -M
+      \end{pmatrix}$$
+      To write the above spherical harmonic integral in terms of CG coefficients we first invert the above equation:
+      $$\begin{pmatrix}
+      j_1 & j_2 & J \\
+      m_1 & m_2 & -M
+      \end{pmatrix}
+      =
+      \frac{(-1)^{j_1-j_2+M}}{\sqrt{2J+1}} \cdot C^{j_1, j_2, J}_{m_1, m_2, M}$$
+      We have $j_1 = 3, j_2 = 2, j_3 = 1, m_1 = -m_1, m_2 = m_2, M = -m_3$. So plugging everything in gives:
+      $$\begin{pmatrix}
+      3 & 2 & 1 \\
+      -m_1 & m_2 & m_3
+      \end{pmatrix}
+      =
+      \frac{(-1)^{1-m_3}}{\sqrt{2\cdot1+1}} \cdot C^{3, 2, 1}_{-m_1, m_2, -m_3}$$
+      So the above spherical harmonic becomes:
+      $$(l=3||Y(l=2)||l=1) \cdot (-1)^{3-m_1} \cdot 
+      \frac{(-1)^{1-m_3}}{\sqrt{2\cdot1+1}} \cdot C^{3, 2, 1}_{-m_1, m_2, -m_3}$$
+    </p>
+
+    <p>
+      The moral of the story is this. Whenever we evaluate a matrix element $\bra{\text{angular momentum}} \text{spherical tensor} \ket{\text{angular momentum}}$, we can do so by decomposing the matrix element into a part that depends only on the total angular momentum (ie. on the representation), and another part that depends strictly on the algebra of the angular momentum (ie. the CG coefficients). Importantly, the values of the CG coefficients are independent of the exact spatial dependence of the states, therefore they may be tabulated beforehand once and reused. Furthermore, the value of $(l=3||Y(l=2)||l=1)$ is the same for all choices of $m_1, m_2, m_3$, so we only need to work it out once for any choice of $l$s in our representation. 
+    </p>
+
+    <p>
+      In the above example, instead of working out all $105$ matrix elements, we can just work out one matrix element, say for $m_1 = 0, m_2 = 0, m_3 = 0$. This result tells us the value of $(l=3||Y(l=2)||l=1) \cdot \text{something} \cdot \text{CG coefficient}$. Now, CG coefficients are tabulated in nice tables from which we can read off its value. This let's us find $(l=3||Y(l=2)||l=1)$ from our calculation above. Finally, to find the value of $\int Y^*(3, m_1) \cdot Y(2, m_2) \cdot Y(1, m_3) \,\text{d}\Omega$ for any other set of $m_1, m_2, m_3$ we can simply multiply the value for $(l=3||Y(l=2)||l=1)$ we found with the corresponding Clebsch Gordan coefficient which we read off the table plus some constants. This reduces $105$ long calculations to just $1$ long calculation. 
+    </p>
+
+    <p>
+      In the context of dipole radiation, the spherical tensor is no longer a spherical harmonic, but rather the dipole operator:
+      $$\vec{\bf{d}} = (d_{-1}, d_0, d_{+1}) \propto (x+iy, z, x-iy)$$
+      The matrix element $\bra{J', m_j'} d_{-1} \ket{J, m_j}$ for instance will then correspond to the amplitude of a transition from $\ket{J', m_j'}$ to $\ket{J, m_j}$ emitting a circularly polarised photon in the process ($\sigma$ polarisation), while $\bra{J', m_j'} d_{0} \ket{J, m_j}$ will correspond to the amplitude of a transition from $\ket{J', m_j'}$ to $\ket{J, m_j}$ emitting a linearly polarised photon in the process ($\pi$ polarisation). 
+    </p>
+
+    <p>
+      In $\text{OP34}$ we are tasked with calculating the relative intensities of peaks in Zeeman splitting. To do so, we first identify if the triplet/doublet belong to a $\sigma$ or $\pi$ line. If it is $\sigma$, then the relative intensity is given by $|\frac{\bra{J_1, m_1} d_{\pm1} \ket{J_2, m_2}}{\bra{J_3, m_3} d_{\pm1} \ket{J_4, m_4}}|^2$, and if it is $\pi$ then the relative intensity is $|\frac{\bra{J_1, m_1} d_{0} \ket{J_2, m_2}}{\bra{J_3, m_3} d_{0} \ket{J_4, m_4}}|^2$. 
+    </p>
+
+    <p>
+      Now let's examine a single transition. Suppose we have a transition from $\ket{J_1, m_1}$ to $\ket{J_2, m_2}$. The matrix element is: 
+      $$\bra{J_1, m_1} d_q \ket{J_2, m_2}$$
+      And the intensity is therefore:
+      $$I(\ket{J_2, m_2}\rightarrow \ket{J_1, m_1}) \propto |\bra{J_1, m_1} d^1_q \ket{J_2, m_2}|^2$$
+      Note that the dipole operator has $J=1$ and $q = -1, 0, +1$, like spin $1$ (don't really know how this comes about). We can expand the matrix element in terms of CG coefficients:
+      $$
+      \begin{align}
+      \bra{J_1, m_1} d_q \ket{J_2, m_2} &= (J_1||d^1||J_2) \cdot (-1)^{J_1 - m_1} \cdot \begin{pmatrix}
+      J_1 & 1 & J_2 \\
+      -m_1 & q & m_2
+      \end{pmatrix} \\
+      &= (J_1||d^1||J_2) \cdot (-1)^{J_1 - m_1} \cdot \frac{(-1)^{J_1 - 1 - m_2}}{\sqrt{2J_2 + 1}} \cdot C^{J_1, 1, J_2}_{-m_1, q, -m_2}
+      \end{align}
+      $$
+      Now, the phases $(-1)^\text{something}$ disappear when we take absolute values, while the $(J_1||d^1||J_2)$ and $\sqrt{2J_2+1}$ dependences cancel when we take ratios, since they depend only on total angular momentum which is common to any pair of transitions for the same term symbol transition (the splitting is due only to differences in $m$). 
+    </p>
+
+    <p>
+      Therefore, relative intensities are given by:
+      $$\frac{I(\ket{J_2, m_2}\rightarrow \ket{J_1, m_1})}{I(\ket{J_4, m_4}\rightarrow \ket{J_3, m_3})} = \frac{|C^{J_1, 1, J_2}_{-m_1, q, -m_2}|^2}{|C^{J_3, 1, J_4}_{-m_3, q, -m_4}|^2} = \frac{|C^{J_1, 1, J_2}_{m_1, q, m_2}|^2}{|C^{J_3, 1, J_4}_{m_3, q, m_4}|^2} $$They are simply the ratios of the absolute values of the CG coefficients squared! Final note: this expression only holds for transitions between the same term symbol pair. If we are comparing two transitions with different term pairs then the front $J$ dependence will not cancel.
+    </p>
+</body>
+</html>

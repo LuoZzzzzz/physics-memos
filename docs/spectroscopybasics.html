@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Spectroscopy Basics</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Spectroscopy Basics</h1>
+
+    <p>
+      If we tensor a total spin $S$ with a total angular momentum $L$, then the algebra combines into the direct sum:
+      $$L \otimes S = |L-S| \oplus \dots \oplus |L+S|$$
+      The natural basis for $L \otimes S$ states is $\ket{L, m_l, S, m_s}$, while the natural basis for the total angular momentum states is $\ket{J, m_j, L, S}$. Here, $J$ is one of $|L-S|, \dots , |L+S|$ (ie. the label of one of the $J$ ladders), and having decided on the ladder $J$ then $m_j$ is one of $-J, -J+1, \dots, J-1, J$. 
+    </p>
+
+    <p>
+      Since the Hilbert space is finite dimensional we better check that there are the same number of basis states in both bases. For the tensor product basis there are $(2S+1)(2L+1)$ states. For the total angular momentum basis, the calculation is slightly trickier. 
+    </p>
+
+    <p>
+      Let us first suppose that $L>S$, so $|L-S| \oplus \dots \oplus |L+S| = L-S \oplus \dots \oplus L+S$. Then there are in total $2S+1$ ladders. The $J$ ladder will have $2J+1$ states, so for example the leftmost ladder will have $2(L-S)+1$ states, while the rightmost ladder will have $2(L+S)+1$ states. Therefore the total number of states is:
+      $$
+      \begin{align}
+      \text{# states} &= \sum_{J=L-S}^{L+S} 2J + 1 \\
+      &= 2\cdot \frac{2S+1}{2} \cdot [(L-S)+(L+S)] + (2S+1) \\ 
+      &= (2S+1)(2L+1)
+      \end{align}
+      $$
+      So the counting checks out.
+    </p>
+
+<pre>|  |  -3 |  -2 |  -1 |   0 |  +1 |  +2 |  +3 |
+|-1| 9   | 97  | 975 | 975 | 975 | 975 | 975 |    /
+| 0| 97  | 975 | 975 | 975 | 975 | 975 | 97  |   / direction of mixing
+|+1| 975 | 975 | 975 | 975 | 975 | 97  | 9   |  /</pre>
+
+    <p>
+      To make things even clearer, we can draw an awesome table with each grid representing a specific state of spin projection $m_s$ and orbital angular momentum projection $m_l$. Here I chose $S=1$ and $L=3$. The algebra works out to be $1 \otimes 3 = 2 \oplus 3 \oplus 4$, so we get three ladders with $5$, $7$ and $9$ states.  Depending on $m_s$ and $m_l$ the tensor product states will mix into different ladders. In particular, states satisfying $m_s + m_l = m_j$ for some given $m_j$ will mix together. This corresponds to states lying along an upper right diagonal in the table. The numbers $5$, $97$, $975$ indicates which ladders the given tensor product state mixes into.
+    </p>
+    
+    <p>
+      A term symbol $^{2S+1}L_J$ tells us the values of $J$, $L$ and $S$ for a state, this gives us all the information we need to identify the atomic level of the state. Note that just knowing the value of $J$ is not enough. For example, if we have hydrogen then for $S=\frac{1}{2}$ and $L = 0$ we have $\frac{1}{2} \otimes 0 = \frac{1}{2}$, while for $S = \frac{1}{2}$ and $L = 1$ we have $\frac{1}{2} \otimes 1 = \frac{1}{2} \oplus \frac{3}{2}$. So if I am only told that $J = \frac{1}{2}$ I would only know that the state is either $L = 0$ or $L = 1$. But in terms of term symbols they are $^2 S_\frac{1}{2}$ and $^2 P _\frac{1}{2}$ and so are easily distinguished.  
+    </p>
+
+    <p>
+      For the Cadmium green line the transition is $^3S_1 \rightarrow ^3P_1$. This suggests that $S=1$. But a single electron is spin $\frac{1}{2}$? The reason is that Cadmium has two valence electrons, and when we construct angular momentum states of the atom we do so using the total spin and orbital angular momentum states of all valence electrons. Therefore, the recipe is to combine the spins of the two valence electrons and the orbital angular momentum of the two valence electrons individually, and then combine the joint spin and the joint orbital angular momenta of the two electrons. 
+    </p>
+
+    <p>
+      Let's work through this. First we do the $^3S_1$ state. For spin, we have $S_1 = \frac{1}{2}$, $S_2 = \frac{1}{2}$. So $S = S_1 \otimes S_2 = \frac{1}{2} \otimes \frac{1}{2} = 0 \oplus 1$. For orbital angular momentum, one of the valence electrons is in $5s$ shell while the other is in $6s$ shell. So $L_1 = 0$, $L_2 = 0$. Then $L = L_1 \otimes L_2 = 0 \otimes 0 = 0$. So $J = S\otimes L = (0\oplus1) \otimes 0 = 0 \oplus 1$. In term symbols this ladder structure is: $^1S_0 \oplus {}^3S_1$. 
+    </p> 
+
+    <p>
+      For the $^3P_1$ state, we have $S=0 \oplus 1$ as before but now one valence electron is in the $5s$ orbital while the other is in the $5p$ orbital. So $L = 0 \otimes 1 = 1$. Therefore, $J = (0 \oplus 1) \otimes 1$ = $1 \oplus (0 \oplus 1 \oplus 2)$. In term symbols this is $^1P_1 \oplus ({}^3P_0 \oplus {}^3P_1 \oplus {}^3P_2)$. So actually the $^3P_1$ is one of the states in this complicated ladder we get by adding two spins and two orbital angular momenta together. Note also that $S$ and $P$ here refer to the total orbital angular momentum of the whole system. And also that even though we are going from $S$ to $P$, its more like $6s$ to $5p$ so the direction is fine.  
+    </p>
+
+    <h2>Selection Rules for Single Valence Electron Atoms</h2>
+    <p>
+      $\Delta S = 0$, because spin states do not couple to spatial perturbation $\vec{\bf{r}}$.
+      $\Delta L = \pm1$, because $\bra{f}V\ket{i} = (-1)^{L_f + L_i + 1} \bra{f}V\ket{i} = (-1)^{\Delta L + 1} \bra{f}V\ket{i}$.
+      Assume that the projection axis the the z axis, then:
+      For $\vec{\bf{k}} \perp \text{z axis}$, $m_j = 0, \pm1$.
+      For $\vec{\bf{k}} \parallel \text{z axis}$, $m_j = \pm1$. 
+    </p>
+
+    <p>
+      In an E1 transition two things are conserved, total angular momentum, and projection of angular momentum onto z. 
+    </p>
+
+    <p>
+      Total angular momentum conservation is described by tensor product algebra:
+      $$J_i \in J_f \otimes J_\gamma = J_f \otimes 1 = |J_f - 1| \oplus J_f \oplus |J_f+1|$$
+      This gives us the possible values of $J_f$ given $J_i$: $\Delta J = J_f - J_i = 0, \pm 1$. An alternative way to express the above statement is to write its algebra:
+      $$\vec{\bf{J}}_i = \vec{\bf{J}}_f + \vec{\bf{J}}_\gamma$$
+      Note also, that if $J_i = J_f = 0$, then we end up with $0 = 0 \otimes 1 = 1$. Clearly this is a contradiction. So $0 \rightarrow 0$ transitions are actually forbidden.
+    </p>
+      
+    <p>
+      On the other hand, the angular momentum projection is described by simple addition:
+      $$m_i = m_f + m_\gamma$$
+      Since photons are spin 1, the can have $m_\gamma = \pm 1$ along the z-axis ($0$ is not allowed as they are massless), so for emission along the z-axis we must have $\Delta m_j = \pm 1$. For emissions in the xy-plane we have to take the projection of the $\pm 1$ spin onto the xy plane, which can give $m_\gamma = 0$. Therefore, for emission in the xy plane we may have $\Delta m_f = 0, \pm 1$. 
+    </p>
+</body>
+</html>
