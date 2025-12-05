@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Decay Rates</title>
+  <title>Formal Derivation of Breit Wigner</title>
 
   <!-- Link external CSS -->
   <link rel="stylesheet" href="styles.css" />
@@ -34,148 +34,148 @@
       <a href="index.html" class="btn">Index</a>
     </nav>
 
-    <h1>Single Channel Decay</h1>
-
+    <h1>General Decay Derivation</h1>
     <p>
-      In time dependent perturbation, the evolution of coefficients $c_m(t)$ is given by:
-      $$\dot{c}_m(t) = -\frac{i}{\hbar} \sum_n e^{-\frac{i}{\hbar}(E_n-E_m)t} \bra{n}V(t)\ket{m} c_n(t)$$
-      This is a set of coupled first order differential equations. In principle, we can solve it numerically given initial conditions $\{c_n(0)\}$. 
+      The lecture notes derive the decay formula using a perturbative approach: start with an ansatz that has the right flavor, but otherwise quite wrong. Run it through the perturbation process once to get a first order solution with a linear rate prediction. Then calculate the rate by taking the time derivative. 
+    </p>
+
+    </p>
+      There are a few things that feel off. Firstly, we take the rate of a linear process, and then magically claim that it is also the rate of an exponential decay. Secondly, our original ansatz only held for $t \ll \tau$, but we take the limit $t \rightarrow \infty$ of our first order solution - does one round of perturbation increase our range of validity that much?
+    <p>
+
+    <h2>Step 1: The Interaction Picture</h2>
+    <p>
+      Given the following Hamiltonian:
+      $$H = H_0 + V$$
+      we consider the following trial solution:
+      $$\ket{\psi(t)}_I = \sum_n e^{\frac{i}{\hbar}E_n t} c_n(t) \ket{n}$$
+      Plugging this into the Schrodinger equation gives us the following equation for $c_n(t)$:
+    </p>
+
+
+    <h2>Step 2: Coupling Assumptions</h2>
+    <p>
+      To proceed from here, we need to introduce a few key assumptions:
+    </p>
+    <ol> 
+      <li>The system begins in the initial state $\ket{i}$.</li>
+      <li>The initial state couples to all final decay states $\ket{f}$.</li>
+      <li>The final decay states do not couple to one another: $\bra{f'} V \ket{f} = V_{f' f} = 0$.</li>
+    </ol>  
+    <p>
+      Therefore, we expect the probability to slosh around between $\ket{i}$ and the various $\ket{f}$s, but not between two final states $\ket{f}$ and $\ket{f'}$.
     </p>
 
     <p>
-      However, we can also try a perturbative solution. The general process is to:
+      Small note: $V_{if} = V_{i \rightarrow f} = \bra{i} V \ket{f}$
     </p>
-
-    <ol>
-      <li>Guess a set of zero order solutions, $\{c^{(0)}_n(t)\}$.</li>
-      <li>Plug $\{c^{(0)}_n(t)\}$ into the equation for $\dot{c}_m(t)$. This turns the set of differential equations into a set of functions: $\dot{c}^{(1)}_m(t) = f^{(0)}_m(t)$.</li>
-      <li>Integrate the $\dot{c}^{(1)}_m(t) = f_m(t)$ to get our set of first order solutions $\{c^{(1)}_n(t)\}$.</li>
-      <li>We can repeat this process indefinitely - plug $\{c^{(1)}_n(t)\}$ back into the $\dot{c}_m(t)$ equations to get $\dot{c}^{(2)}_m(t) = f^{(1)}_m(t)$ and integrate to get $\{c^{(2)}_n(t)\}$, and so on.</li>
-    </ol>
 
     <p>
-      In what follows we are concerned with the first order solution, $c^{(1)}_n(t)$. 
-    </p>
+      This gives us the following pair of equations:
+      $$\dot{c}_i(t) = -\frac{i}{\hbar} \sum_f V_{if} \, e^{-\frac{i}{\hbar} (E_f - E_i) t} \, c_f(t) $$
+      $$\dot{c}_f(t) = -\frac{i}{\hbar} V_{fi} \, e^{\frac{i}{\hbar} (E_f - E_i) t} \, c_i(t)$$
+      Note given our above (physically grounded) assumptions these equations are exact. 
+    </p>  
     
+    
+    <h2>Step 3: Solve the Equations</h2>
     <p>
-      Suppose our system starts out in the state $\ket{i}$, so $c_n(0) = \delta_{ni}$. Let us also use the ansatz that $c_n(t) = \delta_{ni}e^{-\frac{t}{2\tau}}$. Clearly, there is something wrong with this ansatz because the total probability across all states is not conserved with time. Therefore, we are using it with the assumption that $t \ll \tau$. Under this ansatz, the probability that the state of the system remains $\ket{i}$ when measured at time $t$ is $e^{\frac{t}{\tau}}$. Now, if the particle is not in the state $\ket{i}$, then it must be in one of the decay states $\ket{f}$. Therefore, we can say associate $\frac{1}{\tau}$ with the **rate of total decay**.
-    </p>
-    <p>
-      Here's the idea: we start with a zeroth order solution that is clearly wrong, but which captures the flavor of the decay process. We then plug it into the $\dot{c}_m(t)$ equations (which we know is exact), integrate, and hope that the first order solution that comes is a bit more correct than our zeroth order solution. Let's see what happens:
-    </p>
-
-    <p>
-      If we plug in our ansatz, we get:
-      $$\dot{c}_f(t) = -\frac{i}{\hbar} e^{-\frac{i}{\hbar}(E_f-E_i)t} \bra{f}\Delta H\ket{i} e^{-\frac{t}{2\tau}}$$
-      Integrating gives:
-      $$c_f(t) = \bra{f}\Delta H \ket{i} \frac{e^{-\frac{t}{2\tau}}e^{-\frac{i}{\hbar}(E_f-E_i)t}-1}{(E_f-E_i) + \frac{i\hbar}{2\tau}}$$
-      Now, we do something suspicious. Even though we assume that $t \ll \tau$ for the zeroth order solution, we are going to assume that putting it once through the perturbation process makes it good enough for $t \gg \tau$. Now, if we take the large $t$ limit, the exponential term in the numerator goes to zero and we have:
-      $$|c_f(t \rightarrow \infty)|^2 = \frac{|\bra{f}\Delta H \ket{i}|^2}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2}$$
-    </p>
-
-    <div style="text-align: center;">
-      <img src="decayprobs.png" alt="noether transform" width="700">
-    </div>
-
-    <p>
-      Notice that the limit of $|c_f|^2$ for large $t$ is independent of $t$. Visually, the decay process looks like the above - the probabilities associated with the decay states ($\ket{f_1}$ and $\ket{f_2}$ in the above diagram) converge to fixed values as $t$ increases. Note that the probability associated with the initial state goes does not necessarily have to go to zero. In our zeroth order solution it does go to zero, but in our first order solution it goes to $1-\text{sum of all decay probabilities} = 1-P$. Nevertheless in the limit of large $t$ everything becomes static. 
-    </p>
-
-    <p>
-      Let us now assume that there is only a single decay channel. This means that all the $\ket{f}$s and $E_f$s in the equation below are associated with the same type of decay process - the only difference is that there is a range of various different final energies so we integrate over the density of states for this channel. 
-      $$P = \int \frac{|\bra{f}\Delta H \ket{i}|^2}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2} \rho(E_f) \,\text{d}E_f$$
-      Now, if $P$ was not $1$, then the value of $|c_i(t)|^2$ does not go to zero for large $t$. A simple way to account for this is to replace our zeroth order solution $|c^{(0)}_i(t)|^2 = e^{-\frac{t}{\tau}}$ with the first order solution $|c^{(1)}_i(t)|^2 = Pe^{-\frac{t}{\tau}}+(1-P)$. This ensures that our starting probability is still $1$ while also giving the right asymptotic result. 
-    </p>
-
-    <p>
-      Expanding this for small $t$ gives $\text{pr(decay)} \approx P(1-\frac{t}{\tau}) + (1-P)$. Then, the initial rate of decay, as predicted by our sketchy first order solution is:
-      $$R = \frac{P}{\tau}$$
-      If we plug in our above expression for $P$, we get:
+      Integrating $\dot{c}_f(t)$ gives:
+      $$c_f(t) = -\frac{i}{\hbar} V_{fi} \int_0^t e^{\frac{i}{\hbar} (E_f - E_i) t'} \, c_i(t') \,\text{d}t'$$
+      Now, plug this into the equation for $\dot{c}_i(t)$. This gives:
       $$
       \begin{align}
-      R 
-      &= \frac{1}{\tau} \int \frac{|\bra{f}\Delta H \ket{i}|^2}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2} \rho(E_f) \,\text{d}E_f \\
-      &= |\bra{f}\Delta H \ket{i}|^2 \rho(E_f) \int \frac{\frac{1}{\tau}}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2} \,\text{d}E_f \\
-      &= \frac{2\pi}{\hbar} |\bra{f}\Delta H \ket{i}|^2 \rho(E_f)
+      \dot{c}_i(t) &= -\frac{1}{\hbar^2} \sum_f V_{if} \, e^{-\frac{i}{\hbar} (E_f - E_i) t} \cdot (V_{fi} \int_0^t e^{\frac{i}{\hbar} (E_f - E_i) t'} \, c_i(t') \,\text{d}t') \\
+      &= -\frac{1}{\hbar^2} \sum_f |V_{if}|^2 \cdot  \int_0^t e^{\frac{i}{\hbar} (E_f - E_i) (t'-t)} \, c_i(t') \,\text{d}t' \\
+      &= -\frac{1}{\hbar^2} \cdot \int_0^t (\sum_f |V_{if}|^2e^{-i \omega_{fi} (t-t')}) \, c_i(t') \,\text{d}t' \\
+      &= -\frac{1}{\hbar^2} \cdot \int_0^t \kappa (t-t') \, c_i(t') \,\text{d}t'
       \end{align}
       $$
-      And boom. Fermi's Golden rule. In the above equation we pulled $|\bra{f}\Delta H \ket{i}|^2$ and $\rho(E_f)$ out of the integral as we assume they do not really vary over the bandwidth of the $\frac{1}{(E_f-E_i)^2 + (\frac{\hbar}{2\tau})^2}$ term. For practical purposes we can take $f=i$. In the language of probabilities, we say that our decay time follows an exponential distribution with rate $R$. 
+      We have made the substitutions $\omega_{fi} = \frac{1}{\hbar}(E_f-E_i)$ and $\kappa(t-t') = \sum_f |V_{if}|^2e^{-i \omega_{fi} (t-t')}$.
     </p>
 
     <p>
-      From here on, we assume $P=1$. This is, I think, quite realistic. 
+      Here's the main idea: since $\kappa(t-t')$ is the sum of a lot of phases, it should be quite spiky at $t' = t$ and mostly zero everywhere else. Note that this may not necessarily be the case! For example, $\kappa$ could in theory have some kind of periodic structure. The exact details depend on the values of the coupling constants and energy levels. In any case, if we work with the above assumptions then we can do the following. 
     </p>
 
     <p>
-      If we have $\Gamma = \hbar R$ (assuming $P=1$), then:
-      $$\Gamma = 2\pi |\bra{f}\Delta H \ket{i}|^2 \rho(E_f)$$
-      What we have done up to this point is establish a formula for $\tau$ in terms of physical quantities. 
-    </p>
-
-    <h1>Multi Channel Decay</h1>
-
-    <p>
-      Now, suppose there are two decay channels. The first decays into the set of states $\ket{f}$ and the second decays into the set of states $\ket{g}$. 
+      First, if the variation scale of $c_f(t)$ is slow compared to the width of $\kappa(t-t')$, then we may approximate $\int_0^t \kappa (t-t') \, c_i(t') \,\text{d}t \approx c_i(t) \int_0^t \kappa (t-t') \, \text{d}t'$. 
     </p>
 
     <p>
-      Let's suppose, for the sake of simplicity, that there are only two of each of the final states: $\{ \ket{f_1}, \ket{f_2} \}$ for $\ket{f}$ and $\{ \ket{g_1}, \ket{g_2} \}$ for $\ket{g}$. 
+      Next, we make the substitution $\tau = t-t'$, $\text{d}\tau = -\text{d}t'$. From here, we may further approximate by increasing the limit of integration of the $\kappa$ term to $\tau = \infty$. The reason is that because $\kappa(\tau)$ has a tail that vanishes quickly, so the additional area is very small. Therefore, 
+      $$
+      \begin{align}
+      c_i(t) \int_0^t \kappa (t-t') \, \text{d}t' &= c_i(t) \int_t^0 \kappa (\tau) (-1) \cdot \text{d}\tau \\
+      &= c_i(t) \int_0^t \kappa (\tau)\cdot \text{d}\tau \\
+      &\approx c_i(t) \int_0^\infty \kappa (\tau)\cdot \text{d}\tau
+      \end{align}
+      $$
+      Therefore, our approximate differential equation for $c_i(t)$ is: 
+      $$\dot{c}_i(t) = -\frac{1}{\hbar^2} c_i(t) \cdot \int_0^\infty \kappa (\tau) \, \text{d}\tau$$
+    </p>
+
+    <h2>Step 4: Evaluate the Kernel</h2>
+    <p>
+      Now, we evaluate the kernel $\kappa$ in terms of distributions. A result from distribution theory tells us that:
+      $$\int_0^\infty e^{i\omega t} \,\text{d}t = \pi \delta(\omega) + i \mathcal{P}(\frac{1}{\omega})$$
+      The integral on the left hand side is a distribution. On its own it does not make any sense because the integral is oscillatory and never converges. It only makes sense when it appears within another integral (in this case that other integral being the summation over all final states $\sum_f$, which we may rewrite as $\int \rho(E_f) \,\text{d}E_f$ in the continuum limit).  The above relation resolves this distribution into two distributions that we are quite familiar with: the delta function and the principle value function. They are defined by:
+      $$\int f(x) \cdot \delta(x) \,\text{d}x = f(0)$$
+      $$\int f(x) \cdot \mathcal{P}(\frac{1}{x}) \,\text{d}x = \lim_{\epsilon \rightarrow 0} (\int_{-\infty}^{-\epsilon} \frac{f(x)}{x} \,\text{d}x +  \int_{\epsilon}^{\infty} \frac{f(x)}{x} \,\text{d}x)$$
+      This leads us to the following expansion for $\kappa$:
+      $$\int_0^\infty \kappa(\tau) \,\text{d}\tau = \sum_f |V_{if}|^2 \cdot [\pi\delta(\omega_{fi}) + i \mathcal{P}(\frac{1}{\omega_{}fi})]$$
+      We now make two definitions: 
+      $$\Gamma = \frac{2\pi}{\hbar} \sum_f |V_{if}|^2 \cdot \delta(\omega_{fi})$$
+      $$\Delta E = \frac{1}{\hbar} \sum_f |V_{if}|^2 \cdot \mathcal{P}(\frac{1}{\omega_{fi}})$$
+      Then, we have:
+      $$\dot{c}_i(t) = -\frac{1}{\hbar}(\frac{\Gamma}{2} + i \Delta E) \, c_i(t)$$
+      Solving this gives us:
+      $$c_i(t) = e^{-\frac{\Gamma}{2}t}e^{-i\frac{\Delta E}{\hbar}t}$$
+      Now what exactly does it mean to take the sum of many distributions? Of course that makes no sense, but as we mentioned above we can replace the summation with an integral over the density of states:
+      $$\sum_f \rightarrow \int \phantom{xx} \rho(E_f) \,\text{d}E_f$$
+      This gives us:
+      $$
+      \begin{align}
+      \Gamma &= \frac{2\pi}{\hbar} \int |V_{if}|^2 \cdot \delta(\omega_{fi}) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= \frac{2\pi}{\hbar} \int |V_{if}|^2 \cdot \hbar \delta(E_f - E_i) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= 2\pi \int |V_{if}|^2 \cdot \delta(E_f - E_i) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= 2\pi \sum_{E_f = E_i} |V_{if}|^2 \cdot \rho(E_{f_{(E_f=E_i)}})
+      \end{align} 
+      $$
+      That's Fermi's Golden Rule! To calculate the transition rate, sum the norm square of the coupling constant over all final states $\ket{f}$ that has the same energy as the initial state $\ket{i}$. Note that in this case its $E_f = E_i$, not $\ket{f} = \ket{i}$! 
     </p>
 
     <p>
-      The intuition is that there are two competing decay processes, one with $\{ \ket{f_1}, \ket{f_2} \}$ as the end states and $P_f = P_{f_1} + P_{f_2}$ as the final decay probability, and another with $\{ \ket{g_1}, \ket{g_2}\}$ as the end states and $P_g = P_{g_1} + P_{g_2}$ as the final decay probability. 
+      Likewise, we have for $\Delta E$:
+      $$
+      \begin{align}
+      \Delta E &= \frac{1}{\hbar} \int |V_{if}|^2 \cdot \mathcal{P}(\frac{1}{\omega_{fi}}) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= \frac{1}{\hbar} \int |V_{if}|^2 \cdot \hbar\mathcal{P}(\frac{1}{E_f - E_i}) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= \int |V_{if}|^2 \cdot \mathcal{P}(\frac{1}{E_f - E_i}) \cdot \rho(E_f) \,\text{d}E_f \\
+      &= \lim_{\epsilon \rightarrow 0} (\int_{-\infty}^{-\epsilon} \frac{|V_{if}|^2 }{E_f - E_i} \,\text{d}x +  \int_{\epsilon}^{\infty} \frac{|V_{if}|^2 }{E_f - E_i} \,\text{d}x)
+      \end{align}
+      $$
+      This looks familiar, because it is (proportional to) the integral of the Feynman diagram amplitude over all space. 
     </p>
 
     <p>
-      The rates associated with each are $R_f$ and $R_g$ respectively:
-      $$R_f = \frac{2\pi}{\hbar} |\bra{f}\Delta H \ket{i}|^2 \rho_f(E_f)$$
-      $$R_g = \frac{2\pi}{\hbar} |\bra{g}\Delta H \ket{i}|^2 \rho_g(E_g)$$
-      Note that these are single channel rates. 
+      Now, if we take the norm square of $c_i(t)$, we find:
+      $$\text{pr(decayed)}(t) = |c_i(t)|^2 = e^{-\frac{\Gamma}{\hbar}t}$$
+      This is where the relation $\Gamma = \frac{\hbar}{\tau}$ actually comes from!
     </p>
 
     <p>
-      The final decay time follows the distribution $\text{min} [\text{Exp}(R_f), \text{Exp}(R_g)]$. It can be shown that this is the same as the distribution $\text{Exp}(R_f + R_g)$.  
+      We can also plug the expression for $c_i(t)$ into the expression for $c_f(t)$. This gives:
+      $$
+      \begin{align}
+      c_f(t) &= -\frac{i}{\hbar} V_{fi} \int_0^t e^{\frac{i}{\hbar}(E_f - E_i)t} \, c_i(t') \,\text{d}t' \\
+      &= -\frac{i}{\hbar} V_{fi} \int_0^t e^{-\frac{\Gamma}{2\hbar}t'}e^{\frac{i}{\hbar}[\hbar \omega_{fi} - (E_f - E_i)]t'} \,\text{d}t' \\
+      &= -\frac{i}{\hbar} V_{fi} \cdot \frac{1}{-\frac{\Gamma}{2\hbar}+\frac{i}{\hbar}(E_{fi}-\Delta E)} \cdot (e^{-\frac{\Gamma}{2\hbar}t}e^{\frac{i}{\hbar}(E_{fi} - \Delta E)})
+      \end{align}
+      $$
+      Taking the norm square gives: 
+      $$\text{pr(decay into state $f$)}(t) = \frac{|V_{fi}|^2/\hbar^2}{\frac{(E_{fi}-\Delta E)^2}{\hbar^2}+\frac{\Gamma^2}{4\hbar^2}}$$
     </p>
-
-    <p>
-      The total rate $R$ is then given by $R = R_f + R_g$. However, by construction of our ansatz, we must also have $R = \frac{1}{\tau}$ (again we are assuming $P_f = P_g = 1$), since that is the rate at which $|c_i(t)|^2$ initially decays for both channels. Therefore:
-      $$R = \frac{1}{\tau} = \frac{2\pi}{\hbar} |\bra{f}\Delta H \ket{i}|^2 \rho_f(E_f) + \frac{2\pi}{\hbar} |\bra{g}\Delta H \ket{i}|^2 \rho_g(E_g)$$
-      If we define the partial linewidths $\Gamma_f$ and $\Gamma_g$ as:
-      $$\Gamma_f = 2\pi |\bra{f}\Delta H \ket{i}|^2 \rho_f(E_f)$$
-      $$\Gamma_g = 2\pi |\bra{g}\Delta H \ket{i}|^2 \rho_g(E_g)$$
-      Then:
-      $$\Gamma = \frac{\hbar}{\tau} = \Gamma_f + \Gamma_g$$
-    </p>
-
-    <p>
-      Note that even the two channels are different processes, they have the same $\tau$.
-    </p>
-
-    <h1>Quantum Mechanical View</h1>
-
-    <p>
-      How do we analyze the decay process quantum mechanically? Here is, in my opinion, what is going on:
-    </p>
-
-    <p>
-      Suppose we have two decay channels:
-      $$A \rightarrow B_1 + C_1$$
-      $$A \rightarrow B_2 + C_2$$
-      Let us denote the states involved by $\ket{A}$, $\ket{B_1, C_1}$, $\ket{B_2, C_2}$. If these are distinct channels, then the possible final states for process $1$ will be orthogonal to the final possible states for process $2$. In other words, the final states for each of the channels, and the initial state all live in distinct and separate Hilbert spaces, which we denote $\mathcal{H}_A$, $\mathcal{H}_1$ and $\mathcal{H}_2$. 
-    </p>
-
-    <p>
-      What Hilbert space does the decay process take place in? From what I found, I think the decay takes place in the direct sum $\mathcal{H}_A \oplus \mathcal{H}_1 \oplus \mathcal{H}_2$. The initial state is $\ket{A} \oplus \ket{\text{zero}}_1 \oplus \ket{\text{zero}}_2$. In the direct sum picture, our Hamiltonian will be $d_A + d_1 + d_2$ by $d_A + d_1 + d_2$, and the state vector will have a length of $d_A + d_1 + d_2$. The diagonal blocks $d_A \times d_A$, $d_1 \times d_1$, $d_2 \times d_2$ will be the Hamiltonians in each of the individual Hilbert spaces and off-diagonal blocks tell us how the different Hilbert spaces couple to one another. 
-    </p>
-
-    <p>
-      The idea is as follows. Suppose that at some time, our state vector is $\ket{\psi_A} \oplus \ket{\psi_B} \oplus \ket{\psi_C}$. Then, the probability of finding the system in a state will be the norm squared of each of the respective states. Note that the individual $\ket{\psi}$s are in general unnormalized (although the whole state vector of length $d_A + d_1 + d_2$ must obviously be normalized) - this reflects the flow of probability from say, the initial state to one of the decayed states. This leads to a slightly different interpretation of $R = R_f + R_g$. Instead of having two competing processes, we now have a single "decay process" that leads to a set of final states that is described by the direct sum of two Hilbert spaces (each with its own density of states). In any case, the math comes out the same as before. 
-    </p>
-    
-    <p>
-      Another thing that came to mind was the tensor product space $\mathcal{H}_A \otimes \mathcal{H}_1 \otimes \mathcal{H}_2$. In this picture, the initial state of the system is $\ket{A} \otimes \ket{0}_1 \otimes \ket{0}_2$ where $\ket{0}$ is the vacuum state, and have a Hamiltonian with a dimension of $d_A \cdot d_1 \cdot d_2$. However, this does not feel like the right, because it implies the possibility of having something like $\ket{A} \otimes \ket{B_1, C_1}_1 \otimes \ket{0}_2$ as a measurement outcome, which makes no sense. 
-    </p>
-
 
 </body>
 </html>
