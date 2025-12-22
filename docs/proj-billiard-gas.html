@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parity and Parity Conservation</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="projects-index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Billiard Gas</h1>
+
+    <p>
+      Event driven simulation of a billiard ball gas model in two dimensions. Temperature, entropy and chemical potentials computed using a smoothing kernel on individual gas particles. 
+    </p>
+    
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <figure style="text-align: center;">
+        <video width="300" autoplay loop muted playsinline>
+          <source src="assets/gas_particles.mp4" type="video/mp4">
+        </video>
+        <figcaption>Gas particles.</figcaption>
+      </figure>
+
+      <figure style="text-align: center;">
+        <video width="300" autoplay loop muted playsinline>
+          <source src="assets/gas_temperature.mp4" type="video/mp4">
+        </video>
+        <figcaption>Temperature flow.</figcaption>
+      </figure>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <figure style="text-align: center;">
+        <video width="300" autoplay loop muted playsinline>
+          <source src="assets/gas_chemical_potential.mp4" type="video/mp4">
+        </video>
+        <figcaption>Chemical potential flow.</figcaption>
+      </figure>
+
+      <figure style="text-align: center;">
+        <video width="300" autoplay loop muted playsinline>
+          <source src="assets/gas_entropy.mp4" type="video/mp4">
+        </video>
+        <figcaption>Entropy flow.</figcaption>
+      </figure>
+    </div>
+
+</body>
+</html>
