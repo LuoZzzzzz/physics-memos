@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Counting Baryon States</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Counting Baryon States</h1>
+
+    <p>
+      The group theoretic way of counting baryon states, as I understand it, is to start by treating quark flavors as directions in quark Hilbert space. That is, there is only one quark, which has (in the case of light quarks) three different flavor states. In this framework, we demand exchange symmetry of the <em>entire</em> wavefunction, not just like flavors; this is completely analogous to the exchange symmetry of spins, where the symmetry is enforced across all spin projections and not just like ones.
+    </p>
+
+    <p>
+      The next step is usually to assign an algebra, here $\text{SU(3)}$, to the flavor. This algebra is called an "approximate symmetry" in the following sense:
+    </p>
+
+    <ol>
+      <li>
+        The $\text{SU(3)}$ algebra defines a set of unitary transformations that act on the flavor Hilbert space of the system.
+      </li>
+      <li>
+        Particles are eigenstates of the particle Hamiltonian, which is: $H = H_0 + H_{\text{spin}} + H_{\text{flavor}} + H_{\text{spin-flavor}} + \dots$
+      </li>
+      <li>
+        In low energy situations such as baryon ground states, the spin- and flavor-dependent contributions are sufficiently weak so that $[H, \mathrm{SU(3)}] \approx [H_0, \mathrm{SU(3)}] = 0$, where the second equality comes from the fact that \(H_0\) acts on the spatial part of the system while the \(\mathrm{SU(3)}\) generators act on the flavor part.
+      </li>
+      <li>
+        This means that eigenstates of $\text{SU(3)}$ generators are also approximate eigenstates of the Hamiltonian.
+      </li>
+    </ol>
+
+    
+    <h2>Combining three quark flavors</h2>
+
+    <p>
+      Since a single quark flavor is $\text{SU(3)}$, the joint flavor state of three quarks is given by:
+      $$\bf{3 \otimes 3 \otimes 3 = 1_{A} \oplus 8_{MA} \oplus 8_{MS} \oplus 10_{S}}$$
+      The $\bf{1}$ irrep is antisymmetric, the $\bf{10}$ irrep is symmetric, while the two $\bf{8}$ irreps have mixed symmetries. 
+    </p>
+    <p>
+      Here, I list the full flavor wavefunctions of each irrep. 
+    </p>
+
+    <table style="border-collapse:collapse; width:100%;">
+      <thead>
+        <tr>
+          <th style="border:1px solid #ccc; padding:8px;">State</th>
+          <th style="border:1px solid #ccc; padding:8px;">$\mathbf{10}$ (Fully Symmetric)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Delta^{++}$</td><td style="border:1px solid #ccc; padding:8px;">$\vert uuu \rangle$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Delta^{+}$</td><td style="border:1px solid #ccc; padding:8px;">$\frac{1}{\sqrt{3}}(\vert uud \rangle+\vert udu \rangle+\vert duu \rangle)$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Delta^{0}$</td><td style="border:1px solid #ccc; padding:8px;">$\frac{1}{\sqrt{3}}(\vert udd \rangle+\vert dud \rangle+\vert ddu \rangle)$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Delta^{-}$</td><td style="border:1px solid #ccc; padding:8px;">$\vert ddd \rangle$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Sigma^{*+}$</td><td style="border:1px solid #ccc; padding:8px;">$\frac{1}{\sqrt{3}}(\vert uus \rangle+\vert usu \rangle+\vert suu \rangle)$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Sigma^{*0}$</td><td style="border:1px solid #ccc; padding:8px;">$\frac{1}{\sqrt{6}}(\vert uds \rangle+\vert usd \rangle+\vert dus \rangle+\vert dsu \rangle+\vert sud \rangle+\vert sdu \rangle)$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Sigma^{*-}$</td><td style="border:1px solid #ccc; padding:8px;">$\frac{1}{\sqrt{3}}(\vert dds \rangle+\vert dsd \rangle+\vert sdd \rangle)$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Xi^{*0}$</td><td style="border:1px solid #ccc; padding:8px;">$\frac{1}{\sqrt{3}}(\vert uss \rangle+\vert sus \rangle+\vert ssu \rangle)$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Xi^{*-}$</td><td style="border:1px solid #ccc; padding:8px;">$\frac{1}{\sqrt{3}}(\vert dss \rangle+\vert sds \rangle+\vert ssd \rangle)$</td></tr>
+        <tr><td style="border:1px solid #ccc; padding:8px;">$\Omega^{-}$</td><td style="border:1px solid #ccc; padding:8px;">$\vert sss \rangle$</td></tr>
+      </tbody>
+    </table>
+    <p></p>
+    <div style="font-size:75%;">
+      <table style="border-collapse:collapse; width:100%;">
+        <thead>
+          <tr>
+            <th style="border:1px solid #ccc; padding:6.4px;">State</th>
+            <th style="border:1px solid #ccc; padding:6.4px;">$\mathbf{8}_A$ ($1\leftrightarrow2$ Antisymmetric)</th>
+            <th style="border:1px solid #ccc; padding:6.4px;">$\mathbf{8}_S$ ($1\leftrightarrow2$ Symmetric)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6.4px;">$p$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{2}}(\vert udu \rangle-\vert duu \rangle)$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{6}}(\vert duu \rangle+\vert udu \rangle-2\vert uud \rangle)$</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6.4px;">$n$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{2}}(\vert dud \rangle-\vert udd \rangle)$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{6}}(\vert udd \rangle+\vert dud \rangle-2\vert ddu \rangle)$</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\Sigma^{+}$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{2}}(\vert usu \rangle-\vert suu \rangle)$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{6}}(\vert suu \rangle+\vert usu \rangle-2\vert uus \rangle)$</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\Sigma^{-}$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{2}}(\vert dsd \rangle-\vert sdd \rangle)$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{6}}(\vert sdd \rangle+\vert dsd \rangle-2\vert dds \rangle)$</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\Xi^{0}$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{2}}(\vert sus \rangle-\vert suu \rangle)$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{6}}(\vert uss \rangle+\vert sus \rangle-2\vert ssu \rangle)$</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\Xi^{-}$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{2}}(\vert sds \rangle-\vert dss \rangle)$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{6}}(\vert dss \rangle+\vert sds \rangle-2\vert ssd \rangle)$</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\Sigma^{0}$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{2}(\vert uds \rangle-\vert dus \rangle-\vert usd \rangle+\vert sud \rangle)$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{2\sqrt{3}}(2\vert uds \rangle+2\vert dus \rangle-\vert usd \rangle-\vert sud \rangle-\vert dsu \rangle-\vert sdu \rangle)$</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\Lambda$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{\sqrt{12}}(2\vert uds \rangle-2\vert dus \rangle-\vert usd \rangle+\vert sud \rangle-\vert dsu \rangle+\vert sdu \rangle)$</td>
+            <td style="border:1px solid #ccc; padding:6.4px;">$\frac{1}{2}(\vert usd \rangle+\vert sud \rangle-\vert dsu \rangle-\vert sdu \rangle)$</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p></p>
+    <table style="border-collapse:collapse; width:100%;">
+      <thead>
+        <tr>
+          <th style="border:1px solid #ccc; padding:8px;">State</th>
+          <th style="border:1px solid #ccc; padding:8px;">$\mathbf{1}$ (Antisymmetric)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border:1px solid #ccc; padding:8px;">NA</td>
+          <td style="border:1px solid #ccc; padding:8px;">$\frac{1}{\sqrt{6}}(\vert uds \rangle-\vert dus \rangle+\vert sdu \rangle-\vert usd \rangle+\vert dsu \rangle-\vert sud \rangle)$</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Combining three quark spins</h2>
+    <p>
+      Next, the spin states. Since we have three spin $\frac{1}{2}$ quarks, the spin algebra is:
+      $$\bf{\frac{1}{2} \oplus \frac{1}{2} \oplus \frac{3}{2}} = \frac{1}{2}_{\text{MA}} \oplus \frac{1}{2}_{\text{MS}} \oplus \frac{3}{2}_{\text{S}}$$
+    </p>
+    <p>
+      And the states written explicitly are:
+    </p>
+    <table style="border-collapse:collapse; width:100%; font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;">
+      <thead>
+        <tr>
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">$S$</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">$S_z$</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Symmetry</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Spin wavefunction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;">$\tfrac{3}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">$+\tfrac{3}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">Fully Symmetric</td>
+          <td style="border:1px solid #eee; padding:8px;">$\vert \uparrow\uparrow\uparrow \rangle$</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;">$\tfrac{3}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">$+\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">Fully Symmetric</td>
+          <td style="border:1px solid #eee; padding:8px;">$\dfrac{1}{\sqrt{3}}\big(\vert \uparrow\uparrow\downarrow \rangle+\vert \uparrow\downarrow\uparrow \rangle+\vert \downarrow\uparrow\uparrow \rangle\big)$</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;">$\tfrac{3}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">$-\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">Fully Symmetric</td>
+          <td style="border:1px solid #eee; padding:8px;">$\dfrac{1}{\sqrt{3}}\big(\vert \downarrow\downarrow\uparrow \rangle+\vert \downarrow\uparrow\downarrow \rangle+\vert \uparrow\downarrow\downarrow \rangle\big)$</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;">$\tfrac{3}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">$-\tfrac{3}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">Fully Symmetric</td>
+          <td style="border:1px solid #eee; padding:8px;">$\vert \downarrow\downarrow\downarrow \rangle$</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;">$\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">$+\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">Mixed ($1\leftrightarrow2$ Antisymmetric)</td>
+          <td style="border:1px solid #eee; padding:8px;">$\dfrac{1}{\sqrt{2}}\big(\vert \uparrow\uparrow\downarrow \rangle-\vert \uparrow\downarrow\uparrow \rangle\big)$</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;">$\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">$-\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">Mixed ($1\leftrightarrow2$ Antisymmetric)</td>
+          <td style="border:1px solid #eee; padding:8px;">$\dfrac{1}{\sqrt{2}}\big(\vert \downarrow\downarrow\uparrow \rangle-\vert \downarrow\uparrow\downarrow \rangle\big)$</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;">$\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">$+\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">Mixed ($1\leftrightarrow2$ Symmetric)</td>
+          <td style="border:1px solid #eee; padding:8px;">$\dfrac{1}{\sqrt{6}}\big(2\vert \uparrow\downarrow\uparrow \rangle-\vert \uparrow\uparrow\downarrow \rangle-\vert \downarrow\uparrow\uparrow \rangle\big)$</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;">$\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">$-\tfrac{1}{2}$</td>
+          <td style="border:1px solid #eee; padding:8px;">Mixed ($1\leftrightarrow2$ Symmetric)</td>
+          <td style="border:1px solid #eee; padding:8px;">$\dfrac{1}{\sqrt{6}}\big(2\vert \downarrow\uparrow\downarrow \rangle-\vert \downarrow\downarrow\uparrow \rangle-\vert \uparrow\downarrow\downarrow \rangle\big)$</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Baryon state construction</h2>
+    <p>
+      Now, we construct the Baryon states. 
+    </p>
+    <p>
+      First consider the $\bf{10}$ (decuplet) fully symmetric flavor states. These **must** be paired with fully symmetric spin states in order for the spin-flavor parts to be fully symmetric under exchange. This gives us $10$ spin $\frac{3}{2}$ particles that form the Baryon decuplet. 
+    </p>
+    <p>
+      For the $\bf{8}_A$ and $\bf{8}_S$ states the situation is slightly more complicated. A single $\ket{\bf{8}_{A/S}} \ket{\text{spin}}$ cannot possibly be fully symmetric, because the octet states have mixed symmetry, while the spin states have either mixed or full symmetry. However, we can construct superpositions of octet states and $S = \bf{\frac{1}{2}}$ states that do have full symmetry:
+      $$\frac{1}{\sqrt{2}}(\ket{F^x_{MS}}\ket{S^{\pm 1/2}_{MS}}+\ket{F^x_{MA}}\ket{S^{\pm 1/2}_{MA}})$$
+      $\ket{F^x_{MA}}$ and $\ket{F^x_{MS}}$ denote the antisymmetric and symmetric octet states corresponding to the same particle (combination of $u,d,s$ quarks). Thus, the $\bf{8}_A$ and $\bf{8}_S$ octets entangle pairwise to give $8$ particles that form the Baryon octet.
+    </p>
+    <p>
+      The antisymmetric flavor singlet state does not correspond to any physical particle. The reason is that the spin-flavor part of the wavefunction must be symmetric, but that means that we require a completely antisymmetric spin state, which is not present in $\bf{\frac{1}{2} \oplus \frac{1}{2} \oplus \frac{3}{2}}$. 
+    </p>
+
+    <h2>Simplified counting method</h2>
+    </p>
+    In the textbook by Martin and Shaw a simplified counting scheme is presented. The main philosophy is quite different: instead of treating flavors as directions in a single flavor Hilbert space, one instead fixes flavor and uses it to "partition" the spatial and spin Hilbert space according to sectors of "like" quarks. Then, one demands exchange symmetry on each of these sectors.  Somehow this gives the same results as the above group theoretic construction. 
+    </p>
+
+    </p>
+    If we consider only light quarks, then there are three cases to consider. 
+    </p>
+
+    </p>
+    <b>Case 1</b>: $aab$ - $uud, uus, ddu, dds, ssu, ssd$.
+    The $aa$ pair must be symmetric under exchange, and so they must have spin $S=1$. Then, we combine $S=1$ with $S=\frac{1}{2}$ of the remaining $b$ quark. This gives $1 \otimes \frac{1}{2} = \frac{1}{2} \oplus \frac{3}{2}$. So possible spins are $S=\frac{1}{2}$ and $\frac{3}{2}$.  
+    </p>
+
+    </p>
+    <b>Case 2</b>: $aaa$ - $uuu, ddd, sss$.
+    The $aaa$ triplet must be symmetric under exchange. To combine three quarks, use $\frac{1}{2} \otimes \frac{1}{2} \otimes \frac{1}{2} = \frac{1}{2}_{MA} \oplus \frac{1}{2}_{MS} \oplus \frac{3}{2}_{S}$. The spin state of the triplet must be completely symmetric, so that leaves $S = \frac{3}{2}$ as the only possibility. 
+    </p>
+
+    <p>
+    <b>Case 3</b>: $abc$ - $uds$.
+    There is no exchange symmetry here, so the spin state can be any one of $\frac{1}{2}_{MA} \oplus \frac{1}{2}_{MS} \oplus \frac{3}{2}_{S}$. 
+    </p>
+
+    <p>
+    Therefore, we have for each of the spin states:
+    </p>
+    <table style="border-collapse:collapse; width:100%;">
+      <thead>
+        <tr>
+          <th style="border:1px solid #ccc; padding:8px;">$S$</th>
+          <th style="border:1px solid #ccc; padding:8px;">Allowed Flavors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border:1px solid #ccc; padding:8px;">$\tfrac{3}{2}$</td>
+          <td style="border:1px solid #ccc; padding:8px;">
+            $aaa$: $uuu, ddd, sss$<br>
+            $aab$: $uud, uus, ddu, dds, ssu, ssd$<br>
+            $abc$: $uds$
+          </td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #ccc; padding:8px;">$\tfrac{1}{2}$</td>
+          <td style="border:1px solid #ccc; padding:8px;">
+            $aab$: $uud, uus, ddu, dds, ssu, ssd$<br>
+            $abc$: $uds$
+          </td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #ccc; padding:8px;">$\tfrac{1}{2}$</td>
+          <td style="border:1px solid #ccc; padding:8px;">
+            $abc$: $uds$
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Which is the same octet decuplet structure as before.
+    </p>
+
+</body>
+</html>
