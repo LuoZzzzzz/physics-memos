@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Color</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Color</h1>
+    <p>
+      The color degrees of freedom of quarks transform under a unitary representation of the Lie group $\text{SU(3)}$, whose infinitesimal structure is given by the Lie algebra $\mathfrak{su}(3)$.
+    </p>
+
+    <p>
+      A bit of background. Any Lie group is described by a set of generators known as its Lie algebra. If we fix a representation then the generators take the form of a set of matrices. In the case of color, we pick the $3$ by $3$ complex matrix representation. The generators are then given by the Gellman matrices:
+      $$
+      \lambda_1 =
+      \begin{pmatrix}
+      0 & 1 & 0 \\
+      1 & 0 & 0 \\
+      0 & 0 & 0
+      \end{pmatrix},
+      \quad
+      \lambda_2 =
+      \begin{pmatrix}
+      0 & -i & 0 \\
+      i & 0 & 0 \\
+      0 & 0 & 0
+      \end{pmatrix},
+      \quad
+      \lambda_3 =
+      \begin{pmatrix}
+      1 & 0 & 0 \\
+      0 & -1 & 0 \\
+      0 & 0 & 0
+      \end{pmatrix}
+      $$
+      $$
+      \lambda_4 =
+      \begin{pmatrix}
+      0 & 0 & 1 \\
+      0 & 0 & 0 \\
+      1 & 0 & 0
+      \end{pmatrix},
+      \quad
+      \lambda_5 =
+      \begin{pmatrix}
+      0 & 0 & -i \\
+      0 & 0 & 0 \\
+      i & 0 & 0
+      \end{pmatrix}
+      $$
+      $$
+      \lambda_6 =
+      \begin{pmatrix}
+      0 & 0 & 0 \\
+      0 & 0 & 1 \\
+      0 & 1 & 0
+      \end{pmatrix},
+      \quad
+      \lambda_7 =
+      \begin{pmatrix}
+      0 & 0 & 0 \\
+      0 & 0 & -i \\
+      0 & i & 0
+      \end{pmatrix},
+      \quad
+      \lambda_8 =
+      \frac{1}{\sqrt{3}}
+      \begin{pmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & -2
+      \end{pmatrix}
+      $$
+      The color states are represented by:
+      $$
+      \ket{r} =
+      \begin{pmatrix}
+      1 \\
+      0 \\
+      0
+      \end{pmatrix},
+      \quad
+      \ket{g} =
+      \begin{pmatrix}
+      0 \\
+      1 \\
+      0
+      \end{pmatrix},
+      \quad
+      \ket{b} =
+      \begin{pmatrix}
+      0 \\
+      0 \\
+      1
+      \end{pmatrix}
+      $$
+      When we say that a color state is colorless, it means that the state cannot be rotated by $\text{SU(3)}$ - it points in the same direction when acted on by any transformation in $\text{SU(3)}$. This means that a colorless state must be annihilated by all $8$ of the above generators. 
+    
+      The consequences of this can be worked out systematically.
+    </p>
+
+    <h2>Restriction on quark combinations</h2>
+    <p>
+      First, consider a product state:
+      $$r^\alpha b^\beta g^\gamma \bar{r}^\bar{\alpha} \bar{b}^\bar{\beta} \bar{g}^\bar{\gamma}$$
+      Acting on this state with $\lambda_3$ gives:
+      $$\lambda_3(r^\alpha b^\beta g^\gamma \bar{r}^\bar{\alpha} \bar{b}^\bar{\beta} \bar{g}^\bar{\gamma}) = [(\alpha - \bar{\alpha}) - (\beta - \bar{\beta})] (r^\alpha b^\beta g^\gamma \bar{r}^\bar{\alpha} \bar{b}^\bar{\beta} \bar{g}^\bar{\gamma})$$
+      Acting on it with $\lambda_8$ gives: 
+      $$\lambda_8(r^\alpha b^\beta g^\gamma \bar{r}^\bar{\alpha} \bar{b}^\bar{\beta} \bar{g}^\bar{\gamma}) = [(\alpha - \bar{\alpha}) + (\beta - \bar{\beta}) - 2(\gamma - \bar{\gamma})] (r^\alpha b^\beta g^\gamma \bar{r}^\bar{\alpha} \bar{b}^\bar{\beta} \bar{g}^\bar{\gamma})$$
+      Note that the above notation applies for all permutations of the six positions. Also, the $\lambda$ acts like this:
+      $$\lambda = \lambda^{(1)}\otimes\mathbb{I}\otimes\mathbb{I} + \mathbb{I}\otimes\lambda^{(2)}\otimes\mathbb{I} + \mathbb{I}\otimes\mathbb{I}\otimes\lambda^{(3)}$$
+      For annihilation in both cases we must have:
+      $$(\alpha - \bar{\alpha}) = (\beta - \bar{\beta})$$
+      $$(\alpha - \bar{\alpha}) + (\beta - \bar{\beta}) - 2(\gamma - \bar{\gamma}) = 0$$
+      This implies that:
+      $$\alpha - \bar{\alpha} = \beta - \bar{\beta} = \gamma - \bar{\gamma} = p$$
+      Defining:
+      $$m = \alpha + \beta + \gamma, \quad n = \bar{\alpha} + \bar{\beta} + \bar{\gamma}$$
+      We have:
+      $$m-n = (\alpha - \bar{\alpha}) + (\beta - \bar{\beta}) + (\gamma - \bar{\gamma}) = 3p$$
+      Which means that the difference between the number of quarks and antiquarks ($m$ and $n$) must always be a multiple of three. This implies that any combination of quarks and antiquarks must take the form:
+      $$(qqq)^p (q\bar{q})^n$$
+      So for example, $q\bar{q}$ and $qqq$ are allowed while $qq$ and $qqqq$ are forbidden. 
+    </p>
+
+    <h2>Color wavefunction for Baryon states</h2>
+    <p>
+      Enforcing the condition $\alpha - \bar{\alpha} = \beta - \bar{\beta} = \gamma - \bar{\gamma}$ on Baryon states $qqq$ tells us that $\alpha = \beta = \gamma = 1$. So the color wavefunction is restricted to linear combinations of $rgb$:
+      $$\chi^c = \alpha_1 \ket{rgb} + \alpha_2 \ket{grb} + \alpha_3 \ket{brg} + \alpha_4 \ket{bgr} + \alpha_5 \ket{gbr} + \alpha_6 \ket{rbg}$$
+      Annihilation by $\lambda_1$ (or $\lambda_2$, they give the same condition) tells us:
+    </p>
+    <p style="font-size: 85%;">
+      $$\lambda_1 \chi^c = (\alpha_1+\alpha_2)(\ket{ggb}+\ket{rrb}) + (\alpha_3+\alpha_4)(\ket{bgg}+\ket{brr}) + (\alpha_5+\alpha_6)(\ket{gbg}+\ket{rbr}) = 0$$
+    </p>
+    <p>  
+      Annihilation by $\lambda_4$ (or $\lambda_5$) tells us:
+    </p>
+    <p style="font-size: 85%;">
+      $$\lambda_4 \chi^c = (\alpha_1+\alpha_4)(\ket{bgb}+\ket{rgr}) + (\alpha_2+\alpha_5)(\ket{gbb}+\ket{grr}) + (\alpha_3+\alpha_6)(\ket{bbg}+\ket{rrg}) = 0$$
+    </p>
+    <p>
+      Annihilation by $\lambda_6$ (or $\lambda_7$) tells us:
+    </p>
+    <p style="font-size: 85%;">
+      $$\lambda_6 \chi^c = (\alpha_1+\alpha_6)(\ket{rbb}+\ket{rgg}) + (\alpha_2+\alpha_3)(\ket{brb}+\ket{grg}) + (\alpha_4+\alpha_5)(\ket{ggr}+\ket{bbr}) = 0$$
+    </p>
+    <p>
+      These give the following set of conditions:
+      $$\alpha_1 = -\alpha_2, \quad \alpha_3 = -\alpha_4, \quad \alpha_5 = -\alpha_6$$
+      $$\alpha_1 = -\alpha_4, \quad \alpha_2 = -\alpha_5, \quad \alpha_3 = -\alpha_6$$
+      $$\alpha_1 = -\alpha_6, \quad \alpha_2 = -\alpha_3, \quad \alpha_4 = -\alpha_5$$
+      You can solve this set of equations and discover that the solution (up to an overall sign) is:
+      $$\alpha_{1/3/5}=+1, \quad \alpha_{2/4/6}=-1$$
+      Which tells us that the color state of Baryons is:
+      $$\chi^c_\text{Baryon} = \frac{1}{\sqrt{6}}(\ket{rgb} - \ket{grb} + \ket{brg} - \ket{bgr} + \ket{gbr} - \ket{rbg})$$
+      And interestingly, this state is antisymmetric. We see that the antisymmetry of the color wavefunction follows from the condition that it is invariant under $\text{SU(3)}$ rotations. Of course, the earliest motivation was experimental - experiments determined that the spin-spatial part of the wavefunction was symmetric, while Pauli exclusion principle demanded that the overall wavefunction is antisymmetric, which necessitated the addition of a new Hilbert space one which the wavefunction was antisymmetric.
+    </p>
+
+</body>
+</html>
