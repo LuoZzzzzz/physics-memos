@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Formal Derivation of Breit Wigner</title>
+  <title>Wigner-Weisskopf</title>
 
   <!-- Link external CSS -->
   <link rel="stylesheet" href="styles.css" />
@@ -34,7 +34,7 @@
       <a href="index.html" class="btn">Index</a>
     </nav>
 
-    <h1>General Decay Derivation</h1>
+    <h1>Where does exponential decay come from?</h1>
     <p>
       The lecture notes derive the decay formula using a perturbative approach: start with an ansatz that has the right flavor, but otherwise quite wrong. Run it through the perturbation process once to get a first order solution with a linear rate prediction. Then calculate the rate by taking the time derivative. 
     </p>
@@ -43,7 +43,7 @@
       There are a few things that feel off. Firstly, we take the rate of a linear process, and then magically claim that it is also the rate of an exponential decay. Secondly, our original ansatz only held for $t \ll \tau$, but we take the limit $t \rightarrow \infty$ of our first order solution - does one round of perturbation increase our range of validity that much?
     <p>
 
-    <h2>Step 1: The Interaction Picture</h2>
+    <h2>Step 1: interaction picture</h2>
     <p>
       Given the following Hamiltonian:
       $$H = H_0 + V$$
@@ -54,7 +54,7 @@
     </p>
 
 
-    <h2>Step 2: Coupling Assumptions</h2>
+    <h2>Step 2: coupling assumptions</h2>
     <p>
       To proceed from here, we need to introduce a few key assumptions:
     </p>
@@ -79,7 +79,7 @@
     </p>  
     
     
-    <h2>Step 3: Solve the Equations</h2>
+    <h2>Step 3: solve the equations</h2>
     <p>
       Integrating $\dot{c}_f(t)$ gives:
       $$c_f(t) = -\frac{i}{\hbar} V_{fi} \int_0^t e^{\frac{i}{\hbar} (E_f - E_i) t'} \, c_i(t') \,\text{d}t'$$
@@ -116,7 +116,7 @@
       $$\dot{c}_i(t) = -\frac{1}{\hbar^2} c_i(t) \cdot \int_0^\infty \kappa (\tau) \, \text{d}\tau$$
     </p>
 
-    <h2>Step 4: Evaluate the Kernel</h2>
+    <h2>Step 4: evaluate the kernel</h2>
     <p>
       Now, we evaluate the kernel $\kappa$ in terms of distributions. A result from distribution theory tells us that:
       $$\int_0^\infty e^{i\omega t} \,\text{d}t = \pi \delta(\omega) + i \mathcal{P}(\frac{1}{\omega})$$

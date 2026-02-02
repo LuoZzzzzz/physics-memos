@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Counting Baryon States</title>
+  <title>Counting baryon states</title>
 
   <!-- Link external CSS -->
   <link rel="stylesheet" href="styles.css" />
@@ -34,7 +34,7 @@
       <a href="index.html" class="btn">Index</a>
     </nav>
 
-    <h1>Counting Baryon States</h1>
+    <h1>Counting baryon states</h1>
 
     <p>
       The group theoretic way of counting baryon states, as I understand it, is to start by treating quark flavors as directions in quark Hilbert space. That is, there is only one quark, which has (in the case of light quarks) three different flavor states. In this framework, we demand exchange symmetry of the <em>entire</em> wavefunction, not just like flavors; this is completely analogous to the exchange symmetry of spins, where the symmetry is enforced across all spin projections and not just like ones.
@@ -164,7 +164,7 @@
     <h2>Combining three quark spins</h2>
     <p>
       Next, the spin states. Since we have three spin $\frac{1}{2}$ quarks, the spin algebra is:
-      $$\bf{\frac{1}{2} \oplus \frac{1}{2} \oplus \frac{3}{2}} = \frac{1}{2}_{\text{MA}} \oplus \frac{1}{2}_{\text{MS}} \oplus \frac{3}{2}_{\text{S}}$$
+      $$\bf{\frac{1}{2} \otimes \frac{1}{2} \otimes \frac{1}{2}} = \frac{1}{2}_{\text{MA}} \oplus \frac{1}{2}_{\text{MS}} \oplus \frac{3}{2}_{\text{S}}$$
     </p>
     <p>
       And the states written explicitly are:
@@ -232,15 +232,15 @@
 
     <h2>Baryon state construction</h2>
     <p>
-      Now, we construct the Baryon states. 
+      Now, we construct the baryon states. 
     </p>
     <p>
-      First consider the $\bf{10}$ (decuplet) fully symmetric flavor states. These **must** be paired with fully symmetric spin states in order for the spin-flavor parts to be fully symmetric under exchange. This gives us $10$ spin $\frac{3}{2}$ particles that form the Baryon decuplet. 
+      First consider the $\bf{10}$ (decuplet) fully symmetric flavor states. These must be paired with fully symmetric spin states in order for the spin-flavor parts to be fully symmetric under exchange. This gives us $10$ spin $\frac{3}{2}$ particles that form the baryon decuplet. 
     </p>
     <p>
       For the $\bf{8}_A$ and $\bf{8}_S$ states the situation is slightly more complicated. A single $\ket{\bf{8}_{A/S}} \ket{\text{spin}}$ cannot possibly be fully symmetric, because the octet states have mixed symmetry, while the spin states have either mixed or full symmetry. However, we can construct superpositions of octet states and $S = \bf{\frac{1}{2}}$ states that do have full symmetry:
       $$\frac{1}{\sqrt{2}}(\ket{F^x_{MS}}\ket{S^{\pm 1/2}_{MS}}+\ket{F^x_{MA}}\ket{S^{\pm 1/2}_{MA}})$$
-      $\ket{F^x_{MA}}$ and $\ket{F^x_{MS}}$ denote the antisymmetric and symmetric octet states corresponding to the same particle (combination of $u,d,s$ quarks). Thus, the $\bf{8}_A$ and $\bf{8}_S$ octets entangle pairwise to give $8$ particles that form the Baryon octet.
+      $\ket{F^x_{MA}}$ and $\ket{F^x_{MS}}$ denote the antisymmetric and symmetric octet states corresponding to the same particle (combination of $u,d,s$ quarks). Thus, the $\bf{8}_A$ and $\bf{8}_S$ octets entangle pairwise to give $8$ particles that form the baryon octet.
     </p>
     <p>
       The antisymmetric flavor singlet state does not correspond to any physical particle. The reason is that the spin-flavor part of the wavefunction must be symmetric, but that means that we require a completely antisymmetric spin state, which is not present in $\bf{\frac{1}{2} \oplus \frac{1}{2} \oplus \frac{3}{2}}$. 
