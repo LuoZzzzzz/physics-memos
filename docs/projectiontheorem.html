@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projection theorem</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Multi-electron spin-orbit coupling</h1>
+    <p>
+    Consider a system with two valence electrons. The spin-orbit Hamiltonian for this system is:
+    </p>
+    $$H_{\text{s-o}} = \beta_1 \vec{\bf{s}}_1\cdot\vec{\bf{l}}_1 + \beta_2 \vec{\bf{s}}_2\cdot\vec{\bf{l}}_2$$
+    <p>
+    The usual step is to rewrite the spin operator $\vec{\bf{s}}_1$ as:
+    </p>
+    $$\vec{\bf{s}}_1 = \frac{\langle \vec{\bf{s}}_1 \cdot \vec{\bf{S}}\rangle}{\langle\vec{\bf{S}}^2\rangle} \vec{\bf{S}} = \frac{\langle \vec{\bf{s}}_1 \cdot \vec{\bf{S}}\rangle}{S(S+1)} \vec{\bf{S}}$$
+    <p>
+    where the justification comes from a so-called "vector" argument. The idea there is that the vector $\vec{s}_1$ which represents the expectation of some quantum state for the observable $\vec{\bf{s}}_1$ (this is somewhat confusing since there is double meaning) precesses around the vector $\vec{S}$ which represents the expectation of that same quantum state but for the observable $\vec{\bf{S}}$. From the geometry of the precession we see that the time average of the component of $\vec{s}_1$ perpendicular to $\vec{S}$ is $0$. Therefore the time averaged vectors $\langle \vec{S} \rangle _t$ and $\langle \vec{s}_1 \rangle_t$ will point in the same direction. To figure out ratio between them, we argue that $|\vec{s}_1||\vec{S}| \cos \theta = \vec{s}_1\cdot\vec{S}$, and so $|\vec{s}_1|\cos \theta = \frac{\vec{s}_1\cdot\vec{S}}{|\vec{S}|}$. To get $\langle \vec{s}_1 \rangle_t$ we multiply by the unit vector $\langle \hat{S} \rangle_t = \frac{\langle \vec{S} \rangle_t}{|\vec{S}|}$, which gives:
+    </p>
+    $$\langle \vec{s}_1 \rangle_t = \frac{\vec{s}_1\cdot\vec{S}}{|\vec{S}|} \cdot \frac{\langle \vec{S} \rangle_t}{|\vec{S}|} = \frac{\vec{s}_1\cdot\vec{S}}{|\vec{S}|^2} \langle \vec{S} \rangle_t$$
+    <p>
+    The last step is to make everything "quantum". This is done by promoting $\langle \vec{s}_1 \rangle_t \rightarrow \vec{\bf{s}}_1$, $\langle \vec{S} \rangle_t \rightarrow \vec{\bf{S}}$, $\vec{s}_1 \cdot \vec{S} \rightarrow \langle \vec{\bf{s}}_1 \cdot \vec{\bf{S}}\rangle$ and $|\vec{S}|^2 \rightarrow \langle \vec{\bf{S}}^2 \rangle$. Notably, the expectation in the quantum version should be taken with respect to the same quantum state in the classical picture, and the $|\vec{S}|^2$ is promoted to $\langle \vec{\bf{S}}^2 \rangle$ and not $\langle \vec{\bf{S}} \rangle \cdot \langle \vec{\bf{S}} \rangle$. 
+    </p>
+
+    <h2>Shortcoming of the vector model</h2>
+    <p>
+    This picture has a shortcoming in that it gives the impression that $\vec{\bf{s}}_1$ and $\vec{\bf{S}}$ are multiples of each other. If we are working on the full Hilbert space that is simply not true. As a concrete example let's consider $\frac{1}{2} \otimes \frac{1}{2} = 0 \oplus 1$. Recall that the spin operators for a single spin are:
+    </p>
+    $$
+    \hat{s}_{x} =
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & 1 \\
+    1 & 0 
+    \end{pmatrix},
+    \quad
+    \hat{s}_{y} =
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & -i \\
+    i & 0 
+    \end{pmatrix},
+    \quad
+    \hat{s}_{z} =
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    1 & 0 \\
+    0 & -1 
+    \end{pmatrix}
+    $$
+    <p>
+    The components of $\vec{\bf{s}}_1$, although not explicitly stated, operate on the $4$ dimensional tensor product space. That means that the components of $\vec{\bf{s}}_1$ are really $\hat{s}_{1x} \otimes \hat{I}_2$, $\hat{s}_{1y} \otimes \hat{I}_2$ and $\hat{s}_{1z} \otimes \hat{I}_2$. Let's work out the $4$ by $4$ matrices representing these operators in the tensor product basis. We have:
+    </p>
+    $$
+    \hat{s}_{1x} \otimes \hat{I}_2 = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & 1 \\
+    1 & 0 
+    \end{pmatrix} \otimes
+    \begin{pmatrix}
+    1 & 0 \\
+    0 & 1 
+    \end{pmatrix} =
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0
+    \end{pmatrix}
+    $$
+    <p>
+    Similarly, we have:
+    </p>
+    $$
+    \hat{s}_{1y} \otimes \hat{I}_2 = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & 0 & -i & 0 \\
+    0 & 0 & 0 & -i \\
+    i & 0 & 0 & 0 \\
+    0 & i & 0 & 0
+    \end{pmatrix},
+    \quad
+    \hat{s}_{1z} \otimes \hat{I}_2 = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & -1
+    \end{pmatrix}
+    $$
+    <p>
+    Note that the ordering of the columns are $\ket{\uparrow\uparrow}, \ket{\uparrow\downarrow}, \ket{\downarrow\uparrow}, \ket{\downarrow\downarrow}$ because of the way we have defined our $\otimes$ operation on matrices. 
+    </p>
+    <p>
+    What about the components of $\vec{\bf{S}}$, $\hat{S}_x, \hat{S}_y, \hat{S}_z$, in the same basis? We know that $\vec{\bf{S}} = \vec{\bf{s}}_1 + \vec{\bf{s}}_2$, so we must have for example $\hat{S}_x = \hat{s}_{1x} \otimes \hat{I}_2 + \hat{I}_1 \otimes \hat{s}_{2x}$. Now, applying the same tensor product operation as above we find: 
+    </p>
+    <p style="font-size: 80%;">
+    $$
+    \hat{I}_1 \otimes \hat{s}_{2x} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0
+    \end{pmatrix},
+    \quad
+    \hat{I}_1 \otimes \hat{s}_{2y} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & -i & 0 & 0 \\
+    i & 0 & 0 & 0 \\
+    0 & 0 & 0 & -i \\
+    0 & 0 & i & 0
+    \end{pmatrix},
+    \quad
+    \hat{I}_1 \otimes \hat{s}_{2z} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & -1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & -1
+    \end{pmatrix}
+    $$
+    </p>
+    <p>
+    And performing simple addition we find: 
+    </p>
+    $$
+    \hat{S}_x = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & 1 & 1 & 0 \\
+    1 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 1 \\
+    0 & 1 & 1 & 0
+    \end{pmatrix},
+    \quad
+    \hat{S}_y = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & -i & -i & 0 \\
+    i & 0 & 0 & -i \\
+    i & 0 & 0 & -i \\
+    0 & i & i & 0
+    \end{pmatrix},
+    \quad
+    \hat{S}_z = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & -1
+    \end{pmatrix}
+    $$
+    <p>
+    As we can see the operators $\vec{\bf{s}}_1$ and $\vec{\bf{S}}$ are very different!
+    </p>
+
+    <h2>Correct interpretation</h2>
+    <p>
+    As it turns out, $\vec{\bf{s}}_1$ and $\vec{\bf{S}}$ are indeed linear multiples of each other (in the operator sense), but only when we restrict ourselves to eigenspaces of $\vec{\bf{S}}^2$ (subspaces spanned by eigenvectors degenerate in $S$). In the case of two spin-$\frac{1}{2}$s this means that if we restrict ourselves to either the $0$ or $1$ subspace (aka irreducible representation of $\text{SU}(2)$) of $0 \oplus 1$ we should find that the matrix representations of $\vec{\bf{s}}_1$ and $\vec{\bf{S}}$ acting on that subspace are multiples of one another. One way to find the matrix representations in these subspaces is to perform of change of basis from the tensor product basis to the total angular momentum basis. As we know:
+    </p>
+    $$\ket{1, +1} = \ket{\uparrow\uparrow}, \phantom{x}
+    \ket{1, 0} = \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow}+\ket{\downarrow\uparrow}), \phantom{x}
+    \ket{1, -1} = \ket{\downarrow\downarrow}, \phantom{x}
+    \ket{0, 0} = \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow}-\ket{\downarrow\uparrow})$$
+    <p>
+    So the change of basis matrix from the total angular momentum basis to the tensor product basis is:
+    </p>
+    $$
+    U = 
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+    0 & \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
+    0 & 0 & 1 & 0
+    \end{pmatrix}
+    $$
+    <p>
+    where the order of the columns are $\ket{1, +1}, \ket{1, 0}, \ket{1, -1}, \ket{0, 0}$. 
+    </p>
+
+    <p>
+    The matrices in the two bases are related by:
+    </p>
+    $$S_i^{0\oplus1} = U^\dagger S_i^{\frac{1}{2}\otimes\frac{1}{2}}U$$
+    <p>
+    As a check, note that the above sequence of matrices sends a state in the $0\oplus 1$ basis to the $\frac{1}{2} \otimes \frac{1}{2}$ basis, performs the operation in the $\frac{1}{2} \otimes \frac{1}{2}$ basis, and then sends the state back to the $0 \oplus 1$ basis. Like before let's work out what $\hat{s}_{1x} \otimes \hat{I}_2$ and $S_x$ are in the $0 \oplus 1$ basis:
+    </p>
+    <p style="font-size: 70%;">
+    $$
+    (\hat{s}_{1x} \otimes \hat{I}_2)^{0\oplus 1} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+    0 & \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
+    0 & 0 & 1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0
+    \end{pmatrix} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
+    \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} & 0 \\
+    0 & \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+    -\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} & 0
+    \end{pmatrix}
+    $$
+    $$
+    \hat{S}_x^{0\oplus 1} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+    0 & \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
+    0 & 0 & 1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+    0 & 1 & 1 & 0 \\
+    1 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 1 \\
+    0 & 1 & 1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0
+    \end{pmatrix} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & \sqrt{2} & 0 & 0 \\
+    \sqrt{2} & 0 & \sqrt{2} & 0 \\
+    0 & \sqrt{2} & 0 & 0 \\
+    0 & 0 & 0 & 0
+    \end{pmatrix}
+    $$
+    </p>
+    <p>
+    Now notice restricting each operator to the $S=1$ subspace gives:
+    </p>
+    $$
+    (\hat{s}_{1x} \otimes \hat{I}_2)^{1} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & \frac{1}{\sqrt{2}} & 0 & \blacksquare \\
+    \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} & \blacksquare \\
+    0 & \frac{1}{\sqrt{2}} & 0 & \blacksquare \\
+    \blacksquare & \blacksquare & \blacksquare & \blacksquare
+    \end{pmatrix}, \quad 
+    \hat{S}_x^{1} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & \sqrt{2} & 0 & \blacksquare \\
+    \sqrt{2} & 0 & \sqrt{2} & \blacksquare \\
+    0 & \sqrt{2} & 0 & \blacksquare \\
+    \blacksquare & \blacksquare & \blacksquare & \blacksquare
+    \end{pmatrix}
+    $$
+    <p>
+    So we see they are indeed linear multiples of each other, with a constant of proportionality $c=2$. The same business can be done with $y$ and $z$, after which we find:
+    </p>
+    <p style="font-size: 85%;">
+    $$
+    (\hat{s}_{1y} \otimes \hat{I}_2)^{0\oplus 1} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & -\frac{i}{\sqrt{2}} & 0 & \frac{i}{\sqrt{2}} \\
+    \frac{i}{\sqrt{2}} & 0 & -\frac{i}{\sqrt{2}} & 0 \\
+    0 & \frac{i}{\sqrt{2}} & 0 & \frac{i}{\sqrt{2}} \\
+    -\frac{i}{\sqrt{2}} & 0 & -\frac{i}{\sqrt{2}} & 0
+    \end{pmatrix}, \quad 
+    \hat{S}_y^{0\oplus 1} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    0 & -\sqrt{2}i & 0 & 0 \\
+    \sqrt{2}i & 0 & -\sqrt{2}i & 0 \\
+    0 & \sqrt{2}i & 0 & 0 \\
+    0 & 0 & 0 & 0
+    \end{pmatrix}
+    $$
+    $$
+    (\hat{s}_{1z} \otimes \hat{I}_2)^{0\oplus 1} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & -1 & 1 \\
+    0 & 0 & 1 & 0
+    \end{pmatrix}, \quad 
+    \hat{S}_z^{0\oplus 1} = 
+    \frac{\hbar}{2}
+    \begin{pmatrix}
+    2 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & -2 & 0 \\
+    0 & 0 & 0 & 0
+    \end{pmatrix}
+    $$
+    </p>
+    <p>
+    Which has the same constant of proportionality $c=2$ as with $z$. In the case of the $S=0$ subspace it is easily verifiable that our claim is true (it turns out that in a singlet subspace the representation is simply the number $0$, so the claim is trivially true). 
+    </p>
+
+    <h2>The general statement</h2>
+    <p>
+    Suppose now that we have many angular momenta: $\vec{\bf{j}}_1, \dots \vec{\bf{j}}_N$. Tensoring all of them together (ie. $\vec{\bf{J}} = \vec{\bf{j}}_1 + \cdots + \vec{\bf{j}}_N$) gives us a bunch of irreducible representations:
+    </p>
+    $$j_1 \otimes \cdots \otimes j_N = J_1 \oplus J_2 \oplus \cdots$$
+    <p>
+    Then, if we look within any one of the irreps $J_i$, we find that:
+    </p>
+    $$\vec{\bf{j}}_k = c(i, k) \vec{\bf{J}}$$
+    <p>
+    where the constant of proportionality is:
+    </p>
+    $$c(i, k) = \frac{\langle \vec{\bf{j}}_k \cdot \vec{\bf{J}} \rangle}{J_i (J_i + 1)}$$
+    <p>
+    The expectation above written explicitly is $\langle \vec{\bf{j}}_k \cdot \vec{\bf{J}} \rangle = \langle J_i, M_{J_i}| \vec{\bf{j}}_k \cdot \vec{\bf{J}} |J_i, M_{J_i} \rangle$. Because $\vec{\bf{j}}_k \cdot \vec{\bf{J}}$ is a scalar operator, this expectation is in fact independent of $M_{J_i}$, which means we only have to zoom in to the subspace level. If it means anything, the above is known as the projection theorem, and it follows from the Wigner-Eckart theorem and Schur's lemma.
+    </p>
+</body>
+</html>
