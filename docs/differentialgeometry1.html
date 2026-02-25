@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Miller indices</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Very basic differential geometry</h1>
+
+    <p>
+      Index notation is beautiful, but it seems to convey the impression that the mathematics is built upon relativity. This is partly true, but a large part of the mathematics can be derived from geometry that has nothing to do with relativity.
+    </p>
+
+
+    <h2>Space and coordinate systems</h2>
+
+    <p>
+    Imagine a space like the space around you. This space is physical and real. We would like to label the positions in this space, and to do so we use a set of parameters $x_i$. These parameters live in parameter space, which is a different space from real space. Each point in parameter space, labelled by numerical quantities $x_i$, maps to a point in real space. 
+    </p>
+
+    <p>
+    If we move from $\vec{x}$ to $\vec{x} + \text{d}\vec{x}$ in parameter space our image point in real space moves from $\vec{r}$ to $\vec{r} + \text{d}\vec{r}$. The small displacement in real space is related to the small displacement in parameter space by: 
+    $$\text{d}\vec{r} = \frac{\partial \vec{r}}{\partial x_i} \text{d}x_i = \vec{e}_i \,\text{d}x_i$$
+    In this sense that our parameterisation of real space gives us a natural coordinate basis at each point in real space. If we had a vector field $\vec{A}(\vec{r})$ in real space, the "natural" way for us to represent it is to express $\vec{A}$ as a linear combination of the coordinate basis vectors at its position:
+    $$\vec{A} = A_i \vec{e}_i$$
+    Personally, I think the best way to think about $\vec{A}$ and $\vec{e}_i$ is as abstract vectors pointing in space. The coefficients $A_i$ then give the <b>components</b> of the vector $\vec{A}$ in the coordinate basis $\vec{e}_i$ defined by the parameterisation $\vec{r}(x_i)$.
+    </p>
+
+    <p>
+    We can parameterise the real space in any way we like, and a natural question to ask is how the components $A_i$ might change if we instead used a parameterisation $\vec{r}(x'_i)$. That is, if $\vec{A} = A_i \vec{e}_i = A'_i \vec{e}'_i$, how is $A_i$ related to $A'_i$? This is a well posed question because $A_i$ and $A'_i$ are just numbers and there should be a systematic way of calculating one from the other. It goes like this:
+    $$
+    \begin{align}
+    \vec{A} &= A_i \vec{e}_i \\
+    &= A_i \frac{\partial x'_k}{\partial x_i} \frac{\partial \vec{r}}{\partial x'_k} \\
+    &= A_i \frac{\partial x'_k}{\partial x_i} \vec{e}'_k \\
+    &= A'_k \vec{e}'_k
+    \end{align}
+    $$
+    So the transformation rule is:
+    $$A'_i = \frac{\partial x'_i}{\partial x_j} A_j$$
+    </p>
+
+
+    <h2>The metric</h2>
+    <p> 
+    We would like a measure of the "length" of a vector $\vec{A}$ and this is provided by the metric $g$. The squared norm of $\vec{A}$ is defined, numerically, to be $A_i g_{ij} A_j$. At this point, I would like to introduce some confusing notation. Previously I used $\vec{A}$ to refer to abstract vectors, now I am going to use $A$ to refer to the set of numbers corresponding to the components $A_i$. So $A = (A_1, A_2, A_3)^T$. Hopefully there is no confusion. Then, the norm can be written as $A^T g A$. 
+    </p> 
+
+    <p> 
+    We would like the value to be independent of the coordinate basis in which $\vec{A}$ is expressed in. That is, that under a change of parameterisation $A_i \rightarrow A'_i$, we have:
+    $$A^T g A = A'^T g' A'$$
+    We know that the components of $A'$ are fixed by our initial and final parameterisations, so the only way for this to be true is to have $g$ transform in a specific way. Let's work it out. 
+    </p> 
+
+    <p> 
+    We know that $A'_i = \frac{\partial x'_i}{\partial x_j} A_j$ so defining the Jacobian matrix $J = \frac{\partial x'_i}{\partial x_j}$ we have $A' = JA$. We also deduce immediately that $(A')^T = (JA)^T = A^T J^T$. So the above equality becomes:
+    $$A^T g A = A^T J^T g' J A$$
+    and so we must have:
+    $$g' = (J^T)^{-1} g (J^{-1}) = (J^{-1})^T g (J^{-1})$$
+    since the transpose and the inverse commute (you can check this).
+    </p> 
+
+    <p> 
+    Now, $J^{-1} = \frac{\partial x_i}{\partial x'_j}$ since $\frac{\partial x_i}{\partial x'_k} \frac{\partial x'_k}{\partial x_j} = \delta_{ij} = J^{-1}J$. So we have:
+    $$g' = (J^{-1})^T g (J^{-1}) = (J^{-1})_{ki}\,g_{kl}\,(J^{-1})_{lj} = \frac{\partial x_k}{\partial x'_i} \frac{\partial x_l}{\partial x'_j} g_{kl}$$
+    which is the transformation rule for the metric. In component form:
+    $$g'_{ij} = \frac{\partial x_k}{\partial x'_i} \frac{\partial x_l}{\partial x'_j} g_{kl}$$
+    We can also group terms together as:
+    $$A^T g A = (A^T g J^{-1}) (J A)$$
+    The right (column) vector is $A'$, while the left (row) vector transforms as:
+    $$[A^T g]_i \rightarrow [A^T g]_j \, (J^{-1})_{ji} = [A^T g]_j \frac{\partial x_j}{\partial x'_i}$$
+    What we have done thus far has been algebraic. We have dealt entirely with the components of $A$, $A_i$. But there is another way of looking at things which is perhaps more elegant. 
+    </p> 
+
+
+    <h2>Dual vector formalism</h2>
+    <p> 
+    Start by rewriting $A^T g A = (g^T A)^T A$, that is, the matrix multiplication of a row vector and a column vector. The column vector $A$ corresponds to a physical object - the vector $\vec{A}$ in real space. So a natural question to ask is if the row vector $(g^T A)^T$ corresponds to any "physical" object in some space. The answer is yes. With $A$ we had $\vec{A} = A_i \vec{e}_i$ so let us define the vector corresponding to $(g^T A)^T$ to be $\vec{A}^{\text{cov}}$. Note that $\vec{A}^{\text{cov}}$ and $\vec{A}$ live in different spaces. Because they live in different spaces, $\vec{A}^{\text{cov}}$ needs its own special basis, which we denote $\vec{e}^i$. Let's also introduce the notation $A^{\text{cov}}_i = [(g^T A)^T]_i$. Putting these together:
+    $$\vec{A}^\text{cov} = A^{\text{cov}}_i \vec{e}^i$$
+    We want matrix multiplication to be analogous to dot product between $\vec{A}^\text{cov}$ and $\vec{A}$ and this forces some conditions on the relation between $\vec{e}^i$ and $\vec{e}_i$. 
+    </p> 
+
+    <p> 
+    Matrix multiplication gives us the result:
+    $$(g^T A)^T A = A^\text{cov}_1 A_1 + A^\text{cov}_2 A_2 + A^\text{cov}_3 A_3$$
+    While taking the dot product of $\vec{A}^\text{cov}$ and $\vec{A}$ gives us a whole bunch of terms:
+    $$\vec{A}^\text{cov} \cdot \vec{A} = (A^{\text{cov}}_i \vec{e}^i) \cdot (A_j \vec{e}_j) = A^{\text{cov}}_iA_j(\vec{e}^i \cdot \vec{e}_j)$$
+    Which forces $\vec{e}^i \cdot \vec{e}_j = \delta_{ij}$. In fact, since $\vec{e}^i$ and $\vec{e}_j$ belong to different spaces it is not clear what the "dot" product between them actually means, and I think the statement $\vec{e}^i \cdot \vec{e}_j = \delta_{ij}$ is actually the definition of the dot product for a coordinate basis vector and its dual. Oh yea - $\vec{e}^i$ is called the dual vector. 
+    </p> 
+
+    <p> 
+    We would like $\vec{e}^i \cdot \vec{e}_j = \delta_{ij}$ to hold in all coordinate basis, and since the transformation of $\vec{e}_j$ is already fixed by $\vec{e}'_j = \frac{\partial x_k}{\partial{x'_j}}\vec{e}_k$, the transformation rule for $\vec{e}^i$ is also fixed.
+    $$
+    \begin{align}
+    \vec{e}^i \cdot \vec{e}_j &= \delta_{ij} \\
+    &= \vec{e}'^i \cdot \vec{e}'_j \\
+    &= (M_{il} \vec{e}^l) \cdot (\frac{\partial x_k}{\partial x'_j} \vec{e}_k) \\
+    &= M_{il} \frac{\partial x_k}{\partial x'_j} (\vec{e}^l \cdot \vec{e}_k) \\ 
+    &= M_{il} \frac{\partial x_k}{\partial x'_j} \delta_{lk} \\
+    &= M_{ik} \frac{\partial x_k}{\partial x'_j}
+    \end{align}
+    $$
+    And for $M_{ik} \frac{\partial x_k}{\partial x'_j} = \delta_{ij}$ we must have $M_{ik} = \frac{\partial x'_i}{\partial x_k}$. Therefore, the transformation of a dual basis vector is given by:
+    $$\vec{e}'^i = \frac{\partial x'_i}{\partial x_j} \vec{e}^j$$
+    I should mention at this point that there is a "natural" metric given by:
+    $$g_{ij} = \vec{e}_i \cdot \vec{e}_j$$
+    that maps small physical displacements $\vec{e}_i \,\text{d}x_i$ to their physical lengths. But in general the metric can be anything I want - it is the additional structure we impose on the space that gives it its geometry. 
+    </p> 
+
+
+    <h2>Transformation of the dual vector</h2>
+    <p>
+    Under a coordinate transformation the tangent vector $\vec{A}$ transforms from $A_i \vec{e}_i$ to $A'_i \vec{e}'_i$. Both represent the same physical vector - this is non-negotiable and from this the transformation rule for $A_i$ is derived. With cotangent vectors however, the transformation rules (of $g$, $A_i$ and dual basis vectors $\vec{e}^i$) are fixed by our above arguments, so the invariance of $A^\text{cov}_i \vec{e}^i$ must necessarily follow from these transformation rules. Let us check that this is indeed the case.
+    $$
+    \begin{align}
+    \vec{A}^\text{cov} &= A^\text{cov}_i \vec{e}^i \\
+    &= g_{ji} A_j \vec{e}^j \\
+    &= (\frac{\partial x'_k}{\partial x_j}\frac{\partial x'_l}{\partial x_i}g'_{kl})
+    (\frac{\partial x_j}{\partial x'_m}A'_m) (\frac{\partial x_i}{\partial x'_n} \vec{e}'^n) \\
+    &= \delta_{km} \delta_{ln} \, g'_{kl} \, A'_m \vec{e}'^n \\
+    &= g'_{kl} \, A'_k \vec{e}'^l \\
+    &= A'^\text{cov}_i \vec{e}'^i
+    \end{align}
+    $$
+    So the invariance does follow from the transformation rules. 
+    </p>
+
+    <p>
+    Further, we have find that since $A^\text{cov}_i = g_{ji} A_j$ and $A'^\text{cov}_i = g'_{ji} A'_j$, that:
+    $$A'^\text{cov}_i = \frac{\partial x_k}{\partial x'_i} A^\text{cov}_k$$
+    </p>
+
+</body>
+</html>
