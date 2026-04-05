@@ -55,9 +55,9 @@
       $$
       For example, if I want to calculate the vertex factor of a vertex containing $u'$ and $d'$, I write $u' = (1,0,0)$ and $d' = (1,0,0)^T$, and then I calculate the following matrix product:
       $$
-      g_{ud} = 
+      g_{ud} =
       \begin{bmatrix}
-      1 & 0 & 0 
+      1 & 0 & 0
       \end{bmatrix}
       \begin{bmatrix}
       1 & 0 & 0 \\
@@ -67,7 +67,7 @@
       \begin{bmatrix}
       1 \\
       0 \\
-      0 
+      0
       \end{bmatrix}
       $$
       which gives $1$, and that is expected since $u'$ and $d'$ are in the same generation. But, as we have said, when we have quarks in the fermion lines in Feynman diagrams those quarks are not in weak eigenstates, but mass eigenstates. So how do we calculate the vertex factor for an interaction for a vertex containing a $u$ and a $d$ quark? 
@@ -79,14 +79,14 @@
       \begin{bmatrix}
       u' \\
       c' \\
-      t' 
+      t'
       \end{bmatrix}
-      = 
+      =
       U_u
       \begin{bmatrix}
       u \\
       c \\
-      t 
+      t
       \end{bmatrix}
       $$
       Likewise, we have:
@@ -94,22 +94,22 @@
       \begin{bmatrix}
       d' \\
       s' \\
-      b' 
+      b'
       \end{bmatrix}
-      = 
+      =
       U_d
       \begin{bmatrix}
       d \\
       s \\
-      b 
+      b
       \end{bmatrix}
       $$
       So if we want to calculate the vertex factor for $u$ and $d$ we do:
       $$
       \begin{align}
-      g_{ud} &= 
+      g_{ud} &=
       \begin{bmatrix}
-      1 & 0 & 0 
+      1 & 0 & 0
       \end{bmatrix}
       U^\dagger_u
       \,
@@ -119,10 +119,10 @@
       \begin{bmatrix}
       1 \\
       0 \\
-      0 
+      0
       \end{bmatrix} \\
       &= \begin{bmatrix}
-      1 & 0 & 0 
+      1 & 0 & 0
       \end{bmatrix}
       U^\dagger_u
       \,
@@ -130,22 +130,24 @@
       \begin{bmatrix}
       1 \\
       0 \\
-      0 
+      0
       \end{bmatrix} \\
       &= \begin{bmatrix}
-      1 & 0 & 0 
+      1 & 0 & 0
       \end{bmatrix}
       V_{\text{CKM}}
       \begin{bmatrix}
       1 \\
       0 \\
-      0 
+      0
       \end{bmatrix} \\
       &= [V_{\text{CKM}}]_{11}
       \end{align}
       $$
       Therefore, the $\text{CKM}$ matrix is defined as $V_{\text{CKM}} = U^\dagger_u U_d$ and its elements gives the vertex factor between upper and lower mass eigenstates in a weak interaction. Also, as a final note, the $\text{CKM}$ matrix, despite being unitary, does not describe any change of basis - if anything it should be thought of as a bilinear form. That's why you get the vertex factors by reading off it directly.
     </p>
+
+  </main>
 
 </body>
 </html>
