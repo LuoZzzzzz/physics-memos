@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>B1 Bookwork</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: 0.35rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>B3 Bookwork</h1>
+    <p>
+      A list of bookwork derivations for <b>B3</b> atomic and laser Physics.
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3>1. Laser gain equation</h3>
+    <p>
+      For laser light of frequency $\omega$ exciting a transition middle frequency $\omega_{21}$
+      $$
+      \begin{align}
+      \text{power gained} &= \underbrace{[(N_2A\delta z)B_{21} - (N_1A\delta z)B_{12}]}_{\text{number of atoms in each level}} \cdot \underbrace{\hbar\omega}_{\text{photon energy}} \cdot \underbrace{G(\omega-\omega_{21})}_{\text{linewidth}} \cdot \rho(\omega) \\
+      &= B_{21}(N_2 - \frac{B_{12}}{B_{21}}N_1)A\delta z \cdot \hbar\omega \cdot G(\omega-\omega_{21}) \cdot \frac{1}{c}\,c\rho(\omega) \\
+      &= B_{21}\underbrace{(N_2 - \frac{g_2}{g_1}N_1)}_{g_1B_{12} = g_2B_{21}}A\delta z \cdot \hbar\omega \cdot G(\omega-\omega_{21}) \cdot \frac{1}{c}\,\underbrace{I(\omega)}_{I = c\rho} \\
+      &= (N_2 - \frac{g_2}{g_1}N_1)A\delta z \cdot \underbrace{B_{21} \frac{\hbar\omega}{c} \frac{\omega^2}{\pi^2c^2}}_{A_{21}}\frac{\pi^2c^2}{\omega^2} \cdot G(\omega-\omega_{21}) \cdot I(\omega) \\ 
+      &= \underbrace{(N_2 - \frac{g_2}{g_1}N_1)}_{N^*}A\delta z \cdot \underbrace{A_{21}\frac{\pi^2c^2}{\omega^2} \cdot G(\omega-\omega_{21})}_{\sigma(\omega-\omega_{21})} \cdot I(\omega) \\
+      &= N^* \cdot \sigma(\omega-\omega_{21}) \cdot I(\omega) \, A\delta z
+      \end{align}
+      $$
+    </p>
+
+    <p>
+      Now, we need to find the population inversion density $N^*$ in terms of the system's parameters. Start with the rate equations, with pump rates $S_1$ and $S_2$
+      $$
+      \begin{align}
+      \dot{N}_2 &= 0  
+      = S_2 - \frac{N^* \sigma(\omega-\omega_{21}) I}{h \omega} - \frac{N_2}{\tau_2}  
+      = S_2 - N^* W - \frac{N_2}{\tau_2} \\
+      \dot{N}_1 &= 0  
+      = S_1 + N^* W - \frac{N_1}{\tau_1} + N_2 A_{21}  
+      \end{align}
+      $$
+      where we have substituted $W = \frac{\sigma(\omega-\omega_{21}) I}{h \omega}$.
+    </p>
+
+    <p>
+      Now, isolate $N_1$ and $N_2$
+      $$
+      \begin{align}
+      N_2 &= \tau_2 (S_2 - N^* W) \\
+      N_1 &= \tau_1 \left(S_1 + N^* W + N_2 A_{21} \right) \\  
+      &= \tau_1 \left(S_1 + N^* W + A_{21} \tau_2 (S_2 - N^* W) \right) \\  
+      &= \tau_1 \left(S_1 + (1 - A_{21} \tau_2) N^* W + A_{21} \tau_2 S_2 \right) 
+      \end{align}
+      $$
+    </p>
+
+    <p>
+      Then, use $N_1$ and $N_2$ to form an equation for the population inversion density $N^*$
+      $$
+      \begin{align}  
+      n^* &= N_2 - \frac{g_2}{g_1}N_1 \\
+      &= \tau_2 (S_2 - N^* W)  
+      - \frac{g_2}{g_1} \tau_1 \left( S_1 + (1 - A_{21} \tau_2) N^* W + A_{21} \tau_2 S_2 \right)
+      \end{align}
+      $$
+      Finally isolate and $N^*$
+      $$
+      \begin{align}  
+      N^* &=  
+      \frac{  
+      \tau_2 S_2 \left( 1 - \frac{g_2}{g_1} \tau_1 A_{21} \right)  
+      - \frac{g_2}{g_1} \tau_1 S_1}{1 + \left[ \tau_2 + \frac{g_2}{g_1} \tau_1 (1 - A_{21} \tau_2) \right] \frac{\sigma(\omega-\omega_{21}) I}{h \omega}}  
+      \end{align}
+      $$
+    </p>
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+</body>
+</html>

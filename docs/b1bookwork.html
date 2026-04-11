@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>B1 Bookwork</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: 0.35rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>B1 Bookwork</h1>
+    <p>
+      A list of bookwork derivations for <b>B1</b> fluids.
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+    <h3 class="section-anchor">1. Boundary conditions for surface waves</h3>
+    <p>
+      <i>1. No penetration condition at $z=-h$</i>
+      $$v_z(x, -h, t) = 0$$
+    </p>
+
+    <p>
+      <i>2. Kinematic boundary condition at surface $z = \eta(x, t)$</i>
+      $$v_z(x, \eta, t) = \frac{\partial \eta}{\partial t} + v_x(x, t) \frac{\partial \eta}{\partial x}$$
+      $v_z$ is the velocity of a fluid element on the wave surface at $(x, t)$. This condition says that the $z$ velocity of that fluid element must be such that it stays on the wave surface a short time later. A couple of examples makes things clearer. 
+
+      Suppose $\eta = t$. That is, the wave surface is flat but it rises at a constant rate. Then the particle must move up at a constant rate $v_z = 1$ for it to remain on the surface.
+
+      Now suppose $\eta = -x$, so that the surface is inclined downwards at $45^\circ$. Even though the surface is fixed, the particle will have some $x$ velocity $v_x$, and for it to slide down along the surface it must have a corresponding $z$ velocity $-v_x$. 
+    </p>
+
+    <p>
+      <i>3. Vertical force balance</i>
+      $$p(x, \eta, t) - p_{\text{atm}} = -\gamma \frac{\partial^2 \eta}{\partial x^2}$$
+      The net force on a small fluid parcel on the surface must be zero; if it is not so an large acceleration will arise which will cause it to become zero. This requires vertical force balance between pressure and surface tension in the $z$ direction.
+    </p>
+
+    <p>
+      <i>Linearisation</i><br>
+      We assume that the fluid may is irrotational and incompressible, so that we can define a velocity potential $\phi$ satisfying Laplace's equation $\nabla^2 \phi = 0$. In addition we also assume that the flow is inviscid.
+    </p>
+
+    <p>
+      The general procedure is to consider a small perturbation $p_1, \vec{v}_1$ on top of a background flow $p_0, \vec{v}_0$. The background flow corresponds to an uniform flow of velocity $\vec{v}_0$ in which the pressure gradient $\nabla p_0$ exactly balances the body forces due to gravity, $\rho_0 \vec{g}$. 
+    </p>
+
+    <p>
+      In this specific instance we would like to consider a fluid that is at rest in its equilibrium state. Plugging $\vec{v} = \vec{v}_1$, $p = p_0 + p_1$ into the inviscid Navier Stokes gives:
+      $$\rho_0 \frac{\partial \vec{v}_1}{\partial t} = -\nabla (p_0 + p_1) + \rho_0\vec{g} = -\nabla p_1$$
+      In terms of $\phi$:
+      $$\left.\rho_0 \frac{\partial}{\partial t}\left(\nabla\phi\right) = -\nabla p_1\right|_{x, \eta, t}  \implies \left.\rho_0 \frac{\partial \phi}{\partial t} = -p_1\right|_{x, \eta, t} 
+      \phantom{xxx} \text{(linearisation of Navier Stokes)}$$
+      We would like to simplify $p_1$. At equilibrium, we have that $p_0(z) = p_{\text{atm}} - \rho_0 g z$. Further, we know that $p(x, z, t) = p_0(z) + p_1(x, z, t)$. So applying these at $(x, z=\eta(x, t), t)$ gives:
+      $$p(x, \eta, t) = p_\text{atm} - \rho_0 g \eta + p_1(x, \eta, t)$$
+      Now, we invoke boundary condition *3.*:
+      $$-\gamma \frac{\partial^2 \eta}{\partial x^2} = p(x, \eta, t) - p_{\text{atm}} = -\rho_0 g \eta + p_1(x, \eta, t) \implies p_1(x, \eta, t) = \rho_0 g \eta - \gamma \frac{\partial^2 \eta}{\partial x^2}$$
+      Plugging this back into the linearised Navier Stokes gives:
+      $$\rho_0 \frac{\partial \phi}{\partial t}(x, \eta, t) = \rho_0 g \eta - \gamma \frac{\partial^2 \eta}{\partial x^2}$$
+      Expanding the left hand side:
+      $$\rho_0 \frac{\partial \phi}{\partial t}(x, \eta, t) = \rho_0 \frac{\partial \phi}{\partial t}(x, 0, t) + \underbrace{\rho_0 \eta \frac{\partial^2 \phi}{\partial x \partial t}(x, \eta, t)}_{O(\eta v_1)} + \dots \approx \rho_0 \frac{\partial \phi}{\partial t}(x, 0, t)$$
+      Hence:
+      $$\rho_0 \frac{\partial \phi}{\partial t}(x, 0, t) = \rho_0 g \eta - \gamma \frac{\partial^2 \eta}{\partial x^2}
+      \phantom{xxx} \text{(vertical force balance, bc 3.)}$$
+      Now, lets look at the kinematic boundary condition, *2.*. 
+      $$v_z(x, 0, t) \approx v_z(x, \eta, t) = \frac{\partial \eta}{\partial t} + \underbrace{v_x(x, t) \frac{\partial \eta}{\partial x}}_{O(\eta v_1)} \approx \frac{\partial \eta}{\partial t}$$
+      Hence:
+      $$\frac{\partial \phi}{\partial z}(x, 0, t) \approx \frac{\partial \eta}{\partial t} 
+      \phantom{xxx} {\text{(kinematic boundary condition, bc 2.)}}$$
+      Finally, the no penetration condition at $z = -h$ gives:
+      $$\frac{\partial \phi}{\partial z}(x, -h, t) = 0 \phantom{xxx}\text{(no penetration condition, bc 1.)}$$
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

@@ -36,12 +36,12 @@
 
     <h1>Where does exponential decay come from?</h1>
     <p>
-      The lecture notes derive the decay formula using a perturbative approach: start with an ansatz that has the right flavor, but otherwise quite wrong. Run it through the perturbation process once to get a first order solution with a linear rate prediction. Then calculate the rate by taking the time derivative. 
+      The lecture notes derive the decay formula using a perturbative approach: start with an ansatz that has the right flavor, but otherwise quite wrong. Run it through the perturbation process once to get a first order solution with a linear rate prediction. Then calculate the rate by taking the time derivative.
     </p>
 
-    </p>
-      There are a few things that feel off. Firstly, we take the rate of a linear process, and then magically claim that it is also the rate of an exponential decay. Secondly, our original ansatz only held for $t \ll \tau$, but we take the limit $t \rightarrow \infty$ of our first order solution - does one round of perturbation increase our range of validity that much?
     <p>
+      There are a few things that feel off. Firstly, we take the rate of a linear process, and then magically claim that it is also the rate of an exponential decay. Secondly, our original ansatz only held for $t \ll \tau$, but we take the limit $t \rightarrow \infty$ of our first order solution - does one round of perturbation increase our range of validity that much?
+    </p>
 
     <h2>Step 1: interaction picture</h2>
     <p>
@@ -58,11 +58,11 @@
     <p>
       To proceed from here, we need to introduce a few key assumptions:
     </p>
-    <ol> 
+    <ol>
       <li>The system begins in the initial state $\ket{i}$.</li>
       <li>The initial state couples to all final decay states $\ket{f}$.</li>
       <li>The final decay states do not couple to one another: $\bra{f'} V \ket{f} = V_{f' f} = 0$.</li>
-    </ol>  
+    </ol>
     <p>
       Therefore, we expect the probability to slosh around between $\ket{i}$ and the various $\ket{f}$s, but not between two final states $\ket{f}$ and $\ket{f'}$.
     </p>
@@ -75,10 +75,10 @@
       This gives us the following pair of equations:
       $$\dot{c}_i(t) = -\frac{i}{\hbar} \sum_f V_{if} \, e^{-\frac{i}{\hbar} (E_f - E_i) t} \, c_f(t) $$
       $$\dot{c}_f(t) = -\frac{i}{\hbar} V_{fi} \, e^{\frac{i}{\hbar} (E_f - E_i) t} \, c_i(t)$$
-      Note given our above (physically grounded) assumptions these equations are exact. 
-    </p>  
-    
-    
+      Note given our above (physically grounded) assumptions these equations are exact.
+    </p>
+
+
     <h2>Step 3: solve the equations</h2>
     <p>
       Integrating $\dot{c}_f(t)$ gives:
@@ -96,15 +96,15 @@
     </p>
 
     <p>
-      Here's the main idea: since $\kappa(t-t')$ is the sum of a lot of phases, it should be quite spiky at $t' = t$ and mostly zero everywhere else. Note that this may not necessarily be the case! For example, $\kappa$ could in theory have some kind of periodic structure. The exact details depend on the values of the coupling constants and energy levels. In any case, if we work with the above assumptions then we can do the following. 
+      Here's the main idea: since $\kappa(t-t')$ is the sum of a lot of phases, it should be quite spiky at $t' = t$ and mostly zero everywhere else. Note that this may not necessarily be the case! For example, $\kappa$ could in theory have some kind of periodic structure. The exact details depend on the values of the coupling constants and energy levels. In any case, if we work with the above assumptions then we can do the following.
     </p>
 
     <p>
-      First, if the variation scale of $c_f(t)$ is slow compared to the width of $\kappa(t-t')$, then we may approximate $\int_0^t \kappa (t-t') \, c_i(t') \,\text{d}t \approx c_i(t) \int_0^t \kappa (t-t') \, \text{d}t'$. 
+      First, if the variation scale of $c_f(t)$ is slow compared to the width of $\kappa(t-t')$, then we may approximate $\int_0^t \kappa (t-t') \, c_i(t') \,\text{d}t \approx c_i(t) \int_0^t \kappa (t-t') \, \text{d}t'$.
     </p>
 
     <p>
-      Next, we make the substitution $\tau = t-t'$, $\text{d}\tau = -\text{d}t'$. From here, we may further approximate by increasing the limit of integration of the $\kappa$ term to $\tau = \infty$. The reason is that because $\kappa(\tau)$ has a tail that vanishes quickly, so the additional area is very small. Therefore, 
+      Next, we make the substitution $\tau = t-t'$, $\text{d}\tau = -\text{d}t'$. From here, we may further approximate by increasing the limit of integration of the $\kappa$ term to $\tau = \infty$. The reason is that because $\kappa(\tau)$ has a tail that vanishes quickly, so the additional area is very small. Therefore,
       $$
       \begin{align}
       c_i(t) \int_0^t \kappa (t-t') \, \text{d}t' &= c_i(t) \int_t^0 \kappa (\tau) (-1) \cdot \text{d}\tau \\
@@ -112,7 +112,7 @@
       &\approx c_i(t) \int_0^\infty \kappa (\tau)\cdot \text{d}\tau
       \end{align}
       $$
-      Therefore, our approximate differential equation for $c_i(t)$ is: 
+      Therefore, our approximate differential equation for $c_i(t)$ is:
       $$\dot{c}_i(t) = -\frac{1}{\hbar^2} c_i(t) \cdot \int_0^\infty \kappa (\tau) \, \text{d}\tau$$
     </p>
 
@@ -141,9 +141,9 @@
       &= \frac{2\pi}{\hbar} \int |V_{if}|^2 \cdot \hbar \delta(E_f - E_i) \cdot \rho(E_f) \,\text{d}E_f \\
       &= 2\pi \int |V_{if}|^2 \cdot \delta(E_f - E_i) \cdot \rho(E_f) \,\text{d}E_f \\
       &= 2\pi \sum_{E_f = E_i} |V_{if}|^2 \cdot \rho(E_{f_{(E_f=E_i)}})
-      \end{align} 
+      \end{align}
       $$
-      That's Fermi's Golden Rule! To calculate the transition rate, sum the norm square of the coupling constant over all final states $\ket{f}$ that has the same energy as the initial state $\ket{i}$. Note that in this case its $E_f = E_i$, not $\ket{f} = \ket{i}$! 
+      That's Fermi's Golden Rule! To calculate the transition rate, sum the norm square of the coupling constant over all final states $\ket{f}$ that has the same energy as the initial state $\ket{i}$. Note that in this case its $E_f = E_i$, not $\ket{f} = \ket{i}$!
     </p>
 
     <p>
@@ -177,6 +177,8 @@
       Taking the norm square gives: 
       $$\text{pr(decay into state $f$)}(t) = \frac{|V_{fi}|^2/\hbar^2}{\frac{(E_{fi}-\Delta E)^2}{\hbar^2}+\frac{\Gamma^2}{4\hbar^2}}$$
     </p>
+
+  </main>
 
 </body>
 </html>
