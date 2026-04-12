@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>B4 Bookwork</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>B4 Bookwork</h1>
+    <p>
+      A list of bookwork derivations for <b>B4</b> nuclear and particle Physics.
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">1. Natural units</h3>
+    <p>
+      The idea of natural units is to replace the standard SI units $1 \text{ kg}, 1 \text{ m}, 1 \text{ s}$ with $\hbar, c, \text{GeV}$. For example, to convert $1 \text{ m}$ to natural units, note that dimensionally $[\text{m}] = \frac{[\hbar] [c]}{[\text{GeV}]}$. So we want to find $X$ such that:
+      $$1 \text{ m} = X \, \frac{\hbar c}{\text{GeV}}$$
+      where the entire equation is in SI units. Obviously, $X = \frac{10^9 \times 1.6 \times 10^{-19}}{1.055 \times 10^{-34} \times 3 \times 10^8} = 5.06 \times 10^{15}$. The special feature with natural units is that after doing the above we set $\hbar = c = 1$, so we end up with:
+      $$1 \text{ m} = 5.06 \times 10^{15} \text{ GeV}^{-1}$$
+      There always exists an unique combination of $\hbar$ and $c$ that will restore the right units to the equation (in SI), so we can do all the calculations in units of energy, and restore the missing $\hbar$s and $c$s in one go at the very end. The reason this works is because we have three independent units in each basis (SI and natural).
+    </p>
+    <p>
+      Let's work out the conversion of a general SI unit to natural units. That is, find the number $X$ and the power $\gamma$ in the following equation:
+      $$\text{kg}^a \text{m}^b \text{s}^c = X \text{ GeV}^\gamma$$
+      To start, we write the equation in SI:
+      $$\text{kg}^a \text{m}^b \text{s}^c = X \, \hbar^\alpha c^\beta \text{ GeV}^\gamma$$
+      For units in SI to match, we must have $\alpha + \gamma = a$, $2\alpha + \beta + 2\gamma = b$, $-\alpha -\beta - 2\gamma = c$. Solving this system of equations gives $\alpha = b+c$, $\beta = -2a+b$, $\gamma = a-b-c$. So:
+      $$\text{kg}^a \text{m}^b \text{s}^c = X \, \hbar^{b+c} c^{-2a+b} \text{ GeV}^{a-b-c}$$
+      Now $X$ needs to cancel all the random numbers from $\hbar$, $c$ and $\text{GeV}$ on the right hand side, so:
+      $$X = (1.055\times10^{-34})^{-b-c} \times (3\times10^8)^{2a-b} \times (10^9 \times 1.6 \times 10^{-19})^{-a+b+c}$$
+      Finally, set $\hbar = c = 1$, this gives the full conversion:
+      $$\text{kg}^a \text{m}^b \text{s}^c \rightarrow (1.055\times10^{-34})^{-b-c} \times (3\times10^8)^{2a-b} \times (10^9 \times 1.6 \times 10^{-19})^{-a+b+c} \text{ GeV}^{a-b-c}$$
+      So for examples:
+      $$a=1, \, b=c=0: \text{kg} \rightarrow 5.63 \times 10^{26} \text{ GeV}$$
+      $$a=b=0, \, c=1: \text{s} \rightarrow 1.52 \times 10^{24} \text{ GeV}$$
+      There is one more unit, charge. In natural units charge has no units, and it is related to SI units by the fine structure constant. Because the fine structure constant is dimensionless it has the same value in both systems, so:
+      $$\alpha = \frac{e_\text{SI}^2}{4\pi \epsilon_0 \hbar c} = \frac{e_{\text{nat}}^2}{4\pi} \implies e_\text{nat} = \sqrt{4\pi \alpha} = 0.3022$$
+      And Coulombs law becomes:
+      $$F = \frac{q_{1,\text{nat}} \, q_{2, \text{nat}}}{4\pi r^2}$$
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">2. pp chain</h3>
+    <p>
+      $${}^1_1p + {}^1_1p \rightarrow {}^2_1d + e^+ + \nu_e
+      \phantom{xxx} \text{(1. tunneling past Coulomb barrier, Q=0.42 MeV)}$$
+      $${}^2_1d + {}^1_1p \rightarrow {}^3_2\text{He} + \gamma
+      \phantom{xxx} \text{(2. proton capture, Q=5.49 MeV)}$$
+      $${}^3_2\text{He} + {}^3_2\text{He} \rightarrow {}^4_2\text{He} + 2 {}^1_1p
+      \phantom{xxx} \text{(3. He formation via pp-I, Q=12.86 Mev)}$$
+      For a single ${}^4_2\text{He}$ to be formed we require two of step 1, two of step 2 and one of step 3. Therefore the total energy released from a single ${}^4_2\text{He}$ formation is $2 \times (0.42 + 5.49) + 12.86 = 24.68 \text{ MeV}$. The overall reaction is:
+      $$4 {}^1_1p \rightarrow {}^4_2\text{He} + 2e^+ + 2\nu_e + 2\gamma$$
+      The rate of the reaction is limited by step 1, mainly because it proceeds via the weak interaction. The Coulomb barrier between the two protons also slows down the reaction. Note that even though the deuterium is made up of a proton and a neutron, and the latter has a higher rest mass than a proton, the binding energy between them makes the overall reaction release energy. Steps 2 and 3 proceed via the strong interaction.
+    </p>
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

@@ -33,7 +33,7 @@
     }
 
     .toc li {
-      margin: 0.35rem 0;
+      margin: -0.2rem 0;
     }
 
     .toc a {
@@ -93,7 +93,6 @@
       <i>1. No penetration condition at $z=-h$</i>
       $$v_z(x, -h, t) = 0$$
     </p>
-
     <p>
       <i>2. Kinematic boundary condition at surface $z = \eta(x, t)$</i>
       $$v_z(x, \eta, t) = \frac{\partial \eta}{\partial t} + v_x(x, t) \frac{\partial \eta}{\partial x}$$
@@ -103,22 +102,18 @@
 
       Now suppose $\eta = -x$, so that the surface is inclined downwards at $45^\circ$. Even though the surface is fixed, the particle will have some $x$ velocity $v_x$, and for it to slide down along the surface it must have a corresponding $z$ velocity $-v_x$. 
     </p>
-
     <p>
       <i>3. Vertical force balance</i>
       $$p(x, \eta, t) - p_{\text{atm}} = -\gamma \frac{\partial^2 \eta}{\partial x^2}$$
       The net force on a small fluid parcel on the surface must be zero; if it is not so an large acceleration will arise which will cause it to become zero. This requires vertical force balance between pressure and surface tension in the $z$ direction.
     </p>
-
     <p>
       <i>Linearisation</i><br>
       We assume that the fluid may is irrotational and incompressible, so that we can define a velocity potential $\phi$ satisfying Laplace's equation $\nabla^2 \phi = 0$. In addition we also assume that the flow is inviscid.
     </p>
-
     <p>
       The general procedure is to consider a small perturbation $p_1, \vec{v}_1$ on top of a background flow $p_0, \vec{v}_0$. The background flow corresponds to an uniform flow of velocity $\vec{v}_0$ in which the pressure gradient $\nabla p_0$ exactly balances the body forces due to gravity, $\rho_0 \vec{g}$. 
     </p>
-
     <p>
       In this specific instance we would like to consider a fluid that is at rest in its equilibrium state. Plugging $\vec{v} = \vec{v}_1$, $p = p_0 + p_1$ into the inviscid Navier Stokes gives:
       $$\rho_0 \frac{\partial \vec{v}_1}{\partial t} = -\nabla (p_0 + p_1) + \rho_0\vec{g} = -\nabla p_1$$
@@ -144,7 +139,6 @@
       Finally, the no penetration condition at $z = -h$ gives:
       $$\frac{\partial \phi}{\partial z}(x, -h, t) = 0 \phantom{xxx}\text{(no penetration condition, bc 1.)}$$
     </p>
-
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
 
   </main>
