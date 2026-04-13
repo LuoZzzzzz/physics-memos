@@ -34,13 +34,15 @@
       <a href="index.html" class="btn">Index</a>
     </nav>
 
-    <h1>Where does exponential decay come from?</h1>
+    <h1>Exponential decay law and Breit Wigner</h1>
     <p>
       The lecture notes derive the decay formula using a perturbative approach: start with an ansatz that has the right flavor, but otherwise quite wrong. Run it through the perturbation process once to get a first order solution with a linear rate prediction. Then calculate the rate by taking the time derivative.
     </p>
-
     <p>
       There are a few things that feel off. Firstly, we take the rate of a linear process, and then magically claim that it is also the rate of an exponential decay. Secondly, our original ansatz only held for $t \ll \tau$, but we take the limit $t \rightarrow \infty$ of our first order solution - does one round of perturbation increase our range of validity that much?
+    </p>
+    <p>
+      Here I try to provide a rigorous derivation of the exponential decay law and Breit Wigner distribution to try and convince myself that all these things are real.
     </p>
 
     <h2>Step 1: interaction picture</h2>
@@ -66,11 +68,9 @@
     <p>
       Therefore, we expect the probability to slosh around between $\ket{i}$ and the various $\ket{f}$s, but not between two final states $\ket{f}$ and $\ket{f'}$.
     </p>
-
     <p>
       Small note: $V_{if} = V_{i \rightarrow f} = \bra{i} V \ket{f}$
     </p>
-
     <p>
       This gives us the following pair of equations:
       $$\dot{c}_i(t) = -\frac{i}{\hbar} \sum_f V_{if} \, e^{-\frac{i}{\hbar} (E_f - E_i) t} \, c_f(t) $$
@@ -94,15 +94,12 @@
       $$
       We have made the substitutions $\omega_{fi} = \frac{1}{\hbar}(E_f-E_i)$ and $\kappa(t-t') = \sum_f |V_{if}|^2e^{-i \omega_{fi} (t-t')}$.
     </p>
-
     <p>
       Here's the main idea: since $\kappa(t-t')$ is the sum of a lot of phases, it should be quite spiky at $t' = t$ and mostly zero everywhere else. Note that this may not necessarily be the case! For example, $\kappa$ could in theory have some kind of periodic structure. The exact details depend on the values of the coupling constants and energy levels. In any case, if we work with the above assumptions then we can do the following.
     </p>
-
     <p>
       First, if the variation scale of $c_f(t)$ is slow compared to the width of $\kappa(t-t')$, then we may approximate $\int_0^t \kappa (t-t') \, c_i(t') \,\text{d}t \approx c_i(t) \int_0^t \kappa (t-t') \, \text{d}t'$.
     </p>
-
     <p>
       Next, we make the substitution $\tau = t-t'$, $\text{d}\tau = -\text{d}t'$. From here, we may further approximate by increasing the limit of integration of the $\kappa$ term to $\tau = \infty$. The reason is that because $\kappa(\tau)$ has a tail that vanishes quickly, so the additional area is very small. Therefore,
       $$
@@ -124,7 +121,7 @@
       $$\int f(x) \cdot \delta(x) \,\text{d}x = f(0)$$
       $$\int f(x) \cdot \mathcal{P}(\frac{1}{x}) \,\text{d}x = \lim_{\epsilon \rightarrow 0} (\int_{-\infty}^{-\epsilon} \frac{f(x)}{x} \,\text{d}x +  \int_{\epsilon}^{\infty} \frac{f(x)}{x} \,\text{d}x)$$
       This leads us to the following expansion for $\kappa$:
-      $$\int_0^\infty \kappa(\tau) \,\text{d}\tau = \sum_f |V_{if}|^2 \cdot [\pi\delta(\omega_{fi}) + i \mathcal{P}(\frac{1}{\omega_{}fi})]$$
+      $$\int_0^\infty \kappa(\tau) \,\text{d}\tau = \sum_f |V_{if}|^2 \cdot [\pi\delta(\omega_{fi}) + i \mathcal{P}(\frac{1}{\omega_{fi}})]$$
       We now make two definitions: 
       $$\Gamma = \frac{2\pi}{\hbar} \sum_f |V_{if}|^2 \cdot \delta(\omega_{fi})$$
       $$\Delta E = \frac{1}{\hbar} \sum_f |V_{if}|^2 \cdot \mathcal{P}(\frac{1}{\omega_{fi}})$$
@@ -134,18 +131,17 @@
       $$c_i(t) = e^{-\frac{\Gamma}{2}t}e^{-i\frac{\Delta E}{\hbar}t}$$
       Now what exactly does it mean to take the sum of many distributions? Of course that makes no sense, but as we mentioned above we can replace the summation with an integral over the density of states:
       $$\sum_f \rightarrow \int \phantom{xx} \rho(E_f) \,\text{d}E_f$$
-      This gives us:
+      Note that in making this substitution we are implicitly assuming that the integrand has no angular dependence (if it had angular dependence then we have to do $\sum_f \rightarrow \iint \phantom{x} \text{d}E_f \, \text{d}\Omega$, in which case there isn't a clear density of states). This gives us:
       $$
       \begin{align}
       \Gamma &= \frac{2\pi}{\hbar} \int |V_{if}|^2 \cdot \delta(\omega_{fi}) \cdot \rho(E_f) \,\text{d}E_f \\
       &= \frac{2\pi}{\hbar} \int |V_{if}|^2 \cdot \hbar \delta(E_f - E_i) \cdot \rho(E_f) \,\text{d}E_f \\
       &= 2\pi \int |V_{if}|^2 \cdot \delta(E_f - E_i) \cdot \rho(E_f) \,\text{d}E_f \\
-      &= 2\pi \sum_{E_f = E_i} |V_{if}|^2 \cdot \rho(E_{f_{(E_f=E_i)}})
+      &= 2\pi \cdot \left.|V_{if}|^2\right|_{E_f=E_i} \cdot \rho(E_f=E_i)
       \end{align}
       $$
-      That's Fermi's Golden Rule! To calculate the transition rate, sum the norm square of the coupling constant over all final states $\ket{f}$ that has the same energy as the initial state $\ket{i}$. Note that in this case its $E_f = E_i$, not $\ket{f} = \ket{i}$!
+      That's Fermi's Golden Rule! To calculate the transition rate, sum the norm square of the coupling constant over all final states $\ket{f}$ that has the same energy as the initial state $\ket{i}$. Note that in this case its $E_f = E_i$, not $\ket{f} = \ket{i}$! 
     </p>
-
     <p>
       Likewise, we have for $\Delta E$:
       $$
@@ -156,28 +152,73 @@
       &= \lim_{\epsilon \rightarrow 0} (\int_{-\infty}^{-\epsilon} \frac{|V_{if}|^2 }{E_f - E_i} \,\text{d}x +  \int_{\epsilon}^{\infty} \frac{|V_{if}|^2 }{E_f - E_i} \,\text{d}x)
       \end{align}
       $$
-      This looks familiar, because it is (proportional to) the integral of the Feynman diagram amplitude over all space. 
+      This looks like an integral Feynman diagram amplitude over all space, and it gives a small, second order perturbation to the resonance mass.
     </p>
-
     <p>
       Now, if we take the norm square of $c_i(t)$, we find:
-      $$\text{pr(decayed)}(t) = |c_i(t)|^2 = e^{-\frac{\Gamma}{\hbar}t}$$
+      $$\text{pr(survive)}(t) = |c_i(t)|^2 = e^{-\frac{\Gamma}{\hbar}t}$$
       This is where the relation $\Gamma = \frac{\hbar}{\tau}$ actually comes from!
     </p>
-
     <p>
       We can also plug the expression for $c_i(t)$ into the expression for $c_f(t)$. This gives:
       $$
       \begin{align}
       c_f(t) &= -\frac{i}{\hbar} V_{fi} \int_0^t e^{\frac{i}{\hbar}(E_f - E_i)t} \, c_i(t') \,\text{d}t' \\
-      &= -\frac{i}{\hbar} V_{fi} \int_0^t e^{-\frac{\Gamma}{2\hbar}t'}e^{\frac{i}{\hbar}[\hbar \omega_{fi} - (E_f - E_i)]t'} \,\text{d}t' \\
-      &= -\frac{i}{\hbar} V_{fi} \cdot \frac{1}{-\frac{\Gamma}{2\hbar}+\frac{i}{\hbar}(E_{fi}-\Delta E)} \cdot (e^{-\frac{\Gamma}{2\hbar}t}e^{\frac{i}{\hbar}(E_{fi} - \Delta E)})
+      &= -\frac{i}{\hbar} V_{fi} \int_0^t e^{-\frac{\Gamma}{2\hbar}t'}e^{\frac{i}{\hbar}[(E_f - E_i)-\Delta E]t'} \,\text{d}t' \\
+      &= -\frac{i}{\hbar} V_{fi} \cdot \frac{1}{-\frac{\Gamma}{2\hbar}+\frac{i}{\hbar}(E_{fi}-\Delta E)} \cdot (e^{-\frac{\Gamma}{2\hbar}t}e^{\frac{i}{\hbar}(E_{fi} - \Delta E)t}-1)
       \end{align}
       $$
-      Taking the norm square gives: 
-      $$\text{pr(decay into state $f$)}(t) = \frac{|V_{fi}|^2/\hbar^2}{\frac{(E_{fi}-\Delta E)^2}{\hbar^2}+\frac{\Gamma^2}{4\hbar^2}}$$
+      Taking the norm square gives, and noting that the real exponential term $\rightarrow 0$ in the $t \rightarrow \infty$ limit, we get:
+      $$
+      \begin{align}
+      \text{pr(decay into state $f$)}(t\rightarrow \infty) 
+      &= \frac{|V_{fi}|^2/\hbar^2}{\frac{(E_{fi}-\Delta E)^2}{\hbar^2}+\frac{\Gamma^2}{4\hbar^2}} \\
+      &= \frac{|V_{fi}|^2}{(E_{fi}-\Delta E)^2+(\Gamma/2)^2}
+      \end{align}
+      $$
     </p>
 
+    <h2>Connecting to Breit Wigner</h2>
+    <p>
+      Noting that $E_{fi} = E_f - E_i$ where $E_f$ is the energy of the decay products and $E_i$ is the energy of the initial state (resonance), we have: 
+      $$
+      \begin{align}
+      \text{pr(decay into state $f$)}(t\rightarrow \infty) 
+      &= \frac{|V_{fi}|^2}{(E_f-(E_i+\Delta E))^2+(\Gamma/2)^2} \\ 
+      &= \frac{|V_{fi}|^2}{(E_f - M_R)^2+(\Gamma/2)^2}
+      \end{align}
+      $$
+      In the context of resonances, $E_f$ is the invariant mass, $\sqrt{P^\mu P_\mu}$ of the decay products / CM energy, while $M_R = E_i + \Delta E$ is the mass of the resonance. In general $\Delta E$ is small compared to $E_i$ so the resonance mass is approximately the energy of the initial state, but experimentally it is $E_i + \Delta E$ that is measured. 
+    </p>
+    <p>
+      When dealing with decays with multiple decay products we also have to be cautious with the definition of $\Gamma$. In general, the Hilbert space of the decay products may be broken into sectors $s$, each with its own final density of states. Hence:$$\sum_f \rightarrow \sum_s \int \phantom{xx} \rho(E_{f_s}) \,\text{d}E_{f_s}$$And so the corresponding formula for $\Gamma$ becomes:
+      $$
+      \Gamma = \sum_s 2\pi \cdot \left.|V_{if_s}|^2\right|_{E_{f_s}=E_i} \cdot \rho(E_{f_s}=E_i)
+      $$
+      Defining $\Gamma_{i\rightarrow s} = 2\pi \cdot |V_{if_s}|^2 \cdot \rho(E_{f_s}=E_i)$, we have:
+      $$\Gamma = \sum_s \Gamma_{i\rightarrow f_s}$$
+      and:
+      $$\text{pr(decay into state $f_s$)}(t\rightarrow \infty)(E_{f_s})
+      = \frac{|V_{if_s}|^2}{(E_{f_s}-(E_i+\Delta E))^2+(\Gamma/2)^2}$$
+      To get the (unnormalised) probability density of decay into the sector $s$, multiply by the density of states at $\rho(E_{f_s})$ for that sector:
+      $$
+      \text{pdf(decay into sector $s$)}(t\rightarrow \infty)(E_{f_s})
+      \propto \frac{|V_{if_s}|^2 \rho(E_{f_s})}{(E_{f_s}-(E_i+\Delta E))^2+(\Gamma/2)^2}
+      $$
+      Note that the matrix element $|V_{if_s}|$ and density of states $\rho{(E_{f_s})}$ are evaluated at a general $E_{f_s}$, and not necessarily at $E_{f_s}=E_i$. On the other hand, the partial width $\Gamma_{i \rightarrow s}$ is evaluated at $E_{f_s} = E_i$. It is the Markov approximation, which we have used earlier, that allows us to approximate $\Gamma_{i\rightarrow s} \propto |V_{if_s}|^2 \rho(E_{f_s})$, at least for  $E_{f_s}$ sufficiently close to $E_i$. This let's us write:
+      $$\text{pdf(decay into sector $s$)}(t\rightarrow \infty)(E_{f_s}) \propto \frac{\Gamma_{i \rightarrow s}}{(E_{f_s}-(E_i+\Delta E))^2+(\Gamma/2)^2}$$
+    </p>
+
+    <h2>A note about energy and uncertainty</h2>
+    <p>
+      A subtle point should be noted. In the above derivation, the summations involved in the calculation of the parameters $\Delta E$ and $\Gamma$ only involved states with $E_f = E_i$. However, the final result for decay probabilities applies to any final state $\ket{f}$, regardless of its energy $E_f$. Therefore the final decay products will have a spread in energies. This seems to contradict energy conservation, since the initial state $\ket{i}$ has a single well defined energy $E_i$ under $H_0$. 
+    </p>
+    <p>
+      But this is precisely why there is a spread in energy! Because $\ket{i}$ is an eigenstate of $H_0$, it is no longer an eigenstate of the true Hamiltonian $H$. The true energy eigenstates of $H$ are the decay states $\ket{f_s}$; there is no discrete, stable eigenstate corresponding to the resonance. So when we "prepare" the resonance, we are preparing a state that is a superposition of true energy eigenstates of $H$, spread over a range of energies of width $\Gamma$. 
+    </p>
+    <p>
+      We should also note the two distinct but related roles $\Gamma$ plays here. It is both a decay rate ($\propto 1/\tau$) telling us how fast the resonance decays, and an energy width setting the spread of the Breit-Wigner distribution. This is a direct manifestation of the time-energy uncertainty principle.
+    </p>
   </main>
 
 </body>
