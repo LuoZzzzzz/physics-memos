@@ -87,7 +87,102 @@
     </details>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
-    <h3 class="section-anchor">1. Laser gain equation</h3>
+    <h3 class="section-anchor">Fine structure of hydrogen</h3>
+    <p>
+      <i>Common hydrogen symbols</i><br>
+      $$
+      R_\infty  = \frac{me^4}{64\pi^3\epsilon_0^2 \hbar^3c}, 
+      \phantom{x} \alpha = \frac{e^2}{4\pi\epsilon_0\hbar c} = 1/137,
+      $$
+      $$
+      a_0 = \frac{4\pi \epsilon_0\hbar^2}{me^2} = 5.29 \times 10^{-11} \text{ m},
+      \phantom{x} \mu_B = \frac{e \hbar}{2m} = 9.24 \times 10^{-24} \text{ JT}^{-1}
+      $$
+      $$R_\infty hc = \frac{1}{2}\alpha^2 mc^2 = 13.6 \text{ eV}$$
+    </p>
+    <p>
+      <i>Spin-orbit Hamiltonian</i><br>
+      $$H_{\text{so}} = -\vec{\mu}_e\cdot\vec{B}$$
+      The electron spin magnetic moment is $\vec{\mu}_e = -g_s \mu_B \vec{S}$, where $\vec{S}$ is dimensionless. The magnetic field produced by the nucleus at the electron's location may be obtained by:
+      $$
+      \begin{align}
+      \vec{B} &= - \frac{\vec{v} \times \vec{E}}{c^2} \\ 
+      &= - \frac{1}{c^2}\left(\vec{v}\times(\frac{Ze}{4\pi \epsilon_0}\frac{1}{r^3} \vec{r})\right) \\
+      &= - \frac{\hbar}{mc^2}\frac{Ze}{4\pi \epsilon_0}\frac{1}{r^3}\left(\frac{ m\vec{v}\times\vec{r}}{\hbar}\right) \\
+      &= \frac{\hbar}{mc^2}\frac{Ze}{4\pi \epsilon_0}\frac{1}{r^3} \vec{L}
+      \end{align}
+      $$
+      where $\vec{L}$ is dimensionless. So putting things together we find that:
+      $$H_{\text{so}} = g_s \mu_B \frac{\hbar}{mc^2}\frac{Ze}{4\pi \epsilon_0}\frac{1}{r^3} \vec{S}\cdot\vec{L}$$
+      Now take expectation for a state $\ket{n, j, l, s}$. Using $\langle \frac{1}{r^3} \rangle = \frac{2}{l(l+1)(2l+1)}(\frac{Z}{n a_0})^3$, and accounting for Thomas precession $g_s \leftarrow (g_s-1) \approx 1$:
+      $$\langle H_{\text{so}}\rangle = \mu_B \frac{\hbar}{mc^2}\frac{Ze}{4\pi \epsilon_0}\left(\frac{Z}{n a_0}\right)^3 \cdot \frac{j(j+1)-l(l+1)-s(s+1)}{l(l+1)(2l+1)}$$
+      Now, we would like to rewrite the spin-orbit shift in terms of $R_\infty hc$ and $\alpha$. This should be possible for all perturbations, because both $R_\infty hc$ and $\langle H \rangle$ have units of energy, while $\alpha$ is the only meaningful dimensionless parameter we can construct in this situation. We do this because $R_\infty hc$ is the characteristic energy scale of the hydrogen atom, while $\alpha$ is the characteristic of classical electromagnetism to special relativity, so putting things in this form lets us directly compare the scale of various interactions. Focus on the prefactor:
+      $$
+      \begin{align}
+      \mu_B \frac{\hbar}{mc^2} \frac{Ze}{4 \pi \epsilon_0}  
+      \left(\frac{Z}{n a_0}\right)^3 
+      &= \frac{Z^3}{n^3}\frac{e\hbar}{2m}\frac{\hbar}{mc^2} \frac{Ze}{4 \pi \epsilon_0}\left(\frac{me^2}{4\pi \epsilon_0\hbar^2}\right)^3 \\
+      &= \frac{Z^4}{n^3}\frac{me^4}{32\pi^2\epsilon^2\hbar^2}\left(\frac{e^2}{4\pi \epsilon_0 \hbar c}\right)^2 \\
+      &= \frac{Z^4}{n^3}\frac{me^4}{32\pi^2\epsilon^2\hbar^2}\underbrace{\frac{hc}{2\pi\hbar c}}_{1}\left(\frac{e^2}{4\pi \epsilon_0 \hbar c}\right)^2 \\
+      &= \frac{Z^4}{n^3}\cdot\underbrace{\frac{me^4}{64\pi^3\epsilon^2\hbar^3c}}_{R_\infty}hc\cdot\underbrace{\left(\frac{e^2}{4\pi \epsilon_0 \hbar c}\right)^2}_{\alpha^2} \\ 
+      &= R_\infty hc \cdot \frac{Z^4\alpha^2}{n^3}
+      \end{align}$$
+      And so:
+      $$\langle H_{\text{so}}\rangle = R_\infty hc \cdot \frac{Z^4\alpha^2}{n^3} \cdot \frac{j(j+1)-l(l+1)-s(s+1)}{l(l+1)(2l+1)}$$
+    </p>  
+    <p>
+      <i>Relativistic and Darwin corrections</i><br>
+      In addition to spin-orbit coupling, there are two other order $\alpha^2 R_\infty hc$ fine structure perturbations.
+      $$\langle H_{\text{rel}} \rangle = - R_\infty hc \cdot \frac{Z^4 \alpha^2}{n^3} \left( \frac{1}{j + \frac{1}{2}} - \frac{3}{4n} \right)$$
+      $$\langle H_{\text{Darwin}} \rangle = R_\infty hc \cdot \frac{Z^4 \alpha^2}{n^3} \cdot \frac{\delta_{l0}}{n}
+      $$
+      Putting all corrections together gives
+      $$\Delta E_{\text{fs}} = R_\infty hc \cdot \frac{Z^4 \alpha^2}{n^3}\left( \frac{1}{j + \tfrac{1}{2}} - \frac{3}{4n} \right)$$
+      which depends only on $n$ and $j$. This means, for example, that after fine structure perturbation $3s$ and $3p_{1/2}$ have the same energy, as do $3p_{3/2}$ and $3d_{3/2}$. 
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Terms and levels</h3>
+    <p>
+      A short calculation to show how terms and levels arise in divalent atoms. This scenario arises in the $2017$ exam, question $2$.
+    </p>
+    <p>
+      <i>6s7s</i><br>
+      $$
+      \begin{aligned}
+      (\underbrace{0\otimes0}_{l_1 \otimes l_2}) \otimes (\underbrace{\tfrac{1}{2} \otimes \tfrac{1}{2}}_{s_1 \otimes s_2})
+      &= (\underbrace{0}_L) \otimes (\underbrace{0 \oplus 1}_S) \\
+      &= (\underbrace{0 \otimes 0}_{{}^1S}) \oplus (\underbrace{0 \otimes 1}_{{}^3S}) \\
+      &= (\underbrace{0}_{{}^1S_0}) \oplus (\underbrace{1}_{{}^3S_1}) \\
+      \end{aligned}
+      $$
+    </p>
+    <p>
+      <i>6s6p</i><br>
+      $$
+      \begin{aligned}
+      (\underbrace{0\otimes1}_{l_1 \otimes l_2}) \otimes (\underbrace{\tfrac{1}{2} \otimes \tfrac{1}{2}}_{s_1 \otimes s_2})
+      &= (\underbrace{1}_L) \otimes (\underbrace{0 \oplus 1}_S) \\
+      &= (\underbrace{1 \otimes 0}_{{}^1P}) \oplus (\underbrace{1 \otimes 1}_{{}^3P}) \\
+      &= (\underbrace{1}_{{}^1P_1}) \oplus (\underbrace{0 \oplus 1 \oplus 2}_{{}^3P_0, {}^3P_1,{}^3P_2}) \\
+      \end{aligned}
+      $$
+      Consider the transitions between $S=1$ states. In the presence of a magnetic field, the upper ${}^3S_1$ term splits into $3$ $m_J$ levels. The lower ${}^3P_0, {}^3P_1, {}^3P_2$ levels split into $1, 3, 5$ levels respectively. The transitions ${}^3S_1 \rightarrow {}^3P_0, {}^3S_1 \rightarrow {}^3P_1, {}^3S_1 \rightarrow {}^3P_2$ then give rise to $3, 6, 9$ transition lines respectively. Remember these numbers - they show up quite often in these kind of problems. Note also that the transition ${}^1S_0 \rightarrow {}^3P_1$ has $6$, not $7$ lines because the $0 \rightarrow 0$ transition does not happen. 
+    </p>
+    <p>
+      <i>Normal Zeeman</i><br>
+      The shift in a transition line is given by:
+      $$\delta E_{\text{Zeeman}} = \mu_BB(g_u m_u - g_l m_l)$$
+      If the upper and lower levels have $S=0$ then they will have the same $g$ factor of $1$ ($g_u = g_l = 1$), then:
+      $$\delta E_{\text{Zeeman}} = \mu_BB (1\cdot m_u - 1\cdot m_l) = \mu_BB \Delta m_J = \pm \mu_BB, 0$$
+      This is called the normal Zeeman effect. Whenever we have normal Zeeman effect, there are precisely three transition line shifts at $\pm \mu_BB, 0$. 
+    </p>
+    <p>
+      Note that the transition ${}^3S_1 \rightarrow {}^3P_0$, despite having $3$ shifts, is not a normal Zeeman effect, because the shifts are $\pm 2\mu_BB, 0$. Likewise, both ${}^3P_1$ and ${}^3P_2$ have $g_J = \frac{3}{2}$ but transitions between them are not normal. Note also, the statement "<i>whenever we have a set of $3$ transition lines which are not spaced apart by $\mu_B B$ we can conclude that one of the levels is $J=0$</i>" is false. A counterexample is ${}^3P_1$, ${}^3P_2$, $g_u = g_l = \frac{3}{2}$ just mentioned.
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Laser gain equation</h3>
     <p>
       For laser light of frequency $\omega$ exciting a transition middle frequency $\omega_{21}$
       $$
@@ -129,7 +224,7 @@
       Then, use $N_1$ and $N_2$ to form an equation for the population inversion density $N^*$
       $$
       \begin{align}  
-      n^* &= N_2 - \frac{g_2}{g_1}N_1 \\
+      N^* &= N_2 - \frac{g_2}{g_1}N_1 \\
       &= \tau_2 (S_2 - N^* W)  
       - \frac{g_2}{g_1} \tau_1 \left( S_1 + (1 - A_{21} \tau_2) N^* W + A_{21} \tau_2 S_2 \right)
       \end{align}
@@ -144,6 +239,7 @@
       \end{align}
       $$
     </p>
+
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
 
   </main>
