@@ -136,6 +136,56 @@
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Helicity suppression</h3>
+    <p>
+      The weak interaction that is responsible for pion decay couples to right handed ($\text{RH}$) anti-leptons and left handed ($\text{LH}$) leptons. This means that after decay, the electron must be $\text{LH}$ and the anti-neutrino must be $\text{RH}$. 
+    </p>
+    <p>
+      The chirality of a particle is related to its helicity (projection of spin onto momentum). For helicity $+\frac{1}{2}$, the proportion $\text{RH}:\text{LH}$ is $\frac{1}{2}(1+\beta):\frac{1}{2}(1-\beta)$ for both leptons and anti-leptons. 
+    </p>
+    <p>
+      We also know that $S=0$ initially for $\pi^-$. This means that the combined spin state of the electron and anti-neutrino must be the singlet ($S=0$) state of $0 \oplus 1$. 
+    </p>
+    <div style="text-align: center;">
+      <img src="helicitysuppression.png" alt="helicity suppression" width="500">
+    </div>
+    <p>
+      Suppose the anti-neutrino is produced such that it travels right. Since $\beta_{\bar{\nu}_e} = 1$ (as neutrinoes are massless and travel near $c$) and all anti-neutrinos produced are right handed, the helicity of the anti-neutrino must be $+\frac{1}{2}$, which means that its spin in this case must be $\ket{\rightarrow}$. 
+    </p>
+    <p>
+      By momentum conservation the electron must be travelling left. By conservation of spin the spin projection of the electron must be $\ket{\leftarrow}$. Taken together this implies that the electron also has helicity $+\frac{1}{2}$, since its spin and momentum must point in the same direction. This tells us that the ratio $\text{RH}:\text{LH}$ is $\frac{1}{2}(1+\beta_{e^-}):\frac{1}{2}(1-\beta_{e^-})$. The branching ratio is directly proportional to the "fraction" of $\text{LH}$ in helicity $+\frac{1}{2}$, which is $\frac{1}{2}(1-\beta_{e^-})$. 
+    </p>
+    <p>
+      Now, we want to work out $\beta_{e^-}$. Conservation of energy and momentum in the CM frame tells us:
+      $$E_{e^-} = \frac{m^2_{\pi^-} + m^2_{e^-} - m^2_{\bar{\nu}_{e}}}{2m_{\pi^-}} \approx \frac{m^2_{\pi^-} + m^2_{e^-}}{2m_{\pi^-}}$$
+      $$p_{e^-} = \frac{m^2_{\pi^-} - m^2_{e^-}}{2m_{\pi^-}}$$
+      And so:
+      $$\beta_{e^-} = \frac{p_{e^-}}{E_{e^-}} = \frac{m^2_{\pi^-} - m^2_{e^-}}{m^2_{\pi^-} + m^2_{e^-}}$$
+      Therefore, the ratio of helicity suppression in $e^-$ to $\mu^-$ is:
+      $$\frac{\text{helicity suppresion of } e^-}{\text{helicity suppresion of } \mu^-} = \frac{1-\beta_{e^-}}{1-\beta_{\mu^-}} = \frac{m^2_{e^-}}{m^2_{\mu^-}} \cdot \frac{m^2_{\pi^-} + m^2_{\mu^-}}{m^2_{\pi^-} + m^2_{e^-}}$$
+      There is another factor that we need to consider: the phase space of the reaction. The phase space ratio is given by $\frac{\rho_{e^-}(E)}{\rho_{\mu^-}(E)}$ where $\rho(E)$ is the density of states. Now, $\rho(E)$ is defined as $\frac{\text{d}N}{\text{d}E}$ which we can rewrite it using chain rule as $\frac{\text{d}N}{\text{d}p_{l^-}} \cdot \frac{\text{d}p_{l^-}}{\text{d}E}$. Note that $E$ here is the invariant mass of the decay products, or equivalently, the rest mass of the undecayed pion. That is, $E = E_{\text{cm}} = m_\pi$.  Note that in this case the phase space in question is the phase space of the decay products, of which there are two. However, in a two body decay the momenta of the two decay particles are perfectly anti-correlated so it suffices to consider the momentum of just one of them, hence the chain rule only considers that of the lepton, $p_{l^-}$.
+    </p>
+    <p>
+      Now, $\text{d}N_{e^-} = 4\pi p_{e^-}^2 \text{d}p_{e^-}$ so $\frac{\text{d}N_{e^-}}{\text{d}_p{e^-}} \propto p_{e^-}^2$.
+    </p>
+    <p>
+      As for $\frac{\text{d}p_{e^-}}{\text{d}E}$, recall from before that $p_{e^-} = \frac{m^2_{\pi^-} - m^2_{e^-}}{2m_{\pi^-}}$, so differentiating with respect to $E=m_{\pi^-}$ gives:
+      $$\frac{\text{d}p_{e^-}}{\text{d}E} = \frac{4m_{\pi^-}^2-2(m_{\pi^-}^2-m_{e^-}^2)}{4m_{\pi^-}^2}=\frac{m_{\pi^-}^2+m_{e^-}^2}{2m_{\pi^-}^2}=\frac{E_{e^-}}{2m_{\pi^-}} \propto E_{e^-}$$
+      And so:
+      $$\frac{\text{d}N_{e^-}}{\text{d}E} \propto p_{e^-}^2 E_{e^-} \propto \left(\frac{m^2_{\pi^-} - m^2_{e^-}}{2m_{\pi^-}}\right)^2 \cdot \left(\frac{m^2_{\pi^-} + m^2_{e^-}}{2m_{\pi^-}}\right)$$
+      And so:
+      $$\frac{\rho_{e^-}}{\rho_{\mu^-}} = \left(\frac{m^2_{\pi^-} + m^2_{e^-}}{m^2_{\pi^-} + m^2_{\mu^-}}\right) \cdot \left(\frac{m^2_{\pi^-} - m^2_{e^-}}{m^2_{\pi^-} - m^2_{\mu^-}}\right)^2$$
+      Finally, putting things together:
+      $$
+      \begin{align}
+      \frac{\text{BR}(\pi^- \rightarrow e^-\bar{\nu}_e)}{\text{BR}(\pi^- \rightarrow \mu^-\bar{\nu}_\mu)} 
+      &= \frac{\text{helicity suppresion of } e^-}{\text{helicity suppresion of } \mu^-} \cdot \frac{\text{phase space of } e^-}{\text{phase space of } \mu^-} \\
+      &= \frac{m_{e^-}^2}{m_{\mu^-}^2} \cdot \left(\frac{m^2_{\pi^-} - m^2_{e^-}}{m^2_{\pi^-} - m^2_{\mu^-}}\right)^2
+      \end{align}
+      $$
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
 
   </main>
 
