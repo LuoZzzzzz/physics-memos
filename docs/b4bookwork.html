@@ -214,6 +214,40 @@
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Born approximation and differential cross section</h3>
+    <p>
+      The wavefunction of a plane wave interacting with a nuclear potential (centered at the origin) is, in the first Born approximation:
+      $$\psi(\vec{r}) = \psi_i(\vec{r}) + \psi_s(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot\vec{r}} - \frac{1}{\sqrt{V}}\frac{e^{i\vec{k}\cdot\vec{r}}}{r} \frac{m}{2\pi\hbar^2}  \int_{\text{all space}} e^{i \vec{q}\cdot\vec{r}'} V(\vec{r}') \text{d}^3 \vec{r}'$$
+      If the potential is symmetric, then the equation simplifies to:
+      $$\psi(\vec{r}) = \psi_i(\vec{r}) + \psi_s(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot\vec{r}} - \frac{1}{\sqrt{V}}\frac{e^{i\vec{k}\cdot\vec{r}}}{r}\frac{2m}{\hbar^2 q} \int_0^\infty r' V(r') \sin(qr') \text{d}r'$$
+    </p>
+    <p>
+      <i>Interpretation 1.</i><br>
+      Let $\psi(\vec{r})$ represent the wave function of a single particle. $\psi_i(\vec{r})$ and $\psi_s(\vec{r})$ are the wavefunctions corresponding to the incident and scattered parts of that particle. Even though $\psi_i(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot{\vec{r}}}$ is, as written, infinite in extent, in practice the incoming beam has a finite width and in the limit of large $r$ will subtend a relatively small solid angle. Therefore at large $r$ the scattering will be entirely due to $\psi_s(\vec{r})$, and any interference effects due to $\psi_i(\vec{r})$ may be ignored.
+    </p>
+    <p>
+      The probability that the particle scatters into a solid angle $\text{d}\Omega$ is then $\int_0^\infty |\psi_s(\vec{r})|^2 r^2 \text{d}\Omega \text{d}r$. In general we write $\psi_s(\vec{r}) = \frac{1}{\sqrt{V}}f(\theta, \phi) \frac{e^{i\vec{k}\cdot\vec{r}}}{r}$, so the probability can also be written as $\int_0^\infty \frac{1}{V}|f(\theta, \phi)|^2 \text{d}\Omega \text{d}r$ where:
+      $$f(\theta, \phi) = \frac{2m}{\hbar^2 q} \int_0^\infty r' V(r') \sin(qr') \text{d}r'$$
+      We define $\text{d}P(\theta, \phi)$ as the probability that the particle scatters into the infinitesimal solid angle $\text{d}\Omega$ located in the direction of the vector $\vec{r}$, $(\theta, \phi)$. The differential "probability"(for scattering in the direction of $\vec{r}$) is then:
+      $$\frac{\text{d}P}{\text{d}\Omega}(\theta, \phi) = \frac{1}{V} \int_0^\infty |f(\theta, \phi)|^2 \text{d}r$$
+      Note that $f(\theta, \phi)$ has units of $\text{m}$ and so $\frac{\text{d}P}{\text{d}\Omega}$ has units of $\text{str}^{-1}$. There is, however, something annoying with this interpretation, because as $V \rightarrow \infty$ it is not clear whether the integral blows up, $1/V$ kills the whole thing, or if the equation approaches some finite non zero limit!
+    </p>
+    <p>
+      <i>Interpretation 2.</i><br>
+      Now suppose that the wavefunction $\frac{1}{\sqrt{V}} e^{i\vec{k}\cdot\vec{r}}$ represents a stream of particles. The probability current associated with this wave is $j_\text{inc} = |\psi_i|^2 \cdot \frac{\hbar k}{m} = \frac{1}{V} \cdot \frac{\hbar k}{m}$. That is, if we were to put a bucket of cross sectional area $A$ in the way of this stream, the bucket will pick up  $\frac{1}{V} \cdot \frac{\hbar k}{m} \cdot A$ particles per second.
+    </p>
+    <p>
+      Consider the probability current associated with scattering in the direction $(\theta, \phi)$. The same probability current formula tells us that this is $j_\text{sc} = |\psi_s|^2 \cdot \frac{\hbar k}{m} = \frac{1}{V} \frac{|f(\theta, \phi)|^2}{r^2}\cdot \frac{\hbar k}{m}$, and so the number of particles going into the solid angle $\text{d}\Omega$ is $j_\text{sc} r^2 \text{d}\Omega = \frac{\hbar k}{V} |f(\theta, \phi)|^2 \text{d}\Omega$. 
+    </p>
+    <p>
+      Suppose we had a bucket in the path of the incoming wave that collected only particles scattered in the direction $(\theta, \phi)$. Then the cross sectional area of that bucket $\text{d}\sigma (\theta, \phi)$ should be defined such that:
+      $$j_\text{inc} \underbrace{\text{d} \sigma (\theta, \phi)}_{\text{area}} = j_\text{sc} \underbrace{r^2 \text{d}\Omega}_{\text{area}} \implies \frac{1}{V}\frac{\hbar k}{m} \text{d}\sigma(\theta, \phi) = \frac{1}{V} \frac{\hbar k}{m} |f(\theta, \phi)|^2 \text{d}\Omega$$
+      This motivates the definition of a differential cross section:
+      $$\frac{\text{d}\sigma}{\text{d}\Omega} (\theta, \phi) = |f(\theta, \phi)|^2$$
+      which has units $\text{m}^2 \, \text{str}^{-1}$. In this case, the differential cross section is well behaved. This reinforces the point that whenever we work with plane wavefunctions, we have to interpret them in terms of a continuous current of particles instead of the wavefunction of a single particle for the results to make sense.
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
 
   </main>
 
