@@ -143,6 +143,14 @@
       $$\tilde{\psi}_R(E) = \mathcal{F}(\psi_R(t))[E] \propto \frac{1}{\tfrac{E-E_R}{\hbar} + \frac{i\Gamma}{2\hbar}}$$
       And the energy distribution (probability density) is:
       $$|\tilde{\psi}_R(E)|^2 \propto \sigma(E) \propto \frac{1}{(E-E_R)^2 + \Gamma^2/4}$$
+      In a general decay there will be a reaction feeding into the resonance, and the resonance feeds into a number of decay channels indexed by $f$. Including the additional spin factors, the rate of the the reaction $\text{input } i = a+b \rightarrow \text{resonance} \rightarrow \text{decay product } f$ is:
+      $$\Gamma_{i\rightarrow R \rightarrow f} = \frac{2J+1}{(2s_a+1)(2s_b+1)} \cdot \frac{\Gamma_{i\rightarrow R}\Gamma_{R\rightarrow f}}{(E-E_R)^2 + \Gamma^2/4}$$
+      where:<br>
+      $s_1, s_2$: spins of the two incoming input particles - Breit Wigner assumes that there are two incoming particles<br>
+      $J$: spin of resonance $R$<br>
+      $\Gamma_{i \rightarrow R}$: partial width of $R$ formation from inputs<br>
+      $\Gamma_{R \rightarrow f}$: partial width of decay to $f$ from $R$<br>
+      $\Gamma$: sum of all partial decay widths, $\sum_{f'} \Gamma_{R \rightarrow f'}$
     </p>
     <p>
       A more rigorous justification using a toy model is given <a href="decaytoymodel.html">here</a>.
