@@ -134,6 +134,26 @@
     <p>
       A detailed derivation of the Breit Wigner distribution and exponential decay law is given in this <a href="decay.html"> blog</a>. Here I just want to bring up a few points and a quick exam derivation of the distribution.
     </p>
+    <p>
+      <i>Handwavy derivation</i><br>
+      Start with the ansatz:
+      $$\psi_R(t) = e^{-\frac{iE_R t}{\hbar}} e^{-\frac{\Gamma t}{2\hbar}}$$
+      where $E_R$ is the resonance energy and $\Gamma$ is the decay width given by Fermi's golden rule.
+      Taking the Fourier transform of $\psi_R(t)$ gives:
+      $$\tilde{\psi}_R(E) = \mathcal{F}(\psi_R(t))[E] \propto \frac{1}{\tfrac{E-E_R}{\hbar} + \frac{i\Gamma}{2\hbar}}$$
+      And the energy distribution (probability density) is:
+      $$|\tilde{\psi}_R(E)|^2 \propto \sigma(E) \propto \frac{1}{(E-E_R)^2 + \Gamma^2/4}$$
+    </p>
+    <p>
+      A more rigorous justification using a toy model is given <a href="decaytoymodel.html">here</a>.
+    </p>
+
+    <p>
+      <i>Relativistic Breit Wigner</i><br>
+      The relativistic Breit Wigner distribution is given by:
+      $$\sigma(E) \propto \frac{1}{(E^2 - E_R^2)^2 + E_R^2 \Gamma^2}$$
+      where $E_R$ is the resonance energy. When $E$ is close to $E_R$, the distribution reduces to the non-relativistic Breit Wigner distribution.
+    </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
     <h3 class="section-anchor">Helicity suppression</h3>

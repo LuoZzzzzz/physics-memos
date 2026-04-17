@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Beta decay</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Beta decay</h1>
+    <h3>Density of states</h3>
+    <p>
+      For a box of volume $V = L^3$ each individual momentum state occupies a volume $(\frac{2\pi\hbar}{L})^3$ in momentum space. 
+    </p>
+    <p>
+      The number of momentum states at in a small volume $\text{d}^3 p$ at position $\vec{p}$ in momentum space is:
+      $$\text{d}N = \frac{\text{d}^3 p}{(\frac{2\pi\hbar}{L})^3}$$
+      Therefore, the total number of momentum states in the box is:
+      $$N = \frac{V}{(2\pi\hbar)^3} \int_{\vec{p} \text{ space}}1\,\text{d}^3 p$$
+      It seems weird that this is infinity but this is normal since you can in fact fit an infinite number of standing waves in a box. The important point here is that $N$ scales linearly with $V$. 
+    </p>
+    <p>
+      Now consider a system of $n$ particles. If there are no constraints, then the total number of momentum states is:
+      $$N = \prod N_i = [\frac{V}{(2\pi\hbar)^3}]^n \int_{\vec{p}_1}\int_{\vec{p}_2}\cdots\int_{\vec{p}_n}1\,\text{d}^3 p_n\cdots \text{d}^3 p_2 \,\text{d}^3 p_1$$
+      If we however have a momentum constraint $\sum \vec{p_i} = \vec{P}$ then a delta function needs to be inserted somewhere. The correct form of this constraint is a bit tricky, so let's determine it carefully. Given $n-1$ momenta $\vec{p}_1 \cdots \vec{p}_{n-1}$ the momentum of particle $n$ will be fixed. Therefore, the number of states for particle $n$ $N_n$, given the momentum of all other particles is simply $1$. Particle $n$ contributes to the above expression for $N$ through the innermost integral $\frac{V}{(2\pi\hbar)^3} \int_{\vec{p}_n} \text{d}^3 p_n$. By inserting some multiple of a delta function into this integral we wish to make the entire term $1$. The correct constraint therefore is: 
+      $$\frac{V}{(2\pi\hbar)^3} \int_{\vec{p}_n} \underbrace{\frac{(2\pi\hbar)^3}{V} \delta(\vec{p}_1 + \cdots + \vec{p}_n - \vec{P})}_{\text{momentum constraint}} \, \text{d}^3 p_n = 1$$
+      Note that the overall effect of this constraint is to remove one of the integrations entirely, and also reduces the factor at the front from $[\frac{V}{(2\pi\hbar)^3}]^n$  to $[\frac{V}{(2\pi\hbar)^3}]^{n-1}$ . Which makes sense, since we are effectively left with $n-1$ independent momenta. 
+    </p>
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3>Beta decay</h3>
+    <p>
+      With that note let's derive beta decay. Fermi's golden rule tells us that the rate of scattering into the tiny momentum $\text{d}^3 p$ element at position $\vec{p}$ in momentum space is:
+      $$\text{d}\Gamma^{(9)} = \frac{2\pi}{\hbar} |M_{if}|^2 \cdot
+      \underbrace{\frac{V \text{d}^3 p_e}{(2\pi\hbar)^3} 
+      \frac{V \text{d}^3 p_\nu}{(2\pi\hbar)^3}
+      \frac{V \text{d}^3 p_R}{(2\pi\hbar)^3}}_{\text{total number of states in d}^9p} \cdot
+      \underbrace{\delta(E_i-E_e-E_\nu-E_R)}_{\text{energy constraint}} \cdot
+      \underbrace{\frac{(2\pi\hbar)^3}{V} \delta(\vec{p}_e+\vec{p}_\nu+\vec{p}_R)}_{\text{momentum constraint in CM frame}}
+      $$
+      We are only concerned with the energies of the ejected electrons, so we want to integrate out all of the other terms. We can do this systematically, keeping careful track of the superscript of the $\text{d}\Gamma$ term which indicates the final state that the rate is describing. 
+    </p>
+    <p>
+      First we integrate out the momentum constraint. We can integrate over any of $\vec{p}_e$, $\vec{p}_\nu$ or $\vec{p}_R$, and we choose $\vec{p}_R$. After integrating out that constraint we get:
+      $$\text{d}\Gamma^{(6)} = \frac{2\pi}{\hbar} |M_{if}|^2 \cdot
+      \frac{V \text{d}^3 p_e}{(2\pi\hbar)^3} 
+      \frac{V \text{d}^3 p_\nu}{(2\pi\hbar)^3}\cdot
+      \delta(E_i-E_e-E_\nu-E_R(-(\vec{p}_e+\vec{p_\nu})))
+      $$
+      noting that $E_R$ is now fixed by $\vec{p}_R = \vec{p}_e + \vec{p}_\nu$. 
+    </p>
+    <p>
+      To simplify things further we try to get rid of the $\vec{p}_e + \vec{p}_\nu$ dependency in the energy constraint. To do this we approximate $E_R \approx m_Rc^2$. This assumption (heavy nucleus) is typically valid when the residual nucleus is much heavier than the mass of the electron. Under such situations most of the kinetic energy will be retained by the electron and neutrino. Defining $Q = E_i - m_Rc^2$ gives:
+      $$\text{d}\Gamma^{(6)} = \frac{2\pi}{\hbar} |M_{if}|^2 \cdot
+      \frac{V \text{d}^3 p_e}{(2\pi\hbar)^3} 
+      \frac{V \text{d}^3 p_\nu}{(2\pi\hbar)^3}\cdot
+      \delta(Q-E_e-E_\nu)$$
+      We then integrate out the angular dependence. Since the energy-momentum relation for both the electron and neutrino are angle independent the effect of the integration is to replace $\text{d}^3p \leftarrow 4\pi p^2 \text{d}p$. While $\text{d}^3p$ referred to the volume of a small element at position $\vec{p}$, $4\pi p^2 \text{d}p$ represents the volume of an entire shell of constant momentum magnitude - they are different things. With that we now have:
+      $$\text{d}\Gamma^{(2)} = \frac{2\pi}{\hbar} |M_{if}|^2 \cdot
+      \frac{4\pi V p_e^2 \text{d}p_e}{(2\pi\hbar)^3} 
+      \frac{4\pi V p_\nu^2 \text{d}p_\nu}{(2\pi\hbar)^3}\cdot
+      \delta(Q-E_e-E_\nu)$$
+      Note that $\text{d}\Gamma^{(2)}$ now describes the rate of decay into the shell $[p_e, p_e + \text{d}p_e] \times [p_\nu, p_\nu + \text{d}p_\nu]$, instead of a small volume in six dimensional momentum space at location $(\vec{p}_e, \vec{p}_\nu)$. 
+    </p>
+    <p>
+      Finally, we integrate out the energy constraint. To do so we note that for neutrinos $E_\nu = p_\nu c$, and so:
+      $$\text{d}\Gamma^{(2)} = \frac{V^2}{2\pi^3 \hbar^7 c^3} |M_{if}|^2 \cdot
+      p_e^2 \text{d}p_e\cdot
+      E_\nu^2 \text{d}E_\nu\cdot
+      \delta(Q-E_e-E_\nu)$$
+      After integration, we find:
+      $$\text{d}\Gamma^{(1)} = \frac{V^2}{2\pi^3 \hbar^7 c^3} |M_{if}|^2 \cdot
+      p_e^2 (Q-E_e)^2 \text{d}p_e$$
+      Finally, for a relativistic electron we have $E_e = \sqrt{m_e^2c^4 + p_e^2c^2}$ so $p_e^2\text{d}p_e = \frac{p_e E_e}{c^2} \text{d}E_e$. This gives:
+      $$\text{d}\Gamma^{(1)} = \frac{V^2}{2\pi^3 \hbar^7 c^5} |M_{if}|^2 \cdot
+      p_e E_e (Q-E_e)^2 \text{d}E_e$$
+      Now using the approximation $|M_{if}| = \frac{G_F}{V}$ we find: 
+      $$\text{d}\Gamma^{(1)} = \frac{G_F^2}{2\pi^3 \hbar^7 c^5} \cdot
+      p_e E_e (Q-E_e)^2 \text{d}E_e$$
+      Or changing variables to $\text{d}p_e = \frac{E_e}{p_ec^2}\text{d}E_e$:
+      $$\text{d}\Gamma^{(1)} = \frac{G_F^2}{2\pi^3 \hbar^7 c^3} \cdot
+      p_e^2 (Q-E_e)^2 \text{d}p_e$$
+    </p>
+  </main>
+
+</body>
+</html>
