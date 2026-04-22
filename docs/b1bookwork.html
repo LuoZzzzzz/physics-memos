@@ -87,10 +87,71 @@
     </details>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
-
-    <h3 class="section-anchor">1. Boundary conditions for surface waves</h3>
+    <h3 class="section-anchor">Prandtl equations</h3>
     <p>
-      <i>1. No penetration condition at $z=-h$</i>
+      Prandtl's equation applies within a boundary layer flow in an otherwise inviscid outer layer flow (potential flow). Assumes steady state flow and neglect gravity. Navier Stokes gives:
+      $$ 
+      \begin{align}
+      v_x \frac{\partial v_x}{\partial x} + v_y \frac{\partial v_x}{\partial y} &= 
+      -\frac{1}{\rho} \frac{\partial p}{\partial x} + \nu\left(\frac{\partial^2 v_x}{\partial x^2} + \frac{\partial^2 v_x}{\partial y^2}\right) \phantom {xxx} \text{NS x}\\
+      v_x \frac{\partial v_y}{\partial x} + v_y \frac{\partial v_y}{\partial y} &= 
+      -\frac{1}{\rho} \frac{\partial p}{\partial y} + \nu\left(\frac{\partial^2 v_y}{\partial x^2} + \frac{\partial^2 v_y}{\partial y^2}\right) \phantom {xxx} \text{NS y}
+      \end{align}
+      $$
+      And the incompressibility equation gives:
+      $$\frac{\partial v_x}{\partial x} + \frac{\partial v_y}{\partial y} = 0 \phantom {xxx} \text{incompressibility}$$
+      The incompressibility equation gives the relative scales of $v_x$ and $v_y$:
+      $$\frac{v_x}{L} \sim \frac{v_y}{\delta} \implies v_y \sim \frac{\delta}{L}v_x \ll v_x$$
+      Now, look at the scales of the terms in NS x. The LHS convective terms scales as $v_x \frac{\partial v_x}{\partial x} \sim \frac{v_x^2}{L}$ and  $v_y \frac{\partial v_x}{\partial y} \sim (\frac{\delta}{L}v_x) \frac{v_x}{\delta} \sim \frac{v_x^2}{L}$. So LHS $\sim \frac{v_x^2}{L}$. 
+    </p>
+    <p>
+      Now look at the second derivative terms on the RHS. We have $\frac{\partial^2 v_x}{\partial x^2} \sim \frac{v_x}{L^2} \ll \frac{v_x}{\delta^2} \sim \frac{\partial^2 v_x}{\partial y^2}$, so the $\frac{\partial^2 v_x}{\partial x^2}$ term may be neglected. So the RHS becomes $-\frac{1}{\rho} \frac{\partial p}{\partial x} + \nu \frac{\partial^2 v_x}{\partial y^2}$. The scales of the LHS and RHS must match, which means collectively $-\frac{1}{\rho} \frac{\partial p}{\partial x} + \nu \frac{\partial^2 v_x}{\partial y^2} \sim \frac{v_x^2}{L}$. It is not clear if one of the terms scales as $\frac{v_x^2}{L}$ or both do. We assume that both of them scale as $\frac{v_x^2}{L}$, and later argue by self consistency that this assumption is indeed valid.
+    </p>
+    <p>
+      Suppose that $\frac{1}{\rho}\frac{\partial p}{\partial x} \sim \frac{v_x^2}{L}$. Applying the same approximations and scaling assumption to NS y, we find that $\frac{1}{\rho}\frac{\partial p}{\partial y} \sim \frac{\delta}{L} \frac{v_x^2}{L}$, which means that $|\frac{\partial p}{\partial y}| \ll |\frac{\partial p}{\partial x}|$. This means that to an excellent approximation $p(x, y) \approx p(x)$, and so we have $\frac{\partial p}{\partial x} \approx \frac{\text{d}p}{\text{d}x}$. 
+    </p>
+    <p>
+      After all these simplifications, NS x becomes:
+      $$v_x \frac{\partial v_x}{\partial x} + v_y \frac{\partial v_x}{\partial y} = 
+      -\frac{1}{\rho} \frac{\text{d} p}{\text{d} x} + \nu\frac{\partial^2 v_x}{\partial y^2} \phantom {xxx} \text{NS x}$$
+      and $p$ becomes a function of only $x$. Because $p = p(x)$ in the boundary layer, this means that whatever pressure in the potential flow simply prints itself onto the boundary layer. Furthermore because the potential flow is parallel to the surface, the pressure of the potential flow is also constant along $y$ (this ignores gravity). Deep within the potential flow the flow is described by Euler's equation, $\frac{\text{D}\vec{v}}{\text{D}t} = -\frac{\nabla p}{\rho}$. If the potential flow is along $x$ and steady as assumed, then this reduces to:
+      $$U(x) \frac{\text{d}U(x)}{\text{d}x} = -\frac{1}{\rho}\frac{\text{d}p(x)}{\text{d}x}$$
+      So given $U(x)$ we can find $p(x)$, which then gets printed onto the boundary layer. Looking at the scaling of this equation we find $\frac{1}{\rho}\frac{\partial p}{\partial x} \sim \frac{U^2}{L} \sim \frac{v_x^2}{L}$, confirming our previous assumption. 
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Thin film approximation</h3>
+    <p>
+      Suppose that the geometry of the flow is such that the $y$ scale is constrained by geometry to be much smaller than the $x$ scale. In this case we do not assume that the flow is steady at the outset. Let the characteristic $y$ scale be $h$ and the characteristic $x$ scale be $L$. Navier Stokes for the $x$ component gives:
+      $$\frac{\text{D}v_x}{\text{D}t} = -\frac{1}{\rho}\frac{\partial p}{\partial x} + \nu \left(\frac{\partial^2 v_x}{\partial x^2} + \frac{\partial^2 v_x}{\partial y^2}\right)$$
+      Since $\frac{\partial^2 v_x}{\partial x^2} \sim \frac{v_x}{L^2} \ll \frac{v_x}{h^2} \sim \frac{\partial^2 v_x}{\partial y^2}$, the $\frac{\partial^2 v_x}{\partial x^2}$ term may be ignored. Now, look at the scaling of $\nu \frac{\partial^2 v_x}{\partial y^2}$ relative to $\frac{\text{D}v_x}{\text{D}t}$:
+      $$\frac{\text{advective term}}{\text{viscous term}} \sim \frac{|\tfrac{\text{D}v_x}{\text{D}t}|}{|\nu\tfrac{\partial^2 v_x}{\partial y^2}|} \sim \frac{U^2/L}{\nu U/h^2} \sim \frac{UL}{\nu} \left(\frac{h}{L}\right)^2 = \text{Re} \left(\frac{h}{L}\right)^2$$
+      For us to drop the advective term too we require $\text{Re} \left(\frac{h}{L}\right)^2 \ll 1$. This is the thin film condition. In this regime the $x$ component simplifies to:
+      $$0 = -\frac{1}{\rho}\frac{\partial p}{\partial x} + \nu \frac{\partial^2 v_x}{\partial y^2}$$
+      The $y$ component gives:
+      $$\frac{\text{D}v_y}{\text{D}t} = -\frac{1}{\rho}\frac{\partial p}{\partial y} + \nu \left(\frac{\partial^2 v_y}{\partial x^2} + \frac{\partial^2 v_y}{\partial y^2}\right) - g$$
+      Again, we can drop the $\frac{\partial^2 v_y}{\partial x^2}$ term since it is much smaller than the $\frac{\partial^2 v_y}{\partial y^2}$ term, and in the thin film regime we can drop the $\frac{\text{D}v_y}{\text{D}t}$ term. Now, from the incompressibility condition we have $v_y \sim \frac{h}{L} v_x$, so $\nu \frac{\partial^2 v_y}{\partial y^2} \sim \nu\frac{h}{L}\frac{v_x}{h^2} \sim \nu\frac{h}{L}\frac{v_x}{h^2}$. On the other hand we have $\frac{1}{\rho}\frac{\partial p}{\partial y} \sim \frac{L}{h}\frac{1}{\rho}\frac{\partial p}{\partial x} \sim \frac{L}{h} \nu\frac{v_x}{h^2}$. So $\frac{1}{\rho} \frac{\partial p}{\partial y} \sim (\frac{L}{h})^2 \nu\frac{\partial^2 v_y}{\partial y^2} \gg \nu \frac{\partial^2 v_y}{\partial y^2}$ and so $\nu \frac{\partial^2 v_y}{\partial y^2}$ can be discarded too. Hence the $y$ component simplifies to:
+      $$0 = -\frac{1}{\rho}\frac{\partial p}{\partial y} - g$$
+      In other words, the $y$ component is essentially hydrostatic balance. 
+    </p>
+    <p>
+      Now, compare tangential stresses $\eta \frac{\partial v_x}{\partial y}$ to normal stress $p$. We have, from $\frac{\partial p}{\partial x} \sim \eta \frac{v_x}{h^2}$ that $p \sim \frac{L}{h}\frac{\eta v_x}{h}$. On the other hand, $\eta \frac{\partial v_x}{\partial y} \sim \frac{\eta v_x}{h}$. So tangential stresses are much lower than normal stresses in a thin film. That is, the viscous force exerted by the film on the surface is much smaller compared to the normal force that it is supporting. 
+    </p>
+    <p>
+      Together, we have the thin film equations:
+      $$
+      \begin{align}
+      0 &= -\frac{\partial p}{\partial x} + \eta \frac{\partial^2 v_x}{\partial y^2} \phantom{xxx} \text{NS x} \\
+      0 &= -\frac{\partial p}{\partial y} - \rho g \phantom{xxx} \text{NS y} \\
+      0 &= \frac{\partial v_x}{\partial x} + \frac{\partial v_y}{\partial y} \phantom{xxx} \text{incompressibility}
+      \end{align}
+      $$
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Boundary conditions for surface waves</h3>
+    <p>
+      <i>No penetration condition at $z=-h$</i>
       $$v_z(x, -h, t) = 0$$
     </p>
     <p>
