@@ -105,8 +105,12 @@
       Now $X$ needs to cancel all the random numbers from $\hbar$, $c$ and $\text{GeV}$ on the right hand side, so:
       $$X = (1.055\times10^{-34})^{-b-c} \times (3\times10^8)^{2a-b} \times (10^9 \times 1.6 \times 10^{-19})^{-a+b+c}$$
       Finally, set $\hbar = c = 1$, this gives the full conversion:
+    </p>
+    <p style="font-size: 85%;">
       $$\text{kg}^a \text{m}^b \text{s}^c \rightarrow (1.055\times10^{-34})^{-b-c} \times (3\times10^8)^{2a-b} \times (10^9 \times 1.6 \times 10^{-19})^{-a+b+c} \text{ GeV}^{a-b-c}$$
-      So for examples:
+    </p>
+    <p>
+      So for example:
       $$a=1, \, b=c=0: \text{kg} \rightarrow 5.63 \times 10^{26} \text{ GeV}$$
       $$a=b=0, \, c=1: \text{s} \rightarrow 1.52 \times 10^{24} \text{ GeV}$$
       There is one more unit, charge. In natural units charge has no units, and it is related to SI units by the fine structure constant. Because the fine structure constant is dimensionless it has the same value in both systems, so:
@@ -146,7 +150,7 @@
       In a general decay there will be a reaction feeding into the resonance, and the resonance feeds into a number of decay channels indexed by $f$. Including the additional spin factors, the rate of the the reaction $\text{input } i = a+b \rightarrow \text{resonance} \rightarrow \text{decay product } f$ is:
       $$\Gamma_{i\rightarrow R \rightarrow f} = \frac{2J+1}{(2s_a+1)(2s_b+1)} \cdot \frac{\Gamma_{i\rightarrow R}\Gamma_{R\rightarrow f}}{(E-E_R)^2 + \Gamma^2/4}$$
       where:<br>
-      $s_1, s_2$: spins of the two incoming input particles - Breit Wigner assumes that there are two incoming particles<br>
+      $s_a, s_b$: spins of the two incoming input particles - Breit Wigner assumes that there are two incoming particles<br>
       $J$: spin of resonance $R$<br>
       $\Gamma_{i \rightarrow R}$: partial width of $R$ formation from inputs<br>
       $\Gamma_{R \rightarrow f}$: partial width of decay to $f$ from $R$<br>
@@ -161,6 +165,40 @@
       The relativistic Breit Wigner distribution is given by:
       $$\sigma(E) \propto \frac{1}{(E^2 - E_R^2)^2 + E_R^2 \Gamma^2}$$
       where $E_R$ is the resonance energy. When $E$ is close to $E_R$, the distribution reduces to the non-relativistic Breit Wigner distribution.
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Born approximation and differential cross section</h3>
+    <p>
+      The wavefunction of a plane wave interacting with a nuclear potential (centered at the origin) is, in the first Born approximation:
+      $$\psi(\vec{r}) = \psi_i(\vec{r}) + \psi_s(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot\vec{r}} - \frac{1}{\sqrt{V}}\frac{e^{i\vec{k}\cdot\vec{r}}}{r} \frac{m}{2\pi\hbar^2}  \int_{\text{all space}} e^{i \vec{q}\cdot\vec{r}'} V(\vec{r}') \text{d}^3 \vec{r}'$$
+      If the potential is symmetric, then the equation simplifies to:
+      $$\psi(\vec{r}) = \psi_i(\vec{r}) + \psi_s(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot\vec{r}} - \frac{1}{\sqrt{V}}\frac{e^{i\vec{k}\cdot\vec{r}}}{r}\frac{2m}{\hbar^2 q} \int_0^\infty r' V(r') \sin(qr') \text{d}r'$$
+    </p>
+    <p>
+      <i>Interpretation 1.</i><br>
+      Let $\psi(\vec{r})$ represent the wave function of a single particle. $\psi_i(\vec{r})$ and $\psi_s(\vec{r})$ are the wavefunctions corresponding to the incident and scattered parts of that particle. Even though $\psi_i(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot{\vec{r}}}$ is, as written, infinite in extent, in practice the incoming beam has a finite width and in the limit of large $r$ will subtend a relatively small solid angle. Therefore at large $r$ the scattering will be entirely due to $\psi_s(\vec{r})$, and any interference effects due to $\psi_i(\vec{r})$ may be ignored.
+    </p>
+    <p>
+      The probability that the particle scatters into a solid angle $\text{d}\Omega$ is then $\int_0^\infty |\psi_s(\vec{r})|^2 r^2 \text{d}\Omega \text{d}r$. In general we write $\psi_s(\vec{r}) = \frac{1}{\sqrt{V}}f(\theta, \phi) \frac{e^{i\vec{k}\cdot\vec{r}}}{r}$, so the probability can also be written as $\int_0^\infty \frac{1}{V}|f(\theta, \phi)|^2 \text{d}\Omega \text{d}r$ where:
+      $$f(\theta, \phi) = \frac{2m}{\hbar^2 q} \int_0^\infty r' V(r') \sin(qr') \text{d}r'$$
+      We define $\text{d}P(\theta, \phi)$ as the probability that the particle scatters into the infinitesimal solid angle $\text{d}\Omega$ located in the direction of the vector $\vec{r}$, $(\theta, \phi)$. The differential "probability" (for scattering in the direction of $\vec{r}$) is then:
+      $$\frac{\text{d}P}{\text{d}\Omega}(\theta, \phi) = \frac{1}{V} \int_0^\infty |f(\theta, \phi)|^2 \text{d}r$$
+      Note that $f(\theta, \phi)$ has units of $\text{m}$ and so $\frac{\text{d}P}{\text{d}\Omega}$ has units of $\text{str}^{-1}$. There is, however, something annoying with this interpretation, because as $V \rightarrow \infty$ it is not clear whether the integral blows up, $1/V$ kills the whole thing, or if the equation approaches some finite non zero limit!
+    </p>
+    <p>
+      <i>Interpretation 2.</i><br>
+      Now suppose that the wavefunction $\frac{1}{\sqrt{V}} e^{i\vec{k}\cdot\vec{r}}$ represents a stream of particles. The probability current associated with this wave is $j_\text{inc} = |\psi_i|^2 \cdot \frac{\hbar k}{m} = \frac{1}{V} \cdot \frac{\hbar k}{m}$. That is, if we were to put a bucket of cross sectional area $A$ in the way of this stream, the bucket will pick up  $\frac{1}{V} \cdot \frac{\hbar k}{m} \cdot A$ particles per second.
+    </p>
+    <p>
+      Consider the probability current associated with scattering in the direction $(\theta, \phi)$. The same probability current formula tells us that this is $j_\text{sc} = |\psi_s|^2 \cdot \frac{\hbar k}{m} = \frac{1}{V} \frac{|f(\theta, \phi)|^2}{r^2}\cdot \frac{\hbar k}{m}$, and so the number of particles going into the solid angle $\text{d}\Omega$ is $j_\text{sc} r^2 \text{d}\Omega = \frac{\hbar k}{V} |f(\theta, \phi)|^2 \text{d}\Omega$. 
+    </p>
+    <p>
+      Suppose we had a bucket in the path of the incoming wave that collected only particles scattered in the direction $(\theta, \phi)$. Then the cross sectional area of that bucket $\text{d}\sigma (\theta, \phi)$ should be defined such that:
+      $$j_\text{inc} \underbrace{\text{d} \sigma (\theta, \phi)}_{\text{area}} = j_\text{sc} \underbrace{r^2 \text{d}\Omega}_{\text{area}} \implies \frac{1}{V}\frac{\hbar k}{m} \text{d}\sigma(\theta, \phi) = \frac{1}{V} \frac{\hbar k}{m} |f(\theta, \phi)|^2 \text{d}\Omega$$
+      This motivates the definition of a differential cross section:
+      $$\frac{\text{d}\sigma}{\text{d}\Omega} (\theta, \phi) = |f(\theta, \phi)|^2$$
+      which has units $\text{m}^2 \, \text{str}^{-1}$. In this case, the differential cross section is well behaved. This reinforces the point that whenever we work with plane wavefunctions, we have to interpret them in terms of a continuous current of particles instead of the wavefunction of a single particle for the results to make sense.
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
@@ -214,37 +252,182 @@
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
-    <h3 class="section-anchor">Born approximation and differential cross section</h3>
+    <h3 class="section-anchor">Cabibbo matrix</h3>
     <p>
-      The wavefunction of a plane wave interacting with a nuclear potential (centered at the origin) is, in the first Born approximation:
-      $$\psi(\vec{r}) = \psi_i(\vec{r}) + \psi_s(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot\vec{r}} - \frac{1}{\sqrt{V}}\frac{e^{i\vec{k}\cdot\vec{r}}}{r} \frac{m}{2\pi\hbar^2}  \int_{\text{all space}} e^{i \vec{q}\cdot\vec{r}'} V(\vec{r}') \text{d}^3 \vec{r}'$$
-      If the potential is symmetric, then the equation simplifies to:
-      $$\psi(\vec{r}) = \psi_i(\vec{r}) + \psi_s(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot\vec{r}} - \frac{1}{\sqrt{V}}\frac{e^{i\vec{k}\cdot\vec{r}}}{r}\frac{2m}{\hbar^2 q} \int_0^\infty r' V(r') \sin(qr') \text{d}r'$$
+      Suppose a Feynman diagram shows a $u$ (mass eigenstate) quark coupled to a $s$ (also mass eigenstate) quark and a $W^-$ boson. This seems weird because the weak force should produce a quark in the weak eigenbasis, and not the mass eigenbasis. Here's what happens step by step. The $u$ quark first couples to weak eigenstates $d'$ and $s'$ - this is calculated by finding the state vector of $u$ in the weak basis, and then computing the coupling amplitude between it and the state vectors of $d'$ and $s'$ (which are just the unit vectors $[1, 0]$ and$[0, 1]$). The state of the system after this is then a superposition of $d'$ and $s'$ states. Transforming this back to the mass basis gives us a superposition of $d$ and $s$ states, and it is the amplitude of the $s$ state that the CKM matrix tells us. 
     </p>
     <p>
-      <i>Interpretation 1.</i><br>
-      Let $\psi(\vec{r})$ represent the wave function of a single particle. $\psi_i(\vec{r})$ and $\psi_s(\vec{r})$ are the wavefunctions corresponding to the incident and scattered parts of that particle. Even though $\psi_i(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot{\vec{r}}}$ is, as written, infinite in extent, in practice the incoming beam has a finite width and in the limit of large $r$ will subtend a relatively small solid angle. Therefore at large $r$ the scattering will be entirely due to $\psi_s(\vec{r})$, and any interference effects due to $\psi_i(\vec{r})$ may be ignored.
+      Therefore, the weak force does indeed couple $u$ to weak eigenstates. However, because $u$ is a superposition of weak eigenstates, the resulting state that is coupled to will also be a superposition of weak eigenstates. However, when we perform the final measurement we measure in the mass eigenbasis. The point is: the CKM matrix tells us the amplitude associated with the measured mass eigenstate, and the Feynman diagram describes the process post measurement.
     </p>
     <p>
-      The probability that the particle scatters into a solid angle $\text{d}\Omega$ is then $\int_0^\infty |\psi_s(\vec{r})|^2 r^2 \text{d}\Omega \text{d}r$. In general we write $\psi_s(\vec{r}) = \frac{1}{\sqrt{V}}f(\theta, \phi) \frac{e^{i\vec{k}\cdot\vec{r}}}{r}$, so the probability can also be written as $\int_0^\infty \frac{1}{V}|f(\theta, \phi)|^2 \text{d}\Omega \text{d}r$ where:
-      $$f(\theta, \phi) = \frac{2m}{\hbar^2 q} \int_0^\infty r' V(r') \sin(qr') \text{d}r'$$
-      We define $\text{d}P(\theta, \phi)$ as the probability that the particle scatters into the infinitesimal solid angle $\text{d}\Omega$ located in the direction of the vector $\vec{r}$, $(\theta, \phi)$. The differential "probability"(for scattering in the direction of $\vec{r}$) is then:
-      $$\frac{\text{d}P}{\text{d}\Omega}(\theta, \phi) = \frac{1}{V} \int_0^\infty |f(\theta, \phi)|^2 \text{d}r$$
-      Note that $f(\theta, \phi)$ has units of $\text{m}$ and so $\frac{\text{d}P}{\text{d}\Omega}$ has units of $\text{str}^{-1}$. There is, however, something annoying with this interpretation, because as $V \rightarrow \infty$ it is not clear whether the integral blows up, $1/V$ kills the whole thing, or if the equation approaches some finite non zero limit!
+      Let's compute this explicitly. For now, we restrict to the subspace of $(u, d), (c, s)$ so that the matrices are small. We have:
+      $$
+      \begin{bmatrix}
+      u' \\
+      c'
+      \end{bmatrix} =
+      \begin{bmatrix}
+      U_{11} & U_{12}  \\
+      U_{21} & U_{22}
+      \end{bmatrix}
+      \begin{bmatrix}
+      u \\
+      c
+      \end{bmatrix}, \phantom{x} \\
+      \begin{bmatrix}
+      d' \\
+      s'
+      \end{bmatrix} =
+      \begin{bmatrix}
+      L_{11} & L_{12}  \\
+      L_{21} & L_{22}
+      \end{bmatrix}
+      \begin{bmatrix}
+      d \\
+      s 
+      \end{bmatrix}
+      $$
+      So in the weak basis, the state $u$ is:
+      $$\ket{u} = U_{11}\ket{u'} + U_{12}\ket{c'}$$
+      Therefore, the weak coupling matrix (which is just the identity) couples it to:
+      $$U_{11}\ket{d'} + U_{12}\ket{s'}$$
+      In the mass basis, this state is:
+    </p>
+    <p style="font-size: 75%;">
+      $$U_{11}(L_{11}\ket{d} + L_{12}\ket{s}) + U_{12}(L_{21}\ket{d}+L_{22}\ket{s})
+      = (U_{11}L_{11} + U_{21}L_{21})\ket{d} + (U_{11}L_{12} + U_{21}L_{22})\ket{s}$$
     </p>
     <p>
-      <i>Interpretation 2.</i><br>
-      Now suppose that the wavefunction $\frac{1}{\sqrt{V}} e^{i\vec{k}\cdot\vec{r}}$ represents a stream of particles. The probability current associated with this wave is $j_\text{inc} = |\psi_i|^2 \cdot \frac{\hbar k}{m} = \frac{1}{V} \cdot \frac{\hbar k}{m}$. That is, if we were to put a bucket of cross sectional area $A$ in the way of this stream, the bucket will pick up  $\frac{1}{V} \cdot \frac{\hbar k}{m} \cdot A$ particles per second.
+      And the amplitude associated with an observation of $\ket{s}$ is $U_{11}L_{12} + U_{21}L_{22}$. We could have gotten to the same result by changing the basis of the weak coupling: 
+    </p>
+    <p style="font-size: 75%;">
+      $$
+      C_\text{mass} = U^\dagger C_\text{weak} L =
+      \begin{bmatrix}
+      U_{11} & U_{21} \\
+      U_{12} & U_{22}
+      \end{bmatrix}
+      \begin{bmatrix}
+      1 & 0  \\
+      0 & 1
+      \end{bmatrix}
+      \begin{bmatrix}
+      L_{11} & L_{12} \\
+      L_{21} & L_{22}
+      \end{bmatrix} =
+      \begin{bmatrix}
+      U_{11}L_{11}+U_{21}L_{21} & U_{11}L_{12}+U_{21}L_{22} \\
+      U_{12}L_{11}+U_{22}L_{21} & U_{12}L_{12}+U_{22}L_{22}
+      \end{bmatrix}
+      $$
     </p>
     <p>
-      Consider the probability current associated with scattering in the direction $(\theta, \phi)$. The same probability current formula tells us that this is $j_\text{sc} = |\psi_s|^2 \cdot \frac{\hbar k}{m} = \frac{1}{V} \frac{|f(\theta, \phi)|^2}{r^2}\cdot \frac{\hbar k}{m}$, and so the number of particles going into the solid angle $\text{d}\Omega$ is $j_\text{sc} r^2 \text{d}\Omega = \frac{\hbar k}{V} |f(\theta, \phi)|^2 \text{d}\Omega$. 
+      And then calculating:
+      $$
+      \underbrace{
+      \begin{bmatrix}
+      1 & 0
+      \end{bmatrix}}_{\ket{u}}
+      \begin{bmatrix}
+      U_{11}L_{11}+U_{21}L_{21} & U_{11}L_{12}+U_{21}L_{22} \\
+      U_{12}L_{11}+U_{22}L_{21} & U_{12}L_{12}+U_{22}L_{22}
+      \end{bmatrix}
+      \underbrace{
+      \begin{bmatrix}
+      0 \\
+      1
+      \end{bmatrix}}_{\ket{s}}$$
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Ratio of hadron to muon production in $e^+e^-$ collisions</h3>
+    <p>
+      <i>From 2012 Q3</i><br>
+      We are interested in the ratio of $\sigma(e^+e^- \rightarrow \text{hadrons})$ to $\sigma(e^+e^- \rightarrow \mu^+\mu^-)$ in $e^+e^-$ collisions, at energy scales $2-3 \text{ GeV}$, $5-8 \text{ GeV}$ and $12-20 \text{ GeV}$. 
     </p>
     <p>
-      Suppose we had a bucket in the path of the incoming wave that collected only particles scattered in the direction $(\theta, \phi)$. Then the cross sectional area of that bucket $\text{d}\sigma (\theta, \phi)$ should be defined such that:
-      $$j_\text{inc} \underbrace{\text{d} \sigma (\theta, \phi)}_{\text{area}} = j_\text{sc} \underbrace{r^2 \text{d}\Omega}_{\text{area}} \implies \frac{1}{V}\frac{\hbar k}{m} \text{d}\sigma(\theta, \phi) = \frac{1}{V} \frac{\hbar k}{m} |f(\theta, \phi)|^2 \text{d}\Omega$$
-      This motivates the definition of a differential cross section:
-      $$\frac{\text{d}\sigma}{\text{d}\Omega} (\theta, \phi) = |f(\theta, \phi)|^2$$
-      which has units $\text{m}^2 \, \text{str}^{-1}$. In this case, the differential cross section is well behaved. This reinforces the point that whenever we work with plane wavefunctions, we have to interpret them in terms of a continuous current of particles instead of the wavefunction of a single particle for the results to make sense.
+      For reference the bare masses of quarks are (in $\text{MeV}$):
+      $$
+      \begin{align}
+      m_u = 1.7-3.3, m_c = 1270, m_t &= 172000 \\
+      m_d = 4.1-5.8, m_s = 101, m_b &= 4190
+      \end{align}
+      $$
+      Note that in $e^+e^-$ collision, the mass of the meson produced is going to be larger than two times the bare masses above because of the interaction energy between the $q\bar{q}$ pair.
+    </p>
+    <p>
+      At $2-3 \text{ GeV}$, $u\bar{u}, d\bar{d}, s\bar{s}$ can be produced. Charmomium ($c\bar{c}$) has a production threshold of $3.7 \text{ GeV}$. Normalising $\sigma(e^+e^- \rightarrow \mu^+\mu^-)$ to $1$, we have:
+      $$
+      \begin{align}
+      \sigma(e^+e^- \rightarrow u\bar{u}) &= (\underbrace{\frac{2}{3}}_{\text{charge}})^2 \times \underbrace{3}_{\text{colors}} \\
+      \sigma(e^+e^- \rightarrow d\bar{d}) &= (\frac{1}{3})^2 \times 3 \\
+      \sigma(e^+e^- \rightarrow s\bar{s}) &= (\frac{1}{3})^2 \times 3
+      \end{align}
+      $$
+      And so $\sigma(e^+e^- \rightarrow \text{hadrons}) = 4/3 + 1/3 + 1/3 = 2$.
+    </p>
+    <p>
+      At $5-8 \text{ GeV}$, $u\bar{u}, d\bar{d}, s\bar{s}, c\bar{c}$ can be produced, so $\sigma(e^+e^- \rightarrow \text{hadrons}) = 4/3 + 1/3 + 1/3 + 4/3 = 10/3$. 
+    </p>
+    <p>
+      At $10-12 \text{ GeV}$, $u\bar{u}, d\bar{d}, s\bar{s}, c\bar{c}, b\bar{b}$ can be produced, so $\sigma(e^+e^- \rightarrow \text{hadrons}) = 4/3 + 1/3 + 1/3 + 4/3 + 1/3 = 11/3$. 
+    </p>
+    <p>
+      If we crank up the energy all the way to $91 \text{ GeV}$, there will be a sharp spike in $\sigma(e^+e^- \rightarrow \text{hadrons})$ relative to $\sigma(e^+e^- \rightarrow \mu^+\mu^-)$. This is because the resonance channel $e^+e^- \rightarrow Z^0$ opens, and $Z^0$ does not couple to electrical charge, but rather to the weak charge. The weak charge of quarks and leptons are the same, so in normalised units $\sigma(e^+e^- \rightarrow \text{hadrons}) \approx 5 \text{ quark pairs} \times 3 \text{ colors} = 15$ instead of the usual $11/3$. 
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Evidence for three generations of leptons and quarks</h3>
+    <p>
+      A $Z^0$ produced in a $e^+e^-$ collision couples (approximately) equal to all quark pairs ($q\bar{q}$), lepton pairs ($l^+l^-$) and neutrino pairs ($\nu \bar{\nu}$), provided that the process is energetically feasible. In particular, since neutrinos are very light, the $Z^0$ should be able to decay to <i>all</i> possible $\nu\bar{\nu}$ pairs as all these processes are energetically feasible. Together with the fact that $Z^0$ couples equally to all of decay products this means that we can deduce the number of generations of $\nu$. The standard model requires that the number of generations of neutrinos, leptons and quarks must be the same, so if the number of generations of neutrinos is determined to be $3$ then that will mean that there are no further heavier quarks and leptons than what is known.
+    </p>
+    <p>
+      Experimentally, we can deduce $\Gamma_Z$ from the total width of the Breit Wigner curve, and $\Gamma_\text{vis} = \Gamma_\text{had} + \Gamma_\text{lep}$ from the peak cross sections of the hadronic and leptonic Breit Wigner curves. This then allow us to calculate the invisible linewidth due to $\nu\bar{\nu}$ production, $\Gamma_\text{inv} = \Gamma_Z - \Gamma_\text{vis}$. Finally, we can divide $\Gamma_\text{inv}$ by the width of say, $Z^0 \rightarrow e^+e^-$, $\Gamma_{ee}$, to find the number of neutrino generations that contribute to this width. Experimentally, this is close to $3$. 
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Evidence for three generations of leptons and quarks</h3>
+    <p>
+      <i>From 2013 Q1</i><br>
+      Spin of a meson is given by $J = \tfrac{1}{2} \otimes \tfrac{1}{2} \otimes L_{q\bar{q}}$. Parity of the meson is given by $P = (+1)(-1)(-1)^{L_{q\bar{q}}} = (-1)^{L_{q\bar{q}}+1}$.  
+    </p>
+    <p>
+      The states of vector ($S=1$) $c\bar{c}$ are given below.
+    </p>
+    <p>
+      The $\psi$ states correspond to states of parity $-1$.
+      $$
+      \begin{align}
+      \text{S-wave: } J/\psi &\rightarrow n=1, {}^3S_1, 1^- \\
+      \psi' &\rightarrow n=2, {}^3S_1, 1^- \\
+      \text{D-wave: } \psi'' &\rightarrow n=1, {}^3D_1, 1^-
+      \end{align}
+      $$
+      The $\chi_c$ states correspond to states of parity $+1$.
+      $$
+      \begin{align}
+      \text{S-wave: } \chi_{c0} &\rightarrow n=1, {}^3P_0, 1^+ \\
+      \chi_{c1} &\rightarrow n=1, {}^3P_1, 1^+ \\
+      \chi_{c2} &\rightarrow n=1, {}^3P_2, 2^+
+      \end{align}
+      $$
+      The angular momentum for the $\chi_c$ states is constructed from $S \otimes L_{q\bar{q}} = 1 \otimes 1 = 0 \oplus 1 \oplus 2 = {}^3P_0 \oplus {}^3P_1 \oplus {}^3P_2$. 
+    </p>
+    <p>
+      The main decay modes of $J/\psi$ and $\psi'$ are: <br>
+      1. Leptonic: $J/\psi \rightarrow \gamma \rightarrow l^+l^-$ <br>
+      2. Hadronic: $J/\psi \rightarrow ggg \rightarrow \text{hadrons}$, for example $J/\psi \rightarrow ggg \rightarrow \pi^+\pi^-\pi^0$; there are some hadron combinations which are not allowed by isospin - should review.
+    </p>
+    <p>
+      In addition, $\psi'$ can decay into $J/\psi$ via the following strong processes: <br>
+      1. $\psi' \rightarrow J/\psi + \pi^0\pi^0$ <br>
+      2. $\psi' \rightarrow J/\psi + \pi^+\pi^-$
+    </p>
+    <p>
+      $\psi''$ sits above the $D\bar{D}$ production threshold of $3730/3740 \text{MeV}$ ($D$ mesons contain one $c$ and one $u$ or $d$), so in addition it can delay strongly to $D^0\bar{D}^0$ or $D^+D^-$. These decays dominate the branching ratio of $\psi''$ decay. Note also that for a leptonic decay, the $c\bar{c}$ pair must annihilate, which requires the pair to overlap at the origin. However, this is unlikely as the D-wave has $|\psi(0)|^2 = 0$. 
+    </p>
+    <p>
+      The $\chi_c$ states cannot decay via a virtual photon, because photons have parity $-1$ while $\chi_c$ states have parity $+1$. The can however de-excite into of $J/\psi$ by radiating a photon. Conversely, to produce a $\chi_c$ state we must first produce a $\psi'$ and have it decay into a $\chi_c$ state.
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
