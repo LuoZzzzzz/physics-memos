@@ -386,7 +386,7 @@
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
-    <h3 class="section-anchor">Evidence for three generations of leptons and quarks</h3>
+    <h3 class="section-anchor">Charmomium ($c\bar{c}$)</h3>
     <p>
       <i>From 2013 Q1</i><br>
       Spin of a meson is given by $J = \tfrac{1}{2} \otimes \tfrac{1}{2} \otimes L_{q\bar{q}}$. Parity of the meson is given by $P = (+1)(-1)(-1)^{L_{q\bar{q}}} = (-1)^{L_{q\bar{q}}+1}$.  
@@ -428,6 +428,33 @@
     </p>
     <p>
       The $\chi_c$ states cannot decay via a virtual photon, because photons have parity $-1$ while $\chi_c$ states have parity $+1$. The can however de-excite into of $J/\psi$ by radiating a photon. Conversely, to produce a $\chi_c$ state we must first produce a $\psi'$ and have it decay into a $\chi_c$ state.
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Phase space in $e^+e^- \rightarrow l^+l^-$</h3>
+    <p>
+      <i>From 2012 Q3</i><br>
+      In electron positron collisions, the rate of formation muon and tau pairs depend on two quantities, the matrix element $\mathcal{M}$ and the available phase space:
+      $$\sigma(e^+e^- \rightarrow l^+l^-) \propto |\mathcal{M}|^2 \cdot \text{phase space}$$
+      The matrix element is the product of the two vertex factors $e$ (since the process is electromagnetic) and the propagator. If the center of mass energy is $W$, then:
+      $$\mathcal{M} = \frac{\text{vertex}^2}{\text{propagator}} = \frac{e^2}{W^2} = \frac{4\pi \alpha}{W^2}$$
+      where $e^2/4\pi = \alpha$ in natural units.
+    </p>
+    <p>
+      The phase space may be obtained by considering the two body decay of a particle of mass $W$ in its center of mass frame. Let $E_l$ be the energy of one of the decay particles, the other particle travels in the opposite direction with the same energy since the decay is two body. By conservation of energy, $E_l = W/2$. From the energy momentum relation we have for one of the decay particles:
+      $$E_l^2 = p_l^2 c^2 + m_l^2 c^4$$
+      Plugging in $E_l = W/2$ and solving for $p_l$ gives:
+      $$p_l = \frac{1}{c}\sqrt{\frac{W^2}{4}-m_l^2c^4}$$
+      Now, the density of states for a two body decay is $\frac{\text{d}N}{\text{d}W} = \frac{\text{d}N}{\text{d}p_l} \frac{\text{d}p_l}{\text{d}W}$. We have $\frac{\text{d}N}{\text{d}p_l} = 4\pi p_l^2$, and from $W^2/4 = p_l^2 c^2 + m_l^2 c^4$ that $\frac{\text{d}p_l}{\text{d}W} = \frac{W}{4}\frac{1}{p_l c^2}$. So:
+      $$\frac{\text{d}N}{\text{d}W} = 4\pi p_l^2 \cdot \frac{W}{4}\frac{1}{p_l c^2} = \frac{\pi}{2c^2} W^2 \sqrt{1-\frac{4m_l^2c^4}{W^2}}$$
+      Combining all of these gives:
+      $$
+      \begin{align}
+      \sigma(e^+e^- \rightarrow l^+l^-) &\propto \left(\frac{4\pi \alpha}{W^2} \right)^2 \cdot \frac{\pi}{2c^2} W^2 \sqrt{1-\frac{4m_l^2c^4}{W^2}} \\
+      &= \frac{8\pi^3}{c^2} \left( \frac{\alpha}{W} \right)^2 \sqrt{1-\frac{4m_l^2c^4}{W^2}}
+      \end{align}
+      $$
+      If we are producing muons then $\sqrt{1-\frac{4m_\mu^2c^4}{W^2}} \approx 1$ so the cross section is proportional to $(\alpha \hbar c / W)^2$ where the $\hbar c$ is inserted so that the units come out right. If we are producing tau then this phase space term becomes significantly less than $1$ since $m_\tau$ is comparable to $W$ and we get a suppression effect from the phase space. 
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
