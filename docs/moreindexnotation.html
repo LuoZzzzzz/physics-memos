@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>More notes on index notation</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>More notes on index notation</h1>
+
+    <p>
+      <b>Metric $g$ and boost $\Lambda$</b><br>
+      Start with the matrix equation:
+      $$\Lambda^T g \Lambda = g \implies (g^{-1} \Lambda^T g) \Lambda = g^{-1}g = I \implies g^{-1} \Lambda^T g = \Lambda^{-1}$$
+      Recall the following matrix to index notation conversions:
+      $$\Lambda \rightarrow \Lambda^{\mu}_{\phantom{x}\nu}$$
+      $$g \rightarrow g_{\mu\nu}$$
+      The reason that $g$ transforms like a rank $(0, 2)$ tensor is explored in more detail here. 
+    </p>
+    <p>
+      Note also that:
+      $$g^{-1} \rightarrow g^{\mu\nu}$$
+      Therefore, the above statement written in index notation becomes:
+      $$
+      \begin{align}
+      \text{matrix notation: }[g^{-1}]_{\mu\alpha} [\Lambda^T]_{\alpha\beta} [g]_{\beta\nu} &\rightarrow \text{index notation: } g^{\mu\alpha} \Lambda^{\beta}_{\phantom{x}\alpha} g_{\beta\nu} \\
+      \equiv \Lambda^{\phantom{x}\mu}_\nu &\rightarrow [\Lambda^{-1}]_{\mu\nu}
+      \end{align}$$
+      In matrix form a contravariant $4$-vector transforms as:
+      $$A' = \Lambda A$$
+      while its covariant counterpart $A^Tg$ (because $A^TgA$ is invariant by Physics) transforms as:
+      $$
+      \begin{align}
+      A'^Tg &= (\Lambda A)^Tg = A^T\Lambda^Tg \\
+      &= A^T \underbrace{g g^{-1}}_{I} \Lambda^T g = (A^Tg) (g^{-1} \Lambda^T g) \\
+      &= (A^T g) \Lambda^{-1}
+      \end{align}
+      $$
+      So in matrix language, contravariant $4$-vectors transform via left multiplication by $\Lambda$, while covariant $4$-vectors transform via right multiplication by $\Lambda^{-1}$.  
+    </p>
+    <p>
+      In index notation we denote $(A^T g) \rightarrow A_\mu$, which gives rise the the transformation rule:
+      $$\text{matrix notation: }[A^T g]_{\nu} [\Lambda^{-1}]_{\nu\mu} \rightarrow \text{index notation: } A_\nu \Lambda_\mu^{\phantom{x}\nu}$$
+      So covariant $4$-vectors transform as $A'_\mu = \Lambda_\mu^{\phantom{x}\nu}A_\nu$. 
+    </p>
+
+    <p>
+      <b>Scalar functions</b><br>
+      Consider a scalar function $f$, that is, an assignment of a number to every point in space. Because a point in space is associated with both a contravariant displacement $x^\mu$ and a covariant displacement $x_\mu$, we can write either $f(x^0, x^1, x^2, x^3)$ or $f(x_0, x_1, x_2, x_3)$. Both functions have the same value at a given point in space, but because $(x^0, x^1, x^2, x^3)$ and $(x_0, x_1, x_2, x_3)$ are in general different numbers for the same point the two $f$s will have different functional forms when expressed in terms of their respective coordinates.
+    </p>
+    <p>
+      What does it mean to ask "how a scalar transforms"? Suppose we pick some point (with contravariant coordinates) $x^\mu$, and look at the value of $f$ at its image $x'^\mu$ after the transformation. In the case of scalar functions the number attached to $x^\mu$ ($f$) and $x'^\mu$ ($f'$) will be the same.
+    </p>
+    <p>
+      We can also attach $4$-vectors to every point in space. If we now do the same transformation experiment we find that the $4$-vector attached to $x^\mu$ ($A^\mu$) and the $4$-vector attached to its image $x'^\mu$ ($A'^\mu$) are numerically different, and will instead be related by a boost $A'^\mu = \Lambda^\mu_{\phantom{x}\nu} A^\nu$. 
+    </p>
+    <p>
+      Let's work out how the contravariant derivative of $f$ transforms. To be clear, this means we want to find how $\frac{\partial f}{\partial x^\mu}$ and $\frac{\partial f'}{\partial x'^\mu}$ are related at the same physical point in space. The scalar transformation rule lets us write (assuming that $x^\mu$ and $x'^\mu$ label the same physical point in space):
+      $$f'(x'^\mu) = f(x^\mu)$$
+      Applying the chain rule then gives:
+      $$\frac{\partial f'}{\partial x'^\mu} = \frac{\partial f}{\partial x'^\mu} = \frac{\partial x^\nu}{\partial x'^\mu} \frac{\partial f}{\partial x^\nu}$$
+      If the metric $g$ represents a linear transformation (meaning it is the same at all points in space), then:
+      $$x'^\mu = \Lambda^\mu_{\phantom{x}\nu} x^\nu \implies \Lambda_\mu^{\phantom{x}\alpha} x'^\mu = \Lambda_\mu^{\phantom{x}\alpha} \Lambda^\mu_{\phantom{x}\nu} x^\nu = \delta^\alpha_\nu x^\nu = x^\alpha$$
+      So we have $x^\mu = \Lambda_\nu^{\phantom{x}\mu} x'^\nu$, which after differentiating gives:
+      $$\frac{\partial x^\mu}{\partial x'^\nu} = \Lambda_\nu^{\phantom{x}\mu}$$
+      And so:
+      $$\frac{\partial f'}{\partial x'^\mu} = \Lambda_\nu^{\phantom{x}\mu} \frac{\partial f}{\partial x^\nu}$$
+      The derivative of a scalar function with respect to the contravariant displacement transforms like a covariant $4$-vector. Because of this, the derivative $\frac{\partial}{\partial x^\mu}$ is called the covariant derivative and is associated with the symbol $\partial_\mu$, with the lower index indicating the the gradient it produces transforms like a covariant $4$-vector. 
+    </p>
+    <p>
+      Let's also work out the transformation for $\frac{\partial f}{\partial x_\mu}$. First note that:
+      $$x'_\mu = \Lambda_\mu^{\phantom{x}\nu} x_\nu \implies \Lambda^\mu_{\phantom{x}\alpha} x'_\mu = \Lambda^\mu_{\phantom{x}\alpha} \Lambda_\mu^{\phantom{x}\nu} x_\nu = \delta^\nu_\alpha x_\nu = x_\alpha$$
+      $$
+      \begin{align}
+      \frac{\partial f'}{\partial x'_\mu} &= \frac{\partial f}{\partial x'_\mu} = \frac{\partial x_\nu}{\partial x'_\mu} \frac{\partial f}{\partial x_\nu} \\
+      &= \Lambda^\mu_{\phantom{x}\nu} \frac{\partial f}{\partial x_\nu}
+      \end{align}
+      $$
+      So the derivative of a scalar function with respect to covariant displacement transforms like a contravariant $4$-vector; we denote $\frac{\partial}{\partial x_\mu} \rightarrow \partial^\mu$. 
+    </p>
+    <p>
+      Finally we note that for the Minkowski metric $x^\mu = (ct, x, y, z)$ and $x_\mu = (-ct, x, y, z)$ so $\partial_\mu \rightarrow (\frac{1}{c}\frac{\partial}{\partial t}, \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})$ and $\partial^\mu \rightarrow (-\frac{1}{c}\frac{\partial}{\partial t}, \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})$. 
+    </p>
+    <p>
+      <b>$4$-vector transformations</b><br>
+      Now consider the derivative of a $4$-vector field. By derivative, we mean the Jacobian matrix. There are four cases that we can consider, which are:
+      $$\frac{\partial A^\nu}{\partial x_\mu}, \frac{\partial A_\nu}{\partial x^\mu}, \frac{\partial A^\nu}{\partial x^\mu}, \frac{\partial A_\nu}{\partial x_\mu}$$
+      or written in index notation:
+      $$\partial^\mu A^\nu, \partial_\mu A_\nu, \partial_\mu A^\nu, \partial^\mu A_\nu$$
+      As the latter suggests, the ranks of each of them are $(2, 0), (0, 2), (1, 1), (1, 1)$ respectively. 
+    </p>
+    <p>
+      <i>Transformations of rank $(2, 0)$</i><br>
+      $$
+      \frac{\partial A'^\nu}{\partial x'_\mu} = \frac{\partial (\Lambda^\nu_{\phantom{x}\alpha} A^\alpha)}{\partial x'_\mu} = \Lambda^\nu_{\phantom{x}\alpha} \frac{\partial A^\alpha}{\partial x'_\mu} = \Lambda^\nu_{\phantom{x}\alpha} \frac{\partial x_\beta}{\partial x'_\mu} \frac{\partial A^\alpha}{\partial x_\beta} = 
+      \Lambda^\nu_{\phantom{x}\alpha} \Lambda^\mu_{\phantom{x}\beta} \frac{\partial A^\alpha}{\partial x_\beta}
+      $$
+      Now if $\partial'^\mu A'^\nu$ had been a matrix, then $\mu$ would be the row index and $\nu$ would be the column index, so $\partial'^\mu A'^\nu \rightarrow [\partial'_\text{con} A'_\text{con}]_{\mu\nu}$, and $\partial'^\beta A'^\alpha \rightarrow [\partial_\text{con} A_\text{con}]_{\beta\alpha}$. So the above equation in matrix form is:
+      $$[\partial'_\text{con} A'_\text{con}]_{\mu\nu} = [\Lambda]_{\mu\beta} [\partial_\text{con} A_\text{con}]_{\beta\alpha} [\Lambda^T]_{\alpha\nu}$$
+      Or more simply:
+      $$[\partial'_\text{con} A'_\text{con}] = \Lambda [\partial_\text{con} A_\text{con}] \Lambda^T$$
+    </p>
+    <p>
+      <i>Transformations of rank $(0, 2)$</i><br>
+      $$
+      \frac{\partial A'_\nu}{\partial x'^\mu} 
+      = \frac{\partial (\Lambda^{\phantom{x}\alpha}_{\nu} A_\alpha)}{\partial x'^\mu} 
+      = \Lambda^{\phantom{x}\alpha}_{\nu} \frac{\partial A_\alpha}{\partial x'^\mu} 
+      = \Lambda^{\phantom{x}\alpha}_{\nu}\frac{\partial x^\beta}{\partial x'^\mu} \frac{\partial A_\alpha}{\partial x^\beta} 
+      = \Lambda^{\phantom{x}\alpha}_{\nu} \Lambda_\mu^{\phantom{x}\beta} \frac{\partial A_\alpha}{\partial x_\beta}
+      $$
+      Recalling that $\Lambda^{\phantom{x}\alpha}_{\nu} \rightarrow [\Lambda^{-1}]_{\alpha\nu}$ and $\Lambda^{\phantom{x}\beta}_{\mu} \rightarrow [\Lambda^{-1}]_{\beta\mu}$, we have:
+      $$
+      [\partial'_\text{cov} A'_\text{cov}]_{\mu\nu} = [\Lambda^{-1}]_{\beta\mu} [\partial_\text{cov} A_\text{cov}]_{\beta\alpha}[\Lambda^{-1}]_{\alpha\nu} =[(\Lambda^{-1})^T]_{\mu\beta} [\partial_\text{cov} A_\text{cov}]_{\beta\alpha} [\Lambda^{-1}]_{\alpha\nu}
+      $$
+      which simplifies to:
+      $$
+      [\partial'_\text{cov} A'_\text{cov}] = (\Lambda^{-1})^T [\partial_\text{cov} A_\text{cov}] \Lambda^{-1}
+      $$
+    </p>
+    <p>
+      <i>Transformations of rank $(1, 1)$</i><br>
+      $$
+      \frac{\partial A'^\nu}{\partial x'^\mu} 
+      = \frac{\partial (\Lambda_{\phantom{x}\alpha}^{\nu} A^\alpha)}{\partial x'^\mu} 
+      = \Lambda_{\phantom{x}\alpha}^{\nu} \frac{\partial A^\alpha}{\partial x'^\mu} 
+      = \Lambda_{\phantom{x}\alpha}^{\nu}\frac{\partial x^\beta}{\partial x'^\mu} \frac{\partial A^\alpha}{\partial x^\beta} 
+      = \Lambda_{\phantom{x}\alpha}^{\nu} \Lambda_\mu^{\phantom{x}\beta} \frac{\partial A^\alpha}{\partial x_\beta}
+      $$
+      Since $\Lambda^{\phantom{x}\beta}_{\mu} \rightarrow [\Lambda^{-1}]_{\beta\mu}$, we have:
+      $$
+      [\partial'_\text{cov} A'_\text{con}]_{\mu\nu} = [\Lambda^{-1}]_{\beta\mu} [\partial_\text{cov} A_\text{con}]_{\beta\alpha}[\Lambda^{-1}]_{\nu\alpha} =[(\Lambda^{-1})^T]_{\mu\beta} [\partial_\text{cov} A_\text{con}]_{\beta\alpha} [\Lambda^T]_{\alpha\nu}
+      $$
+      which simplifies to:
+      $$
+      [\partial'_\text{cov} A'_\text{con}] = (\Lambda^{-1})^T [\partial_\text{cov} A_\text{con}] \Lambda^T
+      $$
+    </p>
+    <p>
+      <i>Transformations of the other rank $(1, 1)$</i><br>
+      $$
+      \frac{\partial A'_\nu}{\partial x'_\mu} 
+      = \frac{\partial (\Lambda^{\phantom{x}\alpha}_{\nu} A_\alpha)}{\partial x'_\mu} 
+      = \Lambda^{\phantom{x}\alpha}_{\nu} \frac{\partial A_\alpha}{\partial x'_\mu} 
+      = \Lambda^{\phantom{x}\alpha}_{\nu}\frac{\partial x_\beta}{\partial x'_\mu} \frac{\partial A_\alpha}{\partial x_\beta} 
+      = \Lambda^{\phantom{x}\alpha}_{\nu} \Lambda^\mu_{\phantom{x}\beta} \frac{\partial A_\alpha}{\partial x_\beta}
+      $$
+      Since $\Lambda^{\phantom{x}\alpha}_{\nu} \rightarrow [\Lambda^{-1}]_{\alpha\nu}$, we have:
+      $$
+      [\partial'_\text{con} A'_\text{cov}]_{\mu\nu} = [\Lambda]_{\mu\beta} [\partial_\text{con} A_\text{cov}]_{\beta\alpha} [\Lambda^{-1}]_{\alpha\nu}
+      $$
+      which simplifies to:
+      $$
+      [\partial'_\text{con} A'_\text{cov}] = \Lambda [\partial_\text{con} A_\text{cov}] \Lambda^{-1}
+      $$
+    </p>
+
+  </main>
+
+</body>
+</html>

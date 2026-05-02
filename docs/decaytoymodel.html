@@ -159,11 +159,11 @@ surv_prob = np.abs(a_t)**2</code></pre>
       So in the discrete case instead of having a continuum of energies we have a set of energies, and performing a Fourier decomposition produces the coefficients $|\braket{i'|R}|^2$ which are precisely the probabilities of associated with the corresponding energies.
     </p>
     <p>
-      In the continuous case, the Fourier transform of $\psi_R(t)$ is:
-      $$\tilde{\psi}_R(E) = \mathcal{F}(\psi_R(t))[E] \propto \frac{1}{\tfrac{E-E_R}{\hbar} + \frac{i\Gamma}{2\hbar}}$$
-      And the energy probability density is:
+      In the continuous case, the Fourier transform of $\psi_R(t)$ (integrating from $-\infty$ to $\infty$) is:
+      $$\tilde{\psi}_R(E) = \mathcal{F}(\psi_R(t))[E] \propto \frac{1}{(E-E_R)^2 + \Gamma^2/4}$$
+      And so the energy probability density is:
       $$|\tilde{\psi}_R(E)|^2 \propto \frac{1}{(E-E_R)^2 + \Gamma^2/4}$$
-      Note that there is a subtle difference between the discrete and continuous case. In the discrete case, a Fourier decomposition already produces real coefficients which are the probabilities associated with the different energies. In the continuous case, the Fourier transform $\tilde{\psi}_R(E)$ is in general complex and we need to square it again to get the energy probability distribution. This seems rather peculiar to me.
+      Note that sometimes the integration is performed only from $0$ to $\infty$ instead of $-\infty$ to $\infty$, which gives the complex result $\frac{1}{\tfrac{E-E_R}{\hbar} + \frac{i\Gamma}{2\hbar}}$. The Breit Wigner distribution is then obtained by taking the magnitude squared of this result, which gives the same result as integrating from $-\infty$ to $\infty$.
     </p>
   </main>
 
