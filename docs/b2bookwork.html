@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>B2 Bookwork</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>B2 Bookwork</h1>
+    <p>
+      A list of bookwork derivations for <b>B2</b> special relativity.
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">If $A\cdot B$ is invariant and $B$ is a $4$-vector then $A$ is also a $4$-vector</h3>
+    <p>
+      $$A\cdot B = A^T gB$$
+      If $A\cdot B$ is invariant and $B$ is a $4$-vector, then we have:
+      $$A'^T g(\Lambda B) = A^T gB$$
+      where $A'$ is the transformed $A$. We do not assume $A' = \Lambda A$, since we are not sure if $A$ is a $4$-vector. Now, insert $I = (\Lambda^{-1})^T \Lambda^T$. This gives:
+      $$A'^T (\Lambda^{-1})^T \underbrace{\Lambda^T g\Lambda}_{g} B = A'^T (\Lambda^{-1})^T g B$$
+      which means that $A'^T (\Lambda^{-1})^T = A^T \implies \Lambda^{-1}A' = A \implies A' = \Lambda A$ since the statement must hold for all $\Lambda$ and all $A$. But this means $A$ transforms like a $4$-vector.
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Faraday tensor</h3>
+    <p>
+      Faraday tensor $F^{\mu\nu}$ is defined as:
+      $$F^{\mu\nu} = \partial^\mu A^\nu - \partial^\nu A^\mu$$
+      Let's work out the components. If $\mu=\nu$, then $F^{\mu\nu} = 0$. 
+      If $\mu=0$ and $\nu = i = 1, 2, 3$, then:
+      $$F^{0i} = \partial^0 A^i - \partial^i A^0 = -\frac{1}{c}\frac{\partial A^i}{\partial t} - \frac{\partial A^0}{\partial \mathbf{x}_i} = -\frac{1}{c}\frac{\partial \mathbf{A}_i}{\partial t} -\frac{1}{c}\frac{\partial \phi}{\partial \mathbf{x}_i}$$
+      So the upper row is $\frac{1}{c} \bf{E}$ (since $\mathbf{E} = -\frac{\partial \mathbf{A}}{\partial t} - \nabla \phi)$. 
+      If $\mu = i = 1, 2, 3$ and $\nu = j = 1, 2, 3$, then:
+      $$F^{ij} = \partial^i A^j - \partial^j A^i = \epsilon_{ijk}[\nabla \times \mathbf{A}]_k = \epsilon_{ijk}\mathbf{B}_k$$
+      Hence, $F^{12} = \mathbf{B}_z$, $F^{13} = -\mathbf{B}_y$, $F^{23} = \mathbf{B}_x$. 
+      Written in full: 
+      $$
+      F^{\mu\nu} \rightarrow
+      \begin{bmatrix}
+      0 & E_x/c & E_y/c & E_z/c \\
+      -E_x/c & 0 & B_z & -B_y \\
+      -E_y/c & -B_z & 0 & B_x \\
+      -E_z/c & B_y & -B_x & 0
+      \end{bmatrix}
+      $$
+      We can recover two of Maxwell's equations by taking the $4$-divergence of each column:
+      $$
+      \begin{align}
+      \partial_\mu F^{\mu\nu} &= (-\frac{1}{c}\nabla\cdot\mathbf{E}, \frac{1}{c^2}\frac{\partial \mathbf{E}}{\partial t} - \nabla \times\mathbf{B}) \\
+      &= (-\mu_0\rho c, -\mu_o \mathbf{j}) \\
+      &= -\mu_0 J^\nu
+      \end{align}
+      $$
+      Lower $F^{\mu\nu}$ by doing $F_{\mu\nu} = g_{\mu\alpha} g_{\nu\beta} F^{\alpha\beta}$. Both $(+---)$ and $(-+++)$ metrics produce the same result:
+      $$
+      F_{\mu\nu} \rightarrow
+      \begin{bmatrix}
+      0 & -E_x/c & -E_y/c & -E_z/c \\
+      E_x/c & 0 & B_z & -B_y \\
+      E_y/c & -B_z & 0 & B_x \\
+      E_z/c & B_y & -B_x & 0
+      \end{bmatrix}
+      $$
+      In general, the operation $g (\cdot) g$ is independent of the choice of metric. 
+    </p>
+    <p>
+      The dual of the electromagnetic tensor is given by:
+      $$\tilde{F}^{\mu\nu} = \epsilon^{\mu\nu\alpha\beta} F_{\alpha\beta}$$
+      Its elements are:
+      $$
+      \tilde{F}^{\mu\nu} \rightarrow
+      \begin{bmatrix}
+      0 & -B_x & -B_y & -B_z \\
+      B_x & 0 & -E_z/c & E_y/c \\
+      B_y & E_z/c & 0 & -E_x/c \\
+      B_z & -E_y/c & E_x/c & 0
+      \end{bmatrix}
+      $$
+      We can generate invariants $F^{\mu\nu}F_{\mu\nu} = 2(|\mathbf{B}|^2 - \frac{|\mathbf{E}|^2}{c^2})$ and  $\tilde{F}^{\mu\nu}F_{\mu\nu} = -2\frac{\mathbf{B}\cdot\mathbf{E}}{c}$. 
+    </p>
+  
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Electromagnetic stress tensor</h3>
+    <p>
+      The EM tensor is given by:
+      $$T^{\mu\nu} = -\frac{1}{\mu_0} (F^{\mu\alpha}F^{\nu}_{\phantom{x}\alpha} - \frac{1}{4}g^{\mu\nu}F^{\alpha\beta}F_{\alpha\beta})$$
+      We stick to the metric $(-+++)$. Do some calculations:
+    </p>
+    <p style="font-size: 70%;">
+      $$
+      \begin{align}
+      F^{\mu\alpha}F^{\nu}_{\phantom{x}\alpha} &\rightarrow
+      \begin{bmatrix}
+      0 & E_x/c & E_y/c & E_z/c \\
+      -E_x/c & 0 & B_z & -B_y \\
+      -E_y/c & -B_z & 0 & B_x \\
+      -E_z/c & B_y & -B_x & 0
+      \end{bmatrix}
+      \begin{bmatrix}
+      0 & E_x/c & E_y/c & E_z/c \\
+      E_x/c & 0 & B_z & -B_y \\
+      E_y/c & -B_z & 0 & B_x \\
+      E_z/c & B_y & -B_x & 0
+      \end{bmatrix} \\
+      &=
+      \begin{bmatrix}  
+      \frac{1}{c^2}(E_x^2+E_y^2+E_z^2) & \frac{1}{c}(E_z B_y - E_y B_z) & \frac{1}{c}(E_x B_z - E_z B_x) & \frac{1}{c}(E_y B_x - E_x B_y) \\ 
+      \frac{1}{c}(E_y B_z - E_z B_y) & -\frac{1}{c^2}E_x^2 - B_y^2 - B_z^2 & -\frac{1}{c^2}E_xE_y + B_xB_y & -\frac{1}{c^2}E_xE_z + B_xB_z \\  
+      \frac{1}{c}(E_z B_x - E_x B_z) & -\frac{1}{c^2}E_xE_y + B_xB_y & -\frac{1}{c^2}E_y^2 - B_x^2 - B_z^2 & -\frac{1}{c^2}E_yE_z + B_yB_z \\
+      \frac{1}{c}(E_x B_y - E_y B_x) & -\frac{1}{c^2}E_xE_z + B_xB_z & -\frac{1}{c^2}E_yE_z + B_yB_z & -\frac{1}{c^2}E_z^2 - B_x^2 - B_y^2  
+      \end{bmatrix}
+      \end{align}
+      $$
+    </p>
+    <p>
+      while:
+      $$
+      \frac{1}{4}g^{\mu\nu}F^{\alpha\beta}F_{\alpha\beta} \rightarrow
+      \frac{1}{2}\left(|\mathbf{B}|^2-\frac{|\mathbf{E}|^2}{c^2}\right)
+      \begin{bmatrix}
+      -1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+      \end{bmatrix}
+      $$
+      So putting everything together gives:
+    </p>
+    <p style="font-size: 60%;">
+      $$
+      T^{\mu\nu} \rightarrow
+      \frac{1}{\mu_0}  
+      \begin{bmatrix}  
+      \frac12\!\left(\frac{|\mathbf E|^2}{c^2}+|\mathbf B|^2\right)  
+      &  
+      \frac{( \mathbf E\times \mathbf B )_x}{c}  
+      &  
+      \frac{( \mathbf E\times \mathbf B )_y}{c}  
+      &  
+      \frac{( \mathbf E\times \mathbf B )_z}{c}  
+      \\
+      \frac{( \mathbf E\times \mathbf B )_x}{c}  
+      &  
+      -\frac{E_x^2}{c^2}-B_x^2+\frac12\!\left(\frac{|\mathbf E|^2}{c^2}+|\mathbf B|^2\right)  
+      &  
+      -\frac{E_xE_y}{c^2}-B_xB_y  
+      &  
+      -\frac{E_xE_z}{c^2}-B_xB_z  
+      \\
+      \frac{( \mathbf E\times \mathbf B )_y}{c}  
+      &  
+      -\frac{E_yE_x}{c^2}-B_yB_x  
+      &  
+      -\frac{E_y^2}{c^2}-B_y^2+\frac12\!\left(\frac{|\mathbf E|^2}{c^2}+|\mathbf B|^2\right)  
+      &  
+      -\frac{E_yE_z}{c^2}-B_yB_z  
+      \\  
+      \frac{( \mathbf E\times \mathbf B )_z}{c}  
+      &  
+      -\frac{E_zE_x}{c^2}-B_zB_x  
+      &  
+      -\frac{E_zE_y}{c^2}-B_zB_y  
+      &  
+      -\frac{E_z^2}{c^2}-B_z^2+\frac12\!\left(\frac{|\mathbf E|^2}{c^2}+|\mathbf B|^2\right)  
+      \end{bmatrix}
+      $$
+    </p>
+    <p>
+      So the components are:
+      $$T^{00} = \frac{1}{2\mu_0}\left(\frac{|\mathbf E|^2}{c^2}+|\mathbf B|^2\right) = \frac{\epsilon_0}{2}|\mathbf E|^2+\frac{1}{2\mu_0}|\mathbf B|^2$$
+      $$T^{0i} = \frac{1}{c} [\frac{1}{\mu_0}\mathbf{E}\times \mathbf{B}]_i = \frac{\mathbf{S}_i}{c}$$
+      $$T^{ij} = -\frac{1}{\mu_0}\left(\frac{E_iE_j}{c^2} + B_iB_j\right) + \delta_{ij}\left(\frac{\epsilon_0}{2}|\mathbf E|^2+\frac{1}{2\mu_0}|\mathbf B|^2\right) = -\sigma_{ij}$$
+      In free space, $\partial_\mu T^{\mu\nu} = 0$. If charge is present then $\partial_\mu T^{\mu\nu}$ gives the force per unit volume acting on the charge instead. 
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>
