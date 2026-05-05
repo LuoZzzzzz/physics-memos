@@ -159,7 +159,7 @@
     <h3 class="section-anchor">Electromagnetic stress tensor</h3>
     <p>
       The EM tensor is given by:
-      $$T^{\mu\nu} = -\frac{1}{\mu_0} (F^{\mu\alpha}F^{\nu}_{\phantom{x}\alpha} - \frac{1}{4}g^{\mu\nu}F^{\alpha\beta}F_{\alpha\beta})$$
+      $$T^{\mu\nu} = \frac{1}{\mu_0} (F^{\mu\alpha}F^{\nu}_{\phantom{x}\alpha} - \frac{1}{4}g^{\mu\nu}F^{\alpha\beta}F_{\alpha\beta})$$
       We stick to the metric $(-+++)$. Do some calculations:
     </p>
     <p style="font-size: 70%;">
@@ -174,16 +174,16 @@
       \end{bmatrix}
       \begin{bmatrix}
       0 & E_x/c & E_y/c & E_z/c \\
-      E_x/c & 0 & B_z & -B_y \\
-      E_y/c & -B_z & 0 & B_x \\
-      E_z/c & B_y & -B_x & 0
+      E_x/c & 0 & -B_z & B_y \\
+      E_y/c & B_z & 0 & -B_x \\
+      E_z/c & -B_y & B_x & 0
       \end{bmatrix} \\
       &=
       \begin{bmatrix}  
-      \frac{1}{c^2}(E_x^2+E_y^2+E_z^2) & \frac{1}{c}(E_z B_y - E_y B_z) & \frac{1}{c}(E_x B_z - E_z B_x) & \frac{1}{c}(E_y B_x - E_x B_y) \\ 
-      \frac{1}{c}(E_y B_z - E_z B_y) & -\frac{1}{c^2}E_x^2 - B_y^2 - B_z^2 & -\frac{1}{c^2}E_xE_y + B_xB_y & -\frac{1}{c^2}E_xE_z + B_xB_z \\  
-      \frac{1}{c}(E_z B_x - E_x B_z) & -\frac{1}{c^2}E_xE_y + B_xB_y & -\frac{1}{c^2}E_y^2 - B_x^2 - B_z^2 & -\frac{1}{c^2}E_yE_z + B_yB_z \\
-      \frac{1}{c}(E_x B_y - E_y B_x) & -\frac{1}{c^2}E_xE_z + B_xB_z & -\frac{1}{c^2}E_yE_z + B_yB_z & -\frac{1}{c^2}E_z^2 - B_x^2 - B_y^2  
+      \frac{1}{c^2}(E_x^2+E_y^2+E_z^2) & \frac{1}{c}(E_y B_z - E_z B_y) & \frac{1}{c}(E_z B_x - E_x B_z) & \frac{1}{c}(E_x B_y - E_y B_x) \\ 
+      \frac{1}{c}(E_y B_z - E_z B_y) & -\frac{1}{c^2}E_x^2 + B_y^2 + B_z^2 & -\frac{1}{c^2}E_xE_y - B_xB_y & -\frac{1}{c^2}E_xE_z - B_xB_z \\  
+      \frac{1}{c}(E_z B_x - E_x B_z) & -\frac{1}{c^2}E_xE_y - B_xB_y & -\frac{1}{c^2}E_y^2 + B_x^2 + B_z^2 & -\frac{1}{c^2}E_yE_z - B_yB_z \\
+      \frac{1}{c}(E_x B_y - E_y B_x) & -\frac{1}{c^2}E_xE_z - B_xB_z & -\frac{1}{c^2}E_yE_z - B_yB_z & -\frac{1}{c^2}E_z^2 + B_x^2 + B_y^2  
       \end{bmatrix}
       \end{align}
       $$
@@ -246,7 +246,8 @@
       $$T^{00} = \frac{1}{2\mu_0}\left(\frac{|\mathbf E|^2}{c^2}+|\mathbf B|^2\right) = \frac{\epsilon_0}{2}|\mathbf E|^2+\frac{1}{2\mu_0}|\mathbf B|^2$$
       $$T^{0i} = \frac{1}{c} [\frac{1}{\mu_0}\mathbf{E}\times \mathbf{B}]_i = \frac{\mathbf{S}_i}{c}$$
       $$T^{ij} = -\frac{1}{\mu_0}\left(\frac{E_iE_j}{c^2} + B_iB_j\right) + \delta_{ij}\left(\frac{\epsilon_0}{2}|\mathbf E|^2+\frac{1}{2\mu_0}|\mathbf B|^2\right) = -\sigma_{ij}$$
-      In free space, $\partial_\mu T^{\mu\nu} = 0$. If charge is present then $\partial_\mu T^{\mu\nu}$ gives the force per unit volume acting on the charge instead. 
+      In free space, $\partial_\mu T^{\mu\nu} = 0$. If charge is present then $\partial_\mu T^{\mu\nu}$ gives the (negative of the) force per unit volume acting on the charge instead: 
+      $$\partial_\mu T^{\nu\mu} = -\left(\frac{1}{c}(\mathbf{j}\cdot\mathbf{E}), \rho\mathbf{E} + \mathbf{j}\times\mathbf{B}\right)$$
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
