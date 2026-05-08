@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>B6 Bookwork</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>B6 Bookwork</h1>
+    <p>
+      A list of bookwork derivations for <b>B6</b> solid state Physics.
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Einstein solid</h3>
+    <p>
+      A crystal in $3$ dimensions with $N$ oscillators will have a total of $3N$ vibrational modes, as each oscillator has $3$ vibrational degrees of freedom. We treat the oscillators as independent harmonic oscillators, each with a <b>fixed</b> natural frequency $\omega_0$. 
+    </p>
+    <p>
+      The density of states in $\omega$ space is simply:
+      $$g(\omega) = 3N \delta(\omega - \omega_0)$$
+    </p>
+    <p>
+      The occupancy of each oscillator is:
+      $$n_\text{o}(\omega) = \frac{1}{e^{\beta \hbar \omega}-1}$$
+      Therefore, the total number of phonons at a given temperature is:
+      $$N_\text{p} = 3N\int_0^\infty \frac{\delta(\omega-\omega_0)}{e^{\beta \hbar \omega}-1} \text{d}\omega = \frac{3N}{e^{\beta \hbar \omega_0}-1}$$
+      While the internal energy of the crystal is:
+      $$U(T) = \frac{3N \hbar\omega_0}{e^{\beta \hbar \omega_0}-1}$$
+      since all phonons have the same energy $\hbar \omega_0$. 
+    </p>
+    <p>
+      Differentiating gives:
+      $$C_V = \frac{\partial U}{\partial T} = 3N \hbar\omega_0 \frac{\hbar\omega_0}{k_B T^2}\frac{e^{\beta\hbar\omega_0}}{(e^{\beta\hbar\omega_0}-1)^2} = 3Nk_B\left(\frac{\Theta_E}{T}\right)^2 \frac{e^{\Theta_E/T}}{(e^{\Theta_E/T}-1)^2}$$
+      where we have defined the Einstein temperature $\Theta_E = \hbar\omega_0/k_B$.
+    </p>
+    <p>
+      At high temperature, $C_V \rightarrow 3Nk_B$, which is expected. 
+    </p>
+    <p>
+      At low temperature, $C_V \rightarrow 3Nk_B\left(\frac{\Theta_E}{T}\right)^2 e^{-\Theta_D/T}$, which means that the heat capacity is exponentially suppressed. However, this disagrees with experiments which suggests a $T^3$ dependence. 
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Debye solid</h3>
+    <p>
+      A crystal in $3$ dimensions with $N$ oscillators will have a total of $N$ unique $\mathbf{k}$ states. Each $\mathbf{k}$ has a further degeneracy of $3$ as it is able to support $2$ transverse and $1$ longitudinal mode. 
+    </p>
+    <p>
+      Let us further assume that:<br>
+      1. The dispersion relation (between $\omega$ and $k$) has the form $\omega = vk$ where $v$ is the sound speed (group velocity at long wavelengths).<br>
+      2. Density of states $g(k) \text{d}k \propto k^2$.<br>
+      3. Finite cutoff frequency $\omega_D$.
+    </p>
+    <p>
+      The density of states, accounting for the $3$ degeneracies per $\mathbf{k}$ mode, is:
+      $$
+      3\sum_\mathbf{k} \rightarrow 3\frac{V}{(2\pi)^3}\int \text{d}^3 \mathbf{x}
+      = 3\frac{4\pi V}{(2\pi)^3} \int_0^\infty k^2 \text{d}k 
+      \implies g(k) \text{d}k = 3\frac{4\pi V}{(2\pi)^3}  k^2 \text{d}k$$
+      Applying the dispersion relation gives:
+      $$g(\omega) \text{d}\omega = 3\frac{4\pi V}{(2\pi v)^3}  \omega^2 \text{d}\omega$$
+    </p>
+    <p>
+      <i>Debye frequency, $\omega_D$</i><br>
+      The cutoff frequency is defined such that integration up to it gives exactly $3N$ modes, which is the total number of unique modes the crystal has. Therefore:
+      $$
+      \int_0^{\omega_D} g(\omega) \text{d}\omega = \frac{4\pi V}{(2\pi v)^3}  \omega_D^3
+      = 3N \implies
+      \boxed{\omega_D = (6 \pi^2 n)^{1/3} v}
+      $$
+    </p>
+    <p>
+      <i>Statistical mechanics</i><br>
+      Each mode of the crystal behaves like a harmonic oscillator, which has occupancy:
+      $$\boxed{n_\text{o}(\omega) = \frac{1}{e^{\beta \hbar \omega}-1}}$$
+      Therefore, the number of phonons in the crystal is:
+      $$N_\text{p} = \int_0^{\omega_D} n_\text{o}(\omega) g(\omega) \text{d}\omega = 3\frac{4\pi V}{(2\pi v)^3}\int_0^{\omega_D} \frac{\omega^2}{e^{\beta \hbar \omega}-1} \text{d}\omega$$
+      while the total energy of the crystal, as a function of temperature is:
+      $$U(T) = \int_0^{\omega_D} \hbar \omega \,n_\text{o}(\omega) g(\omega) \text{d}\omega = 3\frac{4\pi V \hbar}{(2\pi v)^3}\int_0^{\omega_D} \frac{\omega^3}{e^{\beta \hbar \omega}-1} \text{d}\omega$$
+    </p>
+    <p>
+      <i>Low temperature approximation</i><br>
+      At low $T$, $\beta \rightarrow \infty$, so $\frac{1}{e^{\beta \hbar \omega}-1}$ term decreases quickly and essentially kills off anything for large $\omega \lt \omega_D$. Therefore, we may replace the limits of integration:
+      $$\int_0^{\omega_D} \rightarrow \int_0^\infty$$
+      This reduces the integrals for $N_\text{p}$ and $U(T)$ to standard Zeta integrals. We expect that for low temperature the heat capacity $C_V = \tfrac{\partial U}{\partial T}$ scales as $T^3$.
+    </p>
+    <p>
+      <i>High temperature approximation</i><br>
+      At high $T$, $\beta \rightarrow 0$, so $e^{\beta \hbar \omega} - 1 \approx 1 + \beta\hbar\omega - 1 = \beta\hbar\omega$, so the occupancy becomes:
+      $$n_\text{o}(\omega) = \frac{1}{e^{\beta \hbar \omega}-1} \approx \frac{1}{\beta\hbar\omega}$$
+      which reduces the integrals for $N_\text{p}$ and $U(T)$ to simple polynomial integrals. We expect that $C_V = \tfrac{\partial U}{\partial T} \rightarrow 3Nk_B$.  
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>
