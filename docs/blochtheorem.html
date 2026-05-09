@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bloch's theorem</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax LaTeX Support -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
+
+    <h1>Bloch's theorem</h1>
+
+    <p>
+      A general wavefunction may be expanded in terms of plane waves as:
+      $$\psi = \int_{\mathbf{q}} c(\mathbf{q}) e^{i\mathbf{q}\cdot\mathbf{r}} \,\text{d}^3\mathbf{r} \rightarrow \sum_\mathbf{q} c(\mathbf{q}) e^{i\mathbf{q}\cdot\mathbf{r}}$$
+      For simpler notation we write this as a sum, but it should be noted that $\mathbf{q}$ can vary continuously. Now we note that the sum $\sum_\mathbf{q}$ over the entire reciprocal space can be replaced with the sum $\sum_\mathbf{k} \sum_\mathbf{G}$ where $\mathbf{k}$ is summed continuously over the first Brillouin zone while $\mathbf{G}$ is summed discretely over all all reciprocal vectors. Then, $\psi$ may be decomposed as:
+      $$\psi = \sum_\mathbf{k} \sum_\mathbf{G} c(\mathbf{k}+\mathbf{G}) e^{i(\mathbf{k}+\mathbf{G})\cdot\mathbf{r}} = \sum_\mathbf{k} \left(\sum_\mathbf{G} c(\mathbf{k}+\mathbf{G})e^{i\mathbf{G}\cdot\mathbf{r}}\right) e^{i\mathbf{k}\cdot\mathbf{r}} = \sum_\mathbf{k} u_\mathbf{k}(\mathbf{r}) e^{i\mathbf{k}\cdot\mathbf{r}}$$
+      where $u_\mathbf{k}(\mathbf{r})$ is a periodic function of period $\mathbf{R}$, that is $u_\mathbf{k}(\mathbf{r}+\mathbf{R}) = u_\mathbf{k}(\mathbf{r})$. 
+    </p>
+    <p>
+      <i>Is this Bloch's theorem?</i>
+    </p>
+    <p>
+      No! This is just Fourier decomposition. Bloch's theorem goes a step further to say that each of the individual "modulated" plane waves $u_\mathbf{k}(\mathbf{r}) e^{i\mathbf{k}\cdot\mathbf{r}}$ are energy eigenstates of the crystal Hamiltonian. Of course, to make any statements about the energy eigenstates of the crystal, we have to introduce the crystal potential and look at the time independent Schrodinger equation. 
+    </p>
+    <p>
+      Let us assume a periodic crystal potential:
+      $$V(\mathbf{r}+\mathbf{R}) = V(\mathbf{r})$$
+      Because of the periodicity we can expand $V(\mathbf{r})$ as a sum of plane waves $e^{i\mathbf{G}\cdot\mathbf{r}}$:
+      $$V(\mathbf{r}) = \sum_{\mathbf{G}} V(\mathbf{G}) e^{i\mathbf{G}\cdot\mathbf{r}}$$
+      Plug the $\psi = \sum_\mathbf{q} c(\mathbf{q}) e^{i\mathbf{q}\cdot\mathbf{r}}$ and $V(\mathbf{r}) = \sum_{\mathbf{G}} V(\mathbf{G}) e^{i\mathbf{G}\cdot\mathbf{r}}$ into the time independent Schrodinger equation $-\tfrac{\hbar^2}{2m} \nabla^2 \psi + V(\mathbf{r}) \psi = E\psi$:
+      $$\frac{\hbar^2}{2m} \sum_\mathbf{q} |\mathbf{q}|^2 c(\mathbf{q}) e^{i\mathbf{q}\cdot\mathbf{r}} + \sum_\mathbf{G}\sum_{\mathbf{q}'} V(\mathbf{G}) c(\mathbf{q}') e^{i(\mathbf{G}+\mathbf{q}')\cdot\mathbf{r}} = E\sum_\mathbf{q} c(\mathbf{q}) e^{i\mathbf{q}\cdot\mathbf{r}}$$
+      Now, equate coefficients for terms of the same $e^{i\mathbf{q}\cdot\mathbf{r}}$. Note that $\mathbf{G} + \mathbf{q}' = \mathbf{q} \implies \mathbf{q}' = \mathbf{q} - \mathbf{G}$. So:
+      $$\frac{\hbar^2|\mathbf{q}|^2}{2m} c(\mathbf{q}) + \sum_\mathbf{G} V(\mathbf{G})c(\mathbf{q}-\mathbf{G}) = E c(\mathbf{q})$$
+      Note that by doing this, we have effectively performed a change of basis from the position basis $\mathbf{r}$ to the Fourier basis $\mathbf{q}$. As a result we now have an eigenvector problem. 
+    </p>
+    <p>
+      The form of the above equation says that the Hamiltonian in the Fourier basis only couples $\mathbf{q}$ differing by some reciprocal lattice vector $\mathbf{G}$. 
+    </p>
+    <p>
+      That is, our Hamiltonian initially has the form:
+      $$
+      \begin{bmatrix}
+      H(\mathbf{q}_1, \mathbf{q}_1) & H(\mathbf{q}_1, \mathbf{q}_2) & H(\mathbf{q}_1, \mathbf{q}_3) & \cdots \\
+      H(\mathbf{q}_2, \mathbf{q}_1) & H(\mathbf{q}_2, \mathbf{q}_2) & H(\mathbf{q}_2, \mathbf{q}_3) & \cdots \\
+      H(\mathbf{q}_3, \mathbf{q}_1) & H(\mathbf{q}_3, \mathbf{q}_2) & H(\mathbf{q}_3, \mathbf{q}_3) & \cdots \\
+      \vdots & \vdots & \vdots & \ddots
+      \end{bmatrix}
+      $$
+      where $\mathbf{q}_i$ run over the entire reciprocal space, but it can be rearranged into the block diagonal form:
+    </p>
+    <p style="font-size: 60%;">
+      $$
+      H = \begin{bmatrix}
+      \begin{array}{ccc|ccc|ccc}
+      H(\mathbf{k}_1,\, \mathbf{k}_1) 
+          & H(\mathbf{k}_1,\, \mathbf{k}_1{+}\mathbf{G}_1) 
+          & \cdots 
+          & 0 & 0 & \cdots 
+          & 0 & 0 & \cdots \\
+      H(\mathbf{k}_1{+}\mathbf{G}_1,\, \mathbf{k}_1) 
+          & H(\mathbf{k}_1{+}\mathbf{G}_1,\, \mathbf{k}_1{+}\mathbf{G}_1) 
+          & \cdots 
+          & 0 & 0 & \cdots 
+          & 0 & 0 & \cdots \\
+      \vdots & \vdots & \ddots 
+          & \vdots & \vdots & 
+          & \vdots & \vdots & \\
+      \hline
+      0 & 0 & \cdots 
+          & H(\mathbf{k}_2,\, \mathbf{k}_2) 
+          & H(\mathbf{k}_2,\, \mathbf{k}_2{+}\mathbf{G}_1) 
+          & \cdots 
+          & 0 & 0 & \cdots \\
+      0 & 0 & \cdots 
+          & H(\mathbf{k}_2{+}\mathbf{G}_1,\, \mathbf{k}_2) 
+          & H(\mathbf{k}_2{+}\mathbf{G}_1,\, \mathbf{k}_2{+}\mathbf{G}_1) 
+          & \cdots 
+          & 0 & 0 & \cdots \\
+      \vdots & \vdots & 
+          & \vdots & \vdots & \ddots 
+          & \vdots & \vdots & \\
+      \hline
+      0 & 0 & \cdots 
+          & 0 & 0 & \cdots 
+          & H(\mathbf{k}_3,\, \mathbf{k}_3) 
+          & H(\mathbf{k}_3,\, \mathbf{k}_3{+}\mathbf{G}_1) 
+          & \cdots \\
+      0 & 0 & \cdots 
+          & 0 & 0 & \cdots 
+          & H(\mathbf{k}_3{+}\mathbf{G}_1,\, \mathbf{k}_3) 
+          & H(\mathbf{k}_3{+}\mathbf{G}_1,\, \mathbf{k}_3{+}\mathbf{G}_1) 
+          & \cdots \\
+      \vdots & \vdots & 
+          & \vdots & \vdots & 
+          & \vdots & \vdots & \ddots
+      \end{array}
+      \end{bmatrix}
+      $$
+    </p>
+    <p>
+      where the matrix elements are explicitly:
+    </p>
+    <p style="font-size: 80%;">
+      $$
+      H(\mathbf{k}_i + \mathbf{G},\; \mathbf{k}_j + \mathbf{G}') =
+      \begin{cases}
+      \dfrac{\hbar^2 |\mathbf{k}_i + \mathbf{G}|^2}{2m}\,\delta_{\mathbf{G}\mathbf{G}'} 
+          + V(\mathbf{G} - \mathbf{G}') 
+          & \text{if } \mathbf{k}_i = \mathbf{k}_j \quad (\text{same block}) \\[10pt]
+      0 
+          & \text{if } \mathbf{k}_i \neq \mathbf{k}_j \quad (\text{different blocks})
+      \end{cases}
+      $$
+    </p>
+    <p>
+      with $\mathbf{k}_i$ now running over the first Brillouin zone, instead of the entire reciprocal space.
+    </p>
+    <p>
+      If we fix some $\mathbf{k} \in \text{first BZ}$, then the corresponding diagonal block $B(\mathbf{k})$ is itself an infinite-dimensional matrix:
+      $$
+      B(\mathbf{k}) = 
+      \begin{bmatrix}
+      \frac{\hbar^2|\mathbf{k}|^2}{2m} + V(\mathbf{0}) 
+          & V(-\mathbf{G}_1) 
+          & V(-\mathbf{G}_2) 
+          & \cdots \\[6pt]
+      V(\mathbf{G}_1) 
+          & \frac{\hbar^2|\mathbf{k}+\mathbf{G}_1|^2}{2m} + V(\mathbf{0}) 
+          & V(\mathbf{G}_1 - \mathbf{G}_2) 
+          & \cdots \\[6pt]
+      V(\mathbf{G}_2) 
+          & V(\mathbf{G}_2 - \mathbf{G}_1) 
+          & \frac{\hbar^2|\mathbf{k}+\mathbf{G}_2|^2}{2m} + V(\mathbf{0}) 
+          & \cdots \\[6pt]
+      \vdots & \vdots & \vdots & \ddots
+      \end{bmatrix}
+      $$
+      The solutions will be of the form:
+      $$
+      \left(
+      \begin{bmatrix}
+      c_1(\mathbf{k}) \\ c_1(\mathbf{k}+\mathbf{G}_1) \\ c_1(\mathbf{k}+\mathbf{G}_2) \\ \dots
+      \end{bmatrix}, E_1(\mathbf{k})
+      \right),
+      \left(
+      \begin{bmatrix}
+      c_2(\mathbf{k}) \\ c_2(\mathbf{k}+\mathbf{G}_1) \\ c_2(\mathbf{k}+\mathbf{G}_2) \\ \dots
+      \end{bmatrix}, E_2(\mathbf{k})
+      \right), \cdots$$
+      In fact, because there are an infinite number of $\mathbf{G}$s, the dimension of the above matrix equation is, in principle, infinite, and there will be infinitely many eigenvector eigenvalue pairs. These are indexed by the variable $n$, called the band index. If we varied $\mathbf{k}$ in the first Brillouin zone, keeping the $n$ constant, then the energy $E_n(\mathbf{k})$ also varies continuously. 
+    </p>
+    <p>
+      This means that a single physical $\mathbf{k}$ state can have infinitely many energies, each corresponding to a wavefunction of the form $u_{n, \mathbf{k}}(\mathbf{r}) e^{i\mathbf{k}\cdot\mathbf{r}}$ (ie. same spatial frequency but different spatial modulation) and energy $E_n(\mathbf{k})$. For example, the lowest energy eigenstate (mapping back to the position basis) for the above example is:
+      $$u_{1, \mathbf{k}}(\mathbf{r}) e^{i\mathbf{k}\cdot\mathbf{r}} = \left(\sum_\mathbf{G} c_1(\mathbf{k}+\mathbf{G}) e^{i\mathbf{G}\cdot\mathbf{r}}\right) e^{i\mathbf{k}\cdot\mathbf{r}}$$
+      Looking back, the periodicity of the crystal potential was important, because it meant that in the Fourier basis only $\mathbf{q}$s differing by reciprocal lattice vectors $\mathbf{G}$ are coupled together in an energy eigenstate. This means that the problem can be broken down into smaller "blocks", and due to the relation between $\mathbf{q}$s within each block the spatial modulation is also periodic with period $\mathbf{R}$ when we map back to the position basis. 
+    </p>
+    <p>
+      <b>Practical considerations</b><br>
+      In general, we assume some analytical form for the potential, in which case the potential will contain an infinite number of $e^{i\mathbf{G}\cdot\mathbf{r}}$ components. We then have to settle for an approximation, using a large but finite number of $\mathbf{G}_i$s when solving the above eigenvector-eigenvalue problem so that our matrix remains finite. However, sometimes the potential might be, say, sinusoidal, and so contain only a few non-zero $\mathbf{G_i}$s. In such cases we can find an exact solution. 
+    </p>
+  </main>
+
+</body>
+</html>
