@@ -240,6 +240,51 @@
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Einstein $B$ coefficient from Fermi's Golden Rule</h3>
+    <p>
+      I think this derivation is correct, although the integration over polarisations is suspicious.
+    </p>
+    <p>
+      Consider an atom in a bath of incoherent, isotropic radiation. The density of states of the radiation field is given by:
+      $$\text{d}N = \frac{2V}{(2\pi)^3} \cdot k^2 \text{d}k \text{d}\Omega =  \frac{2V}{(2\pi)^3 c^3} \omega^2 \text{d}\omega\text{d}\Omega$$
+    </p>
+    <p>
+      From equipartition theorem, each mode carries an energy $\frac{1}{2}\epsilon_0 \mathcal{E}_0^2$, so the total energy density in a solid angle $\text{d}\Omega$ is:
+      $$\rho(\omega_0, \Omega) \,\text{d}\Omega = \frac{1}{2}\epsilon_0\mathcal{E}_0^2 \cdot \left.\frac{\text{d}N}{\text{d}\omega}\right|_{\omega=\omega_0} \,\text{d}\Omega = \frac{1}{2}\epsilon_0\mathcal{E}_0^2\cdot\frac{2V}{(2\pi)^3 c^3} \omega_0^2 \,\text{d}\Omega = \frac{\epsilon_0\mathcal{E}_0^2V}{(2\pi)^3c^3}\omega_0^2 \,\text{d}\Omega$$
+      And:
+      $$\rho(\omega_0) = \frac{\epsilon_0\mathcal{E}_0^2V}{2\pi^2c^3}\omega_0^2 $$
+      This gives:
+      $$\mathcal{E}_0^2 = \frac{2\pi^2c^3}{\epsilon_0 \omega_0^2 V}$$
+      The differential rate $\text{d}\Gamma$ into a small volume of phase space $\omega^2 \,\text{d}\omega \text{d}\Omega$ is:
+      $$
+      \begin{align}
+      \text{d} \Gamma (\omega, \Omega) &= \frac{2\pi}{\hbar}|\langle1|\tfrac{1}{2}e\mathcal{E}_0 (\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \delta(\hbar\omega-\hbar\omega_0) \,\text{d}N(\omega, \theta, \phi) \\
+      &= \frac{2\pi}{\hbar^2} \cdot \frac{e^2}{4} \mathcal{E}_0^2 \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \delta(\omega-\omega_0) \cdot \frac{2V}{(2\pi)^3 c^3} \omega^2 \text{d}\omega \,\text{d}\Omega \\
+      &= \frac{2\pi}{\hbar^2} \cdot \frac{e^2}{4} \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \delta(\omega-\omega_0) \cdot \frac{1}{2\pi\epsilon_0} \cdot\frac{\epsilon_0\mathcal{E}_0^2V}{2\pi^2 c^3} \omega^2 \text{d}\omega \,\text{d}\Omega \\
+      &= \frac{e^2}{4\epsilon_0\hbar^2} \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \delta(\omega-\omega_0) \cdot \rho(\omega) \,\text{d}\omega\text{d}\Omega
+      \end{align}
+      $$
+      Now, we assume an isotropic spread in radiation. This means that the polarisation direction $\hat{\epsilon}$ is distributed uniformly across all solid angles. First, integrating over $\omega$ gives:
+      $$
+      \begin{align}
+      \text{d}\Gamma(\Omega) &= [\int_0^\infty \frac{e^2}{4\epsilon_0\hbar^2} \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \delta(\omega-\omega_0) \cdot \rho(\omega) \,\text{d}\omega\text]\,{d}\Omega \\
+      &= \frac{e^2}{4\epsilon_0\hbar^2} \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \rho(\omega_0) \,{d}\Omega
+      \end{align}
+      $$
+      Next, we need to integrate over all polarisation directions. Since the polarisation is independent of $\vec{r}$, we can write $|\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle| = \hat{\epsilon}\cdot|\langle1|\vec{r}|2\rangle|$ in which case we have the dot product between two regular vectors ($\vec{r}$ was an operator). Because of $\hat{\epsilon}$ is uniformly distributed we may make the substitution $\hat{\epsilon}\cdot|\langle1|\vec{r}|2\rangle| \rightarrow |\langle1|z|2\rangle|\cos(\theta)$ for purpose of integration. Therefore:
+      $$
+      \begin{align}
+      \Gamma &= \int_0^{2\pi} \,\text{d}\phi \int_0^\pi \frac{e^2\rho(\omega_0)}{4\epsilon_0\hbar^2} \cdot |\langle1|z|2\rangle|^2 \cos^2(\theta) \cdot \sin(\theta) \,\text{d}\theta \\
+      &= 2\pi \cdot \frac{e^2\rho(\omega_0)}{4\epsilon_0\hbar^2} \cdot |\langle1|z|2\rangle|^2 \cdot \int_0^\pi \cos^2(\theta)\sin(\theta) \,\text{d}\theta \\
+      &= 2\pi \cdot \frac{e^2\rho(\omega_0)}{4\epsilon_0\hbar^2} \cdot |\langle1|z|2\rangle|^2 \cdot \frac{2}{3} \\
+      &= \frac{\pi}{3\epsilon_0\hbar^2} |\langle1|ez|2\rangle|^2 \rho(\omega_0) \\
+      &= \frac{\pi}{3\epsilon_0\hbar^2} |\vec{\mu}_{12}|^2 \rho(\omega_0) \\
+      \end{align}
+      $$
+      where $\vec{\mu}_{12}$ is the electric dipole moment of the atom. 
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
 
   </main>
 
