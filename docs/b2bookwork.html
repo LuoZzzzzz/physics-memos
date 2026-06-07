@@ -97,6 +97,210 @@
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Four force</h3>
+    <p>
+      Definition of $4$ force:
+      $$F^\mu = \frac{\text{d} P^\mu}{\text{d} \tau} 
+      = \gamma\begin{bmatrix}
+      \frac{1}{c}\frac{\text{d} E}{\text{d} t} \\ \frac{\text{d} \mathbf{p}}{\text{d} t}
+      \end{bmatrix}
+      = \gamma\begin{bmatrix}
+      \frac{1}{c}\frac{\text{d} E}{\text{d} t} \\ \mathbf{f}
+      \end{bmatrix}$$
+      A pure force is defined as a $4$ force that is always orthogonal to the $4$ velocity $U^\mu$ of the particle it is acting on:
+      $$F^\mu U_\mu = \gamma\begin{bmatrix}
+      \frac{1}{c}\frac{\text{d} E}{\text{d} t} \\ \mathbf{f}
+      \end{bmatrix} \cdot \gamma\begin{bmatrix}
+      c \\ \mathbf{u} 
+      \end{bmatrix} = \gamma^2 (\frac{\text{d}E}{\text{d}t}-\mathbf{f}\cdot\mathbf{u}) = 0 
+      \implies \frac{\text{d}E}{\text{d}t}=\mathbf{f}\cdot\mathbf{u} \text{ for a pure } 4 \text{ force}$$
+      In the center of mass frame of the particle $E = mc^2$, $t=\tau$ and $\mathbf{u}=0$, so this says that $\frac{\text{d} m}{\text{d} t} = 0$ - a pure force does not change the rest mass of the particle it acts on. Intuitively a force may be considered pure when the system it acts on is point like and has no internal structure - if the system could store potential energy (ie. a spring) then any force acting on it will not be pure. So a force is pure not because of the source of the force, but the effect of the force on the system. 
+    </p>
+    <p>
+      <i>Force transformation</i><br>
+      $S$ is the lab frame and $S'$ moves with velocity $v$ in the $+x$ direction relative to $S$. A particle moves with velocity $\mathbf{u}$ in $S$ and experiences a $4$ force $F^\mu$. The same particle experiences a $4$ force $F'^\mu$ in $S'$ given by:
+      $$
+      F'^\mu =
+      \begin{bmatrix}
+      \gamma & -\gamma\beta & 0 & 0 \\
+      -\gamma\beta & \gamma  & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+      \end{bmatrix}
+      \begin{bmatrix}
+      F^0 \\ F^1 \\ F^2 \\ F^3
+      \end{bmatrix}
+      = 
+      \begin{bmatrix}
+      \gamma(F^0 - \beta F^1) \\ \gamma(F^1 - \beta F^0) \\ F^2 \\ F^3
+      \end{bmatrix}
+      $$
+      If the force is pure, then $F^0 = \gamma_u\frac{\mathbf{f} \cdot \mathbf{u}}{c}, F^1 = \gamma_u f_x, F^2 = \gamma_u f_y, F^3 = \gamma_u f_z$. So:
+      $$\begin{bmatrix}
+      \gamma_{u'}\frac{\mathbf{f'} \cdot \mathbf{u'}}{c} \\ \gamma_{u'} f'_x \\ \gamma_{u'} f'_y \\ \gamma_{u'} f'_z
+      \end{bmatrix} = 
+      \begin{bmatrix}
+      \gamma\gamma_{u}(\frac{\mathbf{f} \cdot \mathbf{u}}{c} - \beta f_x) \\ \gamma\gamma_u(f_x - \beta \frac{\mathbf{f} \cdot \mathbf{u}}{c}) \\ \gamma_u f_y \\ \gamma_u f_z
+      \end{bmatrix}$$
+      To further simplify we need to find relation between $\gamma_u$ and $\gamma_{u'}$. This is obtained by considering the inner product $U^\mu V_\mu$:
+      $$
+      \begin{align}
+      U^\mu V_\mu
+      &=\gamma_u\begin{bmatrix}
+      c \\ \mathbf{u}
+      \end{bmatrix} \cdot
+      \gamma\begin{bmatrix}
+      c \\ \mathbf{v}
+      \end{bmatrix}
+      = \gamma_u\gamma(c^2 - \mathbf{u}\cdot\mathbf{v}) \text{ in frame } S \\
+      &=\gamma_{u'}\begin{bmatrix}
+      c \\ \mathbf{u'}
+      \end{bmatrix} \cdot
+      \begin{bmatrix}
+      c \\ \mathbf{0}
+      \end{bmatrix}
+      = \gamma_{u'}c^2 \text{ in frame } S'
+      \end{align}
+      $$
+      Since $U^\mu V_\mu$ is invariant these are equal, so: 
+      $$\frac{\gamma_u}{\gamma_{u'}} = \frac{1}{\gamma(1-\frac{\mathbf{u}\cdot\mathbf{v}}{c^2})}$$
+      Substituting into the above expression for $f'_x$:
+      $$f'_x = \frac{f_x - (\mathbf{f} \cdot \mathbf{u})\frac{v}{c^2}}{1-\frac{\mathbf{u}\cdot\mathbf{v}}{c^2}}$$
+      With unit vectors this becomes:
+      $$f'_x \hat{x} = \frac{f_x \hat{x} - (\mathbf{f} \cdot \mathbf{u})\frac{v\hat{x}}{c^2}}{1-\frac{\mathbf{u}\cdot\mathbf{v}}{c^2}}$$
+      Which inspires us to make the generalisation $v\hat{x} \rightarrow \mathbf{v}$ and $f_x\hat{x} \rightarrow \mathbf{f}_{//}$, therefore giving: 
+      $$\mathbf{f'}_{\parallel} = \frac{\mathbf{f}_{\parallel} - (\mathbf{f} \cdot \mathbf{u})\frac{\mathbf{v}}{c^2}}{1-\frac{\mathbf{u}\cdot\mathbf{v}}{c^2}}$$
+      The same logic applied to the $y$ and $z$ components give:  
+      $$\mathbf{f'}_\perp = \frac{\mathbf{f}_\perp}{{1-\frac{\mathbf{u}\cdot\mathbf{v}}{c^2}}}$$
+      One notable point. If the motion is strictly one dimension (ie. acceleration from rest from a constant **proper** force, hyperbolic motion), then only the $\mathbf{f}_{//}$ component is non-zero, in which case:
+      $$\mathbf{f'}_{\parallel} = \frac{\mathbf{f}_{\parallel} - (\mathbf{f} \cdot \mathbf{u})\frac{\mathbf{v}}{c^2}}{1-\frac{\mathbf{u}\cdot\mathbf{v}}{c^2}} = \frac{\mathbf{f}_{\parallel} - \mathbf{f}_{\parallel} (\frac{\mathbf{u}\cdot\mathbf{v}}{c^2})}{1-\frac{\mathbf{u}\cdot\mathbf{v}}{c^2}} = \mathbf{f}_{\parallel}$$
+      So the proper force is also the force experienced by the particle in the lab frame in this specific instance. 
+    </p>
+    <p>
+      <i>Force acceleration relationship</i><br>
+      We have:
+      $$\mathbf{f} = \frac{\text{d} \mathbf{p}}{\text{d} t} = \frac{\text{d}}{\text{d} t} (\gamma m \mathbf{u}) = \dot{\gamma}m\mathbf{u} + \gamma m \mathbf{a} + \gamma\dot{m}\mathbf{u} = \dot{\gamma}m\mathbf{u} + \gamma m \mathbf{a}$$
+      Noting that $\dot{\gamma} = \gamma^3\frac{\mathbf{a}\cdot\mathbf{u}}{c^2}$, we get: 
+      $$\mathbf{f} = m(\gamma^3\frac{\mathbf{a}\cdot\mathbf{u}}{c^2}\mathbf{u} + \gamma \mathbf{a})$$
+      We would like to isolate decouple $\mathbf{u}$ and $\mathbf{a}$. This can be done by taking the projection of $\mathbf{f}$ along $\mathbf{u}$ to find an expression for $\mathbf{a}\cdot\mathbf{u}$ in terms of $\mathbf{f}$ and $\mathbf{u}$: 
+      $$\mathbf{f}\cdot\mathbf{u} = \gamma m(\mathbf{a}\cdot\mathbf{u})(\gamma^2\frac{|\mathbf{u}|^2}{c^2} + 1) = \gamma^3m (\mathbf{a}\cdot\mathbf{u})$$
+      And substituting this result into the original equation gives:
+      $$\mathbf{f} = \frac{\mathbf{f}\cdot\mathbf{u}}{c^2} \mathbf{u} + \gamma m\mathbf{a}$$
+      For a charge in **circular motion**, $\mathbf{f}\cdot\mathbf{u} = 0$, so: $$f_\perp = \gamma m a$$For a charge accelerating in a straight line, $\mathbf{f}\cdot\mathbf{u} = f_{//} u$, so:
+      $$f_{\parallel} = \frac{f_{\parallel}u^2}{c^2} + \gamma ma \implies f_{\parallel} = \frac{\gamma m a}{1-\frac{u^2}{c^2}} = \gamma^3 ma$$
+      The force equation can be further manipulated. Dotting both sides with $\mathbf{u}$ gives:
+      $$\mathbf{f}\cdot\mathbf{u} = \frac{|\mathbf{u}|^2}{c^2}\mathbf{f}\cdot\mathbf{u} + \gamma m\mathbf{a}\cdot\mathbf{u} \implies \mathbf{f}\cdot\mathbf{u} = \gamma^3 m \mathbf{a}\cdot\mathbf{u}$$
+      Plugging this back into the original formula gives:
+      $$\mathbf{f} = \frac{\gamma^3 m \mathbf{a}\cdot\mathbf{u}}{c^2} \mathbf{u} + \gamma m\mathbf{a}$$
+      Applying $\text{baccab}$ then gives:
+      $$\mathbf{f} = m\gamma^3 \left(\mathbf{a} + \frac{\mathbf{v}\times(\mathbf{v}\times\mathbf{a})}{c^2}\right)$$
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Trajectory in crossed electromagnetic fields</h3>
+    <p>
+      Frame $S'$ moves at velocity $v\hat{z}$ relative to frame $S$. The field transformation equations between the two frames are:
+      $$
+      \begin{align}
+      \mathbf{E}'_{\parallel} = \mathbf{E}_{\parallel}, &\phantom{x} \mathbf{B}'_{\parallel} = \mathbf{B}_{\parallel} \\
+      \mathbf{E}'_{\perp} = \gamma(\mathbf{E}_{\perp} + \mathbf{v}\times\mathbf{B}), &\phantom{x} \mathbf{B}'_{\perp} = \gamma(\mathbf{B}_{\perp} - \frac{1}{c^2} \mathbf{v}\times\mathbf{E})
+      \end{align}
+      $$
+      Suppose the fields in $S$ are $\mathbf{E} = E\hat{x}$ and $\mathbf{B} = B\hat{y}$. Applying the above rules we find that the fields in $S'$ are:
+      $$
+      \begin{align}
+      \mathbf{E}'_{\parallel} = 0, &\phantom{x} \mathbf{B}'_{\parallel} = 0 \\
+      \mathbf{E}'_{\perp} = \gamma(E-vB)\hat{x} , &\phantom{x} \mathbf{B}'_{\perp} = \gamma(B-\frac{vE}{c^2})\hat{y}
+      \end{align}
+      $$
+      Two cases. If $B$ dominates $E$, then in the frame with $v = E/B$ we have $\mathbf{E}' = 0$. If $E$ dominates $B$, then in the frame with $v = c^2B/E$ we have $\mathbf{B}' = 0$. 
+    </p>
+    <p>
+      Now suppose we place a charge at rest initially at the origin. We want to solve for the future trajectory of the charge. 
+    </p>
+    <p>
+      Consider the first case where $B$ dominates. In $S'$ we have:
+      $$\mathbf{E}' = 0, \phantom{x} \mathbf{B}' = \gamma_0(B-\frac{E^2}{c^2B})\hat{y}' = B' \hat{y}'$$
+      Further, the initial velocity of the charge in $S'$ is:
+      $$\mathbf{v}'_0 = -\frac{E}{B} \hat{z}'$$
+      Therefore, the charge will undergo circular motion in $S'$ with a radius of:
+      $$r' = \frac{p_0'}{qB'}$$
+      and an angular velocity of:
+      $$\omega' = \frac{qB'}{\gamma_0 m}$$
+      Therefore, its trajectory is:
+      $$z' = -r'\sin(\omega't'), \phantom{x} x' = r' - r'\cos(\omega't')$$
+      The events in the two frames are related by the coordinate transformation:
+      $$ct' = \gamma_0(ct - \beta_0 z), \phantom{x} z' = \gamma(z - v_0t), \phantom{x} x' = x, \phantom{x} y' = y$$
+      And so the transformed trajectories in $S$ look like:
+      $$z = -\frac{r'}{\gamma}\sin(\gamma\omega'(t-\frac{v_0z}{c^2})) + v_0t, \phantom{x} x = r'\left(1-\cos(\gamma\omega'(t-\frac{v_0z}{c^2}))\right)$$
+    </p>
+    <p>
+      Now consider the second case, where $E$ dominates $B$. In $S'$ we have:
+      $$\mathbf{E}' = \gamma(E-\frac{c^2B^2}{E})\hat{x}' = E'\hat{x}', \phantom{x} \mathbf{B}' = 0$$
+      The force equation tells us:
+      $$\frac{\text{d}\mathbf{p}}{\text{d}t} = q\mathbf{E}' \implies p'_x = qE't', \phantom{x} p'_z = -p_0$$
+      So:
+      $$\frac{p_x'}{p_z'} = \frac{v_x'}{v_z'} = -\frac{qE't'}{p_0} \implies v_x' = -\frac{qE't'}{p_0}v_z'$$
+      Substituting this back into the $z$ momentum equation gives:
+      $$\frac{mv_z'}{\sqrt{1-\frac{v_z'^2}{c^2}\left(1+(\frac{qE't'}{p_0})^2\right)}} = - p_0$$
+      which after rearranging gives:
+      $$v_z' = -\frac{c}{\sqrt{1+\left(\frac{mc}{p_0}\right)^2 + \left(\frac{qE't'}{p_0}\right)^2}}$$
+      and:
+      $$v_x' = -\frac{qE't'}{p_0}v_z' = \frac{\left(\frac{qE't'}{p_0}\right)c}{\sqrt{1+\left(\frac{mc}{p_0}\right)^2 + \left(\frac{qE't'}{p_0}\right)^2}}$$
+      Define the initial energy of the particle in $S'$ to be $\mathcal{E}'_0 = c\sqrt{p_0^2 + m^2c^2}$, and the energy at time $t'$ to be $\mathcal{E}(t') = c\sqrt{(qE't')^2+p_0^2+m^2c^2}$. Then, integrating gives:
+      $$x' = \frac{\mathcal{E}'(t')-\mathcal{E}_0'}{qE'}, \phantom{x} z' = \frac{p_0c}{qE'}\sinh^{-1}\left(\frac{qE'ct'}{\mathcal{E}_0'}\right)$$
+      So we see that the $z'$ coordinate of the particle in the $S'$ frame asymptotes towards a negative value, while the $x'$ coordinate approaches a constant growth rate for large $t'$.
+    </p>
+    <p>
+      Transforming back to frame $S$ and noting that $\gamma_0E' = E$ gives:
+      $$x = \frac{\gamma_0^2mc^2}{qE}\left(\sqrt{1+\left(\frac{qE(t-v_0z/c^2)}{\gamma_0mc}\right)^2}-1\right)$$
+      $$z = v_0t - \frac{\gamma_0mc^3B}{qE^2}\sinh^{-1}\left(\frac{qE(t-v_0z/c^2)}{\gamma_0mc}\right)$$
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <h3 class="section-anchor">Radiation loss</h3>
+    <p>
+      The power loss of an accelerating charge is given by:
+      $$P = \frac{q^2\alpha^2}{6\pi\epsilon_0 c^3}$$
+      where $\alpha$ is the proper acceleration of the particle. 
+    </p>
+    <p>
+      The proper acceleration is related to the acceleration of the particle in the lab frame via:
+      $$\alpha^2 = A^\mu A_\mu \phantom{xxx} (-+++)\text{ metric}$$
+      Let's work this out fully. We know:
+      $$A^\mu = \frac{\text{d}U^\mu}{\text{d} \tau} = 
+      \gamma \frac{\text{d}}{\text{d}t} \begin{bmatrix}
+      \gamma c \\ \gamma\mathbf{u}
+      \end{bmatrix} =
+      \gamma \begin{bmatrix}
+      \dot{\gamma} c \\ \dot{\gamma}\mathbf{u} + \gamma\mathbf{a}
+      \end{bmatrix}$$
+      And so:
+      $$A^\mu A_\mu = \gamma^2(\dot{\gamma}^2 c^2 + (\dot{\gamma}\mathbf{u} + \gamma\mathbf{a})^2) = \cdots = \gamma^2\left(\frac{\gamma^4 (\mathbf{a}\cdot\mathbf{u})^2}{c^2}+\gamma^2|\mathbf{a}|^2\right)$$
+      where we have used $\dot{\gamma} = \gamma^3\frac{\mathbf{a}\cdot\mathbf{u}}{c^2}$. 
+    </p>
+    <p>
+      Now, define $\parallel$ and $\perp$ to be parallel and perpendicular to $\mathbf{u}$. Then $\mathbf{a}\cdot\mathbf{u} = a_\parallel u$ and $|\mathbf{a}|^2 = a_\parallel^2 + a_\perp^2$. As such:
+      $$
+      \begin{align}
+      A^\mu A_\mu &= \gamma^2\left(\frac{\gamma^4(a_\parallel u)^2}{c^2}\right) + \gamma^2a_\parallel^2 + \gamma^2a_\perp^2 \\
+      &= \gamma^4((\gamma^2\beta^2+1)a_\parallel^2 + a_\perp^2) \\
+      &= \gamma^6 a_\parallel^2 + \gamma^4 a_\perp^2 = \alpha^2
+      \end{align}
+      $$
+      Therefore, we have: 
+      $$P = \frac{q^2}{6\pi\epsilon_0 c^3}(\gamma^6 a_\parallel^2 + \gamma^4 a_\perp^2)$$
+      If we have a linear accelerator then $a_\perp = 0$, and $f_\parallel = \gamma^3 a_\parallel$ from the force acceleration relation we get from differentiating $\mathbf{f} = \text{d}\mathbf{p}/\text{d}t$. Hence:
+      $$P_\text{lin} =  \frac{q^2}{6\pi\epsilon_0 c^3}(\gamma^3 a_\parallel)^2 = \frac{q^2}{6\pi\epsilon_0 c^3}f_\parallel^2 = \frac{q^4E_\parallel^2}{6\pi\epsilon_0 c^3}$$
+      We find that the power loss of a linear accelerator, when expressed in terms of system parameters, is independent of $\gamma$, despite what appears initially to be a $\gamma^6$ dependence. 
+    </p>
+    <p>
+      On the other hand, for a synchrotron, we have $a_\parallel = 0$ and $a_\perp = v^2/R$. Hence:
+      $$P_\text{circ} =  \frac{q^2}{6\pi\epsilon_0 c^3}(\gamma^2 a_\perp)^2 = \frac{q^2}{6\pi\epsilon_0 c^3}\frac{\gamma^4v^4}{R^2} = \frac{q^2c}{6\pi\epsilon_0}\frac{\gamma^4\beta^4}{R^2} \approx \frac{q^2c}{6\pi\epsilon_0}\frac{\gamma^4}{R^2}$$
+      We find that the power loss grows as $\gamma^4$. 
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
     <h3 class="section-anchor">Faraday tensor</h3>
     <p>
       Faraday tensor $F^{\mu\nu}$ is defined as:
