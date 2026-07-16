@@ -73,7 +73,7 @@
 
     <p>
     <div style="border: 2px solid black; padding: 10px; background-color: #f0f0f0; width: fit-content;">
-      <b>Insight 3: </b> Summation indices always come in upper-lower pairs. This implicitly enforces the shape of adjacent blocks to match. Therefore, to every valid equation written in index notation there is a corresponding valid equation in matrix notation. More importantly, each index position also carries transformation meaning, and ensures that we contract tensors in a physically sensible way.</b> 
+      <b>Insight 3: </b> Summation indices always come in upper-lower pairs. This implicitly enforces the shape of adjacent blocks to match. Therefore, to every valid equation written in index notation there is a corresponding valid equation in matrix notation. More importantly, each index position also carries transformation meaning, and ensures that we contract tensors in a physically sensible way.
       <br><br>
       As an illustration, consider the product $\Lambda^T \Lambda$. This is perfectly valid as far as matrix multiplication is concerned, but physically it has no meaning. However, if we write this in matrix notation, we get: $\Lambda^\kappa_{\_\mu} \Lambda^\kappa_{\_\nu}$, and we see immediately that there is a problem because the summation indices $\kappa$ are in the wrong position and therefore cannot contract (if for whatever reason we do see this we have to interpret $\kappa$ as a free variable, not a summation variable). On the other hand, something like $\Lambda^T g \Lambda$ does make physical sense and we see that its corresponding form in index notation $\Lambda^\lambda_{\_\mu} g_{\lambda \kappa} \Lambda^\kappa_{\_\nu}$ does lead to a nice cancellation of indices.
     </div>
@@ -170,7 +170,7 @@
     </p>
 
     <p>
-      $a_\mu$ is to $A_\mu$ what $a^\mu$ is to $A^\mu$. Note that the position of the index  in the component also changes depending on the type of 4-vector. **In the world of components**, think of subscript as _left to right_ and superscript as _top to bottom_. In fact, if you think about it, $\mu$ in $a^\mu$ and $A^\mu$ do different things! In $a^\mu$ $\mu$ serves as an index - zero, one, two, three. In $A^\mu$ $\mu$ serves as an indicator that "I am a 4-vector".
+      $a_\mu$ is to $A_\mu$ what $a^\mu$ is to $A^\mu$. Note that the position of the index in the component also changes depending on the type of 4-vector. <b>In the world of components</b>, think of subscript as <i>left to right</i> and superscript as <i>top to bottom</i>. In fact, if you think about it, $\mu$ in $a^\mu$ and $A^\mu$ do different things! In $a^\mu$ $\mu$ serves as an index - zero, one, two, three. In $A^\mu$ $\mu$ serves as an indicator that "I am a 4-vector".
     </p>
 
     <p>
@@ -184,9 +184,10 @@
       $$a^\mu = g^{\mu \nu} a_\nu$$
       This looks weird because $a_\nu$ is a component of a row 4-vector; it seems we are putting a matrix before a row vector and the shapes don't match. Things are actually fine because there are no matrices here - everybody is a number. The matrix equation is:
       $$A^\mu = g^{-1} A_\mu^T$$
-      Again, the first equation does not tell us anything about the shape of the 4-vectors. 
+      Again, the first equation does not tell us anything about the shape of the 4-vectors.
     </p>
 
+  </main>
 
 </body>
 </html>

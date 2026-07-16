@@ -228,7 +228,7 @@
       - \frac{g_2}{g_1} \tau_1 \left( S_1 + (1 - A_{21} \tau_2) N^* W + A_{21} \tau_2 S_2 \right)
       \end{align}
       $$
-      Finally isolate and $N^*$
+      Finally, isolate $N^*$
       $$
       \begin{align}  
       N^* &=  
@@ -267,8 +267,8 @@
       Now, we assume an isotropic spread in radiation. This means that the polarisation direction $\hat{\epsilon}$ is distributed uniformly across all solid angles. First, integrating over $\omega$ gives:
       $$
       \begin{align}
-      \text{d}\Gamma(\Omega) &= [\int_0^\infty \frac{e^2}{4\epsilon_0\hbar^2} \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \delta(\omega-\omega_0) \cdot \rho(\omega) \,\text{d}\omega\text]\,{d}\Omega \\
-      &= \frac{e^2}{4\epsilon_0\hbar^2} \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \rho(\omega_0) \,{d}\Omega
+      \text{d}\Gamma(\Omega) &= [\int_0^\infty \frac{e^2}{4\epsilon_0\hbar^2} \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \delta(\omega-\omega_0) \cdot \rho(\omega) \,\text{d}\omega]\,\text{d}\Omega \\
+      &= \frac{e^2}{4\epsilon_0\hbar^2} \cdot |\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle|^2 \cdot \rho(\omega_0) \,\text{d}\Omega
       \end{align}
       $$
       Next, we need to integrate over all polarisation directions. Since the polarisation is independent of $\vec{r}$, we can write $|\langle1|(\hat{\epsilon}\cdot\vec{r})|2\rangle| = \hat{\epsilon}\cdot|\langle1|\vec{r}|2\rangle|$ in which case we have the dot product between two regular vectors ($\vec{r}$ was an operator). Because of $\hat{\epsilon}$ is uniformly distributed we may make the substitution $\hat{\epsilon}\cdot|\langle1|\vec{r}|2\rangle| \rightarrow |\langle1|z|2\rangle|\cos(\theta)$ for purpose of integration. Therefore:

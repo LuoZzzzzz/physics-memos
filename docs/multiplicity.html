@@ -1,130 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Ewald's sphere and multiplicities</title>
+<head>
+  <meta charset="UTF-8" />
+  <title>Ewald's sphere and multiplicities</title>
 
-    <!-- Link external CSS -->
-    <link rel="stylesheet" href="styles.css" />
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
 
-    <!-- MathJax LaTeX Support -->
-    <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [
-            ["$", "$"],
-            ["\\(", "\\)"],
-          ],
-          displayMath: [
-            ["$$", "$$"],
-            ["\\[", "\\]"],
-          ],
-          tags: "all", // Enable automatic equation numbering
-        },
-      };
-    </script>
-    <script
-      id="MathJax-script"
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ></script>
-  </head>
-  <body>
-    <header>Physics Memos</header>
+  <!-- MathJax LaTeX Support -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'  // Enable automatic equation numbering
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
 
-    <main>
-      <nav class="page-nav">
-        <a href="index.html" class="btn">Index</a>
-      </nav>
+  <main>
+    <nav class="page-nav">
+      <a href="index.html" class="btn">Index</a>
+    </nav>
 
-      <h1>Ewald's sphere and multiplicities</h1>
-      <p>
-        Suppose I send a X-ray beam into a solid crystal with wavevector
-        $\vec{\bf{k}} \propto \vec{\bf{x}}$. Under most situations, there will
-        be no scattering. To get scattering, we have to rotate the crystal
-        around such that we find an orientation that satisfies Laue's condition.
-        This raises the following question: how do we specify the orientation of
-        our crystal in space?
-      </p>
+    <h1>Ewald's sphere and multiplicities</h1>
+    <p>
+      Suppose I send a X-ray beam into a solid crystal with wavevector $\vec{\bf{k}} \propto \vec{\bf{x}}$. Under most situations, there will be no scattering. To get scattering, we have to rotate the crystal around such that we find an orientation that satisfies Laue's condition. This raises the following question: how do we specify the orientation of our crystal in space?
+    </p>
 
-      <p>
-        Imagine that we paint tiny arrows representing the "normal axis" of the
-        crystal. Then, the orientation of the crystal can be described by first
-        specifying the orientation of this normal axis in space, followed by a
-        clockwise rotation angle of the crystal about this normal axis. The
-        former requires two angles, while the latter requires one angle, so in
-        total three angles are needed.
-      </p>
+    <p>
+      Imagine that we paint tiny arrows representing the "normal axis" of the crystal. Then, the orientation of the crystal can be described by first specifying the orientation of this normal axis in space, followed by a clockwise rotation angle of the crystal about this normal axis. The former requires two angles, while the latter requires one angle, so in total three angles are needed.
+    </p>
 
-      <p>
-        Now, say we fix $\vec{\bf{k}} \propto \vec{\bf{x}}$ and start rotating
-        the crystal. When will Laue's condition be satisfied? One can think of
-        this geometrically in terms of a construction known as Ewald's sphere.
-        Imagine the reciprocal space. In the reciprocal space, draw a sphere
-        centered at $\vec{\bf{k}}$ which touches the origin. The surface of this
-        sphere describes the set of all possible reciprocal space points
-        $\vec{\bf{k}} - \vec{\bf{k}}'$ can access for different $\vec{\bf{k}}'$s
-        with $|\vec{\bf{k}}| = |\vec{\bf{k}}'|$. Now, with the sphere pivoted at
-        the origin, rotate the sphere around in reciprocal space. In general,
-        the surface of the sphere will not intersect any reciprocal lattice
-        points $\vec{\bf{G}}$, since the reciprocal lattice points are, well,
-        points. However, for a "discrete" set of orientations the sphere will
-        intersect reciprocal lattice points - these are the orientations for
-        which scattering occurs. I put quotation marks around discrete because
-        the orientations are not truly discrete - once we find a case where
-        there is an intersection, we can rotate the Ewald sphere to generate an
-        infinite set of similar intersecting orientations; this is because the
-        Ewald sphere also has three independent parameters, two for its normal
-        direction and one for rotations about that normal, and although the
-        third rotation leaves the sphere unchanged it will change the deflection
-        angle of the X-ray in real space (because the orientation of the Ewald
-        sphere is also the orientation of the detector in the lab coordinate
-        system).
-      </p>
+    <p>
+      Now, say we fix $\vec{\bf{k}} \propto \vec{\bf{x}}$ and start rotating the crystal. When will Laue's condition be satisfied? One can think of this geometrically in terms of a construction known as Ewald's sphere. Imagine the reciprocal space. In the reciprocal space, draw a sphere centered at $\vec{\bf{k}}$ which touches the origin. The surface of this sphere describes the set of all possible reciprocal space points $\vec{\bf{k}} - \vec{\bf{k}}'$ can access for different $\vec{\bf{k}}'$s with $|\vec{\bf{k}}| = |\vec{\bf{k}}'|$. Now, with the sphere pivoted at the origin, rotate the sphere around in reciprocal space. In general, the surface of the sphere will not intersect any reciprocal lattice points $\vec{\bf{G}}$, since the reciprocal lattice points are, well, points. However, for a "discrete" set of orientations the sphere will intersect reciprocal lattice points - these are the orientations for which scattering occurs. I put quotation marks around discrete because the orientations are not truly discrete - once we find a case where there is an intersection, we can rotate the Ewald sphere to generate an infinite set of similar intersecting orientations; this is because the Ewald sphere also has three independent parameters, two for its normal direction and one for rotations about that normal, and although the third rotation leaves the sphere unchanged it will change the deflection angle of the X-ray in real space (because the orientation of the Ewald sphere is also the orientation of the detector in the lab coordinate system).
+    </p>
 
-      <p>
-        In the above picture we rotate the Ewald sphere - this corresponds to
-        changing the direction of the incoming X-rays while keeping the crystal
-        orientation fixed. Alternatively, we can also keep the direction of the
-        incoming X-rays fixed and rotate the crystal. In fact, we can simply
-        smash the crystal into a powder, so that we get a sample containing all
-        possible crystal orientations. Conceptually one can think of this as
-        fixing the Ewald sphere and rotating the reciprocal lattice around.
-      </p>
+    <p>
+      In the above picture we rotate the Ewald sphere - this corresponds to changing the direction of the incoming X-rays while keeping the crystal orientation fixed. Alternatively, we can also keep the direction of the incoming X-rays fixed and rotate the crystal. In fact, we can simply smash the crystal into a powder, so that we get a sample containing all possible crystal orientations. Conceptually one can think of this as fixing the Ewald sphere and rotating the reciprocal lattice around.
+    </p>
 
-      <p>
-        Now, we want to count the number of crystal orientations that give
-        scattering in a certain direction. For a general diffraction set up,
-        there will be a discrete set of $\vec{\bf{G}}$s that all scatter to give
-        rings with the same scattering angle $\theta$ (the scattering direction
-        in given by $\cos \theta = \hat{\bf{k}}\cdot\hat{\bf{k}}'$); these are
-        the $\vec{\bf{G}}$s that have the same length $|\vec{\bf{G}}|$. This
-        means that we expect the intensities of the scattered rings to vary
-        across different scattering angles $\theta$. This intensity is
-        proportional to the size of the set $\{ \vec{\bf{G}}; \text{equal }
-        |\vec{\bf{G}}| \}$. The quantity $|\{ \vec{\bf{G}}; \text{equal }
-        |\vec{\bf{G}}| \}|$ is called the multiplicity of the corresponding
-        scattering direction.
-      </p>
+    <p>
+      Now, we want to count the number of crystal orientations that give scattering in a certain direction. For a general diffraction set up, there will be a discrete set of $\vec{\bf{G}}$s that all scatter to give rings with the same scattering angle $\theta$ (the scattering direction is given by $\cos \theta = \hat{\bf{k}}\cdot\hat{\bf{k}}'$); these are the $\vec{\bf{G}}$s that have the same length $|\vec{\bf{G}}|$. This means that we expect the intensities of the scattered rings to vary across different scattering angles $\theta$. This intensity is proportional to the size of the set $\{ \vec{\bf{G}}; \text{equal } |\vec{\bf{G}}| \}$. The quantity $|\{ \vec{\bf{G}}; \text{equal } |\vec{\bf{G}}| \}|$ is called the multiplicity of the corresponding scattering direction.
+    </p>
 
-      <p>
-        Now let's do an example. Consider scattering due to the reciprocal
-        lattice vector with Miller indices $(3, 1, 1)$; under a suitable choice
-        of $|\vec{\bf{k}}|$ this scattering produces a ring of uniform intensity
-        at the scattering angle $\theta_{3, 1, 1}$. How many other reciprocal
-        lattice vectors also contribute to scattering in the direction
-        $\theta_{3, 1, 1}$? As we have said above, the answer is to simply count
-        the number of $\vec{\bf{G}}$s with the same length, in this case
-        $\sqrt{1^2 + 1^2 + 3^2} = \sqrt{11}$. This can be done by computing
-        $m_p$, the number of unique permutations of the indices $(3, 1, 1)$ and
-        $m_s$, the number of permutations of the signs $(\pm, \pm, \pm)$.
-      </p>
+    <p>
+      Now let's do an example. Consider scattering due to the reciprocal lattice vector with Miller indices $(3, 1, 1)$; under a suitable choice of $|\vec{\bf{k}}|$ this scattering produces a ring of uniform intensity at the scattering angle $\theta_{3, 1, 1}$. How many other reciprocal lattice vectors also contribute to scattering in the direction $\theta_{3, 1, 1}$? As we have said above, the answer is to simply count the number of $\vec{\bf{G}}$s with the same length, in this case $\sqrt{1^2 + 1^2 + 3^2} = \sqrt{11}$. This can be done by computing $m_p$, the number of unique permutations of the indices $(3, 1, 1)$ and $m_s$, the number of permutations of the signs $(\pm, \pm, \pm)$.
+    </p>
 
-      <p>
-        In this case, $m_p = 3$: $(3, 1, 1), (1, 3, 1), (1, 1, 3)$, and $m_s =
-        2^3 = 8$ since none of the Miller indices are $0$. Therefore, the
-        multiplicity $m(3, 1, 1) = m_p \cdot m_s = 24$.
-      </p>
-    </main>
-  </body>
+    <p>
+      In this case, $m_p = 3$: $(3, 1, 1), (1, 3, 1), (1, 1, 3)$, and $m_s = 2^3 = 8$ since none of the Miller indices are $0$. Therefore, the multiplicity $m(3, 1, 1) = m_p \cdot m_s = 24$.
+    </p>
+  </main>
+
+</body>
 </html>

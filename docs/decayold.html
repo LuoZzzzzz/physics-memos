@@ -57,7 +57,7 @@
     </p>
     
     <p>
-      Suppose our system starts out in the state $\ket{i}$, so $c_n(0) = \delta_{ni}$. Let us also use the ansatz that $c_n(t) = \delta_{ni}e^{-\frac{t}{2\tau}}$. Clearly, there is something wrong with this ansatz because the total probability across all states is not conserved with time. Therefore, we are using it with the assumption that $t \ll \tau$. Under this ansatz, the probability that the state of the system remains $\ket{i}$ when measured at time $t$ is $e^{\frac{t}{\tau}}$. Now, if the particle is not in the state $\ket{i}$, then it must be in one of the decay states $\ket{f}$. Therefore, we can say associate $\frac{1}{\tau}$ with the **rate of total decay**.
+      Suppose our system starts out in the state $\ket{i}$, so $c_n(0) = \delta_{ni}$. Let us also use the ansatz that $c_n(t) = \delta_{ni}e^{-\frac{t}{2\tau}}$. Clearly, there is something wrong with this ansatz because the total probability across all states is not conserved with time. Therefore, we are using it with the assumption that $t \ll \tau$. Under this ansatz, the probability that the state of the system remains $\ket{i}$ when measured at time $t$ is $e^{\frac{t}{\tau}}$. Now, if the particle is not in the state $\ket{i}$, then it must be in one of the decay states $\ket{f}$. Therefore, we can associate $\frac{1}{\tau}$ with the <b>rate of total decay</b>.
     </p>
     <p>
       Here's the idea: we start with a zeroth order solution that is clearly wrong, but which captures the flavor of the decay process. We then plug it into the $\dot{c}_m(t)$ equations (which we know is exact), integrate, and hope that the first order solution that comes is a bit more correct than our zeroth order solution. Let's see what happens:
@@ -77,7 +77,7 @@
     </div>
 
     <p>
-      Notice that the limit of $|c_f|^2$ for large $t$ is independent of $t$. Visually, the decay process looks like the above - the probabilities associated with the decay states ($\ket{f_1}$ and $\ket{f_2}$ in the above diagram) converge to fixed values as $t$ increases. Note that the probability associated with the initial state goes does not necessarily have to go to zero. In our zeroth order solution it does go to zero, but in our first order solution it goes to $1-\text{sum of all decay probabilities} = 1-P$. Nevertheless in the limit of large $t$ everything becomes static. 
+      Notice that the limit of $|c_f|^2$ for large $t$ is independent of $t$. Visually, the decay process looks like the above - the probabilities associated with the decay states ($\ket{f_1}$ and $\ket{f_2}$ in the above diagram) converge to fixed values as $t$ increases. Note that the probability associated with the initial state does not necessarily have to go to zero. In our zeroth order solution it does go to zero, but in our first order solution it goes to $1-\text{sum of all decay probabilities} = 1-P$. Nevertheless in the limit of large $t$ everything becomes static. 
     </p>
 
     <p>
@@ -172,9 +172,10 @@
     </p>
     
     <p>
-      Another thing that came to mind was the tensor product space $\mathcal{H}_A \otimes \mathcal{H}_1 \otimes \mathcal{H}_2$. In this picture, the initial state of the system is $\ket{A} \otimes \ket{0}_1 \otimes \ket{0}_2$ where $\ket{0}$ is the vacuum state, and have a Hamiltonian with a dimension of $d_A \cdot d_1 \cdot d_2$. However, this does not feel like the right, because it implies the possibility of having something like $\ket{A} \otimes \ket{B_1, C_1}_1 \otimes \ket{0}_2$ as a measurement outcome, which makes no sense. 
+      Another thing that came to mind was the tensor product space $\mathcal{H}_A \otimes \mathcal{H}_1 \otimes \mathcal{H}_2$. In this picture, the initial state of the system is $\ket{A} \otimes \ket{0}_1 \otimes \ket{0}_2$ where $\ket{0}$ is the vacuum state, and have a Hamiltonian with a dimension of $d_A \cdot d_1 \cdot d_2$. However, this does not feel right, because it implies the possibility of having something like $\ket{A} \otimes \ket{B_1, C_1}_1 \otimes \ket{0}_2$ as a measurement outcome, which makes no sense.
     </p>
 
+  </main>
 
 </body>
 </html>

@@ -46,7 +46,7 @@
       $$\vec{\bf{x}} \rightarrow \vec{\bf{x}}' = -\vec{\bf{x}}$$
       Or, for some point $\vec{\bf{x}}_0$ (I think this makes it a bit easier to follow): 
       $$\vec{\bf{x}}_0 \rightarrow \vec{\bf{x}}_0' = -\vec{\bf{x}}_0$$
-      This is saying is that the (physical) point (in space) that was originally labelled by $\vec{\bf{x}}_0$ in the old coordinate system is now labelled by the point $\vec{\bf{x}}_0'$ with the numerical value  $\vec{\bf{x}}_0' = -\vec{\bf{x}}_0$ in the new coordinate system. In fact, this is the mathematical statement of the above intuition of "inverting the coordinate system". 
+      This is saying that the (physical) point (in space) that was originally labelled by $\vec{\bf{x}}_0$ in the old coordinate system is now labelled by the point $\vec{\bf{x}}_0'$ with the numerical value $\vec{\bf{x}}_0' = -\vec{\bf{x}}_0$ in the new coordinate system. In fact, this is the mathematical statement of the above intuition of "inverting the coordinate system". 
     </p>
     <p>
       Following from this definition, we must have that $f'(\vec{\bf{x}}_0') = f'(-\vec{\bf{x}}_0) = f(\vec{\bf{x}}_0)$. 
@@ -61,7 +61,7 @@
       $$f(\vec{\bf{x}}_0) = f'(\vec{\bf{x}}_0) = f(-\vec{\bf{x}}_0)$$
       Or dropping the subscripts:
       $$f(\vec{\bf{x}}) = f(-\vec{\bf{x}})$$
-      The next step: instead of asking "how will my description of the scalar field $f$ change?", I now have to ask "how will my description of the differential equations change?". The intuition we have developed above above holds to a scalar function, but in Physics we deal with laws that are described by differential equations, and these contain derivatives. Therefore, we need to look at how the act of "taking $\frac{\text{d}}{\text{d} x}$" in the old coordinate system looks like in the new inverted coordinate system. 
+      The next step: instead of asking "how will my description of the scalar field $f$ change?", I now have to ask "how will my description of the differential equations change?". The intuition we have developed above holds to a scalar function, but in Physics we deal with laws that are described by differential equations, and these contain derivatives. Therefore, we need to look at how the act of "taking $\frac{\text{d}}{\text{d} x}$" in the old coordinate system looks like in the new inverted coordinate system. 
     </p>
     <p>
       For simplicity, we consider a one-dimensional example, the general three dimensional case follows from the same logic. 
@@ -141,16 +141,17 @@
       Loosely speaking, this means that if we were to write out $\hat{H}$ in position basis (as $\hat{H}(\vec{\bf{x}})$), and then proceeded to flip all the signs of the $x, y, z$ in the Hamiltonian (note that this includes the signs in any derivatives, if present), the form of the Hamiltonian remains completely unchanged. 
     </p>
     <p>
-      Denote $\psi'(\vec{\bf{x}}) = \hat{H}(\vec{\bf{x}}) \psi(\vec{\bf{x}})$. Then $\hat{P} \psi'(\vec{\bf{x}}) = \psi'(-\vec{\bf{x}}) = \hat{H}(-\vec{\bf{x}}) \psi(-\vec{\bf{x}})$. But because of the invariance of the Hamiltonian, this becomes $\hat{P} \psi'(\vec{\bf{x}}) = \hat{H}(\vec{\bf{x}}) \psi(\vec{\bf{-x}}) = \hat{H}(\vec{\bf{x}}) \hat{P} \psi(\vec{\bf{x}})$. Therefore, we end up with the equality:
+      Denote $\psi'(\vec{\bf{x}}) = \hat{H}(\vec{\bf{x}}) \psi(\vec{\bf{x}})$. Then $\hat{P} \psi'(\vec{\bf{x}}) = \psi'(-\vec{\bf{x}}) = \hat{H}(-\vec{\bf{x}}) \psi(-\vec{\bf{x}})$. But because of the invariance of the Hamiltonian, this becomes $\hat{P} \psi'(\vec{\bf{x}}) = \hat{H}(\vec{\bf{x}}) \psi(-\vec{\bf{x}}) = \hat{H}(\vec{\bf{x}}) \hat{P} \psi(\vec{\bf{x}})$. Therefore, we end up with the equality:
       $$\hat{P}\hat{H}(\vec{\bf{x}}) \psi(\vec{\bf{x}}) = \hat{H}(\vec{\bf{x}}) \hat{P} \psi(\vec{\bf{x}})$$
       for any state $\psi(\vec{\bf{x}})$ implying:
       $$\hat{P}\hat{H}(\vec{\bf{x}}) - \hat{H}(\vec{\bf{x}}) \hat{P} = [\hat{P}, \hat{H}] = 0$$
       Consequently, $\partial_t \braket{\hat{P}} = 0$. 
     </p>
     <p>
-      As I am writing this, I realise that the logic behind the equality $\psi'(-\vec{\bf{x}}) = \hat{H}(-\vec{\bf{x}}) \psi(-\vec{\bf{x}})$ is rather fuzzy. If $\hat{H}(\vec{\bf{x}})$ is a scalar function then it is quite easy to convince yourself that this is indeed the case. However,  $\hat{H}(\vec{\bf{x}})$ can also contain all sorts of linear operators like $\partial_x$, and it is not intuitive that the relation should still hold. The reason that this works is because spatial derivatives like $\partial_x$ behave exactly like $\vec{\bf{x}}$ under a change of parity. That is, just like $\vec{\bf{x}} \rightarrow -\vec{\bf{x}}$, we have $\nabla_{\vec{\bf{x}}} \rightarrow -\nabla_{\vec{\bf{x}}}$. 
+      As I am writing this, I realise that the logic behind the equality $\psi'(-\vec{\bf{x}}) = \hat{H}(-\vec{\bf{x}}) \psi(-\vec{\bf{x}})$ is rather fuzzy. If $\hat{H}(\vec{\bf{x}})$ is a scalar function then it is quite easy to convince yourself that this is indeed the case. However,  $\hat{H}(\vec{\bf{x}})$ can also contain all sorts of linear operators like $\partial_x$, and it is not intuitive that the relation should still hold. The reason that this works is because spatial derivatives like $\partial_x$ behave exactly like $\vec{\bf{x}}$ under a change of parity. That is, just like $\vec{\bf{x}} \rightarrow -\vec{\bf{x}}$, we have $\nabla_{\vec{\bf{x}}} \rightarrow -\nabla_{\vec{\bf{x}}}$.
     </p>
 
-    
+  </main>
+
 </body>
 </html>
