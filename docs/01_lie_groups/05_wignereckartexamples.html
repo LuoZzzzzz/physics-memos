@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Two Worked Examples: Reducible Tensors and Multiplicity</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+
+    /* ---- Callout boxes (definitions / key results / remarks) ------- */
+    .callout {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .callout .label {
+      display: block;
+      font-family: "Poppins", -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .callout p {
+      margin: 0.4em 0;
+    }
+
+    .callout ol, .callout ul {
+      margin: 0.4em 0;
+      padding-left: 1.4em;
+    }
+
+    table.mtable {
+      border-collapse: collapse;
+      margin: 1rem auto;
+      /* scroll inside its own box on narrow screens */
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    table.mtable th, table.mtable td {
+      border: 1px solid var(--border);
+      padding: 0.4rem 1.1rem;
+      text-align: center;
+    }
+
+    table.mtable thead th {
+      border-bottom: 2px solid var(--border);
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all',
+        macros: {
+          ket: ["\\lvert #1 \\rangle", 1],
+          bra: ["\\langle #1 \\rvert", 1],
+          braket: ["\\langle #1 \\vert #2 \\rangle", 2]
+        }
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="../index.html" class="btn">Index</a>
+      <span class="prev-next">
+        <a href="04_wignereckart.html" class="btn" title="Tensor Operators and the Wigner&ndash;Eckart Theorem">Previous</a>
+        <span class="sep">|</span>
+        <span class="btn disabled">Next</span>
+      </span>
+    </nav>
+
+    <h1>Two Worked Examples: Reducible Tensors and Multiplicity</h1>
+    <p>
+      <i>29 September 2026</i><br>
+      <i>A companion to the notes on <a href="04_wignereckart.html">tensor operators and the Wigner&ndash;Eckart theorem</a>.</i>
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Introduction</h3>
+
+    <p>The main notes make two structural points, each illustrated with a small example:</p>
+    <ol type="i">
+      <li>a set of operators can close under commutation with $J_a$ while being written in the wrong basis ($\vec r$ transforms with the adjoint matrices rather than the standard spin-1 ones; see <a href="04_wignereckart.html#adjoint">the adjoint representation</a> and <a href="04_wignereckart.html#recipe">converting to standard form</a>);</li>
+      <li>when a spin $j$ occurs more than once in a Hilbert space, the reduced matrix element $k_{\alpha\beta}=\langle J,\beta\Vert O^s\Vert j,\alpha\rangle$ carries the labels of both the starting copy $\alpha$ and the landing copy $\beta$ (see <a href="04_wignereckart.html#k-alpha-beta">the constants $k_{\alpha\beta}$</a> and <a href="04_wignereckart.html#we-statement">the statement of the theorem</a>, with the scalar example $\vec S^{(2)}\!\cdot\vec S^{(3)}$).</li>
+    </ol>
+    <p>This note works a heavier example of each:</p>
+    <ol type="i">
+      <li>the nine operators $T_{ab}=r_ap_b$, which carry a <i>reducible</i> representation, decomposed explicitly into spin $0\oplus1\oplus2$. This shows that converting to standard form is, for a reducible representation, the same machinery as ordinary angular-momentum addition;</li>
+      <li>the table of $k_{\alpha\beta}$ out of the two $j=\tfrac12$ copies for rank-1 operators on three spin-$\tfrac12$ particles, for two different operators: one that preserves an extra quantum number ($j_{12}$) and one that does not.</li>
+    </ol>
+    <p>
+      Conventions are those of the main notes: $J^\pm=\tfrac1{\sqrt2}(J_1\pm iJ_2)$, $C^\pm_{s,l}=\tfrac1{\sqrt2}\sqrt{(s\mp l)(s\pm l+1)}$, $[J^\pm,O^s_l]=C^\pm_{s,l}\,O^s_{l\pm1}$, spherical components $\tilde r_{\pm1}=\mp\tfrac1{\sqrt2}(r_1\pm ir_2)$, $\tilde r_0=r_3$, and Clebsch&ndash;Gordan coefficients $\langle J,M\vert s,j;l,m\rangle$ with the operator's spin $s$ coupled first.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">A reducible example: setting up $T_{ab}=r_ap_b$</h3>
+
+    <p>
+      $p_b$ transforms exactly as $r_b$ does (<a href="04_wignereckart.html#adjoint">main notes</a>):
+      $$[J_a,p_b] = \varepsilon_{acd}\,[r_cp_d,\,p_b] = \varepsilon_{acd}[r_c,p_b]\,p_d = \varepsilon_{acd}(i\delta_{cb})\,p_d = i\varepsilon_{abd}\,p_d .$$
+      Now consider all nine operators $T_{bc}\equiv r_bp_c$. By the Leibniz rule,
+      $$[J_a,T_{bc}] = [J_a,r_b]\,p_c + r_b\,[J_a,p_c] = i\varepsilon_{abd}\,T_{dc} + i\varepsilon_{acd}\,T_{bd}.$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Reducible as well as in the wrong basis</span>
+      <p>This is again of the form $[J_a,\Omega_x]=\Omega_y\big[J_a^{(D)}\big]_{yx}$, but now the label $x$ is the pair $(b,c)$, running over nine values, and $D$ is the product of two adjoint (vector) representations. For $\vec r$, $D$ was irreducible but written in the wrong basis. Here $D$ is also <i>reducible</i>: $9=1+3+5$. The <a href="04_wignereckart.html#recipe">recipe of the main notes</a> generalises to a similarity transformation $S$ that brings $D$ to block-diagonal standard form, $SJ_a^{(D)}S^{-1}=J_a^{(0)}\oplus J_a^{(1)}\oplus J_a^{(2)}$. Each block is an independent tensor operator with its own overall normalisation.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The trace: a spin-0 piece</h3>
+
+    <p>
+      Set $c=b$ in the commutator and sum over $b$:
+      $$[J_a,T_{bb}] = i\varepsilon_{abd}\big(T_{db}+T_{bd}\big)\qquad(\text{summed over }b,d).$$
+      $T_{db}+T_{bd}=r_dp_b+r_bp_d$ is symmetric under $b\leftrightarrow d$, while $\varepsilon_{abd}$ is antisymmetric, so the contraction vanishes:
+      $$[J_a,\,\vec r\cdot\vec p\,] = 0 .$$
+      $\vec r\cdot\vec p$ commutes with every $J_a$: it is a spin-0 (scalar) tensor operator.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The antisymmetric part: a spin-1 piece we already know</h3>
+
+    <p>
+      Let $A_{ab}\equiv\tfrac12(T_{ab}-T_{ba})=\tfrac12(r_ap_b-r_bp_a)$. The <a href="04_wignereckart.html#example-r">main notes</a> showed $\varepsilon_{cab}J_c=r_ap_b-r_bp_a$, so
+      $$A_{ab} = \tfrac12\,\varepsilon_{cab}\,J_c :$$
+      the three independent components of the antisymmetric part are the angular momentum operators themselves.
+    </p>
+
+    <div class="callout">
+      <span class="label">The spin-1 piece is $J_a$ itself</span>
+      <p>$[J_a,J_b]=i\varepsilon_{abc}J_c$ has the same form as $[J_a,r_b]=i\varepsilon_{abc}r_c$, so the <a href="04_wignereckart.html#ladder-route">ladder route</a> of the main notes applies with $r\to J$. $J_3$ commutes with $J_3$, so $\tilde J_0=J_3$; and since $[J^\pm,J_3]=\mp J^\pm$ and $C^\pm_{1,0}=1$,
+      $$\tilde J_0 = J_3,\qquad \tilde J_{\pm1} = [J^\pm,\tilde J_0] = \mp J^{\pm}.$$
+      No eigenvector phases need fixing: the ladder relations fix them automatically.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The symmetric traceless part: a genuine spin-2 piece</h3>
+
+    <p>
+      Define $Q_{ab}\equiv\tfrac12(T_{ab}+T_{ba})-\tfrac13\delta_{ab}\,(\vec r\cdot\vec p)$, which has five independent components. Work with the spherical components $\tilde r_l$ and $\tilde p_l$ (defined in the same way). Since $[J_3,\,\cdot\,]$ obeys the Leibniz rule, weights add:
+      $$[J_3,\,\tilde r_{l_1}\tilde p_{l_2}] = (l_1+l_2)\,\tilde r_{l_1}\tilde p_{l_2}.$$
+      Weight $+2$ occurs only for $\tilde r_{+1}\tilde p_{+1}$. Spin 0 and spin 1 have no weight-2 component, so this operator lies entirely in the spin-2 piece and is its top component. (Indeed $[J^+,\tilde r_{+1}\tilde p_{+1}]=0$, since $[J^+,\tilde r_{+1}]=[J^+,\tilde p_{+1}]=0$.) Fixing the normalisation,
+      $$\tilde Q_2 \equiv \tilde r_{+1}\tilde p_{+1}.$$
+      We lower from the top rather than start from weight 0. Because $D$ is reducible, weight 0 occurs three times: $\tilde r_{+1}\tilde p_{-1}$, $\tilde r_0\tilde p_0$ and $\tilde r_{-1}\tilde p_{+1}$ span a three-dimensional space containing the weight-0 component of each of spin 0, 1 and 2, so commuting with $J_3$ no longer singles out one operator. Weight $+2$ occurs only once. (In Cartesian form $\tilde Q_2=\tfrac12\big(Q_{11}-Q_{22}+2iQ_{12}\big)$, confirming that it lies in the symmetric traceless part.)
+    </p>
+
+    <div class="callout">
+      <span class="label">Laddering down</span>
+      <p>The coefficients needed are $C^-_{1,1}=C^-_{1,0}=1$ for $\tilde r$ and $\tilde p$, and $C^-_{2,2}=\sqrt2$, $C^-_{2,1}=\sqrt3$ for $\tilde Q$. Then
+      $$[J^-,\tilde Q_2] = [J^-,\tilde r_{+1}]\,\tilde p_{+1}+\tilde r_{+1}\,[J^-,\tilde p_{+1}] = \tilde r_0\tilde p_{+1}+\tilde r_{+1}\tilde p_0 = \sqrt2\,\tilde Q_1,$$
+      $$\Rightarrow\quad \tilde Q_1 = \tfrac{1}{\sqrt2}\big(\tilde r_0\tilde p_{+1}+\tilde r_{+1}\tilde p_0\big).$$
+      Lowering once more,
+      $$[J^-,\tilde Q_1] = \tfrac{1}{\sqrt2}\Big[\big(\tilde r_{-1}\tilde p_{+1}+\tilde r_0\tilde p_0\big) + \big(\tilde r_0\tilde p_0+\tilde r_{+1}\tilde p_{-1}\big)\Big] = \sqrt3\,\tilde Q_0,$$
+      $$\Rightarrow\quad \tilde Q_0 = \tfrac{1}{\sqrt6}\big(\tilde r_{+1}\tilde p_{-1}+\tilde r_{-1}\tilde p_{+1}+2\tilde r_0\tilde p_0\big).$$
+      $\tilde Q_{-1}$ and $\tilde Q_{-2}$ follow in the same way.</p>
+    </div>
+
+    <p>
+      Back in Cartesian components, the imaginary cross terms cancel,
+      $$\tilde r_{+1}\tilde p_{-1}+\tilde r_{-1}\tilde p_{+1} = -\big(r_1p_1+r_2p_2\big), \qquad\text{so}\qquad \tilde Q_0 = \tfrac{1}{\sqrt6}\big(2r_3p_3 - r_1p_1 - r_2p_2\big) = \sqrt{\tfrac32}\,Q_{33}.$$
+      This is the pattern of $2z^2-x^2-y^2\propto r^2Y_{2,0}$, the familiar quadrupole combination, now built from $r$ and $p$ together.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The bridge to Clebsch&ndash;Gordan coefficients</h3>
+
+    <p>
+      The products $\tilde r_{l_1}\tilde p_{l_2}$ transform under commutation with $J_a$ exactly like the product states $\ket{1,l_1}\ket{1,l_2}$ (the same observation as in <a href="04_wignereckart.html#one-system">&ldquo;one system that transforms like two&rdquo;</a>). So the Clebsch&ndash;Gordan combinations
+      $$(\tilde r\otimes\tilde p)_{L,M} \equiv \sum_{l_1,l_2}\langle L,M\vert 1,1;l_1,l_2\rangle\;\tilde r_{l_1}\tilde p_{l_2}$$
+      are spin-$L$ tensor operators in standard form. Comparing with the pieces found above:
+      $$(\tilde r\otimes\tilde p)_{0,0} = -\tfrac{1}{\sqrt3}\,\vec r\cdot\vec p,\qquad (\tilde r\otimes\tilde p)_{1,M} = \tfrac{i}{\sqrt2}\,\tilde J_M,\qquad (\tilde r\otimes\tilde p)_{2,M} = \tilde Q_M .$$
+      For example, the coefficients $\tfrac1{\sqrt2},\tfrac1{\sqrt2}$ in $\tilde Q_1$ and $\tfrac1{\sqrt6},\tfrac2{\sqrt6},\tfrac1{\sqrt6}$ in $\tilde Q_0$ are exactly $\langle 2,M\vert1,1;l_1,l_2\rangle$.
+    </p>
+
+    <div class="callout">
+      <span class="label">Addition of angular momentum is a special case of the recipe</span>
+      <p>The change of basis from the nine $T_{ab}$ to $\{\vec r\cdot\vec p,\ \tilde J_M,\ \tilde Q_M\}$ is the similarity transformation $S$ of the <a href="04_wignereckart.html#recipe">main notes</a>, generalised to a reducible $D$. Its entries are Clebsch&ndash;Gordan coefficients for $1\otimes1=0\oplus1\oplus2$, composed with the Cartesian-to-spherical change of basis for $\vec r$ and $\vec p$, and with one free constant per irreducible piece ($-\tfrac1{\sqrt3}$, $\tfrac{i}{\sqrt2}$ and $1$ above). Ordinary angular-momentum addition is the case of the recipe in which $D$ is a product of two representations already in standard form.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Multiplicity with rank-1 operators: setup</h3>
+
+    <p>
+      Couple particles 1 and 2 first, to $j_{12}=0$ (singlet) or $j_{12}=1$ (triplet), then couple the result to particle 3:
+      $$\tfrac12\otimes\tfrac12\otimes\tfrac12 = \underbrace{\tfrac12}_{j_{12}=0,\ \alpha=1}\ \oplus\ \underbrace{\tfrac12}_{j_{12}=1,\ \alpha=2}\ \oplus\ \underbrace{\tfrac32}_{j_{12}=1}.$$
+      $J=\tfrac12$ occurs twice, labelled by $\alpha$ (or $\beta$) $=1,2$. $J=\tfrac32$ occurs once.
+    </p>
+
+    <p><b>The states.</b> Coupling $j_{12}=1$ with particle 3: start from $\ket{\tfrac32,\tfrac32}=\ket{1,1}_{12}\ket{\uparrow}$ and lower with $J^-$, which in the convention of the main notes gives
+      $$J^-\ket{j,m}=\tfrac1{\sqrt2}\sqrt{(j+m)(j-m+1)}\ket{j,m-1}.$$
+      The factors of $\tfrac1{\sqrt2}$ cancel between the two sides:
+      $$\sqrt3\,\ket{\tfrac32,\tfrac12} = \sqrt2\,\ket{1,0}_{12}\ket{\uparrow}+\ket{1,1}_{12}\ket{\downarrow} \quad\Rightarrow\quad \ket{\tfrac32,\tfrac12} = \sqrt{\tfrac13}\,\ket{1,1}_{12}\ket{\downarrow}+\sqrt{\tfrac23}\,\ket{1,0}_{12}\ket{\uparrow}.$$
+      The orthogonal combination is the $J=\tfrac12$ state. Its overall sign is fixed by the Condon&ndash;Shortley convention: positive coefficient on the term with $m_{12}=j_{12}$. Together with the singlet state:
+      $$\ket{\tfrac12,\tfrac12,2} = \sqrt{\tfrac23}\,\ket{1,1}_{12}\ket{\downarrow}-\sqrt{\tfrac13}\,\ket{1,0}_{12}\ket{\uparrow}, \qquad \ket{\tfrac12,\tfrac12,1} = \ket{0,0}_{12}\ket{\uparrow}.$$
+      (Check: the two $M=\tfrac12$ states in the $j_{12}=1$ sector are orthonormal.) The $M=-\tfrac12$ states are obtained by applying $J^-$, so that $J_a$ acts on both copies with the same standard matrices, as the main notes require. Inverting the $2\times2$ change of basis, which is its own inverse, will be useful:
+      $$\ket{1,1}_{12}\ket{\downarrow} = \sqrt{\tfrac13}\,\ket{\tfrac32,\tfrac12}+\sqrt{\tfrac23}\,\ket{\tfrac12,\tfrac12,2},\qquad \ket{1,0}_{12}\ket{\uparrow} = \sqrt{\tfrac23}\,\ket{\tfrac32,\tfrac12}-\sqrt{\tfrac13}\,\ket{\tfrac12,\tfrac12,2}.$$
+    </p>
+
+    <p><b>The operators.</b> Take $O^1_l=S^{(n)}_l$, the spherical components of the spin of particle $n$ ($S_{\pm1}=\mp\tfrac1{\sqrt2}(S_x\pm iS_y)$, $S_0=S_z$). Since $[J_a,S^{(n)}_b]=[S^{(n)}_a,S^{(n)}_b]=i\varepsilon_{abc}S^{(n)}_c$, each is a spin-1 tensor operator with respect to the total $J_a$. We use $n=3$ and then $n=2$.</p>
+
+    <p><b>Which Clebsch&ndash;Gordan coefficients.</b> With $s=1$ and $j=\tfrac12$, the landing spins are $J\in\{\tfrac12,\tfrac32\}$ and the coefficients are $\langle J,M\vert 1,\tfrac12;l,m\rangle$. This is the same $1\otimes\tfrac12$ table as above, but now the spin 1 is the <i>operator</i>. At $l=0$, $m=\tfrac12$:
+      $$\langle\tfrac12,\tfrac12\vert1,\tfrac12;0,\tfrac12\rangle = -\sqrt{\tfrac13},\qquad \langle\tfrac32,\tfrac12\vert1,\tfrac12;0,\tfrac12\rangle = \sqrt{\tfrac23}.$$
+      So each reduced matrix element can be read off from $O^1_0=S^{(n)}_z$ acting on the $M=\tfrac12$ states:
+      $$k_{\alpha\beta} = \frac{\bra{J,\tfrac12,\beta}\,S^{(n)}_z\,\ket{\tfrac12,\tfrac12,\alpha}}{\langle J,\tfrac12\vert1,\tfrac12;0,\tfrac12\rangle}.$$
+      Here $\beta$ labels the landing irrep: $(J{=}\tfrac12,\beta{=}1)$, $(J{=}\tfrac12,\beta{=}2)$ or the single $J=\tfrac32$, for which we write $k_{\alpha,\frac32}$.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">$O=\vec S^{(3)}$: an operator that preserves $j_{12}$</h3>
+
+    <p>$\vec S^{(3)}$ commutes with $\vec S^{(1)}$ and $\vec S^{(2)}$, hence with $\big(\vec S^{(1)}+\vec S^{(2)}\big)^2$: it cannot change $j_{12}$.</p>
+
+    <p><b>Starting from $\alpha=1$.</b> The singlet factor is a spectator:
+      $$S^{(3)}_z\ket{\tfrac12,\tfrac12,1} = \tfrac12\,\ket{\tfrac12,\tfrac12,1} \quad\Rightarrow\quad k_{11} = \frac{1/2}{-\sqrt{1/3}} = -\frac{\sqrt3}{2},\qquad k_{12}=0,\qquad k_{1,\frac32}=0.$$
+    </p>
+
+    <p><b>Starting from $\alpha=2$.</b> $S^{(3)}_z$ gives $-\tfrac12$ on $\ket{\downarrow}$ and $+\tfrac12$ on $\ket{\uparrow}$, so, re-expanding with the inverse above,
+      $$S^{(3)}_z\ket{\tfrac12,\tfrac12,2} = -\tfrac{1}{\sqrt6}\,\ket{1,1}_{12}\ket{\downarrow} - \tfrac{1}{2\sqrt3}\,\ket{1,0}_{12}\ket{\uparrow} = -\frac{\sqrt2}{3}\,\ket{\tfrac32,\tfrac12} - \frac16\,\ket{\tfrac12,\tfrac12,2},$$
+      so
+      $$k_{21}=0,\qquad k_{22} = \frac{-1/6}{-\sqrt{1/3}} = \frac{\sqrt3}{6},\qquad k_{2,\frac32} = \frac{-\sqrt2/3}{\sqrt{2/3}} = -\frac{1}{\sqrt3}.$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Why $\alpha=1$ cannot reach $J=\tfrac32$ but $\alpha=2$ can</span>
+      <p>The Wigner&ndash;Eckart triangle rule allows both $J=\tfrac12$ and $J=\tfrac32$ from $j=\tfrac12$ with $s=1$, for either $\alpha$. The zeros come from extra structure: $\vec S^{(3)}$ commutes with $\big(\vec S^{(1)}+\vec S^{(2)}\big)^2$, so it preserves $j_{12}$. The $j_{12}=0$ sector contains only the $\alpha=1$ doublet, so starting there the operator can land nowhere else: $k_{12}=k_{1,\frac32}=0$. The $j_{12}=1$ sector contains both the $\alpha=2$ doublet and the $J=\tfrac32$ quartet, so starting from $\alpha=2$ both are reachable, while $\alpha=1$ is not: $k_{21}=0$. The Wigner&ndash;Eckart theorem for the total $\vec J$ alone cannot see this selection rule.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">$O=\vec S^{(2)}$: an operator that does not preserve $j_{12}$</h3>
+
+    <p>
+      $\vec S^{(2)}$ does not commute with $\big(\vec S^{(1)}+\vec S^{(2)}\big)^2$, so it can move between the $j_{12}$ sectors. Starting from $\alpha=1$, with $\ket{0,0}_{12}=\tfrac1{\sqrt2}(\ket{\uparrow\downarrow}-\ket{\downarrow\uparrow})$,
+      $$S^{(2)}_z\ket{\tfrac12,\tfrac12,1} = -\tfrac12\cdot\tfrac1{\sqrt2}\big(\ket{\uparrow\downarrow}+\ket{\downarrow\uparrow}\big)\ket{\uparrow} = -\tfrac12\,\ket{1,0}_{12}\ket{\uparrow} = -\tfrac12\sqrt{\tfrac23}\,\ket{\tfrac32,\tfrac12} + \tfrac12\sqrt{\tfrac13}\,\ket{\tfrac12,\tfrac12,2},$$
+      so
+      $$k_{11}=0,\qquad k_{12} = \frac{\tfrac12\sqrt{1/3}}{-\sqrt{1/3}} = -\frac12,\qquad k_{1,\frac32} = \frac{-\tfrac12\sqrt{2/3}}{\sqrt{2/3}} = -\frac12 .$$
+      Starting from $\alpha=2$, the same kind of computation gives the projections $\bra{\tfrac12,\tfrac12,1}S^{(2)}_z\ket{\tfrac12,\tfrac12,2}=\tfrac1{2\sqrt3}$, $\bra{\tfrac12,\tfrac12,2}S^{(2)}_z\ket{\tfrac12,\tfrac12,2}=\tfrac13$ and $\bra{\tfrac32,\tfrac12}S^{(2)}_z\ket{\tfrac12,\tfrac12,2}=\tfrac{\sqrt2}{6}$, hence
+      $$k_{21}=-\frac12,\qquad k_{22}=-\frac{1}{\sqrt3},\qquad k_{2,\frac32}=\frac{\sqrt3}{6}.$$
+      Now the off-diagonal, copy-changing elements $k_{12}=k_{21}=-\tfrac12$ are non-zero, and both copies reach $J=\tfrac32$. (The signs of $k_{12}$ and $k_{21}$ depend on the relative phase of the two $j=\tfrac12$ copies, fixed here by coupling particles 1 and 2 first with Condon&ndash;Shortley conventions.)
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Independence of $l$ and $m$, checked explicitly</h3>
+
+    <p>
+      Each $k_{\alpha\beta}$ above was extracted from a single choice, $l=0$ and $m=\tfrac12$. Repeating the extraction at every $(l,m)$ with a non-zero Clebsch&ndash;Gordan coefficient (four for each $J=\tfrac12$ entry, six for $J=\tfrac32$) gives identical values in every case. This is not a trivial check: between $m=\tfrac12$ and $m=-\tfrac12$ at $l=0$, the $J=\tfrac12$ Clebsch&ndash;Gordan coefficient changes sign ($-\sqrt{1/3}\to+\sqrt{1/3}$), and so does the matrix element. For example $\bra{\tfrac12,-\tfrac12,1}S^{(3)}_z\ket{\tfrac12,-\tfrac12,1}=-\tfrac12$, and the ratio is again $-\tfrac{\sqrt3}{2}$. This is the concrete content of the <a href="04_wignereckart.html#m-independence">$M$-independence argument</a> and the <a href="04_wignereckart.html#we-statement">statement of the theorem</a> in the main notes.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Summary</h3>
+
+    <table class="mtable">
+      <thead>
+        <tr><th>Operator</th><th>Start</th><th>$\to(J{=}\tfrac12,\beta{=}1)$</th><th>$\to(J{=}\tfrac12,\beta{=}2)$</th><th>$\to J{=}\tfrac32$</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="2">$\vec S^{(3)}$</td><td>$\alpha=1$</td><td>$-\tfrac{\sqrt3}{2}$</td><td>$0$</td><td>$0$</td></tr>
+        <tr><td>$\alpha=2$</td><td>$0$</td><td>$\tfrac{\sqrt3}{6}$</td><td>$-\tfrac{1}{\sqrt3}$</td></tr>
+        <tr><td rowspan="2">$\vec S^{(2)}$</td><td>$\alpha=1$</td><td>$0$</td><td>$-\tfrac12$</td><td>$-\tfrac12$</td></tr>
+        <tr><td>$\alpha=2$</td><td>$-\tfrac12$</td><td>$-\tfrac{1}{\sqrt3}$</td><td>$\tfrac{\sqrt3}{6}$</td></tr>
+      </tbody>
+    </table>
+
+    <p>What the table shows that dimension-counting alone does not:</p>
+    <ol>
+      <li>the reduced matrix element depends on <i>which copy</i> of $j$ we start from and <i>which copy</i> of $J$ we land on, including non-zero copy-changing elements ($k_{12},k_{21}$ for $\vec S^{(2)}$);</li>
+      <li>zeros beyond the Wigner&ndash;Eckart selection rules come from extra structure: $\vec S^{(3)}$ preserves $j_{12}$, which forbids $\alpha=1\to J=\tfrac32$ even though the triangle rule allows it;</li>
+      <li>knowing $J$ and $j$ is not enough to know what a tensor operator does; the multiplicity labels matter.</li>
+    </ol>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

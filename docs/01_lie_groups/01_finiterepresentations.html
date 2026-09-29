@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Groups & Representations</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+
+    /* ---- Callout boxes (definitions / key results / remarks) ------- */
+    .callout {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .callout .label {
+      display: block;
+      font-family: "Poppins", -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .callout p {
+      margin: 0.4em 0;
+    }
+
+    .callout ol, .callout ul {
+      margin: 0.4em 0;
+      padding-left: 1.3em;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all',
+        macros: {
+          mat: ["\\begin{bmatrix}#1\\end{bmatrix}", 1]
+        }
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="../index.html" class="btn">Index</a>
+      <span class="prev-next">
+        <span class="btn disabled">Previous</span>
+        <span class="sep">|</span>
+        <a href="02_liegroups.html" class="btn" title="Lie Groups">Next</a>
+      </span>
+    </nav>
+
+    <h1>Groups & Representations</h1>
+    <p>
+      <i>22 September 2026</i><br>
+      <i>Digitised from handwritten notes.</i>
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Group definition</h3>
+
+    <div class="callout">
+      <span class="label">Definition &mdash; Group</span>
+      <p>A set $G$ with a binary operation is a <b>group</b> if:</p>
+      <ol>
+        <li>If $g, h \in G$ then $gh \in G$ &mdash; <i>closure</i></li>
+        <li>$(gh)k = g(hk)$ for all $g,h,k\in G$ &mdash; <i>associativity</i></li>
+        <li>There exists $e \in G$ such that $e g = g e = g$ for every $g\in G$ &mdash; <i>identity</i></li>
+        <li>For every $g \in G$ there exists $g^{-1} \in G$ such that $g g^{-1} = g^{-1} g = e$ &mdash; <i>inverse</i></li>
+      </ol>
+    </div>
+
+    <p>Throughout, $G$ is a finite group with $n$ distinct elements $g_1, g_2, \dots, g_n$.</p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The group table</h3>
+
+    <p>
+      $$
+      \begin{array}{c|ccc}
+             & g_1 & g_2 & \cdots \\ \hline
+        g_1  & g_1^2 & g_1 g_2 & \cdots \\
+        g_2  & g_2 g_1 & g_2^2 & \cdots \\
+        \vdots & \vdots & \vdots & \ddots
+      \end{array}
+      \qquad \Longrightarrow \qquad \text{entry in row } i,\ \text{column } j \text{ is } g_i g_j,
+      $$
+      with the left factor taken from the row header and the right factor from the column header.
+    </p>
+
+    <div class="callout">
+      <span class="label">Important property</span>
+      <ul>
+        <li>Each <i>row</i> of the group table is a permutation of the $n$ group elements $\{g_1, g_2, \dots, g_n\}$.</li>
+        <li>Each <i>column</i> of the group table is also a permutation of $\{g_1, g_2, \dots, g_n\}$.</li>
+      </ul>
+      <p>Equivalently, every group element appears in each row and in each column exactly once. (Proved in the next section.)</p>
+    </div>
+
+    <p><b>Consequence: location matrices.</b> For each element $g$, put a $1$ at every position of the table where the entry is $g$, and $0$ everywhere else:
+      $$P(g)_{ij} = \begin{cases} 1 & \text{if } g_ig_j = g,\\ 0 & \text{otherwise.}\end{cases}$$
+      Since $g$ appears exactly once in each row and each column, every $P(g)$ is a permutation matrix. The group table therefore decomposes into $n$ permutation matrices, one for each element, recording its $n$ locations in the table.
+    </p>
+
+    <div class="callout">
+      <span class="label">Open question 1</span>
+      <p>How are these permutation matrices related to the row/column permutation matrices? (Answered in the <a href="#location-revisited">final section</a>.)</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Every element appears once in each row and column</h3>
+
+    <div class="callout">
+      <span class="label">Claim</span>
+      <p>$g_i g_1, g_i g_2, \dots, g_i g_n$ (the $i^{\text{th}}$ row) contains exactly one copy of each group element.</p>
+    </div>
+
+    <p><b>Fact 1: all $n$ elements $g_ig_1$ to $g_ig_n$ are distinct.</b> Suppose otherwise, i.e. suppose that for some $a \neq b$,
+      $$g_i g_a = g_i g_b.$$
+      Left-multiply both sides by $g_i^{-1}$ and use associativity and the identity, $g_i^{-1}(g_ig_a) = (g_i^{-1}g_i)g_a = eg_a = g_a$:
+      $$g_i g_a = g_i g_b \quad\xrightarrow{\ \text{left-multiply by }g_i^{-1}\ }\quad g_i^{-1} g_i g_a = g_i^{-1} g_i g_b \quad\Longrightarrow\quad g_a = g_b.$$
+      But the column headers list each element once, so $a\neq b$ means $g_a\neq g_b$. This is a contradiction, so our premise is wrong: all $n$ elements of the row are distinct.
+    </p>
+    <p><i>Intuition:</i> left multiplication by $g_i$, the map $g\mapsto g_ig$, can be undone by the map $g\mapsto g_i^{-1}g$. A map that can be undone cannot send two different elements to the same one.</p>
+
+    <p><b>Fact 2: the row contains $n$ elements.</b> Each entry lies in $G$ (closure), and there are $n$ of them. So: (1) no duplicates, all elements distinct; and (2) $n$ elements in total, drawn from a set of $n$ $\Rightarrow$ the row contains the entire group, each element exactly once.</p>
+
+    <p><b>Columns.</b> The same reasoning applies to the $i^{\text{th}}$ column, $g_1 g_i, g_2 g_i, \dots, g_n g_i$, using right multiplication instead: if $g_ag_i = g_bg_i$, right-multiplying by $g_i^{-1}$ gives $(g_ag_i)g_i^{-1} = g_a(g_ig_i^{-1}) = g_a$, and likewise $g_b$, so $g_a=g_b$.</p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">A simple $n$-dimensional representation</h3>
+
+    <div class="callout">
+      <span class="label">Definition &mdash; Representation</span>
+      <p>A <b>representation</b> of $G$ assigns to each element $g$ an invertible matrix $D(g)$ such that the matrices multiply like the group elements:
+      $$D(g_i)\,D(g_j) = D(g_ig_j)\qquad\text{for all } i,j.$$
+      In particular $D(e)=I$, since $D(e)D(e)=D(e)$ and $D(e)$ is invertible.</p>
+    </div>
+
+    <p>For any finite group $g_1, g_2, \dots, g_n$, there is a very easy $n$-dimensional representation we can construct.</p>
+
+    <div class="callout">
+      <span class="label">Procedure</span>
+      <ol>
+        <li>Map elements to vectors: $g_1 \to \mat{1\\0\\\vdots}$, $g_2 \to \mat{0\\1\\\vdots}$, etc. Write $V(g_j)$ for the $j^{\text{th}}$ standard basis vector.</li>
+        <li>Associate to $g_i$ the matrix $M(g_i)$ defined by
+          $$M(g_i)\, V(g_j) = V(g_i g_j)\qquad\text{for all } j.$$</li>
+      </ol>
+      <p>This fixes every column: column $j$ of $M(g_i)$ is $V(g_ig_j)$, so $M(g_i)$ is row $i$ of the group table written as unit vectors. By the important property, row $i$ contains each element once, so the columns of $M(g_i)$ are the $n$ basis vectors, each once: $M(g_i)$ is a permutation matrix. It is the matrix of the row-$i$ permutation $g_j\mapsto g_ig_j$. (This is called the <b>regular representation</b>.)</p>
+    </div>
+
+    <p><b>Example.</b>
+      $$
+      \begin{array}{c|ccc}
+             & g_1 & g_2 & g_3 \\ \hline
+        g_1  & g_3 & g_1 & g_2 \\
+        g_2  & g_1 & g_2 & g_3 \\
+        g_3  & g_2 & g_3 & g_1
+      \end{array}
+      \quad \Big\} \ \text{some arbitrary group table I made up}
+      $$
+      This table does satisfy the group axioms. Row 2 and column 2 reproduce the headers, so $g_2=e$. Also $g_1g_3=g_3g_1=g_2$, so $g_3=g_1^{-1}$, and $g_1g_1=g_3$. It is the cyclic group of order 3, with $g_1=a$, $g_2=e$, $g_3=a^2$.
+    </p>
+
+    <p>So $V(g_1) = \mat{1\\0\\0}$, $V(g_2) = \mat{0\\1\\0}$, $V(g_3) = \mat{0\\0\\1}$.</p>
+
+    <p><b>Row 1</b> then says:
+      $$M(g_1) = \mat{0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0}.$$
+      For example, $M(g_1) V(g_1) = V(g_1 g_1) = V(g_3)$ fixes the first column of $M(g_1)$:
+      $$\mat{0 & \times & \times \\ 0 & \times & \times \\ 1 & \times & \times} \mat{1\\0\\0} = \mat{0\\0\\1},$$
+      and $V(g_1g_2)=V(g_1)$, $V(g_1g_3)=V(g_2)$ fix the second and third columns.
+    </p>
+
+    <p><b>Row 2</b> and <b>Row 3</b> give:
+      $$M(g_2) = \mat{1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1} \qquad M(g_3) = \mat{0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0}$$
+      As it must, the identity $g_2$ is represented by the identity matrix.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Checking the construction</h3>
+
+    <p>In the construction, top headers $\to$ vectors, left headers $\to$ matrices. But the definition of a representation involves only the matrices, so let's check it directly:
+      $$M(g_1) M(g_1) = \mat{0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0} \mat{0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0} = \mat{0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0} = M(g_3) = M(g_1g_1).$$
+      &#10003; Seems to work.
+    </p>
+
+    <div class="callout">
+      <span class="label">Open question 2</span>
+      <p>Why does the construction (which is done in terms of both matrices and vectors) generalise to matrices only, i.e. extend to the full group structure?</p>
+    </div>
+
+    <div class="callout">
+      <span class="label">Resolution</span>
+      <p>For any $k$,
+      $$\begin{aligned}
+      M(g_i)M(g_j)\,V(g_k) &= M(g_i)\,V(g_jg_k) = V\big(g_i(g_jg_k)\big)\\
+      &= V\big((g_ig_j)g_k\big) = M(g_ig_j)\,V(g_k),
+      \end{aligned}$$
+      where the third equality uses associativity. The two matrices $M(g_i)M(g_j)$ and $M(g_ig_j)$ agree on every basis vector $V(g_k)$, so they are equal:
+      $$M(g_i)M(g_j)=M(g_ig_j)\qquad\text{for all } i,j.$$
+      So $M$ is a representation of every finite group, not just of this example. The vectors only serve to define the matrices; once defined, the matrices inherit the multiplication law of the group through associativity.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="location-revisited">Location matrices revisited</h3>
+
+    <p><b>Random thought.</b> From this construction we found:
+      $$g_1 \to \mat{0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0}, \qquad g_2 \to \mat{1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1}, \qquad g_3 \to \mat{0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0}.$$
+      If we used instead the location matrices $P(g)$, based on the <i>locations</i> of $g_1, g_2, g_3$ in the group table, we get:
+      $$g_1 \to \mat{0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1} \; ?, \qquad g_2 \to \mat{0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0} \; ?, \qquad g_3 \to \mat{1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0} \; ?$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Open question 3</span>
+      <p>Is this a valid representation, and how are these matrices related to the representation we found?</p>
+    </div>
+
+    <p><b>Check.</b>
+      $$P(g_1) P(g_1) = \mat{0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1} \mat{0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1} = \mat{1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1}, \quad \text{not in the set!}$$
+      In particular it is not $P(g_1g_1)=P(g_3)$, so this is not a valid representation. A quicker way to see it: any representation sends the identity to the identity matrix, but $P(g_2)=P(e)\neq I$. Comparing the two sets of matrices, the $P$'s look like mirror images of the $M$'s.
+    </p>
+
+    <div class="callout">
+      <span class="label">Hypothesis</span>
+      <p>They actually are mirror images?</p>
+    </div>
+
+    <div class="callout">
+      <span class="label">Resolution &mdash; the exact relation</span>
+      <p>Compare the defining conditions entry by entry:
+      $$P(g)_{ij}=1 \iff g_ig_j = g \iff g_i = g\,g_j^{-1},\qquad M(g)_{ij}=1 \iff g_i = g\,g_j.$$
+      So column $j$ of $P(g)$ is the column of $M(g)$ belonging to $g_j^{-1}$ rather than $g_j$. In matrix form,
+      $$P(g) = M(g)\,P(e),$$
+      where $P(e)_{ij}=1 \iff g_ig_j=e$: $P(e)$ is the permutation matrix of the inversion map $g_j\mapsto g_j^{-1}$. Right-multiplying by $P(e)$ re-orders the columns of $M(g)$, sending column $j$ to the position of $g_j^{-1}$.</p>
+      <ul>
+        <li><b>Mirror images?</b> Only because of the labelling in this example. With $g_2=e$, inversion fixes $g_2$ and swaps $g_1\leftrightarrow g_3$, so $P(e)$ is the anti-diagonal matrix, which reverses the column order: a left&ndash;right mirror image. Had we labelled the identity $g_1$, inversion would swap only columns 2 and 3, and no mirror symmetry would be visible. The relation $P(g)=M(g)P(e)$ holds for every finite group.</li>
+        <li><b>Valid representation?</b> $P$ is a representation if and only if $P(e)=I$, i.e. if and only if every element is its own inverse. If $P(e)=I$, then $P(g)=M(g)$ exactly, as for $\mathbb Z_2\times\mathbb Z_2$; if not, $P$ fails $D(e)=I$. Here $g_1^{-1}=g_3\neq g_1$, so it is not.</li>
+        <li><b>Open question 1.</b> The row permutation matrices are the $M(g_i)$ themselves: row $i$ of the table is the permutation $g_j\mapsto g_ig_j$. The column permutation matrices $C(g_j)$, defined by $C(g_j)V(g_i)=V(g_ig_j)$, describe column $j$. The location matrices are built from either: $P(g) = M(g)\,P(e) = P(e)\,C(g)^{-1}$.</li>
+      </ul>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

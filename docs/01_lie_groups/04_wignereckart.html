@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tensor Operators and the Wigner&ndash;Eckart Theorem</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+
+    /* ---- Callout boxes (definitions / key results / remarks) ------- */
+    .callout {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .callout .label {
+      display: block;
+      font-family: "Poppins", -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .callout p {
+      margin: 0.4em 0;
+    }
+
+    .callout ol, .callout ul {
+      margin: 0.4em 0;
+      padding-left: 1.4em;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all',
+        macros: {
+          ket: ["\\lvert #1 \\rangle", 1],
+          bra: ["\\langle #1 \\rvert", 1],
+          braket: ["\\langle #1 \\vert #2 \\rangle", 2],
+          tket: ["\\lvert \\widetilde{#1,#2} \\rangle", 2],
+          CG: ["\\langle s,j;#1,#2\\vert #3,#4\\rangle", 4],
+          GC: ["\\langle #3,#4\\vert s,j;#1,#2\\rangle", 4]
+        }
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="../index.html" class="btn">Index</a>
+      <span class="prev-next">
+        <a href="03_su2.html" class="btn" title="Irreducible Representations of SU(2)">Previous</a>
+        <span class="sep">|</span>
+        <a href="05_wignereckartexamples.html" class="btn" title="Two Worked Examples: Reducible Tensors and Multiplicity">Next</a>
+      </span>
+    </nav>
+
+    <h1>Tensor Operators and the Wigner&ndash;Eckart Theorem</h1>
+    <p>
+      <i>25&ndash;27 September 2026</i><br>
+      <i>Digitised from handwritten notes.</i>
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Tensor operators</h3>
+
+    <p>
+      Throughout, $J_a$ ($a=1,2,3$, one for each of the three independent generators of $SU(2)$) satisfy $[J_a,J_b]=i\varepsilon_{abc}J_c$, and
+      $$J^\pm \equiv \tfrac1{\sqrt2}\big(J_1\pm iJ_2\big),\qquad [J_3,J^\pm]=\pm J^\pm,\qquad [J^+,J^-]=J_3 .$$
+      $J_a^{(s)}$ denotes the <i>standard</i> spin-$s$ matrices of the <a href="03_su2.html#spin-j">companion notes on $SU(2)$ representations</a>: a $(2s{+}1)\times(2s{+}1)$ matrix with rows and columns labelled by $l=s,s-1,\dots,-s$, with
+      $$\big[J_3^{(s)}\big]_{l'l} = l\,\delta_{l'l},\qquad \big[J^{\pm(s)}\big]_{l'l} = C^\pm_{s,l}\,\delta_{l',l\pm1},\qquad C^\pm_{s,l} \equiv \frac1{\sqrt2}\sqrt{(s\mp l)(s\pm l+1)} .$$
+      Equivalently, $J_a\ket{s,l}=\ket{s,l'}\big[J_a^{(s)}\big]_{l'l}$ (repeated indices summed).
+    </p>
+
+    <div class="callout">
+      <span class="label">Definition &mdash; Tensor operator</span>
+      <p>A set of $2s+1$ operators $O^s_l$, $l=s,s-1,\dots,-s$, constitute a <b>spin-$s$ tensor operator</b> if
+      $$[J_a,O^s_l] = O^s_{l'}\big[J_a^{(s)}\big]_{l'l}\qquad\text{for all }a,l.$$</p>
+    </div>
+
+    <p>
+      In words: commuting $J_a$ with $O^s_l$ gives a linear combination of $O^s_{s},\dots,O^s_{-s}$ whose coefficients are the $l$-th column of the spin-$s$ matrix of $J_a$. For example,
+      $$[J_1,O^s_l] = \big[J_1^{(s)}\big]_{s,l}\,O^s_{s} + \big[J_1^{(s)}\big]_{s-1,l}\,O^s_{s-1} + \cdots + \big[J_1^{(s)}\big]_{-s,l}\,O^s_{-s}.$$
+      This is exactly the rule by which the basis states $\ket{s,l}$ transform under $J_a$, with &ldquo;act on a state&rdquo; replaced by &ldquo;commute with an operator&rdquo;. That parallel is the whole content of the <a href="#we-setting">Wigner&ndash;Eckart theorem</a>.
+    </p>
+
+    <div class="callout">
+      <span class="label">Consistency of the index order</span>
+      <p>Applying the definition twice,
+      $$[J_a,[J_b,O^s_l]] = [J_a,O^s_{l'}]\big[J_b^{(s)}\big]_{l'l} = O^s_{l''}\big[J_a^{(s)}J_b^{(s)}\big]_{l''l}.$$
+      With the Jacobi identity,
+      $$\begin{aligned}
+      \big[[J_a,J_b],O^s_l\big] &= [J_a,[J_b,O^s_l]]-[J_b,[J_a,O^s_l]] = O^s_{l'}\big[J_a^{(s)},J_b^{(s)}\big]_{l'l}\\
+      &= i\varepsilon_{abc}\,O^s_{l'}\big[J_c^{(s)}\big]_{l'l} = i\varepsilon_{abc}\,[J_c,O^s_l],
+      \end{aligned}$$
+      as it must be. The &ldquo;column&rdquo; convention $O_{l'}[J_a^{(s)}]_{l'l}$ is the one that makes the definition compatible with the algebra.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Weights and ladder relations</h3>
+
+    <p>
+      Two consequences follow immediately. Taking $a=3$,
+      $$[J_3,O^s_l] = O^s_{l'}\,l\,\delta_{l'l} = l\,O^s_l ,$$
+      so $O^s_l$ carries $J_3$-weight $l$. In particular $O^s_0$ (which exists when $s$ is an integer) commutes with $J_3$.
+    </p>
+    <p>
+      For $J^\pm$, the Jacobi identity gives
+      $$[J_3,[J^\pm,O^s_l]] = [[J_3,J^\pm],O^s_l] + [J^\pm,[J_3,O^s_l]] = \pm[J^\pm,O^s_l] + l\,[J^\pm,O^s_l] = (l\pm1)[J^\pm,O^s_l],$$
+      so $[J^\pm,O^s_l]$ has weight $l\pm1$ and must be proportional to $O^s_{l\pm1}$. The constant is not free: by linearity of the definition,
+      $$[J^\pm,O^s_l] = \tfrac1{\sqrt2}\big([J_1,O^s_l]\pm i[J_2,O^s_l]\big) = O^s_{l'}\big[J^{\pm(s)}\big]_{l'l}.$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Ladder relations</span>
+      <p>$$[J^\pm,O^s_l] = C^\pm_{s,l}\,O^s_{l\pm1},\qquad\qquad C^\pm_{s,l} = \frac1{\sqrt2}\sqrt{(s\mp l)(s\pm l+1)} ,$$
+      the same coefficients as $J^\pm\ket{s,l}=C^\pm_{s,l}\ket{s,l\pm1}$, with $l$ the component being raised or lowered <i>from</i>.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="example-r">Example: is $\vec r=(x,y,z)$ a tensor operator?</h3>
+
+    <p>
+      To answer this we need the commutators $[J_a,r_b]$, and for those we need a representation of $J_a$ acting on the same space as $\vec r$.
+    </p>
+
+    <p><b>Orbital angular momentum represents the algebra.</b> Take
+      $$J_a = \varepsilon_{abc}\,r_bp_c,\qquad [r_a,p_b]=i\delta_{ab},\qquad [r_a,r_b]=[p_a,p_b]=0 .$$
+      To confirm that this satisfies $[J_a,J_b]=i\varepsilon_{abc}J_c$, use
+      $$[AB,CD]=A[B,C]D+AC[B,D]+[A,C]DB+C[A,D]B.$$
+      Only the first and last terms survive:
+      $$[r_dp_e,\,r_fp_g] = r_d[p_e,r_f]p_g + r_f[r_d,p_g]p_e = -i\delta_{ef}\,r_dp_g + i\delta_{dg}\,r_fp_e .$$
+      Hence
+      $$[J_a,J_b] = \varepsilon_{ade}\varepsilon_{bfg}\,[r_dp_e,\,r_fp_g] = -i\,\varepsilon_{ade}\varepsilon_{beg}\,r_dp_g + i\,\varepsilon_{ade}\varepsilon_{bfd}\,r_fp_e .$$
+      Cycling indices so that the summed index comes first and using $\varepsilon_{kij}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$:
+      $$\begin{aligned}
+      \varepsilon_{ade}\varepsilon_{beg} = \varepsilon_{ead}\varepsilon_{egb} &= \delta_{ag}\delta_{db}-\delta_{ab}\delta_{dg}
+      &&\Rightarrow\quad -i\big(r_bp_a - \delta_{ab}\,r_dp_d\big),\\
+      \varepsilon_{ade}\varepsilon_{bfd} = \varepsilon_{dea}\varepsilon_{dbf} &= \delta_{eb}\delta_{af}-\delta_{ef}\delta_{ab}
+      &&\Rightarrow\quad +i\big(r_ap_b - \delta_{ab}\,r_ep_e\big).
+      \end{aligned}$$
+      The two $\delta_{ab}$ terms are both $\vec r\cdot\vec p$ with $r$ to the left of $p$, so they cancel identically, leaving
+      $$[J_a,J_b] = i\big(r_ap_b - r_bp_a\big).$$
+      Finally,
+      $$\varepsilon_{cab}J_c = \varepsilon_{cab}\varepsilon_{cde}\,r_dp_e = (\delta_{ad}\delta_{be}-\delta_{ae}\delta_{bd})\,r_dp_e = r_ap_b-r_bp_a,$$
+      so
+      $$[J_a,J_b] = i\varepsilon_{cab}J_c = i\varepsilon_{abc}J_c ,$$
+      and $J_a=\varepsilon_{abc}r_bp_c$ is a valid representation of the algebra.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="adjoint">The commutator $[J_a,r_b]$ and the adjoint representation</h3>
+
+    <p>
+      Since $r_b$ and $r_c$ commute,
+      $$[J_a,r_b] = \varepsilon_{acd}\,[r_cp_d,\,r_b] = \varepsilon_{acd}\,r_c[p_d,r_b] = \varepsilon_{acd}\,r_c(-i\delta_{db}) = -i\varepsilon_{acb}\,r_c = i\varepsilon_{abc}\,r_c .$$
+      Define the <b>adjoint representation</b> by $\big[J_a^{\mathrm{adj}}\big]_{bc}\equiv-i\varepsilon_{abc}$ (these $3\times3$ matrices satisfy the algebra). Then $-i\varepsilon_{acb}=\big[J_a^{\mathrm{adj}}\big]_{cb}$, and
+      $$[J_a,r_b] = r_c\big[J_a^{\mathrm{adj}}\big]_{cb}.$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Right shape but wrong basis</span>
+      <p>This has exactly the form of the definition, with three operators and a valid set of $3\times3$ representation matrices. But the matrices are the adjoint ones, not the standard spin-1 ones: for instance
+      $$J_3^{\mathrm{adj}}=\begin{pmatrix}0&-i&0\\ i&0&0\\ 0&0&0\end{pmatrix}\quad\text{is not}\quad J_3^{(1)}=\mathrm{diag}(1,0,-1).$$
+      The two are equivalent (both are 3-dimensional irreps of $SU(2)$), i.e. they are the same representation written in different bases. So there is a similarity transformation $S$ with
+      $$S\,J_a^{\mathrm{adj}}\,S^{-1} = J_a^{(1)},\qquad\text{i.e.}\qquad [S]_{lx}\big[J_a^{\mathrm{adj}}\big]_{xy}\big[S^{-1}\big]_{yl'} = \big[J_a^{(1)}\big]_{ll'} .$$
+      $\vec r$ is therefore a spin-1 tensor operator written in the wrong basis. The next three sections show how to change basis.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="recipe">Converting to standard form: the general recipe</h3>
+
+    <p>
+      Suppose a set of operators $\Omega_x$ ($x=1,\dots,2s+1$) satisfies
+      $$[J_a,\Omega_x] = \Omega_y\big[J_a^{(D)}\big]_{yx},$$
+      where $D$ is some representation equivalent to spin $s$, so that $S\,J_a^{(D)}S^{-1}=J_a^{(s)}$ for some invertible $S$.
+    </p>
+
+    <div class="callout">
+      <span class="label">Recipe</span>
+      <p>Define
+      $$O^s_l \equiv \Omega_y\big[S^{-1}\big]_{yl},$$
+      i.e. $O^s_l$ is the combination of the $\Omega$'s whose coefficients are the $l$-th column of $S^{-1}$. Then, inserting $\delta_{ku}=[S^{-1}]_{ke}[S]_{eu}$,
+      $$\begin{aligned}
+      {[J_a,O^s_l]} &= \big[S^{-1}\big]_{yl}\,[J_a,\Omega_y] = \big[S^{-1}\big]_{yl}\,\Omega_k\big[J_a^{(D)}\big]_{ky}
+      = \big[S^{-1}\big]_{yl}\,\Omega_k\big[S^{-1}\big]_{ke}\big[S\big]_{eu}\big[J_a^{(D)}\big]_{uy}\\
+      &= \Big(\Omega_k\big[S^{-1}\big]_{ke}\Big)\Big(\big[S\big]_{eu}\big[J_a^{(D)}\big]_{uy}\big[S^{-1}\big]_{yl}\Big)
+      = O^s_e\,\big[J_a^{(s)}\big]_{el}.
+      \end{aligned}$$
+      So the $O^s_l$ form a spin-$s$ tensor operator in standard form.</p>
+    </div>
+
+    <p>
+      There are two ways to use this: avoid computing $S$ altogether by building the $O^s_l$ with the ladder relations (<a href="#ladder-route">the ladder route</a>), or <a href="#explicit-S">compute $S$ explicitly</a>.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="ladder-route">The ladder route</h3>
+
+    <p>
+      Suppose $D$ is irreducible and $s$ is an integer. By the recipe a standard-form set $O^s_l$ exists, and its $O^s_0$ commutes with $J_3$. The $\Omega$'s are linearly independent: the coefficient vectors $c$ with $c_y\Omega_y=0$ form a $D$-invariant subspace (commuting $J_a$ through $c_y\Omega_y=0$ gives $\Omega_x\big[J_a^{(D)}c\big]_x=0$), so by irreducibility it is $\{0\}$ unless all the $\Omega$'s vanish. In an irrep the weight $0$ occurs exactly once, so every combination of the $\Omega$'s that commutes with $J_3$ is a multiple of $O^s_0$. The definition is linear in $O$, so its overall normalisation is ours to choose. Hence:
+    </p>
+    <ol>
+      <li>find the combination of $\Omega$'s that commutes with $J_3$ and call it $O^s_0$;</li>
+      <li>generate the rest from the ladder relations, $O^s_{l\pm1}=[J^\pm,O^s_l]/C^\pm_{s,l}$.</li>
+    </ol>
+    <p>
+      (For half-integer $s$ there is no weight $0$; start instead from the combination of weight $s$, which is annihilated by $[J^+,\,\cdot\,]$, and lower.)
+    </p>
+
+    <p><b>Applied to $\vec r$.</b> With $J_3=r_1p_2-r_2p_1$, $[J_3,r_3]=0$, while $[J_3,r_1]=ir_2$ and $[J_3,r_2]=-ir_1$, so up to normalisation $r_3$ is the only combination commuting with $J_3$:
+      $$\tilde r_0 = r_3 .$$
+      Using $[J_a,r_b]=i\varepsilon_{abc}r_c$, i.e. $[J_1,r_3]=-ir_2$ and $[J_2,r_3]=ir_1$:
+      $$\begin{aligned}
+      {[J^+,\tilde r_0]} &= \tfrac1{\sqrt2}[J_1,r_3] + \tfrac{i}{\sqrt2}[J_2,r_3] = \tfrac1{\sqrt2}(-ir_2) + \tfrac{i}{\sqrt2}(ir_1) = -\tfrac1{\sqrt2}(r_1+ir_2),\\
+      {[J^-,\tilde r_0]} &= \tfrac1{\sqrt2}[J_1,r_3] - \tfrac{i}{\sqrt2}[J_2,r_3] = \tfrac1{\sqrt2}(-ir_2) - \tfrac{i}{\sqrt2}(ir_1) = \tfrac1{\sqrt2}(r_1-ir_2).
+      \end{aligned}$$
+      Since $C^\pm_{1,0}=\tfrac1{\sqrt2}\sqrt{1\cdot2}=1$, these are $\tilde r_{\pm1}$ directly.
+    </p>
+
+    <div class="callout">
+      <span class="label">Result &mdash; $\vec r$ as a spin-1 tensor operator</span>
+      <p>$$\tilde r_{\pm1} = \mp\frac1{\sqrt2}\big(r_1\pm ir_2\big),\qquad \tilde r_0 = r_3 .$$
+      As a check, $[J_3,\tilde r_{\pm1}]=\pm\tilde r_{\pm1}$ and
+      $$[J^+,\tilde r_{+1}]\propto[J_1+iJ_2,\,r_1+ir_2] = -r_3+r_3 = 0,$$
+      as required at the top of the ladder.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="explicit-S">Finding $S$ explicitly</h3>
+
+    <p>
+      Alternatively, solve for $S$ directly. The condition $SJ_3^{\mathrm{adj}}S^{-1}=J_3^{(1)}=\mathrm{diag}(1,0,-1)$ says that the columns of $S^{-1}$ are eigenvectors of $J_3^{\mathrm{adj}}$ with eigenvalues $1,0,-1$, in that order. Since $J_3^{\mathrm{adj}}$ is Hermitian they can be taken orthonormal, making $S$ unitary. The normalised eigenvectors are
+      $$\lambda=1:\ \tfrac1{\sqrt2}\begin{pmatrix}1\\ i\\ 0\end{pmatrix},\qquad
+      \lambda=0:\ \begin{pmatrix}0\\ 0\\ 1\end{pmatrix},\qquad
+      \lambda=-1:\ \tfrac1{\sqrt2}\begin{pmatrix}1\\ -i\\ 0\end{pmatrix},$$
+      each determined only up to a phase $e^{i\theta_l}$, because the eigenvalues are non-degenerate.
+    </p>
+
+    <div class="callout">
+      <span class="label">Diagonalising $J_3$ is not enough</span>
+      <p>Taking all phases $\theta_l=0$,
+      $$S^{-1}_{\text{naive}} = \begin{pmatrix}\tfrac1{\sqrt2}&0&\tfrac1{\sqrt2}\\ \tfrac{i}{\sqrt2}&0&-\tfrac{i}{\sqrt2}\\ 0&1&0\end{pmatrix}
+      \quad\text{gives}\quad
+      S_{\text{naive}}J_3^{\mathrm{adj}}S^{-1}_{\text{naive}}=\mathrm{diag}(1,0,-1)\ \checkmark,$$
+      but
+      $$S_{\text{naive}}J_1^{\mathrm{adj}}S^{-1}_{\text{naive}} = \frac1{\sqrt2}\begin{pmatrix}0&-1&0\\ -1&0&1\\ 0&1&0\end{pmatrix}
+      \;\ne\; J_1^{(1)} = \frac1{\sqrt2}\begin{pmatrix}0&1&0\\ 1&0&1\\ 0&1&0\end{pmatrix}.$$
+      All three relations $SJ_a^{\mathrm{adj}}S^{-1}=J_a^{(1)}$ must hold at once. The phases leave the diagonal $J_3$ untouched but multiply the off-diagonal entries: $\big[SJ^\pm S^{-1}\big]_{l\pm1,\,l}\propto e^{i(\theta_l-\theta_{l\pm1})}$. Demanding that these equal the positive $C^\pm_{1,l}$ fixes the <i>relative</i> phases. One overall phase remains free; it is the freedom to rescale the whole tensor operator. Here the naive choice gives $\big[SJ^+S^{-1}\big]_{+1,0}=-1$ instead of $+1$, so the $l=+1$ column must be multiplied by $e^{i\pi}=-1$.</p>
+    </div>
+
+    <p>
+      With that phase fixed,
+      $$S^{-1} = \begin{pmatrix} -\tfrac1{\sqrt2} & 0 & \tfrac1{\sqrt2} \\ -\tfrac{i}{\sqrt2} & 0 & -\tfrac{i}{\sqrt2} \\ 0 & 1 & 0 \end{pmatrix},
+      \qquad
+      S = \big(S^{-1}\big)^\dagger = \begin{pmatrix} -\tfrac1{\sqrt2} & \tfrac{i}{\sqrt2} & 0 \\ 0 & 0 & 1 \\ \tfrac1{\sqrt2} & \tfrac{i}{\sqrt2} & 0 \end{pmatrix},$$
+      and now $SJ_a^{\mathrm{adj}}S^{-1}=J_a^{(1)}$ for all three $a$; for example $SJ_1^{\mathrm{adj}}S^{-1}=\tfrac1{\sqrt2}\left(\begin{smallmatrix}0&1&0\\1&0&1\\0&1&0\end{smallmatrix}\right)$. By the recipe, $\tilde r_l = r_y\big[S^{-1}\big]_{yl}$ reads off the columns of $S^{-1}$:
+      $$\tilde r_{+1} = -\tfrac1{\sqrt2}(r_1+ir_2),\qquad \tilde r_0 = r_3,\qquad \tilde r_{-1} = \tfrac1{\sqrt2}(r_1-ir_2),$$
+      exactly the result of the ladder route.
+    </p>
+
+    <div class="callout">
+      <span class="label">Summary of the general method</span>
+      <ol>
+        <li>We want $S$ mapping $J_a^{(D)}$ (here $J_a^{\mathrm{adj}}$) to $J_a^{(s)}$; both sets of matrices are known in advance.</li>
+        <li>$SJ_3^{(D)}S^{-1}=J_3^{(s)}$ fixes the columns of $S^{-1}$ (equivalently the rows of $S$), each up to a constant factor &mdash; just a phase once the columns are normalised.</li>
+        <li>$SJ_{1,2}^{(D)}S^{-1}=J_{1,2}^{(s)}$, equivalently $SJ^{\pm(D)}S^{-1}=J^{\pm(s)}$, fixes these factors relative to one another, leaving one overall constant free.</li>
+      </ol>
+      <p>The <a href="#ladder-route">ladder route</a> builds step 3 in from the start, which is why it is quicker in practice.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="we-setting">The Wigner&ndash;Eckart theorem: setting</h3>
+
+    <p>
+      Consider a system whose Hilbert space decomposes into irreps of $J_a$, with orthonormal basis $\ket{j,m,\alpha}$. The label $\alpha$ distinguishes different copies of the same $j$. It is needed even though the Clebsch&ndash;Gordan part of the construction only refers to $s,l,j,m$: for three spin-$\tfrac12$ particles, $\tfrac12\otimes\tfrac12\otimes\tfrac12=\tfrac12\oplus\tfrac12\oplus\tfrac32$, so $j=\tfrac12$ occurs twice. The basis is chosen so that $J_a$ acts within each copy by the standard matrices, the same for every $\alpha$:
+      $$J_a\ket{j,m,\alpha} = \ket{j,m',\alpha}\big[J_a^{(j)}\big]_{m'm}.$$
+      Let $O^s_l$ be a spin-$s$ tensor operator on this space.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="one-system">One system that transforms like two</h3>
+
+    <p><b>Two genuine systems.</b> Write the states of a spin-$s$ system as $\ket{s,l}$ and those of a spin-$j$ system as $\ket{j,m}$. On the product space the total angular momentum is $J_a=J_a^{s}+J_a^{j}$, so
+      $$J_a\ket{s,l}\ket{j,m} = \big[J_a^{(s)}\big]_{l'l}\,\ket{s,l'}\ket{j,m} + \big[J_a^{(j)}\big]_{m'm}\,\ket{s,l}\ket{j,m'} .$$
+    </p>
+
+    <p><b>One system and a tensor operator.</b> Using the definition of $O^s_l$ and the action of $J_a$ on $\ket{j,m,\alpha}$,
+      $$\begin{aligned}
+      J_a\big(O^s_l\ket{j,m,\alpha}\big) &= [J_a,O^s_l]\ket{j,m,\alpha} + O^s_l\,J_a\ket{j,m,\alpha}\\
+      &= \big[J_a^{(s)}\big]_{l'l}\,\big(O^s_{l'}\ket{j,m,\alpha}\big) + \big[J_a^{(j)}\big]_{m'm}\,\big(O^s_l\ket{j,m',\alpha}\big).
+      \end{aligned}$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Key observation</span>
+      <p>The $(2s{+}1)(2j{+}1)$ states $O^s_l\ket{j,m,\alpha}$ transform under $J_a$ with exactly the same coefficients as the $(2s{+}1)(2j{+}1)$ product states $\ket{s,l}\ket{j,m}$, even though there is only one Hilbert space in play (the system's own), whereas $\ket{s,l}\ket{j,m}$ genuinely involves two. Precisely: the linear map
+      $$\Phi_\alpha:\ \ket{s,l}\ket{j,m}\ \longmapsto\ O^s_l\ket{j,m,\alpha}$$
+      commutes with $J_a$, i.e. $J_a\Phi_\alpha=\Phi_\alpha J_a$. $\Phi_\alpha$ need not preserve norms, and some $O^s_l\ket{j,m,\alpha}$ may vanish, but every relation built from linear combinations and the action of $J_a$ carries over from the product space.</p>
+    </div>
+
+    <p>
+      For example, since $J_3$ is diagonal in both factors,
+      $$J_3\big(O^s_l\ket{j,m,\alpha}\big) = (l+m)\,O^s_l\ket{j,m,\alpha},$$
+      just as $J_3\ket{s,l}\ket{j,m}=(l+m)\ket{s,l}\ket{j,m}$. The highest weight is $s+j$, carried by $O^s_s\ket{j,j,\alpha}$.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Clebsch&ndash;Gordan coefficients and the states $\tket{J}{M}$</h3>
+
+    <p>
+      In the product space, coupling proceeds as usual. Start from the top state $\ket{s,s}\ket{j,j}$ and lower with the total $J^-$ (acting on both factors) to generate the $J=j+s$ tower. At $M=j+s-1$ the lowered state is a combination of $\ket{s,s-1}\ket{j,j}$ and $\ket{s,s}\ket{j,j-1}$; the combination orthogonal to it (Gram&ndash;Schmidt) is annihilated by $J^+$ and is the top of the $J=j+s-1$ tower, and so on down to $J=|j-s|$:
+      $$s\otimes j = (j+s)\oplus(j+s-1)\oplus\cdots\oplus|j-s| .$$
+      The <b>Clebsch&ndash;Gordan coefficients</b> are the resulting expansion coefficients,
+      $$\ket{J,M} = \sum_l \ket{s,l}\ket{j,M-l}\;\CG{l}{M-l}{J}{M},\qquad \CG{l}{m}{J}{M}\equiv\big(\bra{s,l}\bra{j,m}\big)\ket{J,M},$$
+      where the sum runs over the $l$ with $|M-l|\le j$. Gram&ndash;Schmidt leaves the phase of each tower's top state free; the standard (Condon&ndash;Shortley) convention fixes it by taking $\CG{s}{J-s}{J}{J}>0$, which makes all the coefficients real, so $\GC{l}{m}{J}{M}=\CG{l}{m}{J}{M}$. (This choice fixes the sign of the $k_{\alpha\beta}$ below.)
+    </p>
+    <p>
+      Applying $\Phi_\alpha$ carries these combinations over to the tensor-operator construction. Define
+      $$\tket{J}{M} \equiv \Phi_\alpha\ket{J,M} = \sum_l O^s_l\ket{j,M-l,\alpha}\;\CG{l}{M-l}{J}{M},$$
+      where the tilde marks a state built by the tensor-operator construction, as opposed to the product-space state $\ket{J,M}$. ($\tket{J}{M}$ also depends on $\alpha$ and on $O^s$; the notation suppresses this.) Because $\Phi_\alpha$ commutes with $J_a$,
+      $$J_3\tket{J}{M}=M\tket{J}{M},\qquad \vec J^{\,2}\tket{J}{M}=J(J+1)\tket{J}{M},\qquad J^\pm\tket{J}{M}=C^\pm_{J,M}\tket{J}{M\pm1}.$$
+    </p>
+
+    <div class="callout">
+      <span class="label">What carries over and what does not</span>
+      <p>Lowering $O^s_s\ket{j,j,\alpha}$ with $J^-$ generates the $J=j+s$ tower of tilde states directly. The top of each lower tower cannot be found by Gram&ndash;Schmidt among the $O^s_l\ket{j,m,\alpha}$, since their inner products are not known and orthogonality is not preserved by $\Phi_\alpha$. What <i>is</i> preserved is &ldquo;annihilated by $J^+$&rdquo;: the product-space combination that is the top of the $J$ tower maps to a tilde state that is also annihilated by $J^+$. So the Clebsch&ndash;Gordan coefficients, computed once in the product space, apply unchanged.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="k-alpha-beta">Expanding $\tket{J}{M}$: the constants $k_{\alpha\beta}$</h3>
+
+    <p>
+      $\tket{J}{M}$ satisfies the eigenvalue equations of $\vec J^{\,2}$ and $J_3$ with eigenvalues $J(J+1)$ and $M$ (it may also be zero), so it lies in the span of the system's basis states with those labels, $\{\ket{J,M,\beta}\}_\beta$. It need not be normalised, since the $O^s_l\ket{j,M-l,\alpha}$ need not be. So
+      $$\tket{J}{M} = \sum_\beta k^{(M)}_{\alpha\beta}\,\ket{J,M,\beta},$$
+      where $\alpha$ labels the copy of $j$ we started from and $\beta$ runs over the copies of $J$. If spin $J$ occurs only once in the system (a single $\beta$), this reduces to $\tket{J}{M}=k_{\alpha\beta}\ket{J,M,\beta}$: the tilde state is proportional to the unique basis state with those labels. If $J$ occurs more than once, the tilde state can be a combination of several copies.
+    </p>
+
+    <div class="callout">
+      <span class="label">Example &mdash; three spin-$\tfrac12$ particles</span>
+      <p>Take $\ket{\tfrac12,m,\alpha{=}1}$ to be (singlet of particles 1,2)$\,\otimes\,$particle 3, and $\ket{\tfrac12,m,\alpha{=}2}$ to be (triplet of 1,2) coupled with particle 3 to total spin $\tfrac12$:
+      $$\ket{\tfrac12,\tfrac12,1} = \tfrac1{\sqrt2}\big(\ket{\uparrow\downarrow\uparrow}-\ket{\downarrow\uparrow\uparrow}\big),\qquad
+      \ket{\tfrac12,\tfrac12,2} = \sqrt{\tfrac23}\,\ket{\uparrow\uparrow\downarrow}-\tfrac1{\sqrt6}\big(\ket{\uparrow\downarrow\uparrow}+\ket{\downarrow\uparrow\uparrow}\big).$$
+      The scalar ($s=0$) operator $O^0_0=\vec S^{(2)}\!\cdot\vec S^{(3)}$ commutes with every $J_a$. Writing
+      $$\vec S^{(2)}\!\cdot\vec S^{(3)}=S^{(2)}_zS^{(3)}_z+\tfrac12\big(S^{(2)}_+S^{(3)}_-+S^{(2)}_-S^{(3)}_+\big),$$
+      with $S_\pm\equiv S_x\pm iS_y$ here (no $1/\sqrt2$),
+      $$O^0_0\ket{\tfrac12,\tfrac12,1} = \tfrac1{\sqrt2}\Big(\tfrac12\ket{\uparrow\uparrow\downarrow}-\tfrac14\ket{\uparrow\downarrow\uparrow}-\tfrac14\ket{\downarrow\uparrow\uparrow}\Big) = \tfrac{\sqrt3}{4}\,\ket{\tfrac12,\tfrac12,2}.$$
+      Here $s=0$, so $J=j=\tfrac12$ and the only Clebsch&ndash;Gordan coefficient is $1$; thus $\tket{\tfrac12}{\tfrac12}=O^0_0\ket{\tfrac12,\tfrac12,1}$. It lies entirely in the <i>other</i> copy: $k_{11}=0$, $k_{12}=\tfrac{\sqrt3}{4}$.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="m-independence">$k_{\alpha\beta}$ is independent of $M$</h3>
+
+    <p>
+      Apply $J^-$ to $\tket{J}{M}=\sum_\beta k^{(M)}_{\alpha\beta}\ket{J,M,\beta}$. On the left, $J^-\tket{J}{M}=C^-_{J,M}\tket{J}{M-1}$. On the right, $J^-$ acts on every copy with the same coefficient and does not change $\beta$:
+      $$C^-_{J,M}\tket{J}{M-1} = C^-_{J,M}\sum_\beta k^{(M)}_{\alpha\beta}\ket{J,M-1,\beta}.$$
+      Comparing with $\tket{J}{M-1}=\sum_\beta k^{(M-1)}_{\alpha\beta}\ket{J,M-1,\beta}$, and using $C^-_{J,M}\neq0$ for $M>-J$ and the linear independence of the $\ket{J,M-1,\beta}$,
+      $$k^{(M-1)}_{\alpha\beta}=k^{(M)}_{\alpha\beta}\quad\Longrightarrow\quad k_{\alpha\beta}\ \text{is independent of }M.$$
+      It does not depend on any single $l$ either, since $\tket{J}{M}$ is a sum over all $l$. What $k_{\alpha\beta}$ does depend on:
+    </p>
+    <ol>
+      <li>$\alpha$, $j$ and the operator $O^s$: the irrep $\ket{j,\alpha}$ and the operator we started the construction from;</li>
+      <li>$J$: which tower of $s\otimes j$ we are in;</li>
+      <li>$\beta$: which copy of $J$ we land on.</li>
+    </ol>
+    <p>The notation $k_{\alpha\beta}$ shows only $\alpha$ and $\beta$; the dependence on $J$, $j$ and $O^s$ is implicit.</p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Inverting the construction</h3>
+
+    <p>
+      In the product space the coupled basis is complete, and only $M=l+m$ contributes, so
+      $$\ket{s,l}\ket{j,m} = \sum_{J=|j-s|}^{j+s} \ket{J,l+m}\,\GC{l}{m}{J}{l+m}.$$
+      Applying $\Phi_\alpha$ to both sides and then expanding each $\tket{J}{l+m}$:
+      $$O^s_l\ket{j,m,\alpha} = \sum_{J=|j-s|}^{j+s} \GC{l}{m}{J}{l+m}\,\tket{J}{l+m} = \sum_{J=|j-s|}^{j+s}\sum_{\beta} \GC{l}{m}{J}{l+m}\;k_{\alpha\beta}\,\ket{J,l+m,\beta}.$$
+      Now project onto $\bra{J',M',\beta'}$, using $\braket{J',M',\beta'}{J,M,\beta}=\delta_{J'J}\delta_{M'M}\delta_{\beta'\beta}$ (the inner sum over $\beta$ is over copies of the $J$ in the outer sum). Dropping the primes:
+      $$\bra{J,M',\beta}O^s_l\ket{j,m,\alpha} = \delta_{M',\,l+m}\;k_{\alpha\beta}\;\GC{l}{m}{J}{l+m}\qquad\big(|j-s|\le J\le j+s\big),$$
+      and the matrix element vanishes for $J$ outside this range.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="we-statement">The Wigner&ndash;Eckart theorem</h3>
+
+    <p>
+      To make the dependence of $k_{\alpha\beta}$ explicit, write it as the <b>reduced matrix element</b>
+      $$k_{\alpha\beta}\equiv\langle J,\beta\Vert O^s\Vert j,\alpha\rangle .$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Wigner&ndash;Eckart theorem</span>
+      <p>$$\bra{J,l+m,\beta}\,O^s_l\,\ket{j,m,\alpha} \;=\; \underbrace{\langle J,\beta\Vert O^s\Vert j,\alpha\rangle}_{\text{reduced matrix element}}\;\underbrace{\GC{l}{m}{J}{l+m}}_{\text{Clebsch–Gordan coefficient}} .$$
+      All matrix elements $\bra{J,M',\beta}O^s_l\ket{j,m,\alpha}$ with $M'\neq l+m$, or with $J$ outside $|j-s|\le J\le j+s$, vanish. The left-hand side is some (possibly nasty) integral; the right-hand side splits it into a purely group-theoretic Clebsch&ndash;Gordan coefficient, which carries all of the $l,m$ dependence, and a single number that knows nothing about $l$ or $m$.</p>
+    </div>
+
+    <p>
+      Equivalently, for any $l,m$ whose Clebsch&ndash;Gordan coefficient is non-zero,
+      $$\langle J,\beta\Vert O^s\Vert j,\alpha\rangle = \frac{\bra{J,l+m,\beta}O^s_l\ket{j,m,\alpha}}{\GC{l}{m}{J}{l+m}},$$
+      and the ratio is the same for every such choice.
+    </p>
+
+    <div class="callout">
+      <span class="label">Why this is useful</span>
+      <ol>
+        <li>Evaluate the left-hand side once, for one convenient $l,m$ with a non-zero Clebsch&ndash;Gordan coefficient.</li>
+        <li>Look up that Clebsch&ndash;Gordan coefficient for $l,m,J,j,s$.</li>
+        <li>Divide to get the reduced matrix element. It can be reused for every other $l$ and $m$.</li>
+        <li>Look up the Clebsch&ndash;Gordan coefficients for all other $l,m$: the corresponding matrix elements follow practically for free.</li>
+      </ol>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

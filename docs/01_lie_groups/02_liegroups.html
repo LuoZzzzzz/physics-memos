@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lie Groups</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+
+    /* ---- Callout boxes (definitions / key results / remarks) ------- */
+    .callout {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .callout .label {
+      display: block;
+      font-family: "Poppins", -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .callout p {
+      margin: 0.4em 0;
+    }
+
+    .callout ol, .callout ul {
+      margin: 0.4em 0;
+      padding-left: 1.3em;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all'
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="../index.html" class="btn">Index</a>
+      <span class="prev-next">
+        <a href="01_finiterepresentations.html" class="btn" title="Groups &amp; Representations">Previous</a>
+        <span class="sep">|</span>
+        <a href="03_su2.html" class="btn" title="Irreducible Representations of SU(2)">Next</a>
+      </span>
+    </nav>
+
+    <h1>Lie Groups</h1>
+    <p>
+      <i>22 September 2026</i><br>
+      <i>Digitised from handwritten notes.</i>
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Generators of a Lie group</h3>
+    <p>
+      Consider a continuous family of (linear) transformations $D(\alpha)$, smoothly labelled by real parameters $\alpha = (\alpha_1,\alpha_2,\dots)$, with $D(0)=1$ (the identity transformation). In a neighbourhood of the identity we can Taylor-expand:
+      $$D(\delta\alpha) = 1 + i\,\delta\alpha_a X_a + \mathcal{O}(\delta\alpha^2), \qquad X_a \equiv -i\left.\frac{\partial D(\alpha)}{\partial \alpha_a}\right|_{\alpha=0}.$$
+      (Repeated indices are summed.) The operators $X_a$ are the <b>generators</b> of the group: they describe what an <i>infinitesimal</i> transformation looks like. The factor of $i$ is a convention, chosen so that generators of unitary transformations come out Hermitian (see <a href="#unitary">below</a>). We take the $X_a$ to be linearly independent; otherwise some of the parameters would be redundant. Let $N$ be their number.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The exponential parametrisation</h3>
+
+    <div class="callout">
+      <span class="label">Why exponentiate?</span>
+      <p>Knowing $D$ only for tiny $\delta\alpha$ isn't very useful on its own. The standard trick for turning &ldquo;infinitesimal&rdquo; data into a <i>finite</i> transformation is to apply the infinitesimal step many times in a row, making each step smaller as you add more of them &mdash; exactly how $e^x$ is built from compound interest.</p>
+    </div>
+
+    <p>We therefore <i>define</i> a new labelling of group elements, the <b>exponential parametrisation</b>:
+      $$D(\alpha) \equiv \lim_{n\to\infty}\left(1+\frac{i\alpha_aX_a}{n}\right)^n = e^{i\alpha_aX_a}.$$
+      This is a choice of how the parameters $\alpha$ label group elements, not a consequence of the original labelling; from now on $D(\alpha)$ means $e^{i\alpha_aX_a}$.
+    </p>
+
+    <div class="callout">
+      <span class="label">Is $e^{i\alpha_aX_a}$ really a group element?</span>
+      <p>$1+i\alpha_aX_a$ is, in general, <i>not</i> an element of the group for finite $\alpha$ &mdash; it is only the first-order approximation to one. But $1+\dfrac{i\alpha_aX_a}{n}$ differs from a genuine group element, the element with parameters $\alpha/n$ in the original labelling, only at order $1/n^2$. Multiplying $n$ such factors together accumulates an error of order $n\cdot\tfrac{1}{n^2}=\tfrac1n\to0$. So $e^{i\alpha_aX_a}$ is the limit of products of genuine group elements, and is itself an element of the group for every $\alpha$ &mdash; not just to first order.</p>
+    </div>
+
+    <p>We call $\{X_a\}$ the <b>generators of the Lie group</b> $D(\alpha)$.</p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Where structure constants come from</h3>
+    <p>
+      Generators of a non-commutative (&ldquo;non-abelian&rdquo;) Lie group don't commute with each other, so in general
+      $$e^{i\alpha_aX_a}e^{i\beta_bX_b} \neq e^{i(\alpha_a+\beta_a)X_a}.$$
+      Nonetheless, the left-hand side is a product of two group elements, hence itself a group element. For small $\alpha$ and $\beta$ it is close to the identity, so it can be written as $e^{i\delta_aX_a}$ for <i>some</i> $\delta$ depending on $\alpha$ and $\beta$. The question is: what is $\delta$?
+    </p>
+
+    <div class="callout">
+      <span class="label">Strategy</span>
+      <p>Take $\ln$ of both sides and expand in powers of the generators. This is the Baker&ndash;Campbell&ndash;Hausdorff (BCH) approach: it turns a hard question about multiplying exponentials into an easier one about expanding a logarithm.</p>
+    </div>
+
+    <p>
+      Write $u \equiv \alpha_aX_a$ and $v\equiv \beta_bX_b$ for brevity, so we want $\delta$ with $i\delta_aX_a=\ln(e^{iu}e^{iv})=\ln(1+K)$, where $K\equiv e^{iu}e^{iv}-1$. Expanding each exponential to second order and multiplying:
+      $$K = \Big(1+iu-\tfrac12u^2\Big)\Big(1+iv-\tfrac12v^2\Big) - 1 + \mathcal{O}(3) = iu+iv-uv-\tfrac12u^2-\tfrac12v^2+\mathcal{O}(3).$$
+      Now use $\ln(1+K)=K-\tfrac12K^2+\mathcal{O}(K^3)$. Since $K$ starts at first order, only its first-order part is needed in $K^2$:
+      $$K^2 = (iu+iv)^2 + \mathcal O(3) = -u^2-uv-vu-v^2 + \mathcal O(3).$$
+      Putting these together:
+      $$\begin{aligned}
+      \ln(1+K) &= \Big[iu+iv-uv-\tfrac12u^2-\tfrac12v^2\Big] - \tfrac12\Big[-u^2-uv-vu-v^2\Big] + \mathcal O(3)\\
+      &= iu+iv - uv + \tfrac12uv+\tfrac12vu + \mathcal O(3) = iu+iv-\tfrac12[u,v] + \mathcal O(3).
+      \end{aligned}$$
+    </p>
+
+    <div class="callout">
+      <span class="label">What just happened</span>
+      <p>All the $u^2$ and $v^2$ terms cancelled &mdash; the only thing left over from &ldquo;squaring&rdquo; the exponentials is the commutator $[u,v]$. This is the second-order truncation of the full BCH formula, and it's the reason commutators are the central object in Lie theory: to second order, the &ldquo;leftover&rdquo; from composing two group elements is entirely a commutator.</p>
+    </div>
+
+    <p>So $i\delta_aX_a = iu+iv-\tfrac12[u,v]+\mathcal O(3)$. Rearranging,
+      $$[u,v] = [\alpha_aX_a,\beta_bX_b] = -2i(\delta_c-\alpha_c-\beta_c)X_c + \mathcal O(3).$$
+      $\delta_c-\alpha_c-\beta_c$ starts at second order in $\alpha,\beta$; write its second-order part (the terms of degree two in $\alpha$ and $\beta$ jointly) as $-\tfrac12\gamma_c$. The left-hand side is exactly of second order, so matching second-order terms on both sides gives
+      $$[\alpha_aX_a,\beta_bX_b] = i\gamma_cX_c,$$
+      exactly, as an identity between polynomials in $\alpha$ and $\beta$.
+    </p>
+
+    <p><b>Extracting the structure constants.</b> The commutator is <b>bilinear</b> &mdash; linear in each argument separately &mdash; so the parameters come straight out of the bracket, exactly:
+      $$\alpha_a\beta_b\,[X_a,X_b] = i\gamma_cX_c\qquad\text{for all }\alpha,\beta.$$
+      Now choose $\alpha$ pointing along a single direction $a$ and $\beta$ along a single direction $b$, i.e. $\alpha=s\,\hat e_a$ and $\beta=t\,\hat e_b$. The left-hand side becomes $st\,[X_a,X_b]$, while the right-hand side is some linear combination of the $X_c$. So $[X_a,X_b]$ is itself a linear combination of the generators: the generators are closed under commutation. This is a consequence of the group being closed under multiplication, not an extra assumption. The coefficients depend only on $a,b,c$, since there is no $\alpha$ or $\beta$ anywhere in $[X_a,X_b]$. Call them $if_{abc}$:
+    </p>
+
+    <div class="callout">
+      <span class="label">Structure constants</span>
+      <p>$$[X_a,X_b] = if_{abc}X_c.$$</p>
+    </div>
+
+    <div class="callout">
+      <span class="label">Why must $\gamma$ take this specific structure?</span>
+      <p>Substituting back gives $\gamma_c=\alpha_a\beta_bf_{abc}$. This bilinear form is not an extra assumption. $\gamma_c$ is a second-order polynomial in $\alpha$ and $\beta$, which could a priori contain $\alpha\alpha$ and $\beta\beta$ terms as well. But the left-hand side $\alpha_a\beta_b[X_a,X_b]$ is exactly bilinear, and the $X_c$ are linearly independent, so each $\gamma_c$ must be bilinear too, with coefficients $f_{abc}$ that cannot depend on $\alpha$ or $\beta$. Both closure and the constants $f_{abc}$ come out of the argument.</p>
+    </div>
+
+    <p>
+      Since $[X_b,X_a]=-[X_a,X_b]$ (antisymmetry of the commutator itself), comparing coefficients of the linearly independent $X_c$ gives
+      $$f_{bac} = -f_{abc} \qquad \text{(the structure constants are antisymmetric in their first two indices).}$$
+      And comparing coefficients of $X_c$ in $i\delta_aX_a=iu+iv-\tfrac12[u,v]$ gives $\delta$ explicitly:
+      $$\delta_c = \alpha_c+\beta_c-\tfrac12\alpha_a\beta_bf_{abc}+\cdots$$
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Why the structure constants are enough</h3>
+    <p>
+      A natural worry: if we expanded $\ln(e^{iu}e^{iv})$ to <i>third</i> order instead of second, might we find terms like $X_1X_1X_2$ or $X_1^3$ that cannot be built from any combination of nested commutators? To match the left-hand side $i\delta_aX_a$, which is linear in the generators, we would then need additional constraints such as $X_a^3=c_bX_b$ &mdash; a whole new set of &ldquo;third-order structure constants&rdquo; on top of the $f_{abc}$'s.
+    </p>
+
+    <div class="callout">
+      <span class="label">No &mdash; the BCH theorem rules this out</span>
+      <p>The Baker&ndash;Campbell&ndash;Hausdorff theorem guarantees that $\ln(e^{iu}e^{iv})$, expanded to <i>any</i> order, is always a sum of nested commutators of $u$ and $v$ &mdash; never a stand-alone term like $X_1^3$. Each nested commutator reduces, by repeated use of $[X_a,X_b]=if_{abc}X_c$, to a linear combination of the $X_c$ whose coefficients are built from $\alpha$, $\beta$ and the $f_{abc}$. So the commutation relations determine $\delta_a$ uniquely, as an infinite series in $\alpha$, $\beta$ and $f_{abc}$ alone: no further &ldquo;structure constants&rdquo; need to be specified. Going to higher order adds new terms to the series, but at every order the result is an exact linear combination of the $X_a$.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="unitary">Unitary representations force real structure constants</h3>
+    <p>
+      Symmetries in quantum mechanics are represented by unitary operators (so that probabilities are preserved), so it matters what unitarity implies for the generators. If every $e^{i\alpha_aX_a}$ is unitary, then differentiating $\big(e^{i\alpha_aX_a}\big)^\dagger e^{i\alpha_aX_a}=1$ at $\alpha=0$ gives $-iX_a^\dagger+iX_a=0$: each $X_a$ is Hermitian. Taking the dagger of the structure-constant relation,
+      $$[X_a,X_b]^\dagger = (if_{abc}X_c)^\dagger = -if_{abc}^*X_c.$$
+      But also, using $(X_aX_b)^\dagger=X_b^\dagger X_a^\dagger=X_bX_a$,
+      $$[X_a,X_b]^\dagger = X_bX_a-X_aX_b = -[X_a,X_b] = -if_{abc}X_c.$$
+      Comparing coefficients of the linearly independent $X_c$:
+    </p>
+    <div class="callout">
+      <p>$$f_{abc}^* = f_{abc} \qquad\Longrightarrow\qquad \text{the structure constants of a unitary representation are real.}$$</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The Jacobi identity and the adjoint representation</h3>
+    <p>Any commutator of an associative product satisfies the <b>Jacobi identity</b>; it is an algebraic identity, not a separate assumption:</p>
+    <div class="callout">
+      <span class="label">Jacobi identity</span>
+      <p>$$[X_a,[X_b,X_c]] + [X_b,[X_c,X_a]] + [X_c,[X_a,X_b]] = 0.$$</p>
+    </div>
+    <p>
+      Expanding the first term using the structure constants twice,
+      $$[X_a,[X_b,X_c]] = [X_a,if_{bcd}X_d] = if_{bcd}[X_a,X_d] = if_{bcd}\cdot if_{ade}X_e = -f_{bcd}f_{ade}X_e,$$
+      and cyclically permuting $(a,b,c)$ for the other two terms, the Jacobi identity becomes (by linear independence of the $X_e$) a purely numerical identity among the structure constants, with free indices $a,b,c,e$:
+    </p>
+    <div class="callout">
+      <p>$$f_{bcd}f_{ade} + f_{cad}f_{bde} + f_{abd}f_{cde} = 0.$$</p>
+    </div>
+
+    <p><b>The adjoint representation.</b> Define $N\times N$ matrices $T_a$ by reading the structure constants off as matrix entries:
+      $$[T_a]_{bc}\equiv-if_{abc}.$$
+      Then
+      $$[T_a,T_b]_{pq} = [T_a]_{pd}[T_b]_{dq} - [T_b]_{pd}[T_a]_{dq} = -f_{apd}f_{bdq} + f_{bpd}f_{adq}.$$
+      The Jacobi identity above with $c\to p$ and $e\to q$ reads $f_{bpd}f_{adq} + f_{pad}f_{bdq} + f_{abd}f_{pdq} = 0$. Using antisymmetry in the first two indices, $f_{pad}=-f_{apd}$ and $f_{pdq}=-f_{dpq}$, so
+      $$-f_{apd}f_{bdq} + f_{bpd}f_{adq} = f_{abd}f_{dpq} = if_{abd}\,\big(-if_{dpq}\big) = if_{abd}\,[T_d]_{pq}.$$
+      Hence:
+    </p>
+
+    <div class="callout">
+      <span class="label">The adjoint representation</span>
+      <p>$$[T_a,T_b] = if_{abc}T_c.$$
+      The matrices $T_a$ obey the same commutation relations as the generators, so they generate a representation of the group built from the structure constants alone, acting on an $N$-dimensional space (one dimension per generator). Up to a transpose and a sign, which disappear once $f_{abc}$ is totally antisymmetric (<a href="#compact">below</a>), $T_a$ is the matrix of the map $X\mapsto[X_a,X]$: each generator is represented by its own action, through the bracket, on all the generators.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">A scalar product on the generators</h3>
+    <p>
+      From here on, $T_a$ denotes the representation of $X_a$ in the adjoint representation. On the linear space of these matrices, define the scalar product
+      $$\langle T_a,T_b\rangle \equiv \operatorname{Tr}[T_aT_b] \equiv M_{ab}.$$
+      This is the <b>Killing form</b> $\operatorname{Tr}[\operatorname{ad}X_a\,\operatorname{ad}X_b]$, evaluated on the Hermitian generators $X_a$. (Mathematicians usually evaluate it on the anti-Hermitian combinations $iX_a$, which flips its sign; that is why &ldquo;compact&rdquo; corresponds to positive values here and to negative ones in maths texts.) The indices $a,b$ run from $1$ to $N$, so the scalar products form an $N\times N$ matrix $M$, which is
+    </p>
+    <ul>
+      <li><i>symmetric</i>, because $\operatorname{Tr}[T_aT_b]=\operatorname{Tr}[T_bT_a]$ (cyclicity of the trace);</li>
+      <li><i>real</i>, because the $f_{abc}$'s are real (for a unitary representation), which makes each $T_a$ purely imaginary, and a product of two purely imaginary matrices has real entries.</li>
+    </ul>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Changing the basis of generators</h3>
+    <p>
+      The generators are only defined up to a change of basis. Consider a real, invertible $N\times N$ matrix $L$ and new generators
+      $$X_a\to X_a'=L_{ab}X_b.$$
+      ($L$ is real so that Hermitian generators stay Hermitian and the structure constants stay real.) Then
+      $$[X_a',X_b'] = L_{ad}L_{be}[X_d,X_e] = iL_{ad}L_{be}f_{deg}X_g = iL_{ad}L_{be}f_{deg}\big(L^{-1}\big)_{gc}X_c',$$
+      using $X_g=\big(L^{-1}\big)_{gc}X_c'$. So the structure constants transform as
+      $$f_{abc}\to f'_{abc} = L_{ad}L_{be}f_{deg}\big(L^{-1}\big)_{gc}.$$
+      The new structure constants generate a new adjoint representation:
+      $$[T_a']_{bc} = -if'_{abc} = L_{ad}\,L_{be}\,[T_d]_{eg}\,\big(L^{-1}\big)_{gc} = L_{ad}\,\big[LT_dL^{-1}\big]_{bc},
+      \qquad\text{i.e.}\qquad T_a' = L_{ad}\,\big(LT_dL^{-1}\big).$$
+      So a linear transformation of the generators induces two operations on the adjoint representation: the same linear recombination $T_d\to L_{ad}T_d$, together with a similarity transformation $T\to LTL^{-1}$ of each matrix.
+    </p>
+
+    <div class="callout">
+      <span class="label">Do the two operations commute?</span>
+      <p>Yes. Conjugation is linear, and the $L_{ad}$ are just numbers:
+      $$L\Big(\sum_d L_{ad}T_d\Big)L^{-1} = \sum_d L_{ad}\,\big(LT_dL^{-1}\big).$$
+      Recombining and then conjugating gives the same result as conjugating and then recombining.</p>
+    </div>
+
+    <p>The effect on the scalar product follows from cyclicity of the trace:
+      $$\operatorname{Tr}[T_a'T_b'] = L_{ac}L_{bd}\operatorname{Tr}\big[LT_cL^{-1}\,LT_dL^{-1}\big] = L_{ac}L_{bd}\operatorname{Tr}\big[LT_cT_dL^{-1}\big] = L_{ac}L_{bd}\operatorname{Tr}[T_cT_d],$$
+      i.e.
+      $$M\to M' = LML^T.$$
+      (The matrices $T_c$, $T_d$ cannot be rearranged inside the trace, but the numbers $L_{ac}$, $L_{bd}$ can be moved anywhere.)
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="compact">Compact Lie algebras</h3>
+
+    <p><b>Diagonalising the scalar product.</b> $M$ is real and symmetric, so it can be diagonalised by an orthogonal matrix: $M=Q\Lambda Q^T$. Choosing $L=Q^T$,
+      $$\begin{gathered}
+      M\to M' = Q^T\big(Q\Lambda Q^T\big)Q = \Lambda,\qquad \Lambda=\operatorname{diag}(k^1,k^2,\dots,k^N),\\
+      \text{i.e.}\qquad \operatorname{Tr}[T_a'T_b'] = k^a\,\delta_{ab}\quad(\text{no sum}).
+      \end{gathered}$$
+      A further diagonal $L=\operatorname{diag}(\mu_1,\dots,\mu_N)$ rescales $k^a\to \mu_a^2\,k^a$: by varying $L$ we can change the size of each $k^a$, but not its sign, since $L$ appears twice in $M\to LML^T$. More generally, by Sylvester's law of inertia, no real change of basis changes the numbers of positive, negative and zero $k^a$, so the definition below does not depend on the basis.
+    </p>
+
+    <div class="callout">
+      <span class="label">Compact Lie algebra</span>
+      <p>If every $k^a$ is <i>positive</i>, the Lie algebra is called <b>compact</b>. In that case we can rescale every $k^a$ to a single common constant $\lambda>0$, by an appropriate choice of $L$, giving
+      $$\operatorname{Tr}[T_aT_b]=\lambda\,\delta_{ab}.$$
+      From here on we work in such a basis (and drop the primes).</p>
+    </div>
+
+    <p>In this basis, the structure constants can be recovered directly from the trace:
+      $$\operatorname{Tr}\big[[T_a,T_b]T_c\big] = if_{abd}\operatorname{Tr}[T_dT_c] = if_{abd}\,\lambda\,\delta_{dc} = i\lambda f_{abc} \qquad\Longrightarrow\qquad f_{abc} = -\frac{i}{\lambda}\operatorname{Tr}\big[[T_a,T_b]T_c\big].$$
+    </p>
+
+    <div class="callout">
+      <span class="label">The structure constants are completely antisymmetric</span>
+      <p>By the cyclic property of the trace,
+      $$\operatorname{Tr}\big[[T_a,T_b]T_c\big] = \operatorname{Tr}[T_aT_bT_c - T_bT_aT_c] = \operatorname{Tr}[T_bT_cT_a - T_cT_bT_a] = \operatorname{Tr}\big[[T_b,T_c]T_a\big],$$
+      so $f_{abc}=f_{bca}$. Combined with the antisymmetry $f_{abc}=-f_{bac}$ already established,
+      $$f_{abc}=f_{bca}=f_{cab} \quad\text{(cyclic)}, \qquad f_{abc}=-f_{bac}=-f_{cba}=-f_{acb} \quad\text{(swap any two)}:$$
+      swapping any two indices flips the sign. This holds in the basis where $\operatorname{Tr}[T_aT_b]=\lambda\delta_{ab}$; a generic change of basis destroys it. Orthogonal changes of basis ($LL^T=1$) preserve $\operatorname{Tr}[T_aT_b]=\lambda\delta_{ab}$, and hence total antisymmetry. In this basis each $T_a$ is purely imaginary and antisymmetric, hence Hermitian, and $T_a$ is exactly the matrix of $X\mapsto[X_a,X]$.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Invariant subalgebras and simple Lie algebras</h3>
+
+    <div class="callout">
+      <span class="label">Invariant subalgebra</span>
+      <p>A subset of generators spans an <b>invariant subalgebra</b> if bracketing any of its elements with <i>any</i> generator of the whole algebra always lands back inside it: if $X$ is in the invariant subalgebra and $Y$ is any generator, then $[X,Y]$ is again in the invariant subalgebra. By linearity, the same then holds for any combination $Y$ of generators.</p>
+    </div>
+
+    <p><b>Exponentiating an invariant subalgebra produces an invariant subgroup.</b> Let $X$ be in the invariant subalgebra and $Y$ be any element of the algebra. Conjugation by an invertible matrix commutes with taking powers, $S^{-1}X^nS=(S^{-1}XS)^n$, and hence with exponentiation, so
+      $$\big(e^{iY}\big)^{-1}e^{iX}e^{iY} = e^{iX'},\qquad X'\equiv e^{-iY}Xe^{iY}.$$
+      Expanding to second order,
+      $$\begin{aligned}
+      e^{-iY}Xe^{iY} &= \Big(1-iY-\tfrac12Y^2\Big)\,X\,\Big(1+iY-\tfrac12Y^2\Big) + \mathcal O(3)\\
+      &= X - iYX + iXY - \tfrac12Y^2X + YXY - \tfrac12XY^2 + \mathcal O(3)\\
+      &= X - i(YX-XY) - \tfrac12\big(Y^2X-2YXY+XY^2\big) + \mathcal O(3)\\
+      &= X - i[Y,X] - \tfrac12[Y,[Y,X]] + \mathcal O(3).
+      \end{aligned}$$
+      At every order the correction is a nested commutator $[Y,[Y,\dots[Y,X]]]$, and each such commutator lands back in the invariant subalgebra by definition. So $X'$ is in the invariant subalgebra too, $e^{iX'}$ is in the corresponding subgroup, and conjugation by any group element $e^{iY}$ cannot push you out of it: the subgroup is <b>invariant</b>.
+    </p>
+
+    <p>Every Lie algebra has two <b>trivial</b> invariant subalgebras: $\{0\}$ (zero), and the whole algebra.</p>
+    <div class="callout">
+      <span class="label">Simple algebra</span>
+      <p>A Lie algebra is <b>simple</b> if it has no invariant subalgebras other than these two trivial ones. (A single generator, as for $U(1)$, trivially qualifies; it is conventionally excluded, and &ldquo;simple&rdquo; is reserved for non-abelian algebras.)</p>
+    </div>
+
+    <div class="callout">
+      <span class="label">Simple vs. irreducible &mdash; don't confuse the two</span>
+      <p><b>Simple</b> is a statement about the generators and their commutators (an algebraic property). <b>Irreducible</b> is a statement about a <i>representation</i> of the group elements and the vector space it acts on &mdash; whether that space contains a smaller invariant subspace. The theorem below relates the two notions for one particular representation: the adjoint representation.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Simple + compact &rArr; the adjoint representation is irreducible</h3>
+
+    <div class="callout">
+      <span class="label">Theorem</span>
+      <p>If a Lie algebra is (1) simple, and (2) compact, so that in a suitable basis $\operatorname{Tr}[T_aT_b]=\lambda\delta_{ab}$, then its adjoint representation is irreducible.</p>
+    </div>
+
+    <p>
+      <i>Setting.</i> The adjoint representation acts on $N$-component vectors $\xi$, one component per generator. Work in the compact basis, where $f_{abc}$ is totally antisymmetric. There $[T_a]_{cb}=-if_{acb}=if_{abc}$, so $T_a\xi$ lists the coefficients of $[X_a,\xi_bX_b]=if_{abc}\xi_bX_c$: $T_a$ is the matrix of $X\mapsto[X_a,X]$. Reducibility means there is a subspace $W$, with $0\lt\dim W\lt N$, that every $T_a$ maps into itself. We take $W$ to be spanned by real vectors $\xi$, i.e. by real combinations of generators; complex subspaces are discussed after the proof.
+    </p>
+    <p>
+      <i>Proof.</i> We argue by contradiction. Suppose the adjoint representation <i>were</i> reducible: there is an invariant subspace $W$ of dimension $m$, with $0\lt m\lt N$. Choose a real orthonormal basis of the generator space whose first $m$ vectors span $W$. This is an orthogonal change of basis, so $\operatorname{Tr}[T_aT_b]=\lambda\delta_{ab}$ and total antisymmetry survive. In the new basis $W$ is spanned by $X_1,\dots,X_m$. Let $r$ label the first group, $r\in\{1,\dots,m\}$, and $x$ the second, $x\in\{m+1,\dots,N\}$. Invariance of $W$ says $T_a$ never maps an $r$-direction into an $x$-direction:
+      $$[T_a]_{xr} = -if_{axr} = 0\qquad\text{for every } a,\ x,\ r.$$
+      The index $a$ must itself be one of the $x$'s or one of the $r$'s, so both $f_{x_1x_2r}=0$ and $f_{r_1xr_2}=0$. By total antisymmetry, every structure constant carrying indices from both groups is a permutation of one of these, so it vanishes too. The only non-zero $f_{abc}$'s are of the form $f_{r_1r_2r_3}$ or $f_{x_1x_2x_3}$, and every $T_a$ is block-diagonal:
+      $$[T_a] = \left[\begin{array}{c|c} m\times m \text{ block} & 0 \\ \hline 0 & (N-m)\times(N-m) \text{ block} \end{array}\right].$$
+    </p>
+    <p>
+      So the whole algebra breaks into two non-trivial invariant subalgebras: bracketing any $X_r$ with any $X_x$ gives zero, and bracketing it with another $X_r$ stays inside the first group. $\{X_1,\dots,X_m\}$ (corresponding to $T_1$ to $T_m$) is therefore a non-trivial invariant subalgebra, and likewise $\{X_{m+1},\dots,X_N\}$ (corresponding to $T_{m+1}$ to $T_N$). This contradicts simplicity, which allows no non-trivial invariant subalgebras. So the adjoint representation cannot be reducible. &#8718;
+    </p>
+
+    <div class="callout">
+      <span class="label">The idea in one sentence</span>
+      <p>Reducibility of the adjoint representation would mean the generators split into two blocks that never interact under the bracket &mdash; but two non-interacting blocks are, by definition, each an invariant subalgebra, which simplicity forbids. Compactness enters through total antisymmetry. It converts the invariance of $W$, $f_{axr}=0$ (a statement about the matrices $T_a$), into $f_{rax}=0$ (a statement about the brackets $[X_r,X_a]$), and it makes the complementary block vanish as well.</p>
+    </div>
+
+    <div class="callout">
+      <span class="label">Real versus complex invariant subspaces</span>
+      <p>The proof uses a real orthogonal change of basis, so it shows that no invariant subspace is spanned by <i>real</i> combinations of generators. The statement also holds for complex invariant subspaces, which is what matters in quantum mechanics, but that needs one more fact: for a compact simple algebra, allowing complex combinations of generators creates no new invariant subalgebras. Here compactness is essential. The Lorentz algebra is simple as a real algebra, yet over the complex numbers its adjoint representation splits in two: the self-dual and anti-self-dual parts of an antisymmetric tensor $F_{\mu\nu}$.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">$U(1)$ factors</h3>
+
+    <div class="callout">
+      <span class="label">$U(1)$ factor</span>
+      <p>A $U(1)$ factor of a group is an invariant subalgebra containing a single generator, which commutes with every other generator of that group.</p>
+    </div>
+
+    <p>
+      If $X_a$ is a $U(1)$ generator, then $[X_a,X_b]=if_{abc}X_c=0$ for every $b$, so $f_{abc}=0$ for every $b,c$. Since $[T_a]_{bc}=-if_{abc}$, this means $T_a$ is, according to the construction above, the zero matrix in the adjoint representation. Two consequences:
+    </p>
+    <ol>
+      <li><b>The scalar product cannot see it.</b> Row $a$ of $M_{ab}=\operatorname{Tr}[T_aT_b]$ vanishes, so $M$ has a zero eigenvalue, and by Sylvester's law some $k^a=0$ in every diagonal basis. So an algebra with a $U(1)$ factor is never compact in the strict sense defined above (every $k^a>0$); that definition really describes compact algebras without $U(1)$ factors (compact semisimple algebras). For example, $SU(2)\times U(1)$, with generators $\tfrac12\sigma_{1,2,3}$ and $\tfrac12\mathbb 1$, gives $\operatorname{Tr}[T_aT_b]=\operatorname{diag}(2,2,2,0)$.</li>
+      <li><b>In every slot.</b> Where $f_{abc}$ is totally antisymmetric, the vanishing of $f_{abc}$ with the $U(1)$ index in the first slot implies it vanishes in every slot:
+      $$f_{abc}=f_{cab}=f_{bca}=f_{bac}=f_{cba}=f_{acb}=0,$$
+      so $X_a$ also never appears on the right-hand side of any commutator. Compact groups with $U(1)$ factors, such as $U(2)$, do admit a basis with totally antisymmetric $f_{abc}$ &mdash; for instance the basis above &mdash; but it comes from a positive-definite invariant scalar product other than $\operatorname{Tr}[T_aT_b]$, which vanishes on the $U(1)$ direction.</li>
+    </ol>
+
+    <div class="callout">
+      <span class="label">What it means that structure constants &ldquo;see&rdquo; nothing about $U(1)$ factors</span>
+      <p>A $U(1)$ generator contributes only zeros to the structure-constant array (in a totally antisymmetric basis) &mdash; exactly what an <i>absent</i> direction would give. So the list of non-zero $f_{abc}$'s can never reveal how many $U(1)$ factors a Lie algebra has, and the scalar product $\operatorname{Tr}[T_aT_b]$ built from them is equally blind to them. This is why, in classifying compact Lie algebras, the non-abelian (&ldquo;semisimple&rdquo;) part is fixed by its structure constants, while the number of $U(1)$ factors must be supplied as separate data.</p>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

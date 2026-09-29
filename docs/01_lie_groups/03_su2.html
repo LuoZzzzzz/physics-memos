@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Irreducible Representations of SU(2)</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+
+    /* ---- Callout boxes (definitions / key results / remarks) ------- */
+    .callout {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .callout .label {
+      display: block;
+      font-family: "Poppins", -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .callout p {
+      margin: 0.4em 0;
+    }
+
+    .callout ol, .callout ul {
+      margin: 0.4em 0;
+      padding-left: 1.4em;
+    }
+
+    table.mtable {
+      border-collapse: collapse;
+      margin: 1rem auto;
+      /* scroll inside its own box on narrow screens */
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    table.mtable th, table.mtable td {
+      border: 1px solid var(--border);
+      padding: 0.4rem 1.1rem;
+      text-align: center;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all',
+        macros: {
+          ket: ["\\lvert #1 \\rangle", 1],
+          bra: ["\\langle #1 \\rvert", 1],
+          braket: ["\\langle #1 \\vert #2 \\rangle", 2]
+        }
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="../index.html" class="btn">Index</a>
+      <span class="prev-next">
+        <a href="02_liegroups.html" class="btn" title="Lie Groups">Previous</a>
+        <span class="sep">|</span>
+        <a href="04_wignereckart.html" class="btn" title="Tensor Operators and the Wigner&ndash;Eckart Theorem">Next</a>
+      </span>
+    </nav>
+
+    <h1>Irreducible Representations of $SU(2)$</h1>
+    <p>
+      <i>23&ndash;25 September 2026</i><br>
+      <i>Digitised from handwritten notes.</i>
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The $su(2)$ algebra</h3>
+
+    <div class="callout">
+      <span class="label">Definition &mdash; Structure constants</span>
+      <p>A Lie algebra with generators $X_a$ ($a=1,\dots,M$, where $M$ is the dimension of the algebra) satisfies
+      $$[X_a,X_b] = i f_{abc}X_c ,$$
+      with <b>structure constants</b> $f_{abc}$ antisymmetric in $a,b$. For compact groups such as $SU(2)$ the generators can be chosen so that $f_{abc}$ is totally antisymmetric, and we assume this from now on.</p>
+    </div>
+
+    <p>
+      A totally antisymmetric $f_{abc}$ vanishes whenever two indices coincide. For $M=1$ or $M=2$ every $f_{abc}$ has a repeated index, so the algebra is abelian. The smallest $M$ with a non-trivial $f_{abc}$ is therefore $M=3$, and there the only totally antisymmetric three-index object is, up to normalisation, the Levi-Civita symbol: $f_{abc}=\lambda\,\varepsilon_{abc}$. Rescaling the generators by $1/\lambda$ sets $\lambda=1$.
+    </p>
+
+    <div class="callout">
+      <span class="label">Definition &mdash; The $su(2)$ algebra</span>
+      <p>$$[J_a,J_b] = i\varepsilon_{abc}J_c .$$
+      This commutation relation defines the Lie algebra $su(2)$ of $SU(2)$. (The letters $i$ and $j$ are avoided as indices: $i$ denotes $\sqrt{-1}$, and $j$ will denote the largest $J_3$ eigenvalue.)</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Setting up a representation</h3>
+
+    <p>
+      Suppose the algebra has a $d\times d$ <b>irreducible</b> representation acting on a $d$-dimensional vector space. (Irreducibility is only used in the <a href="#spin-j">final section</a>; everything before it holds for any finite-dimensional representation of the kind described here.) We take the representation to be unitary, so that $J_1,J_2,J_3$ are Hermitian.
+    </p>
+    <p>We want an orthonormal basis (ONB) of the space adapted to the $J$'s:</p>
+    <ol>
+      <li>each $J_a$ is Hermitian, so each on its own has an orthonormal eigenbasis;</li>
+      <li>no two of them commute (unless the representation is trivial, $J_a=0$), so they are not simultaneously diagonalisable.</li>
+    </ol>
+    <p>
+      We can therefore make the eigenstates of <i>one and only one</i> of them our ONB. We pick $J_3$.
+    </p>
+    <p>
+      Let $j$ be the largest eigenvalue of $J_3$ (it exists since $d$ is finite), and denote the corresponding state(s) by $\ket{j,\alpha}$, where $\alpha$ is a <b>degeneracy index</b>:
+      $$J_3\ket{j,\alpha} = j\ket{j,\alpha}.$$
+      If $j$ is degenerate, we choose an orthonormal basis of its eigenspace (Gram&ndash;Schmidt), so that
+      $$\braket{j,\alpha}{j,\beta} = \delta_{\alpha\beta}.$$
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Ladder operators</h3>
+
+    <div class="callout">
+      <span class="label">Definition &mdash; Ladder operators</span>
+      <p>$$J^+ = \frac{1}{\sqrt2}(J_1+iJ_2), \qquad J^- = \frac{1}{\sqrt2}(J_1-iJ_2).$$
+      Since $J_1,J_2$ are Hermitian, $(J^+)^\dagger = J^-$.</p>
+    </div>
+
+    <p>
+      From $[J_a,J_b]=i\varepsilon_{abc}J_c$, i.e. $[J_3,J_1]=iJ_2$ and $[J_3,J_2]=-iJ_1$:
+      $$\begin{aligned}
+      {[J_3,J^\pm]} &= \frac{1}{\sqrt2}[J_3,J_1] \pm \frac{i}{\sqrt2}[J_3,J_2] = \frac{1}{\sqrt2}(iJ_2)\pm\frac{i}{\sqrt2}(-iJ_1)\\
+      &= \frac{1}{\sqrt2}\big(iJ_2 \pm J_1\big) = \pm\frac{1}{\sqrt2}\big(J_1\pm iJ_2\big) = \pm J^\pm ,
+      \end{aligned}$$
+      and, using $[J_1,J_2]=iJ_3$,
+      $$[J^+,J^-] = \tfrac12\big[J_1+iJ_2,\;J_1-iJ_2\big] = \tfrac12\big(-i[J_1,J_2] + i[J_2,J_1]\big) = \tfrac12\big(J_3+J_3\big) = J_3 .$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Result</span>
+      <p>$$[J_3,J^\pm] = \pm J^\pm, \qquad\qquad [J^+,J^-] = J_3, \qquad\qquad (J^\pm)^\dagger = J^\mp .$$</p>
+    </div>
+
+    <p>
+      Hence, for a state $\ket{m}$ with $J_3\ket{m}=m\ket{m}$,
+      $$J_3\big(J^\pm\ket{m}\big) = J^\pm J_3\ket m \pm J^\pm\ket m = (m\pm1)\,J^\pm\ket m .$$
+      So $J^\pm\ket m$ is <i>either zero or</i> an (unnormalised) eigenstate of $J_3$ with eigenvalue $m\pm1$: $J^\pm$ raise and lower the $J_3$ eigenvalue by one unit.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="top">The top of the ladder</h3>
+
+    <p><b>$J^+$ annihilates the top.</b> $J^+\ket{j,\alpha}$ would have $J_3$ eigenvalue $j+1$, but $j$ is the largest eigenvalue. Hence
+      $$J^+\ket{j,\alpha} = 0 \qquad\text{for all }\alpha.$$
+    </p>
+
+    <p><b>One step down.</b> Apply $J^-$ to $\ket{j,\alpha}$ and write
+      $$J^-\ket{j,\alpha} = N_j(\alpha)\,\ket{j-1,\alpha},$$
+      where $\ket{j-1,\alpha}$ is normalised and $N_j(\alpha)$ absorbs the norm of $J^-\ket{j,\alpha}$. Using $(J^-)^\dagger=J^+$, $J^+J^- = [J^+,J^-]+J^-J^+ = J_3+J^-J^+$, and $J^+\ket{j,\alpha}=0$:
+      $$N_j^*(\beta)N_j(\alpha)\,\braket{j-1,\beta}{j-1,\alpha} = \bra{j,\beta}J^+J^-\ket{j,\alpha} = \bra{j,\beta}J_3\ket{j,\alpha} = j\,\delta_{\alpha\beta}.$$
+      This gives two things at once:
+    </p>
+    <ol type="i">
+      <li>for $\alpha\neq\beta$, $\ket{j-1,\alpha}$ and $\ket{j-1,\beta}$ are orthogonal;</li>
+      <li>for $\alpha=\beta$, $\big\|J^-\ket{j,\alpha}\big\|^2=|N_j(\alpha)|^2=j$. In particular $j\ge0$, and we may choose the same real, positive constant for every $\alpha$:
+      $$N_j(\alpha)=N_j=\sqrt j,\qquad \ket{j-1,\alpha}=\frac{J^-\ket{j,\alpha}}{N_j}.$$
+      (If $j=0$, then $J^-\ket{j,\alpha}=0$ and the ladder has a single rung; see <a href="#termination">termination</a>.)</li>
+    </ol>
+
+    <p><b>Raising back up.</b>
+      $$J^+\ket{j-1,\alpha} = \frac1{N_j}J^+J^-\ket{j,\alpha} = \frac1{N_j}\big(J_3+J^-J^+\big)\ket{j,\alpha} = \frac{j}{N_j}\ket{j,\alpha} = N_j\ket{j,\alpha}.$$
+    </p>
+
+    <div class="callout">
+      <span class="label">Result &mdash; first step of the ladder</span>
+      <p>$$J^-\ket{j,\alpha} = N_j\ket{j-1,\alpha}, \qquad J^+\ket{j-1,\alpha} = N_j\ket{j,\alpha},\qquad N_j=\sqrt j,$$
+      and the states $\ket{j-1,\alpha}$ are orthonormal.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Induction down the ladder</h3>
+
+    <p>
+      We now repeat the argument at a general level, working through the algebra for
+      $$J^-\ket{j-k,\alpha} = N_{j-k}(\alpha)\,\ket{j-k-1,\alpha}\qquad(k\ge1),$$
+      for as long as $J^-\ket{j-k,\alpha}\neq0$, i.e. $N_{j-k}\neq0$, so that the normalised state $\ket{j-k-1,\alpha}$ exists. (When it vanishes, the ladder ends; see <a href="#termination">termination</a>.)
+    </p>
+    <p>
+      The logic is as follows. The algebra needs three &ldquo;requirements&rdquo; to hold. At the start they are only established for the pair of levels $j/j{-}1$. The algebra then shows that if they hold for the pair $j{-}k{+}1/j{-}k$, they also hold for $j{-}k/j{-}k{-}1$. Hence $j/j{-}1$ holds $\Rightarrow$ $j{-}1/j{-}2$ holds $\Rightarrow\cdots$.
+    </p>
+
+    <div class="callout">
+      <span class="label">The requirements at step $k$</span>
+      <p><b>Req. 1</b>&ensp;$J^+\ket{j-k,\alpha} = N_{j-k+1}\ket{j-k+1,\alpha}$, with $N_{j-k+1}$ real, positive and independent of $\alpha$.</p>
+      <p><b>Req. 2</b>&ensp;$\braket{j-k,\beta}{j-k,\alpha} = \delta_{\alpha\beta}$: the states we lower <i>from</i> are orthonormal.</p>
+      <p><b>Req. 3</b>&ensp;$\braket{j-k+1,\beta}{j-k+1,\alpha} = \delta_{\alpha\beta}$: the states one level above are orthonormal.</p>
+    </div>
+
+    <p><b>The induction step.</b> Using $J^+J^-=J_3+J^-J^+$ and, in the second term, $J^-J^+=(J^+)^\dagger J^+$:
+      $$\begin{aligned}
+      & N_{j-k}^*(\beta)N_{j-k}(\alpha)\,\braket{j-k-1,\beta}{j-k-1,\alpha} = \bra{j-k,\beta}J^+J^-\ket{j-k,\alpha}\\
+      &\qquad= \bra{j-k,\beta}J_3\ket{j-k,\alpha} + \big(J^+\ket{j-k,\beta}\big)^\dagger\big(J^+\ket{j-k,\alpha}\big)\\
+      &\qquad= (j-k)\,\braket{j-k,\beta}{j-k,\alpha} + N_{j-k+1}^2\,\braket{j-k+1,\beta}{j-k+1,\alpha}\\
+      &\qquad= \big[(j-k) + N_{j-k+1}^2\big]\,\delta_{\alpha\beta}.
+      \end{aligned}$$
+      The third line uses Req. 1 on both the bra and the ket of the second term; the last line uses Req. 2 and Req. 3. This establishes, for the level $j-k-1$:
+    </p>
+    <ul>
+      <li><b>A.</b> $\ket{j-k-1,\alpha}$ and $\ket{j-k-1,\beta}$ are orthogonal for $\alpha\neq\beta$.</li>
+      <li><b>B.</b> Taking $\alpha=\beta$ and demanding $\ket{j-k-1,\alpha}$ be normalised, $|N_{j-k}(\alpha)|^2=(j-k)+N_{j-k+1}^2$ for every $\alpha$. Choosing $N_{j-k}$ real, positive and $\alpha$-independent, and dropping the argument $\alpha$,
+      $$N_{j-k}^2 - N_{j-k+1}^2 = j-k .$$</li>
+      <li><b>C.</b> $J^+\ket{j-k-1,\alpha} = N_{j-k}\ket{j-k,\alpha}$. Proof: by Req. 1 and then the defining relation $J^-\ket{j-k+1,\alpha}=N_{j-k+1}\ket{j-k,\alpha}$ from the previous step, we have $J^-J^+\ket{j-k,\alpha}=N_{j-k+1}^2\ket{j-k,\alpha}$. So
+      $$\begin{aligned}
+      J^+\ket{j-k-1,\alpha} &= \frac{1}{N_{j-k}}\big(J_3+J^-J^+\big)\ket{j-k,\alpha}\\
+      &= \frac{(j-k)+N_{j-k+1}^2}{N_{j-k}}\ket{j-k,\alpha} = N_{j-k}\ket{j-k,\alpha},
+      \end{aligned}$$
+      using B in the last step.</li>
+    </ul>
+
+    <p><b>Closing the induction.</b> <b>A</b>, <b>B</b>, <b>C</b> are exactly the requirements for the next step, $k\to k+1$:
+      $$\text{B and C}\;\Rightarrow\;\text{Req. 1},\qquad \text{A and B}\;\Rightarrow\;\text{Req. 2},\qquad \text{Req. 2 at step }k\;\Rightarrow\;\text{Req. 3 at step }k+1 .$$
+      For the base case $k=1$ (the pair $j/j{-}1$):
+    </p>
+    <ul>
+      <li>Req. 1: $J^+\ket{j-1,\alpha}=N_j\ket{j,\alpha}$ &mdash; shown at <a href="#top">the top of the ladder</a>;</li>
+      <li>Req. 2: $\braket{j-1,\beta}{j-1,\alpha}=\delta_{\alpha\beta}$ &mdash; shown at <a href="#top">the top of the ladder</a>;</li>
+      <li>Req. 3: $\braket{j,\beta}{j,\alpha}=\delta_{\alpha\beta}$ &mdash; by construction.</li>
+    </ul>
+    <p>
+      The first round therefore gives $\braket{j-2,\beta}{j-2,\alpha}=\delta_{\alpha\beta}$, $N_{j-1}^2-N_j^2=j-1$ and $J^+\ket{j-2,\alpha}=N_{j-1}\ket{j-1,\alpha}$, and so on down the ladder for as long as it continues. The result at the top of the ladder, $N_j^2=j$, is the same recursion at $k=0$ with $N_{j+1}\equiv0$.
+    </p>
+
+    <div class="callout">
+      <span class="label">What has been established so far</span>
+      <p>For each $\alpha$ there is a ladder of orthonormal states, connected by the same real positive constants for every $\alpha$:
+      $$\ket{j,\alpha}\ \overset{J^-,\,N_j}{\underset{J^+,\,N_j}{\rightleftharpoons}}\ \ket{j-1,\alpha}\ \overset{J^-,\,N_{j-1}}{\underset{J^+,\,N_{j-1}}{\rightleftharpoons}}\ \ket{j-2,\alpha}\ \cdots\quad \ket{j-k+1,\alpha}\ \overset{J^-,\,N_{j-k+1}}{\underset{J^+,\,N_{j-k+1}}{\rightleftharpoons}}\ \ket{j-k,\alpha}$$
+      with $N_{j-k}^2-N_{j-k+1}^2=j-k$ and $N_j=\sqrt j$.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Closed form for the normalisation</h3>
+
+    <p>
+      Telescoping the recursion,
+      $$\begin{aligned}
+      N_{j-k}^2 &= N_{j-k+1}^2 + (j-k) = N_{j-k+2}^2 + (j-k+1)+(j-k) = \cdots\\
+      &= \sum_{n=0}^{k}(j-n) = j+(j-1)+\cdots+(j-k) = \tfrac12(k+1)(2j-k),
+      \end{aligned}$$
+      so, taking the positive root,
+      $$N_{j-k} = \frac{1}{\sqrt2}\sqrt{(k+1)(2j-k)} .$$
+      Substituting $m=j-k$ (so $k=j-m$):
+    </p>
+
+    <div class="callout">
+      <span class="label">Result &mdash; normalisation constant</span>
+      <p>$$N_m = \frac{1}{\sqrt2}\sqrt{(j+m)(j-m+1)}$$
+      is the constant for lowering <i>from</i> $\ket{m}$, or raising <i>to</i> $\ket{m}$:
+      $$J^-\ket{m,\alpha}=N_m\ket{m-1,\alpha},\qquad J^+\ket{m-1,\alpha}=N_m\ket{m,\alpha}.$$</p>
+    </div>
+
+    <p>Choosing every $N_m$ real and positive is the standard (Condon&ndash;Shortley) phase convention.</p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="termination">Termination and the allowed values of $j$</h3>
+
+    <p>
+      The representation has finite dimension $d$. Each lowering produces an eigenstate of $J_3$ with a new eigenvalue, hence orthogonal to all the previous ones, so the process must terminate. Suppose the $(\ell+1)$-th lowering is the first to give zero:
+      $$J^-\ket{j-\ell,\alpha}=0 .$$
+      Since the $N_m$ do not depend on $\alpha$, neither does $\ell$. The induction step computes the norm of $J^-\ket{j-\ell,\alpha}$ without needing the state below to exist:
+      $$\big\|J^-\ket{j-\ell,\alpha}\big\|^2 = \bra{j-\ell,\alpha}J^+J^-\ket{j-\ell,\alpha} = (j-\ell)+N_{j-\ell+1}^2 = \tfrac12(\ell+1)(2j-\ell).$$
+      This vanishes if and only if $2j-\ell=0$, since $\ell+1\neq0$. So $\ell=2j$: the bottom of the ladder is $m=j-\ell=-j$, consistent with $N_{-j}=0$ in the closed form.
+    </p>
+
+    <div class="callout">
+      <span class="label">Result &mdash; allowed values of $j$</span>
+      <p>$2j=\ell$ is a non-negative integer, so
+      $$j\in\big\{0,\tfrac12,1,\tfrac32,2,\dots\big\},$$
+      and each ladder has exactly $2j+1$ states, $m=j,j-1,\dots,-j$.</p>
+    </div>
+
+    <p>
+      In fact positivity alone forces this. The squared norm $\tfrac12(\ell+1)(2j-\ell)$ is positive for $0\le\ell\lt 2j$, so the ladder cannot stop early. If $2j$ were not an integer, it would become negative at the first integer $\ell\gt 2j$, which is impossible for a squared norm.
+    </p>
+
+    <div class="callout">
+      <span class="label">Open question</span>
+      <p>Why does $J^-$ annihilate a state only at the end of a computation, when $J^+$ annihilated the top state $\ket{j,\alpha}$ directly?</p>
+    </div>
+
+    <div class="callout">
+      <span class="label">Resolution &mdash; the asymmetry is only in the order of construction</span>
+      <p>$J^+\ket{j,\alpha}=0$ was an input: it is what &ldquo;top of the ladder&rdquo; means, and the closed form for $N_m$ was derived from it. The closed form is consistent with that input. Using $J^-J^+=J^+J^--J_3$,
+      $$\big\|J^+\ket{m,\alpha}\big\|^2 = \bra{m,\alpha}\big(J^+J^--J_3\big)\ket{m,\alpha} = N_m^2-m = \tfrac12(j-m)(j+m+1) = N_{m+1}^2 ,$$
+      so $\big\|J^\pm\ket{m,\alpha}\big\|^2=\tfrac12(j\mp m)(j\pm m+1)$. The factor $(j-m)$ that makes $J^+$ vanish at $m=j$ ($N_{j+1}=0$) is the mirror image of the factor $(j+m)$ that makes $J^-$ vanish at $m=-j$ ($N_{-j}=0$). Had we started from the smallest eigenvalue and built the ladder upwards, $J^-\ket{-j,\alpha}=0$ would have been the input, and $J^+$ would have annihilated the top only at the end of the computation.</p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="spin-j">Irreducibility and the standard spin-$j$ representation</h3>
+
+    <p><b>Each ladder is an invariant subspace.</b> Fix $\alpha$ and consider the span of $\ket{m,\alpha}$, $m=j,\dots,-j$. $J_3$ is diagonal on it; $J^+$ and $J^-$ map it into itself (including $J^+\ket{j,\alpha}=0$ and $J^-\ket{-j,\alpha}=0$); and
+      $$J_1=\tfrac1{\sqrt2}\big(J^++J^-\big),\qquad J_2=\tfrac1{\sqrt2\,i}\big(J^+-J^-\big),$$
+      so it is invariant under $J_1,J_2,J_3$, and hence under the group elements $e^{i\theta_1J_1},e^{i\theta_2J_2},e^{i\theta_3J_3}$. Different $\alpha$ give mutually orthogonal ladders: states at the same level with different $\alpha$ are orthogonal (conclusion A of the induction), and states at different levels have different $J_3$ eigenvalues.
+    </p>
+    <p><b>Irreducibility.</b> By assumption the representation is irreducible, so its only non-zero invariant subspace is the whole space. Each ladder is therefore the whole space, so there is only one value of $\alpha$, and we drop the label: $d=2j+1$. Conversely, a single ladder is itself irreducible. Any invariant subspace of it is invariant under $J_3$, whose eigenvalues on the ladder are non-degenerate, so it is spanned by some of the $\ket{m,\alpha}$. Since $J^\pm$ connect neighbouring states with non-zero coefficients ($N_m\neq0$ for $-j\lt m\le j$), it must contain all of them.</p>
+    <p>(For a reducible representation the ladders built from the top eigenvalue need not fill the space. The orthogonal complement of their span is also invariant, since the $J_a$ are Hermitian, and can be treated in the same way starting from its own largest $J_3$ eigenvalue. The space breaks up into orthogonal invariant subspaces, each a spin-$j$ irrep of the kind below.)</p>
+
+    <div class="callout">
+      <span class="label">Standard notation</span>
+      <p>$$\ket{j,m}, \qquad \underbrace{j}_{\text{largest }J_3\text{ eigenvalue}}\ ,\qquad \underbrace{m}_{J_3\text{ eigenvalue of this state}}.$$</p>
+    </div>
+
+    <p>
+      The <b>spin-$j$ representation</b> is defined by its matrix elements:
+      $$\begin{aligned}
+      \big[J_3^{(j)}\big]_{m'm} &= \bra{j,m'}J_3\ket{j,m} = m\,\delta_{m'm},\\
+      \big[J^{+(j)}\big]_{m'm} &= \bra{j,m'}J^+\ket{j,m} = N_{m+1}\,\delta_{m',m+1} = \frac{1}{\sqrt2}\sqrt{(j+m+1)(j-m)}\;\delta_{m',m+1},\\
+      \big[J^{-(j)}\big]_{m'm} &= \bra{j,m'}J^-\ket{j,m} = N_{m}\,\delta_{m',m-1} = \frac{1}{\sqrt2}\sqrt{(j+m)(j-m+1)}\;\delta_{m',m-1},
+      \end{aligned}$$
+      with $J_1^{(j)},J_2^{(j)}$ following from $J^{\pm(j)}$ as above. These matrices do represent the algebra: $[J_3,J^\pm]=\pm J^\pm$ because $J^\pm$ shift $m$ by $\pm1$, and
+      $$[J^+,J^-]\ket{j,m}=\big(N_m^2-N_{m+1}^2\big)\ket{j,m}=m\ket{j,m}.$$
+      As $(2j{+}1)\times(2j{+}1)$ matrices, the rows and columns can be labelled directly by $m=j,j-1,\dots,-j$, or by position $p=1,\dots,2j+1$:
+      $$\big[J_a^{(j)}\big]_{pq} = \bra{j,\,j+1-p}J_a\ket{j,\,j+1-q},$$
+      i.e. position $p$ corresponds to the $J_3$ eigenvalue $m=j+1-p$:
+    </p>
+
+    <table class="mtable">
+      <tbody>
+        <tr><th>$p$</th><td>$1$</td><td>$2$</td><td>$3$</td><td>$\cdots$</td><td>$2j+1$</td></tr>
+        <tr><th>$m$</th><td>$j$</td><td>$j-1$</td><td>$j-2$</td><td>$\cdots$</td><td>$-j$</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <span class="label">Check &mdash; spin $\tfrac12$</span>
+      <p>For $j=\tfrac12$ the only non-zero ladder element is $N_{1/2}=\tfrac1{\sqrt2}\sqrt{1\cdot1}=\tfrac1{\sqrt2}$, so $J^{+(1/2)}=\left(\begin{smallmatrix}0&1/\sqrt2\\0&0\end{smallmatrix}\right)$ and $J^{-(1/2)}=\left(\begin{smallmatrix}0&0\\1/\sqrt2&0\end{smallmatrix}\right)$. Then
+      $$J_1^{(1/2)}=\tfrac12\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad J_2^{(1/2)}=\tfrac12\begin{pmatrix}0&-i\\i&0\end{pmatrix},\qquad J_3^{(1/2)}=\tfrac12\begin{pmatrix}1&0\\0&-1\end{pmatrix},$$
+      i.e. $J_a^{(1/2)}=\tfrac12\sigma_a$, the Pauli matrices, as expected.</p>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>
