@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Counting baryon states</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counting baryon states</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Counting baryon states</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="ckm.html" rel="prev" title="CKM matrix">← Previous</a><a href="color.html" rel="next" title="Color">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Nuclear and Particle Physics (B4)</p>
+<h1>Counting baryon states</h1>
+</header>
 
     <p>
       The group theoretic way of counting baryon states, as I understand it, is to start by treating quark flavors as directions in quark Hilbert space. That is, there is only one quark, which has (in the case of light quarks) three different flavor states. In this framework, we demand exchange symmetry of the <em>entire</em> wavefunction, not just like flavors; this is completely analogous to the exchange symmetry of spins, where the symmetry is enforced across all spin projections and not just like ones.
@@ -308,8 +299,8 @@
     <p>
       Which is the same octet decuplet structure as before.
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="ckm.html" rel="prev"><span class="pl">← Previous</span>CKM matrix</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="color.html" rel="next"><span class="pl">Next →</span>Color</a></nav>
+</article>
+</main>
 </body>
 </html>

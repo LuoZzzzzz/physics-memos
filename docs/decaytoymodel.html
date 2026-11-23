@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Toy model of decay</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toy model of decay</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,29 +15,19 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
-
-  <!-- Python Highlighting -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-  
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Toy model of decay</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="color.html" rel="prev" title="Color">← Previous</a><a href="betadecay.html" rel="next" title="Beta decay">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Nuclear and Particle Physics (B4)</p>
+<h1>Toy model of decay</h1>
+</header>
     <p>
       Consider an unperturbed Hamiltonian:
       $$
@@ -164,7 +152,8 @@ surv_prob = np.abs(a_t)**2</code></pre>
       $$|\tilde{\psi}_R(E)|^2 \propto \frac{1}{(E-E_R)^2 + \Gamma^2/4}$$
       Note that sometimes the integration is performed only from $0$ to $\infty$ instead of $-\infty$ to $\infty$, which gives the complex result $\frac{1}{\tfrac{E-E_R}{\hbar} + \frac{i\Gamma}{2\hbar}}$. The Breit Wigner distribution is then obtained by taking the magnitude squared of this result, which gives the same result as integrating from $-\infty$ to $\infty$.
     </p>
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="color.html" rel="prev"><span class="pl">← Previous</span>Color</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="betadecay.html" rel="next"><span class="pl">Next →</span>Beta decay</a></nav>
+</article>
+</main>
 </body>
 </html>

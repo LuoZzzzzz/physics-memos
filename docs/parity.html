@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Parity and parity conservation</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parity and parity conservation</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Parity</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Quantum Mechanics (A3)</p>
+<h1>Parity</h1>
+</header>
 
     <p>
       What do we mean by "a change of parity"? A change of parity really describes a change of coordinate system. We are essentially asking: if we had inverted our coordinate system, so that our new coordinate axes now point in the opposite direction as before, how will we have to rewrite the laws of our system? Note that in this (passive) picture, the physical system remains unchanged - it is our description of it that changes. 
@@ -150,8 +141,8 @@
     <p>
       As I am writing this, I realise that the logic behind the equality $\psi'(-\vec{\bf{x}}) = \hat{H}(-\vec{\bf{x}}) \psi(-\vec{\bf{x}})$ is rather fuzzy. If $\hat{H}(\vec{\bf{x}})$ is a scalar function then it is quite easy to convince yourself that this is indeed the case. However,  $\hat{H}(\vec{\bf{x}})$ can also contain all sorts of linear operators like $\partial_x$, and it is not intuitive that the relation should still hold. The reason that this works is because spatial derivatives like $\partial_x$ behave exactly like $\vec{\bf{x}}$ under a change of parity. That is, just like $\vec{\bf{x}} \rightarrow -\vec{\bf{x}}$, we have $\nabla_{\vec{\bf{x}}} \rightarrow -\nabla_{\vec{\bf{x}}}$.
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><span class="prev"></span><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><span class="next"></span></nav>
+</article>
+</main>
 </body>
 </html>

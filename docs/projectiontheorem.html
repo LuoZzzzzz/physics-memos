@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Projection theorem</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projection theorem</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Multi-electron spin-orbit coupling</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="wignereckart.html" rel="prev" title="Calculations using Wigner Eckart">← Previous</a><a href="rabioscillations.html" rel="next" title="Some insights into Rabi oscillations">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Atomic and Laser (B3)</p>
+<h1>Multi-electron spin-orbit coupling</h1>
+</header>
     <p>
     Consider a system with two valence electrons. The spin-orbit Hamiltonian for this system is:
     </p>
@@ -364,7 +355,8 @@
     <p>
     The expectation above written explicitly is $\langle \vec{\bf{j}}_k \cdot \vec{\bf{J}} \rangle = \langle J_i, M_{J_i}| \vec{\bf{j}}_k \cdot \vec{\bf{J}} |J_i, M_{J_i} \rangle$. Because $\vec{\bf{j}}_k \cdot \vec{\bf{J}}$ is a scalar operator, this expectation is in fact independent of $M_{J_i}$, which means we only have to zoom in to the subspace level. If it means anything, the above is known as the projection theorem, and it follows from the Wigner-Eckart theorem and Schur's lemma.
     </p>
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="wignereckart.html" rel="prev"><span class="pl">← Previous</span>Calculations using Wigner Eckart</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="rabioscillations.html" rel="next"><span class="pl">Next →</span>Some insights into Rabi oscillations</a></nav>
+</article>
+</main>
 </body>
 </html>

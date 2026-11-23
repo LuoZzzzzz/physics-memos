@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Color</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Color</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="countingbaryonstates.html" rel="prev" title="Constructing baryon states">← Previous</a><a href="decaytoymodel.html" rel="next" title="Toy model of decay">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Nuclear and Particle Physics (B4)</p>
+<h1>Color</h1>
+</header>
     <p>
       The color degrees of freedom of quarks transform under a unitary representation of the Lie group $\text{SU(3)}$, whose infinitesimal structure is given by the Lie algebra $\mathfrak{su}(3)$.
     </p>
@@ -184,8 +175,8 @@
       $$\chi^c_\text{Baryon} = \frac{1}{\sqrt{6}}(\ket{rgb} - \ket{grb} + \ket{brg} - \ket{bgr} + \ket{gbr} - \ket{rbg})$$
       And interestingly, this state is antisymmetric. We see that the antisymmetry of the color wavefunction follows from the condition that it is invariant under $\text{SU(3)}$ rotations. Of course, the earliest motivation was experimental - experiments determined that the spin-spatial part of the wavefunction was symmetric, while Pauli exclusion principle demanded that the overall wavefunction is antisymmetric, which necessitated the addition of a new Hilbert space one which the wavefunction was antisymmetric.
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="countingbaryonstates.html" rel="prev"><span class="pl">← Previous</span>Constructing baryon states</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="decaytoymodel.html" rel="next"><span class="pl">Next →</span>Toy model of decay</a></nav>
+</article>
+</main>
 </body>
 </html>

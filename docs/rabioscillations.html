@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Rabi oscillations</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rabi oscillations</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Rabi oscillations</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="projectiontheorem.html" rel="prev" title="H_{\text{s-o}} in LS coupling">← Previous</a><span class="off">Next →</span></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Atomic and Laser (B3)</p>
+<h1>Rabi oscillations</h1>
+</header>
 
     <p>
       The time dependent Hamiltonian is:
@@ -260,6 +251,8 @@
       $$\text{pr}_{1\rightarrow 2}(t) \approx \frac{\pi t}{2} \left(\frac{2|M|}{\hbar}\right)^2 \hbar \rho(E_0) = \frac{2\pi}{\hbar} |M|^2 \rho(E_0) t = \Gamma t$$
       and we have therefore recovered Fermi's Golden Rule in the context of a two state system driven by incoherent radiation. Note that in this context, $\rho$ is the normalised power spectrum (in units of inverse energy), not the density of states. However, the two becomes the same if the energy in each mode is the same, which is the case in classical blackbody radiation (a result of the equipartition theorem). Again, as a lecturer once said, you should not pull Fermi's Golden Rule out of your ass - you always derive it in the context in which you are applying it first. 
     </p>
-    </main>
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="projectiontheorem.html" rel="prev"><span class="pl">← Previous</span>$H_{\text{s-o}}$ in $LS$ coupling</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><span class="next"></span></nav>
+</article>
+</main>
 </body>
 </html>

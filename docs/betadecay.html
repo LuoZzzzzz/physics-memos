@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Beta decay</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beta decay</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Beta decay</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="decaytoymodel.html" rel="prev" title="Toy model of decay">← Previous</a><span class="off">Next →</span></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Nuclear and Particle Physics (B4)</p>
+<h1>Beta decay</h1>
+</header>
     <h3>Density of states</h3>
     <p>
       For a box of volume $V = L^3$ each individual momentum state occupies a volume $(\frac{2\pi\hbar}{L})^3$ in momentum space. 
@@ -106,7 +97,8 @@
       $$\text{d}\Gamma^{(1)} = \frac{G_F^2}{2\pi^3 \hbar^7 c^3} \cdot
       p_e^2 (Q-E_e)^2 \text{d}p_e$$
     </p>
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="decaytoymodel.html" rel="prev"><span class="pl">← Previous</span>Toy model of decay</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><span class="next"></span></nav>
+</article>
+</main>
 </body>
 </html>

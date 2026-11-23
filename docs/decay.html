@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Wigner-Weisskopf</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wigner-Weisskopf</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Exponential decay law and Breit Wigner</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="kleingordon.html" rel="prev" title="Klein Gordon equation and scattering">← Previous</a><a href="particlehilbertspace.html" rel="next" title="Basic particle physics">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Nuclear and Particle Physics (B4)</p>
+<h1>Exponential decay law and Breit Wigner</h1>
+</header>
     <p>
       The lecture notes derive the decay formula using a perturbative approach: start with an ansatz that has the right flavor, but otherwise quite wrong. Run it through the perturbation process once to get a first order solution with a linear rate prediction. Then calculate the rate by taking the time derivative.
     </p>
@@ -218,7 +209,8 @@
     <p>
       We should also note the two distinct but related roles $\Gamma$ plays here. It is both a decay rate ($\propto 1/\tau$) telling us how fast the resonance decays, and an energy width setting the spread of the Breit-Wigner distribution. This is a direct manifestation of the time-energy uncertainty principle.
     </p>
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="kleingordon.html" rel="prev"><span class="pl">← Previous</span>Klein Gordon equation and scattering</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="particlehilbertspace.html" rel="next"><span class="pl">Next →</span>Basic particle physics</a></nav>
+</article>
+</main>
 </body>
 </html>

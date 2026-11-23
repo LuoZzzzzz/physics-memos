@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Differential Geometry 1</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Differential Geometry 1</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Very basic differential geometry</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="wignerrotations.html" rel="prev" title="Wigner rotations">← Previous</a><a href="moreindexnotation.html" rel="next" title="More notes on index notation">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Symmetry and Relativity (B2)</p>
+<h1>Very basic differential geometry</h1>
+</header>
 
     <p>
       Index notation is beautiful, but it seems to convey the impression that the mathematics is built upon relativity. This is partly true, but a large part of the mathematics can be derived from geometry that has nothing to do with relativity.
@@ -157,8 +148,8 @@
     Further, we find that since $A^\text{cov}_i = g_{ji} A_j$ and $A'^\text{cov}_i = g'_{ji} A'_j$, that:
     $$A'^\text{cov}_i = \frac{\partial x_k}{\partial x'_i} A^\text{cov}_k$$
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="wignerrotations.html" rel="prev"><span class="pl">← Previous</span>Wigner rotations</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="moreindexnotation.html" rel="next"><span class="pl">Next →</span>More notes on index notation</a></nav>
+</article>
+</main>
 </body>
 </html>

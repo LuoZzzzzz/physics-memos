@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Basic particle physics</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basic particle physics</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Basic particle physics</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="decay.html" rel="prev" title="Exponential decay law and Breit Wigner">← Previous</a><a href="isospin.html" rel="next" title="What is isospin?">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Nuclear and Particle Physics (B4)</p>
+<h1>Basic particle physics</h1>
+</header>
 
     <p>
       At some point, we come across an equation like this:
@@ -72,8 +63,8 @@
     <p>
       To get to $18$, the first thing we should note is that we are only concerned with the flavors $u$, $d$ and $s$. Anything with other flavors are not considered "light". Therefore, we should change the count to $2\times2\times3\times3 = 36$. Now, concentrate on the spin part. By addition of angular momentum, the spin part can be factorized into $0 \oplus 1$. Now, even though this Hilbert space has a dimension of $4$, we are really counting the number of possible total spins when classifying mesons. Therefore, of the $36$ cases, $9$ will correspond to particles with a total spin of $0$, and the remaining $27$ will correspond to particles with a total spin of $1$, but these count as $9$ distinct spin $1$ particles since we do not care about the projection of spin along the z-axis.
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="decay.html" rel="prev"><span class="pl">← Previous</span>Exponential decay law and Breit Wigner</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="isospin.html" rel="next"><span class="pl">Next →</span>What is isospin?</a></nav>
+</article>
+</main>
 </body>
 </html>

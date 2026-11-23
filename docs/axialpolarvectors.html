@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Axial and polar vectors</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Axial and polar vectors</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Axial and polar vectors</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="moreindexnotation.html" rel="prev" title="More notes on index notation">← Previous</a><span class="off">Next →</span></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Symmetry and Relativity (B2)</p>
+<h1>Axial and polar vectors</h1>
+</header>
 
     <p>
       A polar vector transforms as $\mathbf{r} \rightarrow -\mathbf{r}$ under a spatial inversion. That is, if we reversed the directions of all the axes in our coordinate system then the numerical description of the same vector will pick up a negative sign as compared to the old coordinate system. 
@@ -91,8 +82,8 @@
       $$\mathbf{F}_B = q\mathbf{v}\times\mathbf{B}$$
       The axial nature of the cross product and the axial nature of $\mathbf{B}$ cancel so that the resulting vector is polar - which must be for the case of a force. 
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="moreindexnotation.html" rel="prev"><span class="pl">← Previous</span>More notes on index notation</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><span class="next"></span></nav>
+</article>
+</main>
 </body>
 </html>

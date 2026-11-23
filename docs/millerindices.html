@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Miller indices</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miller indices</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Miller indices</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><span class="off">← Previous</span><a href="xrayscattering.html" rel="next" title="Small note on X-ray scattering derivation">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Condensed Matter (B6)</p>
+<h1>Miller indices</h1>
+</header>
 
     <p>
       <b>Definition: </b>Any reciprocal vector $\vec{G}$ in the reciprocal lattice give multiples of $2\pi$ when dotted with all real vectors $\vec{R}$ in the real lattice. That is, if $\vec{G}$ is a reciprocal vector then:
@@ -88,8 +79,8 @@
       $$\vec{b}_1 = \frac{2\pi}{a}(0, 1, 1), \phantom{x} \vec{b}_2 = \frac{2\pi}{a}(1, 0, 1), \phantom{x} \vec{b}_3 = \frac{2\pi}{a}(1, 1, 0)$$
       The consequence for the Miller indices $(h,k,l)$ is that $h+k+l$ is even.
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><span class="prev"></span><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="xrayscattering.html" rel="next"><span class="pl">Next →</span>Small note on X-ray scattering derivation</a></nav>
+</article>
+</main>
 </body>
 </html>

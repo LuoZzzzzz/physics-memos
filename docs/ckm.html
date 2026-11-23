@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>CKM matrices</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CKM matrices</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>CKM matrices</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="isospin.html" rel="prev" title="What is isospin?">← Previous</a><a href="countingbaryonstates.html" rel="next" title="Constructing baryon states">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Nuclear and Particle Physics (B4)</p>
+<h1>CKM matrices</h1>
+</header>
 
     <p>
       The weak force couples upper and lower leptons in the same generation. For example, it couples an electron to an electron neutrino, or an electron to an electron anti-neutrino. However, it cannot do intergenerational coupling, for example, a muon to an electron neutrino. This is reflected in the conservation of lepton numbers. By the way, it also cannot couple an electron to an electron, because both are upper.
@@ -145,8 +136,8 @@
       $$
       Therefore, the $\text{CKM}$ matrix is defined as $V_{\text{CKM}} = U^\dagger_u U_d$ and its elements gives the vertex factor between upper and lower mass eigenstates in a weak interaction. Also, as a final note, the $\text{CKM}$ matrix, despite being unitary, does not describe any change of basis - if anything it should be thought of as a bilinear form. That's why you get the vertex factors by reading off it directly.
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="isospin.html" rel="prev"><span class="pl">← Previous</span>What is isospin?</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="countingbaryonstates.html" rel="next"><span class="pl">Next →</span>Constructing baryon states</a></nav>
+</article>
+</main>
 </body>
 </html>

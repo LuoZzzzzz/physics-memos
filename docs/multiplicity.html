@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ewald's sphere and multiplicities</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ewald's sphere and multiplicities</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>Ewald's sphere and multiplicities</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="xrayscattering.html" rel="prev" title="Small note on X-ray scattering derivation">← Previous</a><a href="blochtheorem.html" rel="next" title="Bloch&#x27;s theorem">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Condensed Matter (B6)</p>
+<h1>Ewald's sphere and multiplicities</h1>
+</header>
     <p>
       Suppose I send a X-ray beam into a solid crystal with wavevector $\vec{\bf{k}} \propto \vec{\bf{x}}$. Under most situations, there will be no scattering. To get scattering, we have to rotate the crystal around such that we find an orientation that satisfies Laue's condition. This raises the following question: how do we specify the orientation of our crystal in space?
     </p>
@@ -61,7 +52,8 @@
     <p>
       In this case, $m_p = 3$: $(3, 1, 1), (1, 3, 1), (1, 1, 3)$, and $m_s = 2^3 = 8$ since none of the Miller indices are $0$. Therefore, the multiplicity $m(3, 1, 1) = m_p \cdot m_s = 24$.
     </p>
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="xrayscattering.html" rel="prev"><span class="pl">← Previous</span>Small note on X-ray scattering derivation</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="blochtheorem.html" rel="next"><span class="pl">Next →</span>Bloch's theorem</a></nav>
+</article>
+</main>
 </body>
 </html>

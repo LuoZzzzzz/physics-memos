@@ -1,56 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>B3 Bookwork</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    .toc {
-      margin: 1rem 0 1.25rem 0;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      background: #fafafa;
-    }
-
-    .toc summary {
-      cursor: pointer;
-      font-weight: 600;
-      user-select: none;
-      outline: none;
-    }
-
-    .toc ul {
-      margin: 0.75rem 0 0 1.25rem;
-      padding: 0;
-    }
-
-    .toc li {
-      margin: -0.2rem 0;
-    }
-
-    .toc a {
-      text-decoration: none;
-    }
-
-    .toc a:hover {
-      text-decoration: underline;
-    }
-
-    .section-anchor {
-      scroll-margin-top: 1rem;
-    }
-  </style>
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B3 Bookwork</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -59,31 +14,20 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>B3 Bookwork</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="b2bookwork.html" rel="prev" title="B2 bookwork">← Previous</a><a href="b4bookwork.html" rel="next" title="B4 bookwork">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Part B Bookwork</p>
+<h1>B3 Bookwork</h1>
+</header>
     <p>
       A list of bookwork derivations for <b>B3</b> atomic and laser Physics.
     </p>
-
-    <details class="toc" open>
-      <summary>Contents</summary>
-      <ul id="toc-list"></ul>
-    </details>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
     <h3 class="section-anchor">Fine structure of hydrogen</h3>
@@ -285,27 +229,8 @@
     </p>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
-
-  </main>
-
-  <script>
-    const tocList = document.getElementById("toc-list");
-    const headers = document.querySelectorAll("h3");
-
-    headers.forEach((header, index) => {
-      if (!header.id) {
-        header.id = `section-${index + 1}`;
-      }
-
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-
-      a.href = `#${header.id}`;
-      a.textContent = header.textContent;
-
-      li.appendChild(a);
-      tocList.appendChild(li);
-    });
-  </script>
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="b2bookwork.html" rel="prev"><span class="pl">← Previous</span>B2 bookwork</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="b4bookwork.html" rel="next"><span class="pl">Next →</span>B4 bookwork</a></nav>
+</article>
+</main>
 </body>
 </html>

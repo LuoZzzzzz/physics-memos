@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>What is isospin?</title>
-
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MathJax LaTeX Support -->
-  <script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is isospin?</title>
+<link rel="stylesheet" href="styles.css">
+<script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -17,23 +14,17 @@
       }
     };
   </script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="site.js" defer></script>
 </head>
 <body>
-  <header>
-    Physics Memos
-  </header>
-
-  <main>
-    <nav class="page-nav">
-      <a href="index.html" class="btn">Index</a>
-    </nav>
-
-    <h1>What is isospin?</h1>
+<main class="page" id="top">
+<nav class="site-nav" aria-label="Site"><a href="index.html">Physics Memos</a><span class="pn"><a href="particlehilbertspace.html" rel="prev" title="Basic particle physics">← Previous</a><a href="ckm.html" rel="next" title="CKM matrix">Next →</a></span></nav>
+<article>
+<header class="chap-head">
+<p class="kicker">Nuclear and Particle Physics (B4)</p>
+<h1>What is isospin?</h1>
+</header>
 
     <p>
       We know that the Hilbert space of a quark may be broken into four distinct parts: spatial, spin, color and flavor. The spin part is described by the algebra of $SU(2)$, while the color part is described by the algebra of $SU(3)$. But what are the rules for the flavor part of the state? 
@@ -159,9 +150,8 @@
     <p>
       On each of the individual two dimensional flavor Hilbert spaces we have raising and lowering operators $I_+$ and $I_-$. We can also construct the raising and lowering operators on the joint flavor Hilbert space, it's just $I^{(1)}_+ + I^{(2)}_+ + I^{(3)}_+$ and $I^{(1)}_- + I^{(2)}_- + I^{(3)}_-$ respectively. The former will raise a $n$ state with spin projection $+1/2$ to a $p$ state with spin $+1/2$ for instance, while the latter will turn a $p$ into a $n$ with the same spin.
     </p>
-
-  </main>
-
+<nav class="pager" aria-label="Previous and next pages"><a class="prev" href="particlehilbertspace.html" rel="prev"><span class="pl">← Previous</span>Basic particle physics</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="ckm.html" rel="next"><span class="pl">Next →</span>CKM matrix</a></nav>
+</article>
+</main>
 </body>
 </html>
-
