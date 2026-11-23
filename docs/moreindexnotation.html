@@ -26,14 +26,14 @@
 <h1>More notes on index notation</h1>
 </header>
 
+    <h4 class="sub">Metric $g$ and boost $\Lambda$</h4>
     <p>
-      <b>Metric $g$ and boost $\Lambda$</b><br>
       Start with the matrix equation:
       $$\Lambda^T g \Lambda = g \implies (g^{-1} \Lambda^T g) \Lambda = g^{-1}g = I \implies g^{-1} \Lambda^T g = \Lambda^{-1}$$
       Recall the following matrix to index notation conversions:
       $$\Lambda \rightarrow \Lambda^{\mu}_{\phantom{x}\nu}$$
       $$g \rightarrow g_{\mu\nu}$$
-      The reason that $g$ transforms like a rank $(0, 2)$ tensor is explored in more detail here. 
+      The reason that $g$ transforms like a rank $(0, 2)$ tensor is explored in more detail here.
     </p>
     <p>
       Note also that:
@@ -62,8 +62,8 @@
       So covariant $4$-vectors transform as $A'_\mu = \Lambda_\mu^{\phantom{x}\nu}A_\nu$. 
     </p>
 
+    <h4 class="sub">Scalar functions</h4>
     <p>
-      <b>Scalar functions</b><br>
       Consider a scalar function $f$, that is, an assignment of a number to every point in space. Because a point in space is associated with both a contravariant displacement $x^\mu$ and a covariant displacement $x_\mu$, we can write either $f(x^0, x^1, x^2, x^3)$ or $f(x_0, x_1, x_2, x_3)$. Both functions have the same value at a given point in space, but because $(x^0, x^1, x^2, x^3)$ and $(x_0, x_1, x_2, x_3)$ are in general different numbers for the same point the two $f$s will have different functional forms when expressed in terms of their respective coordinates.
     </p>
     <p>
@@ -99,16 +99,16 @@
     <p>
       Finally we note that for the Minkowski metric $x^\mu = (ct, x, y, z)$ and $x_\mu = (-ct, x, y, z)$ so $\partial_\mu \rightarrow (\frac{1}{c}\frac{\partial}{\partial t}, \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})$ and $\partial^\mu \rightarrow (-\frac{1}{c}\frac{\partial}{\partial t}, \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})$. 
     </p>
+    <h4 class="sub">$4$-vector transformations</h4>
     <p>
-      <b>$4$-vector transformations</b><br>
       Now consider the derivative of a $4$-vector field. By derivative, we mean the Jacobian matrix. There are four cases that we can consider, which are:
       $$\frac{\partial A^\nu}{\partial x_\mu}, \frac{\partial A_\nu}{\partial x^\mu}, \frac{\partial A^\nu}{\partial x^\mu}, \frac{\partial A_\nu}{\partial x_\mu}$$
       or written in index notation:
       $$\partial^\mu A^\nu, \partial_\mu A_\nu, \partial_\mu A^\nu, \partial^\mu A_\nu$$
-      As the latter suggests, the ranks of each of them are $(2, 0), (0, 2), (1, 1), (1, 1)$ respectively. 
+      As the latter suggests, the ranks of each of them are $(2, 0), (0, 2), (1, 1), (1, 1)$ respectively.
     </p>
+    <h4 class="sub it">Transformations of rank $(2, 0)$</h4>
     <p>
-      <i>Transformations of rank $(2, 0)$</i><br>
       $$
       \frac{\partial A'^\nu}{\partial x'_\mu} = \frac{\partial (\Lambda^\nu_{\phantom{x}\alpha} A^\alpha)}{\partial x'_\mu} = \Lambda^\nu_{\phantom{x}\alpha} \frac{\partial A^\alpha}{\partial x'_\mu} = \Lambda^\nu_{\phantom{x}\alpha} \frac{\partial x_\beta}{\partial x'_\mu} \frac{\partial A^\alpha}{\partial x_\beta} = 
       \Lambda^\nu_{\phantom{x}\alpha} \Lambda^\mu_{\phantom{x}\beta} \frac{\partial A^\alpha}{\partial x_\beta}
@@ -118,8 +118,8 @@
       Or more simply:
       $$[\partial'_\text{con} A'_\text{con}] = \Lambda [\partial_\text{con} A_\text{con}] \Lambda^T$$
     </p>
+    <h4 class="sub it">Transformations of rank $(0, 2)$</h4>
     <p>
-      <i>Transformations of rank $(0, 2)$</i><br>
       $$
       \frac{\partial A'_\nu}{\partial x'^\mu} 
       = \frac{\partial (\Lambda^{\phantom{x}\alpha}_{\nu} A_\alpha)}{\partial x'^\mu} 
@@ -136,8 +136,8 @@
       [\partial'_\text{cov} A'_\text{cov}] = (\Lambda^{-1})^T [\partial_\text{cov} A_\text{cov}] \Lambda^{-1}
       $$
     </p>
+    <h4 class="sub it">Transformations of rank $(1, 1)$</h4>
     <p>
-      <i>Transformations of rank $(1, 1)$</i><br>
       $$
       \frac{\partial A'^\nu}{\partial x'^\mu} 
       = \frac{\partial (\Lambda_{\phantom{x}\alpha}^{\nu} A^\alpha)}{\partial x'^\mu} 
@@ -154,8 +154,8 @@
       [\partial'_\text{cov} A'_\text{con}] = (\Lambda^{-1})^T [\partial_\text{cov} A_\text{con}] \Lambda^T
       $$
     </p>
+    <h4 class="sub it">Transformations of the other rank $(1, 1)$</h4>
     <p>
-      <i>Transformations of the other rank $(1, 1)$</i><br>
       $$
       \frac{\partial A'_\nu}{\partial x'_\mu} 
       = \frac{\partial (\Lambda^{\phantom{x}\alpha}_{\nu} A_\alpha)}{\partial x'_\mu} 

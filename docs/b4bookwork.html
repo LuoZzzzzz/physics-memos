@@ -29,7 +29,7 @@
       A list of bookwork derivations for <b>B4</b> nuclear and particle Physics.
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Natural units</h3>
     <p>
       The idea of natural units is to replace the standard SI units $1 \text{ kg}, 1 \text{ m}, 1 \text{ s}$ with $\hbar, c, \text{GeV}$. For example, to convert $1 \text{ m}$ to natural units, note that dimensionally $[\text{m}] = \frac{[\hbar] [c]}{[\text{GeV}]}$. So we want to find $X$ such that:
@@ -62,7 +62,7 @@
       $$F = \frac{q_{1,\text{nat}} \, q_{2, \text{nat}}}{4\pi r^2}$$
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">pp chain</h3>
     <p>
       $${}^1_1p + {}^1_1p \rightarrow {}^2_1d + e^+ + \nu_e
@@ -76,13 +76,13 @@
       The rate of the reaction is limited by step 1, mainly because it proceeds via the weak interaction. The Coulomb barrier between the two protons also slows down the reaction. Note that even though the deuterium is made up of a proton and a neutron, and the latter has a higher rest mass than a proton, the binding energy between them makes the overall reaction release energy. Steps 2 and 3 proceed via the strong interaction.
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Breit Wigner distribution</h3>
     <p>
       A detailed derivation of the Breit Wigner distribution and exponential decay law is given in this <a href="decay.html"> blog</a>. Here I just want to bring up a few points and a quick exam derivation of the distribution.
     </p>
+    <h4 class="sub it">Handwavy derivation</h4>
     <p>
-      <i>Handwavy derivation</i><br>
       Start with the ansatz:
       $$\psi_R(t) = e^{-\frac{iE_R t}{\hbar}} e^{-\frac{\Gamma t}{2\hbar}}$$
       where $E_R$ is the resonance energy and $\Gamma$ is the decay width given by Fermi's golden rule.
@@ -103,14 +103,14 @@
       A more rigorous justification using a toy model is given <a href="decaytoymodel.html">here</a>.
     </p>
 
+    <h4 class="sub it">Relativistic Breit Wigner</h4>
     <p>
-      <i>Relativistic Breit Wigner</i><br>
       The relativistic Breit Wigner distribution is given by:
       $$\sigma(E) \propto \frac{1}{(E^2 - E_R^2)^2 + E_R^2 \Gamma^2}$$
       where $E_R$ is the resonance energy. When $E$ is close to $E_R$, the distribution reduces to the non-relativistic Breit Wigner distribution.
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Born approximation and differential cross section</h3>
     <p>
       The wavefunction of a plane wave interacting with a nuclear potential (centered at the origin) is, in the first Born approximation:
@@ -118,8 +118,8 @@
       If the potential is symmetric, then the equation simplifies to:
       $$\psi(\vec{r}) = \psi_i(\vec{r}) + \psi_s(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot\vec{r}} - \frac{1}{\sqrt{V}}\frac{e^{i\vec{k}\cdot\vec{r}}}{r}\frac{2m}{\hbar^2 q} \int_0^\infty r' V(r') \sin(qr') \text{d}r'$$
     </p>
+    <h4 class="sub it">Interpretation 1.</h4>
     <p>
-      <i>Interpretation 1.</i><br>
       Let $\psi(\vec{r})$ represent the wave function of a single particle. $\psi_i(\vec{r})$ and $\psi_s(\vec{r})$ are the wavefunctions corresponding to the incident and scattered parts of that particle. Even though $\psi_i(\vec{r}) = \frac{1}{\sqrt{V}}e^{i\vec{k}\cdot{\vec{r}}}$ is, as written, infinite in extent, in practice the incoming beam has a finite width and in the limit of large $r$ will subtend a relatively small solid angle. Therefore at large $r$ the scattering will be entirely due to $\psi_s(\vec{r})$, and any interference effects due to $\psi_i(\vec{r})$ may be ignored.
     </p>
     <p>
@@ -129,8 +129,8 @@
       $$\frac{\text{d}P}{\text{d}\Omega}(\theta, \phi) = \frac{1}{V} \int_0^\infty |f(\theta, \phi)|^2 \text{d}r$$
       Note that $f(\theta, \phi)$ has units of $\text{m}$ and so $\frac{\text{d}P}{\text{d}\Omega}$ has units of $\text{str}^{-1}$. There is, however, something annoying with this interpretation, because as $V \rightarrow \infty$ it is not clear whether the integral blows up, $1/V$ kills the whole thing, or if the equation approaches some finite non zero limit!
     </p>
+    <h4 class="sub it">Interpretation 2.</h4>
     <p>
-      <i>Interpretation 2.</i><br>
       Now suppose that the wavefunction $\frac{1}{\sqrt{V}} e^{i\vec{k}\cdot\vec{r}}$ represents a stream of particles. The probability current associated with this wave is $j_\text{inc} = |\psi_i|^2 \cdot \frac{\hbar k}{m} = \frac{1}{V} \cdot \frac{\hbar k}{m}$. That is, if we were to put a bucket of cross sectional area $A$ in the way of this stream, the bucket will pick up  $\frac{1}{V} \cdot \frac{\hbar k}{m} \cdot A$ particles per second.
     </p>
     <p>
@@ -144,7 +144,7 @@
       which has units $\text{m}^2 \, \text{str}^{-1}$. In this case, the differential cross section is well behaved. This reinforces the point that whenever we work with plane wavefunctions, we have to interpret them in terms of a continuous current of particles instead of the wavefunction of a single particle for the results to make sense.
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">$\alpha$ decay</h3>
     <p>
       The potential experienced by an alpha particle may be modelled as a deep well from $0$ to $r_a$, and a Coulombic potential from $r_a$ to $\infty$. The excess energy of the alpha particle above the energy at $\infty$ is $Q$. Therefore, the region $r_a$ to $r_b$ (Coulomb barrier) is classically forbidden by energy conservation. $r_b$ is given by:
@@ -181,7 +181,7 @@
       So the decay rate $\Gamma \propto \sqrt{Q} e^{-k/\sqrt{Q}}$.
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Helicity suppression</h3>
     <p>
       The weak interaction that is responsible for pion decay couples to right handed ($\text{RH}$) anti-leptons and left handed ($\text{LH}$) leptons. This means that after decay, the electron must be $\text{LH}$ and the anti-neutrino must be $\text{RH}$. 
@@ -192,9 +192,9 @@
     <p>
       We also know that $S=0$ initially for $\pi^-$. This means that the combined spin state of the electron and anti-neutrino must be the singlet ($S=0$) state of $0 \oplus 1$. 
     </p>
-    <div style="text-align: center;">
+    <figure>
       <img src="helicitysuppression.png" alt="helicity suppression" width="500">
-    </div>
+    </figure>
     <p>
       Suppose the anti-neutrino is produced such that it travels right. Since $\beta_{\bar{\nu}_e} = 1$ (as neutrinoes are massless and travel near $c$) and all anti-neutrinos produced are right handed, the helicity of the anti-neutrino must be $+\frac{1}{2}$, which means that its spin in this case must be $\ket{\rightarrow}$. 
     </p>
@@ -231,7 +231,7 @@
       $$
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Cabibbo matrix</h3>
     <p>
       Suppose a Feynman diagram shows a $u$ (mass eigenstate) quark coupled to a $s$ (also mass eigenstate) quark and a $W^-$ boson. This seems weird because the weak force should produce a quark in the weak eigenbasis, and not the mass eigenbasis. Here's what happens step by step. The $u$ quark first couples to weak eigenstates $d'$ and $s'$ - this is calculated by finding the state vector of $u$ in the weak basis, and then computing the coupling amplitude between it and the state vectors of $d'$ and $s'$ (which are just the unit vectors $[1, 0]$ and$[0, 1]$). The state of the system after this is then a superposition of $d'$ and $s'$ states. Transforming this back to the mass basis gives us a superposition of $d$ and $s$ states, and it is the amplitude of the $s$ state that the CKM matrix tells us. 
@@ -319,11 +319,11 @@
       \end{bmatrix}}_{\ket{s}}$$
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Ratio of hadron to muon production in $e^+e^-$ collisions</h3>
+    <h4 class="sub it">From 2012 Q3</h4>
     <p>
-      <i>From 2012 Q3</i><br>
-      We are interested in the ratio of $\sigma(e^+e^- \rightarrow \text{hadrons})$ to $\sigma(e^+e^- \rightarrow \mu^+\mu^-)$ in $e^+e^-$ collisions, at energy scales $2-3 \text{ GeV}$, $5-8 \text{ GeV}$ and $12-20 \text{ GeV}$. 
+      We are interested in the ratio of $\sigma(e^+e^- \rightarrow \text{hadrons})$ to $\sigma(e^+e^- \rightarrow \mu^+\mu^-)$ in $e^+e^-$ collisions, at energy scales $2-3 \text{ GeV}$, $5-8 \text{ GeV}$ and $12-20 \text{ GeV}$.
     </p>
     <p>
       For reference the bare masses of quarks are (in $\text{MeV}$):
@@ -356,7 +356,7 @@
       If we crank up the energy all the way to $91 \text{ GeV}$, there will be a sharp spike in $\sigma(e^+e^- \rightarrow \text{hadrons})$ relative to $\sigma(e^+e^- \rightarrow \mu^+\mu^-)$. This is because the resonance channel $e^+e^- \rightarrow Z^0$ opens, and $Z^0$ does not couple to electrical charge, but rather to the weak charge. The weak charge of quarks and leptons are the same, so in normalised units $\sigma(e^+e^- \rightarrow \text{hadrons}) \approx 5 \text{ quark pairs} \times 3 \text{ colors} = 15$ instead of the usual $11/3$. 
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Evidence for three generations of leptons and quarks</h3>
     <p>
       A $Z^0$ produced in a $e^+e^-$ collision couples (approximately) equal to all quark pairs ($q\bar{q}$), lepton pairs ($l^+l^-$) and neutrino pairs ($\nu \bar{\nu}$), provided that the process is energetically feasible. In particular, since neutrinos are very light, the $Z^0$ should be able to decay to <i>all</i> possible $\nu\bar{\nu}$ pairs as all these processes are energetically feasible. Together with the fact that $Z^0$ couples equally to all of decay products this means that we can deduce the number of generations of $\nu$. The standard model requires that the number of generations of neutrinos, leptons and quarks must be the same, so if the number of generations of neutrinos is determined to be $3$ then that will mean that there are no further heavier quarks and leptons than what is known.
@@ -365,11 +365,11 @@
       Experimentally, we can deduce $\Gamma_Z$ from the total width of the Breit Wigner curve, and $\Gamma_\text{vis} = \Gamma_\text{had} + \Gamma_\text{lep}$ from the peak cross sections of the hadronic and leptonic Breit Wigner curves. This then allow us to calculate the invisible linewidth due to $\nu\bar{\nu}$ production, $\Gamma_\text{inv} = \Gamma_Z - \Gamma_\text{vis}$. Finally, we can divide $\Gamma_\text{inv}$ by the width of say, $Z^0 \rightarrow e^+e^-$, $\Gamma_{ee}$, to find the number of neutrino generations that contribute to this width. Experimentally, this is close to $3$. 
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Charmonium ($c\bar{c}$)</h3>
+    <h4 class="sub it">From 2013 Q1</h4>
     <p>
-      <i>From 2013 Q1</i><br>
-      Spin of a meson is given by $J = \tfrac{1}{2} \otimes \tfrac{1}{2} \otimes L_{q\bar{q}}$. Parity of the meson is given by $P = (+1)(-1)(-1)^{L_{q\bar{q}}} = (-1)^{L_{q\bar{q}}+1}$.  
+      Spin of a meson is given by $J = \tfrac{1}{2} \otimes \tfrac{1}{2} \otimes L_{q\bar{q}}$. Parity of the meson is given by $P = (+1)(-1)(-1)^{L_{q\bar{q}}} = (-1)^{L_{q\bar{q}}+1}$.
     </p>
     <p>
       The states of vector ($S=1$) $c\bar{c}$ are given below.
@@ -410,10 +410,10 @@
       The $\chi_c$ states cannot decay via a virtual photon, because photons have parity $-1$ while $\chi_c$ states have parity $+1$. The can however de-excite into of $J/\psi$ by radiating a photon. Conversely, to produce a $\chi_c$ state we must first produce a $\psi'$ and have it decay into a $\chi_c$ state.
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Phase space in $e^+e^- \rightarrow l^+l^-$</h3>
+    <h4 class="sub it">From 2012 Q3</h4>
     <p>
-      <i>From 2012 Q3</i><br>
       In electron positron collisions, the rate of formation muon and tau pairs depend on two quantities, the matrix element $\mathcal{M}$ and the available phase space:
       $$\sigma(e^+e^- \rightarrow l^+l^-) \propto |\mathcal{M}|^2 \cdot \text{phase space}$$
       The matrix element is the product of the two vertex factors $e$ (since the process is electromagnetic) and the propagator. If the center of mass energy is $W$, then:
@@ -437,7 +437,7 @@
       If we are producing muons then $\sqrt{1-\frac{4m_\mu^2c^4}{W^2}} \approx 1$ so the cross section is proportional to $(\alpha \hbar c / W)^2$ where the $\hbar c$ is inserted so that the units come out right. If we are producing tau then this phase space term becomes significantly less than $1$ since $m_\tau$ is comparable to $W$ and we get a suppression effect from the phase space. 
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
 <nav class="pager" aria-label="Previous and next pages"><a class="prev" href="b3bookwork.html" rel="prev"><span class="pl">← Previous</span>B3 bookwork</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="b6bookwork.html" rel="next"><span class="pl">Next →</span>B6 bookwork</a></nav>
 </article>
 </main>

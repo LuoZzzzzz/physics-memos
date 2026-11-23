@@ -29,7 +29,7 @@
       A list of bookwork derivations for <b>B1</b> fluids.
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Prandtl equations</h3>
     <p>
       Prandtl's equation applies within a boundary layer flow in an otherwise inviscid outer layer flow (potential flow). Assumes steady state flow and neglect gravity. Navier Stokes gives:
@@ -62,7 +62,7 @@
       So given $U(x)$ we can find $p(x)$, which then gets printed onto the boundary layer. Looking at the scaling of this equation we find $\frac{1}{\rho}\frac{\partial p}{\partial x} \sim \frac{U^2}{L} \sim \frac{v_x^2}{L}$, confirming our previous assumption. 
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Thin film approximation</h3>
     <p>
       Suppose that the geometry of the flow is such that the $y$ scale is constrained by geometry to be much smaller than the $x$ scale. In this case we do not assume that the flow is steady at the outset. Let the characteristic $y$ scale be $h$ and the characteristic $x$ scale be $L$. Navier Stokes for the $x$ component gives:
@@ -91,7 +91,7 @@
       $$
     </p>
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
     <h3 class="section-anchor">Boundary conditions for surface waves</h3>
     <p>
       <i>1. No penetration condition at $z=-h$</i>
@@ -111,8 +111,8 @@
       $$p(x, \eta, t) - p_{\text{atm}} = -\gamma \frac{\partial^2 \eta}{\partial x^2}$$
       The net force on a small fluid parcel on the surface must be zero; if it is not so a large acceleration will arise which will cause it to become zero. This requires vertical force balance between pressure and surface tension in the $z$ direction.
     </p>
+    <h4 class="sub it">Linearisation</h4>
     <p>
-      <i>Linearisation</i><br>
       We assume that the fluid is irrotational and incompressible, so that we can define a velocity potential $\phi$ satisfying Laplace's equation $\nabla^2 \phi = 0$. In addition we also assume that the flow is inviscid.
     </p>
     <p>
@@ -143,7 +143,7 @@
       Finally, the no penetration condition at $z = -h$ gives:
       $$\frac{\partial \phi}{\partial z}(x, -h, t) = 0 \phantom{xxx}\text{(no penetration condition, bc 1.)}$$
     </p>
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+    <hr>
 <nav class="pager" aria-label="Previous and next pages"><span class="prev"></span><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><a class="next" href="b2bookwork.html" rel="next"><span class="pl">Next →</span>B2 bookwork</a></nav>
 </article>
 </main>

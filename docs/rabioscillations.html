@@ -152,8 +152,8 @@
       $$U(t) = e^{-i\underbrace{\tfrac{1}{2}\Omega_\text{eff} t}_{\text{rotation angle}}\cdot(\hat{\Omega}_\text{eff} \cdot \vec{\sigma})}$$
       So the vector $\begin{bmatrix} \bar{c}_1(t) \\ \bar{c}_2(t) \end{bmatrix}$ rotates about the axis $\hat{\Omega}_\text{eff}$ (on the Bloch sphere) at angular velocity $\Omega_\text{eff}$ (because the standard spin $1/2$ rotation by angle $\theta$ is $e^{-i(\theta /2) \hat{n}\cdot\vec{\sigma}})$. 
     </p>
+    <h4 class="sub">Effect of driving phase when there is no detuning</h4>
     <p>
-      <b>Effect of driving phase when there is no detuning</b><br>
       Suppose $\delta=0$ and the system starts in the ground state $\ket{1}$. The coefficients $\bar{c}_1(t)$ and $\bar{c}_2(t)$ evolves as:
       $$
       \begin{bmatrix} \bar{c}_1(t) \\ \bar{c}_2(t) \end{bmatrix} = 
@@ -235,8 +235,8 @@
     <p>
       The same logic tells us that a state $\begin{bmatrix} \bar{c}_1 \\ \bar{c}_2 \end{bmatrix} = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ looks like $\begin{bmatrix} c_1 \\ c_2 \end{bmatrix} = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ e^{-i \delta t} \end{bmatrix}$ in the original $c_i(t)$ coordinates, meaning that the $\bar{c}_i$ coordinates gives an additional angular velocity boost $\delta$ relative to the $c_i$ coordinates. So the $\bar{c}_i$ frame stacks on top of $c_i$, bringing the total rotation rate to $\omega_0 + \delta = \omega$. Physically, the $\bar{c}_i$ frame co-rotates with the drive, which is why the effective Hamiltonian​ in those coordinates is time-independent.
     </p>
+    <h4 class="sub">Broadband limit, from oscillations to linear rate</h4>
     <p>
-      <b>Broadband limit, from oscillations to linear rate</b><br>
       Consider a broadband spectrum (meaning $\delta \gg \Omega$) driving an atom. For a pure driving field the transition probability of the atom as a function of time is: 
       $$\text{pr}_{1\rightarrow 2}(t) = \frac{\Omega^2}{\Omega^2+\delta^2} \sin^2\left(\frac{\sqrt{\Omega^2+\delta^2}}{2} t \right)$$
       but for large detuning (applicable for a broadband spectrum) it is approximately:
@@ -249,7 +249,7 @@
       $$\text{pr}_{1\rightarrow 2}(t) \approx \frac{\pi t}{2} \Omega^2(\delta=0 \implies \omega_0) g(\omega_0)$$
       Now, note that we can relate $M = \hbar \Omega$, where $M$ is the matrix element in Fermi's Golden rule ($M = \langle 1 | e \mathcal{E}_0 z | 2\rangle$). Actually, $M$ is conventionally defined to contain a single $e^{-i \omega t}$ oscillation, but here we have two of them ($e^{i \omega t}$ and $e^{-i\omega t}$ from the cosine), so we really need $2M = \hbar\Omega$. Further, note that $\rho(E) = g(\omega)/\hbar$, since the standard density in FGR is per unit energy, not frequency. Plugging these into the above equation gives: 
       $$\text{pr}_{1\rightarrow 2}(t) \approx \frac{\pi t}{2} \left(\frac{2|M|}{\hbar}\right)^2 \hbar \rho(E_0) = \frac{2\pi}{\hbar} |M|^2 \rho(E_0) t = \Gamma t$$
-      and we have therefore recovered Fermi's Golden Rule in the context of a two state system driven by incoherent radiation. Note that in this context, $\rho$ is the normalised power spectrum (in units of inverse energy), not the density of states. However, the two becomes the same if the energy in each mode is the same, which is the case in classical blackbody radiation (a result of the equipartition theorem). Again, as a lecturer once said, you should not pull Fermi's Golden Rule out of your ass - you always derive it in the context in which you are applying it first. 
+      and we have therefore recovered Fermi's Golden Rule in the context of a two state system driven by incoherent radiation. Note that in this context, $\rho$ is the normalised power spectrum (in units of inverse energy), not the density of states. However, the two becomes the same if the energy in each mode is the same, which is the case in classical blackbody radiation (a result of the equipartition theorem). Again, as a lecturer once said, you should not pull Fermi's Golden Rule out of your ass - you always derive it in the context in which you are applying it first.
     </p>
 <nav class="pager" aria-label="Previous and next pages"><a class="prev" href="projectiontheorem.html" rel="prev"><span class="pl">← Previous</span>$H_{\text{s-o}}$ in $LS$ coupling</a><a class="idx" href="index.html"><span class="pl">Index</span>Physics Memos</a><span class="next"></span></nav>
 </article>
