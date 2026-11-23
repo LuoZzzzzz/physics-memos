@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wigner&ndash;Eckart Examples: Reducible Tensor Operators</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+
+    /* ---- Callout boxes (definitions / key results / remarks) ------- */
+    .callout {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .callout .label {
+      display: block;
+      font-family: "Poppins", -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .callout .label mjx-container {
+      text-transform: none;
+      letter-spacing: normal;
+      margin: 0 0.15em;
+    }
+
+    .callout p {
+      margin: 0.4em 0;
+    }
+
+    .callout ol, .callout ul {
+      margin: 0.4em 0;
+      padding-left: 1.4em;
+    }
+
+    mjx-container[display="true"] {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all',
+        macros: {
+          ket: ["\\lvert #1 \\rangle", 1],
+          rt: ["\\tilde r^{1}_{#1}", 1],
+          pt: ["\\tilde p^{1}_{#1}", 1],
+          Jt: ["\\tilde J^{1}_{#1}", 1],
+          rdp: "\\vec r\\cdot\\vec p"
+        }
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="../index.html" class="btn">Index</a>
+      <span class="prev-next">
+        <a href="05_ex1_three_spin_construction.html" class="btn" title="Full Construction on a Three-Spin Hilbert Space">Previous</a>
+        <span class="sep">|</span>
+        <span class="btn disabled">Next</span>
+      </span>
+    </nav>
+
+    <h1>Wigner&ndash;Eckart Examples: Reducible Tensor Operators</h1>
+    <p>
+      <i>3 October 2026</i><br>
+      <i>Digitised from handwritten notes.</i>
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Setting and conventions</h3>
+
+    <div class="callout">
+      <span class="label">Conventions</span>
+    <ul>
+      <li>
+      A single spinless particle, with $[r_a,p_b]=i\delta_{ab}$. The rotation generators are the orbital angular momentum, $J_a=\varepsilon_{acd}\,r_cp_d$.
+      </li>
+      <li>
+      A set of operators $O_x$ is a tensor operator in representation $D$ if $[J_a,O_x]=O_y\,\big[J^D_a\big]_{yx}$. The adjoint (spin-1, Cartesian) representation is $\big[J^{\text{adj}}_a\big]_{cb}=-i\varepsilon_{acb}$.
+      </li>
+      <li>
+      Spherical components of a vector operator $\vec v$: $\tilde v^1_0=v_3$, $\tilde v^1_{\pm1}=\mp\tfrac{1}{\sqrt2}\,(v_1\pm iv_2)$.
+      </li>
+      <li>
+      Ladder operators $J_\pm=J_1\pm iJ_2$, with $C^\pm(j,m)=\sqrt{(j\mp m)(j\pm m+1)}$. For a spin-$s$ tensor operator in standard form, $\big[J_\pm,\tilde O^s_l\big]=C^\pm(s,l)\,\tilde O^s_{l\pm1}$.
+      </li>
+      <li>
+      &ldquo;$\ket{J,M}\simeq X$&rdquo; means that the operator $X$ transforms under commutation with $J_a$ exactly as the state $\ket{J,M}$ transforms under $J_a$.
+      </li>
+    </ul>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">$\vec r$ and $\vec p$ are tensor operators</h3>
+
+    <p>
+      Both $\vec r$ and $\vec p$ are tensor operators:
+      $$\begin{aligned}{}[J_a,r_b] &= \varepsilon_{acd}\,[r_cp_d,\,r_b] = -i\varepsilon_{adb}\,r_d = i\varepsilon_{abd}\,r_d,\\
+[J_a,p_b] &= \varepsilon_{acd}\,[r_cp_d,\,p_b] = -i\varepsilon_{adb}\,p_d = i\varepsilon_{abd}\,p_d.\end{aligned}$$
+      Recall also the Leibniz rule:
+      $$[A,BC] = ABC-BCA = ABC-BAC+BAC-BCA = [A,B]\,C + B\,[A,C].$$
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The nine operators $T_{bc}=r_bp_c$</h3>
+
+    <p>
+      Now consider the operators
+      $$T_{bc} = r_bp_c,\qquad b,c\in\{1,2,3\}.$$
+      Their commutator with $J_a$ is, by the Leibniz rule with $A=J_a$, $B=r_b$, $C=p_c$,
+      $$\begin{aligned}{}[J_a,T_{bc}] = [J_a,\,r_bp_c] &= [J_a,r_b]\,p_c + r_b\,[J_a,p_c]\\
+&= i\varepsilon_{abd}\,r_dp_c + r_b\,\big(i\varepsilon_{acd}\,p_d\big)\\
+&= i\varepsilon_{abd}\,T_{dc} + i\varepsilon_{acd}\,T_{bd}.\end{aligned}$$
+    </p>
+    <p>
+      <b>Comparison with a product state.</b> If $J^D_a = J^{D_1}_a + J^{D_2}_a$, i.e. $J^D_a = J^{D_1}_a\otimes 1 + 1\otimes J^{D_2}_a$, and $\ket{b}\in D_1$, $\ket{c}\in D_2$, then
+      $$\begin{aligned}J^D_a\ket{b}\ket{c} &= \big[J^{D_1}_a\big]_{b'b}\,\ket{b'}\ket{c} + \big[J^{D_2}_a\big]_{c'c}\,\ket{b}\ket{c'}\\
+&= \underbrace{\big[J^{D_1}_a\big]_{db}}_{\substack{i\varepsilon_{abd}\\ =\,-i\varepsilon_{adb}}}\underbrace{\ket{d}\ket{c}}_{T_{dc}}
+ \;+\; \underbrace{\big[J^{D_2}_a\big]_{dc}}_{\substack{i\varepsilon_{acd}\\ =\,-i\varepsilon_{adc}}}\underbrace{\ket{b}\ket{d}}_{T_{bd}} ,\end{aligned}$$
+      where the underbraces show what each factor corresponds to when $D_1=D_2=\text{adj}$.
+    </p>
+    <div class="callout">
+      <span class="label">$T_{bc}$ transforms like a two-particle state</span>
+    <p>
+      $T_{bc}=r_bp_c$ transforms exactly as a state $\ket{b}\ket{c}$ would in the product of two adjoint representations, $\text{adj}\otimes\text{adj}$, whose generators are
+      $$J_a = J^{(1)}_a + J^{(2)}_a = J^{\text{adj}}_a\otimes 1 + 1\otimes J^{\text{adj}}_a .$$
+      That is, $[J_a,T_{bc}] = T_{de}\,\big[J^{\text{adj}\otimes\text{adj}}_a\big]_{de,\,bc}$, a 9-dimensional and <i>reducible</i> representation.
+    </p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The expected structure</h3>
+
+    <p>
+      Since $\vec r$ and $\vec p$ are individually spin-1 tensor operators, we expect to find linear combinations of the $r_bp_c$ that obey the structure
+      $$1\otimes1 = 0\oplus1\oplus2$$
+      under commutation with $J_a$. So, for example, the spin-0 piece should satisfy
+      $$[J_a,T_{0,0}] = 0,\qquad\text{as}\quad \big[J^{s=0}_a\big]_{bc}=0\ \text{for all valid } b,c$$
+      (and there is just one valid pair, since the spin-0 representation is 1-dimensional).
+    </p>
+    <p>
+      The nine operators are to be reorganised as follows:
+      $$\underbrace{\begin{array}{ccc}
+T_{11} & T_{12} & T_{13}\\
+T_{21} & T_{22} & T_{23}\\
+T_{31} & T_{32} & T_{33}
+\end{array}}_{\text{original (adj}\otimes\text{adj) basis}}
+\qquad\longrightarrow\qquad
+\underbrace{
+\boxed{\begin{array}{c} T_{0,0}\end{array}}
+\quad
+\boxed{\begin{array}{c} T_{1,-1}\\ T_{1,0}\\ T_{1,+1}\end{array}}
+\quad
+\boxed{\begin{array}{c} T_{2,-2}\\ T_{2,-1}\\ T_{2,0}\\ T_{2,+1}\\ T_{2,+2}\end{array}}
+}_{0\,\oplus\,1\,\oplus\,2\ \text{basis}}$$
+      Each box is self-contained under $[J_a,\,\cdot\,]$: the first transforms like spin 0, the second like spin 1, the third like spin 2.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The spin-0 piece</h3>
+
+    <p>
+      Consider the trace
+      $$T_{bb} = T_{11}+T_{22}+T_{33} = \rdp .$$
+      Its commutator is
+      $$[J_a,T_{bb}] = i\varepsilon_{abd}\,\big(T_{db}+T_{bd}\big).$$
+      Here $\varepsilon_{abd}$ is antisymmetric under $b\leftrightarrow d$ while $T_{db}+T_{bd}$ is symmetric under $b\leftrightarrow d$, so the sum vanishes after contracting: the $(b,d)=(1,2)$ term cancels the $(2,1)$ term, $(1,3)$ cancels $(3,1)$, and so on. Hence
+      $$[J_a,\,\rdp] = \big[J^{s=0}_a\big]_{00}\,(\rdp) = 0,$$
+      and $\rdp$ is the spin-0 piece.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The spin-1 piece</h3>
+
+    <p>
+      Let
+      $$A_{ab} = \tfrac12\big(T_{ab}-T_{ba}\big) = \tfrac12\big(r_ap_b-r_bp_a\big) = \tfrac12\,\varepsilon_{abc}\,J_c .$$
+      As we sweep $a,b$ over $\{1,2,3\}$ we find the independent operators $\tfrac12(J_1,J_2,J_3)$. And we already know that these operators, constructed from $\vec r$ and $\vec p$, satisfy
+      $$[J_a,J_b] = i\varepsilon_{abc}\,J_c = -i\varepsilon_{acb}\,J_c = \big[J^{\text{adj}}_a\big]_{cb}\,J_c .$$
+      From before, we also know $[J_a,r_b] = \big[J^{\text{adj}}_a\big]_{cb}\,r_c$, so $J_b$ and $r_b$ share the same structure. We also know that to put $r_1,r_2,r_3$ in the spin-1 form we take
+      $$\rt{0}=r_3,\qquad \rt{+1}=-\tfrac{1}{\sqrt2}\,(r_1+ir_2),\qquad \rt{-1}=\tfrac{1}{\sqrt2}\,(r_1-ir_2).$$
+      So to put $J_1,J_2,J_3$ in the appropriate spin-1 form we take
+      $$\Jt{0}=J_3,\qquad \Jt{+1} = -\tfrac{1}{\sqrt2}\,(J_1+iJ_2) = -\tfrac{1}{\sqrt2}\,J_+,\qquad \Jt{-1} = \tfrac{1}{\sqrt2}\,(J_1-iJ_2) = \tfrac{1}{\sqrt2}\,J_- .$$
+    </p>
+    <p>
+      <b>So far.</b> Using $J_1 = r_2p_3-r_3p_2$, $J_2 = r_3p_1-r_1p_3$ and $J_3 = r_1p_2-r_2p_1$:
+      $$\begin{aligned}T^0_0 &\propto \rdp = r_1p_1+r_2p_2+r_3p_3,\\
+T^1_0 &\propto J_3 = r_1p_2-r_2p_1,\\
+T^1_{+1} &\propto \Jt{+1} = -\tfrac{1}{\sqrt2}\,(J_1+iJ_2) = -\tfrac{1}{\sqrt2}\Big((r_2p_3-r_3p_2)+i(r_3p_1-r_1p_3)\Big)\\
+&\phantom{\propto \Jt{+1}} = -\tfrac{1}{\sqrt2}\,\big(r_2p_3-r_3p_2+ir_3p_1-ir_1p_3\big),\\
+T^1_{-1} &\propto \Jt{-1} = \tfrac{1}{\sqrt2}\,(J_1-iJ_2) = \tfrac{1}{\sqrt2}\,\big(r_2p_3-r_3p_2-ir_3p_1+ir_1p_3\big).\end{aligned}$$
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">The spin-2 piece</h3>
+
+    <p>
+      In the spherical basis we have
+      $$\big[J_3,\rt{l_1}\big] = l_1\,\rt{l_1}\qquad\text{and}\qquad \big[J_3,\pt{l_2}\big] = l_2\,\pt{l_2}.$$
+      Hence, under commutation with $J_3$, the operator $\rt{l_1}\pt{l_2}$ behaves as
+      $$\begin{aligned}\big[J_3,\,\rt{l_1}\pt{l_2}\big] &= \big[J_3,\rt{l_1}\big]\,\pt{l_2} + \rt{l_1}\,\big[J_3,\pt{l_2}\big]\\
+&= l_1\,\rt{l_1}\pt{l_2} + \rt{l_1}\,\big(l_2\,\pt{l_2}\big)\\
+&= (l_1+l_2)\,\rt{l_1}\pt{l_2}.\end{aligned}$$
+      If $l_1=l_2=+1$ then $\big[J_3,\rt{+1}\pt{+1}\big] = 2\,\rt{+1}\pt{+1}$, and this is the only element of the tensor operator with a $J_3$ value of 2. So if there really is a spin-2 piece, this must be its top state.
+    </p>
+    <p>
+      Let us suppose it is the $\ket{2,2}$ state. Then commuting it with $J_-$ should produce 4 new operators, $\ket{2,1},\dots,\ket{2,-2}$. Their coefficient vectors in the $\rt{l_1}\pt{l_2}$ basis are orthonormal to one another and to those of the spin-0 and spin-1 pieces. This is orthonormality in the symbolic sense, via the correspondence $\rt{l_1}\pt{l_2}\leftrightarrow\ket{1,l_1}\ket{1,l_2}$.
+    </p>
+    <p>
+      For convenience we label operators using angular-momentum notation, so our hypothesis is
+      $$\boxed{\;\ket{2,2}\overset{?}{\simeq}\rt{+1}\pt{+1}\;}$$
+    </p>
+    <p>
+      <b>Lower $\ket{2,2}$.</b> Using $C^-(2,2)=\sqrt{4\times1}=2$ and $C^-(1,1)=\sqrt{2\times1}=\sqrt2$:
+      $$\begin{aligned}\underbrace{J_-\ket{2,2}}_{C^-(2,2)\ket{2,1}\,=\,2\ket{2,1}}
+\;\simeq\; \big[J_-,\,\rt{+1}\pt{+1}\big]
+&= \big[J_-,\rt{+1}\big]\,\pt{+1} + \rt{+1}\,\big[J_-,\pt{+1}\big]\\
+&= C^-(1,1)\,\rt{0}\pt{+1} + \rt{+1}\,\big(C^-(1,1)\,\pt{0}\big)\\
+&= \sqrt2\,\big(\rt{0}\pt{+1} + \rt{+1}\pt{0}\big).\end{aligned}$$
+      So
+      $$\boxed{\;\ket{2,1}\simeq\tfrac{1}{\sqrt2}\,\big(\rt{0}\pt{+1}+\rt{+1}\pt{0}\big)\;}$$
+    </p>
+    <p>
+      <b>Lower $\ket{2,1}$.</b> Using $C^-(2,1)=\sqrt{(2+1)(2-1+1)}=\sqrt6$:
+      $$\begin{aligned}\underbrace{J_-\ket{2,1}}_{\sqrt6\,\ket{2,0}}
+\;\simeq\; \Big[J_-,\,\tfrac{1}{\sqrt2}\big(\rt{0}\pt{+1}+\rt{+1}\pt{0}\big)\Big]
+&= \tfrac{1}{\sqrt2}\Big(\big[J_-,\rt{0}\pt{+1}\big] + \big[J_-,\rt{+1}\pt{0}\big]\Big)\\
+&= \tfrac{1}{\sqrt2}\Big(\underbrace{\big[J_-,\rt{0}\big]}_{\sqrt2\,\rt{-1}}\pt{+1} + \rt{0}\underbrace{\big[J_-,\pt{+1}\big]}_{\sqrt2\,\pt{0}}\\
+&\hspace{3.2em} + \underbrace{\big[J_-,\rt{+1}\big]}_{\sqrt2\,\rt{0}}\pt{0} + \rt{+1}\underbrace{\big[J_-,\pt{0}\big]}_{\sqrt2\,\pt{-1}}\Big)\\
+&= \rt{-1}\pt{+1} + 2\,\rt{0}\pt{0} + \rt{+1}\pt{-1}.\end{aligned}$$
+      So
+      $$\boxed{\;\ket{2,0}\simeq\tfrac{1}{\sqrt6}\,\big(\rt{-1}\pt{+1}+\rt{+1}\pt{-1}+2\,\rt{0}\pt{0}\big)\;}$$
+    </p>
+    <p>
+      <b>Lower $\ket{2,0}$ again.</b> Using $C^-(2,0)=\sqrt{(2+0)(2-0+1)}=\sqrt6$:
+      $$\begin{aligned}\underbrace{J_-\ket{2,0}}_{\sqrt6\,\ket{2,-1}}
+&\simeq \Big[J_-,\,\tfrac{1}{\sqrt6}\big(\rt{+1}\pt{-1}+\rt{-1}\pt{+1}+2\,\rt{0}\pt{0}\big)\Big]\\
+&= \tfrac{1}{\sqrt6}\Big(\big[J_-,\rt{+1}\pt{-1}\big] + \big[J_-,\rt{-1}\pt{+1}\big] + 2\,\big[J_-,\rt{0}\pt{0}\big]\Big)\\
+&= \tfrac{1}{\sqrt6}\Big(\underbrace{\big[J_-,\rt{+1}\big]}_{\sqrt2\,\rt{0}}\pt{-1} + \rt{+1}\underbrace{\big[J_-,\pt{-1}\big]}_{0}
+ + \underbrace{\big[J_-,\rt{-1}\big]}_{0}\pt{+1} + \rt{-1}\underbrace{\big[J_-,\pt{+1}\big]}_{\sqrt2\,\pt{0}}\\
+&\hspace{3.2em} + 2\,\underbrace{\big[J_-,\rt{0}\big]}_{\sqrt2\,\rt{-1}}\pt{0} + 2\,\rt{0}\underbrace{\big[J_-,\pt{0}\big]}_{\sqrt2\,\pt{-1}}\Big)\\
+&= \tfrac{1}{\sqrt6}\Big(\sqrt2\,\rt{0}\pt{-1} + \sqrt2\,\rt{-1}\pt{0} + 2\sqrt2\,\rt{-1}\pt{0} + 2\sqrt2\,\rt{0}\pt{-1}\Big)\\
+&= \sqrt3\,\big(\rt{0}\pt{-1} + \rt{-1}\pt{0}\big).\end{aligned}$$
+      So
+      $$\boxed{\;\ket{2,-1}\simeq\tfrac{1}{\sqrt2}\,\big(\rt{0}\pt{-1}+\rt{-1}\pt{0}\big)\;}$$
+    </p>
+    <p>
+      <b>Finally, lower $\ket{2,-1}$.</b> Using $C^-(2,-1)=\sqrt{(2-1)(2+1+1)}=2$:
+      $$\begin{aligned}\underbrace{J_-\ket{2,-1}}_{2\,\ket{2,-2}}
+\;\simeq\; \Big[J_-,\,\tfrac{1}{\sqrt2}\big(\rt{0}\pt{-1}+\rt{-1}\pt{0}\big)\Big]
+&= \tfrac{1}{\sqrt2}\Big(\underbrace{\big[J_-,\rt{0}\big]}_{\sqrt2\,\rt{-1}}\pt{-1} + \rt{0}\underbrace{\big[J_-,\pt{-1}\big]}_{0}\\
+&\hspace{3.2em} + \underbrace{\big[J_-,\rt{-1}\big]}_{0}\pt{0} + \rt{-1}\underbrace{\big[J_-,\pt{0}\big]}_{\sqrt2\,\pt{-1}}\Big)\\
+&= \tfrac{1}{\sqrt2}\Big(2\sqrt2\,\rt{-1}\pt{-1}\Big) = 2\,\rt{-1}\pt{-1}.\end{aligned}$$
+      So
+      $$\boxed{\;\ket{2,-2}\simeq\rt{-1}\pt{-1}\;}$$
+    </p>
+    <div class="callout">
+      <span class="label">The hypothesis holds</span>
+    <p>
+      $\rt{+1}\pt{+1}$ is a genuine top state: $\big[J_+,\rt{+1}\big]=\big[J_+,\pt{+1}\big]=0$, so $\big[J_+,\rt{+1}\pt{+1}\big]=0$ by the Leibniz rule. Likewise $\big[J_-,\rt{-1}\pt{-1}\big]=0$, so the ladder closes after five states. Together with the one spin-0 and three spin-1 operators, this accounts for all $1+3+5=9$ of the $r_ap_b$.
+    </p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Summary</h3>
+
+    <p>
+      The operators $r_ap_b$ may be reorganised as
+      $$\begin{array}{ccccc}
+ & & & & \ket{2,2}\simeq\rt{+1}\pt{+1}\\
+ & & \ket{1,1}\simeq\Jt{+1}=-\tfrac{1}{\sqrt2}J_+ & & \ket{2,1}\simeq\tfrac{1}{\sqrt2}\big(\rt{+1}\pt{0}+\rt{0}\pt{+1}\big)\\
+\ket{0,0}\simeq\rdp & \oplus & \ket{1,0}\simeq J_3 & \oplus & \ket{2,0}\simeq\tfrac{1}{\sqrt6}\big(\rt{+1}\pt{-1}+\rt{-1}\pt{+1}+2\,\rt{0}\pt{0}\big)\\
+ & & \ket{1,-1}\simeq\Jt{-1}=\tfrac{1}{\sqrt2}J_- & & \ket{2,-1}\simeq\tfrac{1}{\sqrt2}\big(\rt{0}\pt{-1}+\rt{-1}\pt{0}\big)\\
+ & & & & \ket{2,-2}\simeq\rt{-1}\pt{-1}
+\end{array}$$
+      where $\rt{0}=r_3$ and $\rt{\pm1}=\mp\tfrac{1}{\sqrt2}\,(r_1\pm ir_2)$, and likewise for $\vec p$.
+    </p>
+    <p>
+      The overall normalisation of each block is free, since any multiple of a block transforms the same way. For comparison, the Clebsch&ndash;Gordan combinations $(\tilde r\otimes\tilde p)_{J,M}=\sum_{l}\langle J,M\vert 1,l;\,1,M-l\rangle\,\rt{l}\,\pt{M-l}$ give exactly the spin-2 entries above, together with
+      $$(\tilde r\otimes\tilde p)_{0,0} = -\tfrac{1}{\sqrt3}\,\rdp,\qquad (\tilde r\otimes\tilde p)_{1,M} = \tfrac{i}{\sqrt2}\,\Jt{M}.$$
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

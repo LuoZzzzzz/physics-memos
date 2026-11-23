@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Full Construction on a Three-Spin Hilbert Space</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .toc {
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+    }
+
+    .toc summary {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      outline: none;
+    }
+
+    .toc ul {
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .toc li {
+      margin: -0.2rem 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 1rem;
+    }
+
+    /* ---- Callout boxes (definitions / key results / remarks) ------- */
+    .callout {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .callout .label {
+      display: block;
+      font-family: "Poppins", -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .callout .label mjx-container {
+      text-transform: none;
+      letter-spacing: normal;
+      margin: 0 0.15em;
+    }
+
+    .callout p {
+      margin: 0.4em 0;
+    }
+
+    .callout ol, .callout ul {
+      margin: 0.4em 0;
+      padding-left: 1.4em;
+    }
+
+    mjx-container[display="true"] {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+    }
+  </style>
+
+  <!-- MathJax LaTeX Support -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'all',
+        macros: {
+          ket: ["\\lvert #1 \\rangle", 1],
+          bra: ["\\langle #1 \\rvert", 1],
+          h: "\\tfrac12",
+          mh: "{-}\\tfrac12",
+          tth: "\\tfrac32",
+          mtth: "{-}\\tfrac32",
+          fh: "\\tfrac52",
+          U: "{\\uparrow}",
+          D: "{\\downarrow}",
+          ka: ["\\lvert \\tfrac12,#1,\\alpha{=}#2\\rangle", 2],
+          kb: ["\\lvert \\tfrac12,#1,\\beta{=}#2\\rangle", 2],
+          tk: ["\\lvert \\widetilde{#1,#2} \\rangle^{(2)}", 2],
+          tq: ["\\lvert \\widetilde{#1,#2} \\rangle", 2],
+          Sl: ["S^1_{#1}", 1],
+          CG: ["\\langle #1 \\,\\vert\\, #2 \\rangle", 2]
+        }
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <header>
+    Physics Memos
+  </header>
+
+  <main>
+    <nav class="page-nav">
+      <a href="../index.html" class="btn">Index</a>
+      <span class="prev-next">
+        <a href="04_wignereckart.html" class="btn" title="Tensor Operators and the Wigner&ndash;Eckart Theorem">Previous</a>
+        <span class="sep">|</span>
+        <a href="06_ex2_reducible_tensor_operators.html" class="btn" title="Wigner&ndash;Eckart Examples: Reducible Tensor Operators">Next</a>
+      </span>
+    </nav>
+
+    <h1>Full Construction on a Three-Spin Hilbert Space</h1>
+    <p>
+      <i>10 October 2026</i><br>
+      <i>Digitised from handwritten notes.</i>
+    </p>
+
+    <details class="toc" open>
+      <summary>Contents</summary>
+      <ul id="toc-list"></ul>
+    </details>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Set-up: three spin-$\tfrac12$ particles</h3>
+
+    <p>
+      The space of three spin-$\h$ particles decomposes as
+      $$\begin{aligned}\mathcal H_1\otimes\mathcal H_2\otimes\mathcal H_3
+&= \h\otimes\h\otimes\h = \big(\h\otimes\h\big)\otimes\h \\
+&= \big(\underbrace{0\oplus1}_{j_{12}=0,\,1}\big)\otimes\h
+ = \big(0\otimes\h\big)\oplus\big(1\otimes\h\big) \\
+&= \underbrace{\h}_{\substack{j_{12}=0\\ \text{label }\alpha=1}}
+ \;\oplus\; \underbrace{\h}_{\substack{j_{12}=1\\ \alpha=2}}
+ \;\oplus\; \underbrace{\tth}_{j_{12}=1}.\end{aligned}$$
+      The eight states $\ka{m}{1}$, $\ka{m}{2}$, $\ket{\tth,m}$ form the <i>original</i> basis. Spin $\h$ occurs twice, and $\alpha$ tells the two copies apart.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">A spin-1 tensor operator</h3>
+
+    <p>
+      The spin operators on the full space are
+      $$J_i = S_i^{(1)} + S_i^{(2)} + S_i^{(3)},$$
+      where $S_i^{(k)}$ acts on the $k$-th factor and as the identity on the others. Take the operator $O_i$ to be $S_i^{(2)}$. It is a tensor operator because
+      $$\big[J_a, S_b^{(2)}\big] = i\varepsilon_{abc}\,S_c^{(2)} = \big[J_a^{\text{adj},\,s=1}\big]_{cb}\,S_c^{(2)},
+\qquad \big[J_a^{\text{adj}}\big]_{cb} = -i\varepsilon_{acb}.$$
+      This means that
+      $$\Big\{\, \Sl{\pm1} = \mp\tfrac{1}{\sqrt2}\big(S_1^{(2)}\pm iS_2^{(2)}\big),\quad \Sl{0}=S_3^{(2)} \Big\}$$
+      form a spin-1 tensor operator in this space.
+    </p>
+    <div class="callout">
+      <span class="label">Conventions</span>
+    <ul>
+      <li>
+      $J_\pm = J_1\pm iJ_2$, so $J_\pm\ket{j,m} = C^\pm(j,m)\,\ket{j,m\pm1}$ with $C^\pm(j,m) = \sqrt{(j\mp m)(j\pm m+1)}$.
+      </li>
+      <li>
+      For the tensor operator, $\big[J_\pm,\Sl{l}\big] = C^\pm(1,l)\,\Sl{l\pm1}$.
+      </li>
+      <li>
+      Single-particle ladder operators carry the same normalisation as $J_\pm$: $S^{(2)}_\pm = S^{(2)}_1\pm iS^{(2)}_2$, with $S_+\ket{\D}=\ket{\U}$ and $S_-\ket{\U}=\ket{\D}$. Hence
+      $$\Sl{\pm1} = \mp\tfrac{1}{\sqrt2}\,S^{(2)}_\pm ,$$
+      an additional signed factor of $\tfrac1{\sqrt2}$ compared with $J_\pm$.
+      </li>
+      <li>
+      Clebsch&ndash;Gordan coefficients are written $\CG{J,M}{s,l;\,j,m}$, with the operator's spin $s$ first, in the Condon&ndash;Shortley convention.
+      </li>
+    </ul>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="two-routes">General construction: two routes</h3>
+
+    <p>
+      Take one of the irreps: $(\h,\alpha{=}1)$, $(\h,\alpha{=}2)$, or $(\tth)$.
+    </p>
+    <p>
+      <b>Route 1: product states.</b> Apply $\Sl{\pm1,0}$ to all states of the irrep. For example, taking the $(\h,\alpha{=}2)$ irrep generates 6 states:
+      $$\begin{gathered}\Sl{+1}\ka{\h}{2},\quad \Sl{0}\ka{\h}{2},\quad \Sl{-1}\ka{\h}{2},\\
+\Sl{+1}\ka{\mh}{2},\quad \Sl{0}\ka{\mh}{2},\quad \Sl{-1}\ka{\mh}{2}.\end{gathered}$$
+      These are the &ldquo;product&rdquo; states.
+    </p>
+    <div class="callout">
+      <span class="label">What the &ldquo;isomorphism&rdquo; carries over</span>
+    <p>
+      $\Sl{l}\ket{\h,m}$ is &ldquo;isomorphic&rdquo; to $\ket{1,l}\ket{\h,m}$: the correspondence $\ket{1,l}\ket{\h,m}\mapsto\Sl{l}\ka{m}{2}$ is linear and commutes with the $J_a$ (that is the content of the tensor-operator commutator). Every linear relation among the $\ket{1,l}\ket{\h,m}$ therefore carries over to the product states, including every Clebsch&ndash;Gordan expansion and every result of acting with $J_\pm$.
+    </p>
+    <p>
+      Inner products do <i>not</i> carry over. The $\ket{1,l}\ket{\h,m}$ are orthonormal, so the 6 product states are orthonormal only <i>symbolically</i>, as abstract labels. As vectors in $\mathcal H_1\otimes\mathcal H_2\otimes\mathcal H_3$ they need not be normalised or orthogonal, and some may even vanish. The only orthogonality guaranteed in the actual space comes from $J_3$ and $J^2$: states with different eigenvalues are orthogonal.
+    </p>
+    </div>
+    <p>
+      <b>Route 2: highest-weight construction.</b> Here we use $1\otimes\h=\h\oplus\tth$, read as (tensor operator)&thinsp;$\otimes$&thinsp;(irrep).
+    </p>
+    <ul>
+      <li>
+      Start with
+      $$\tk{\tth}{\tth} = \Sl{+1}\ka{\h}{2}.$$
+      </li>
+      <li>
+      Lower both sides.
+      </li>
+    </ul>
+    <p>
+      LHS: $J_-\tk{\tth}{\tth} = C^-(\tth,\tth)\,\tk{\tth}{\h} = \sqrt3\,\tk{\tth}{\h}$.
+    </p>
+    <p>
+      RHS: $J_-\big(\Sl{+1}\ka{\h}{2}\big)$. Again there are two routes:
+    </p>
+    <ol type="a">
+      <li>
+      work it out explicitly using the commutator;
+      </li>
+      <li>
+      understand that (a) implies $\Sl{+1}\ka{\h}{2}\simeq\ket{1,1}\ket{\h,\h}$, and so just use angular-momentum addition.
+      </li>
+    </ol>
+    <p>
+      Let us use (a):
+      $$\begin{aligned}J_-\Sl{+1}\ka{\h}{2} &= \big[J_-,\Sl{+1}\big]\ka{\h}{2} + \Sl{+1}J_-\ka{\h}{2}\\
+&= C^-(1,1)\,\Sl{0}\ka{\h}{2} + \Sl{+1}\,C^-(\h,\h)\ka{\mh}{2}\\
+&= \sqrt2\,\Sl{0}\ka{\h}{2} + \Sl{+1}\ka{\mh}{2}.\end{aligned}$$
+      So
+      $$\tk{\tth}{\h} = \sqrt{\tfrac23}\,\Sl{0}\ka{\h}{2} + \tfrac{1}{\sqrt3}\,\Sl{+1}\ka{\mh}{2}.$$
+    </p>
+    <p>
+      Now we want to move &ldquo;laterally&rdquo; to the $\tk{\h}{\h}$ state. Both $\tk{\tth}{\h}$ and $\tk{\h}{\h}$ must be linear combinations of $\Sl{+1}\ka{\mh}{2}$ and $\Sl{0}\ka{\h}{2}$, the only product states with $M=\h$. Requiring $\tk{\h}{\h}$ to be symbolically orthogonal to $\tk{\tth}{\h}$, with the Condon&ndash;Shortley sign (the coefficient of the $l=+1$ term positive), gives
+      $$\tk{\h}{\h} = -\tfrac{1}{\sqrt3}\,\Sl{0}\ka{\h}{2} + \sqrt{\tfrac23}\,\Sl{+1}\ka{\mh}{2}.$$
+      We can then continue lowering each ladder to find all the states.
+    </p>
+    <p>
+      <b>Comparing the routes.</b> Route 1 produces
+      $$\begin{array}{c|ccc}
+ & \Sl{-1} & \Sl{0} & \Sl{+1}\\ \hline
+\ka{\h}{2} & \Sl{-1}\ka{\h}{2} & \Sl{0}\ka{\h}{2} & \Sl{+1}\ka{\h}{2}\\
+\ka{\mh}{2} & \Sl{-1}\ka{\mh}{2} & \Sl{0}\ka{\mh}{2} & \Sl{+1}\ka{\mh}{2}
+\end{array}$$
+      while Route 2 produces
+      $$\begin{array}{c}
+\tk{\h}{\h}\\[6pt] \tk{\h}{\mh}
+\end{array}
+\;\oplus\;
+\begin{array}{c}
+\tk{\tth}{\tth}\\[6pt] \tk{\tth}{\h}\\[6pt] \tk{\tth}{\mh}\\[6pt] \tk{\tth}{\mtth}
+\end{array}$$
+      The two sets are related by the Clebsch&ndash;Gordan coefficients, just as the states $\ket{J,M;\,s,j}$ and $\ket{s,l}\ket{j,m}$ are related.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Where these states live</h3>
+
+    <p>
+      Whichever route we take, the 6 states live in $\mathcal H_1\otimes\mathcal H_2\otimes\mathcal H_3$. They can therefore be expressed in terms of the single-spin states $\{\ket{\U\U\U},\ket{\U\U\D},\dots\}$, or in terms of the states $\{\ket{\tth,\h},\ka{\h}{1},\dots\}$ of the <i>original</i> decomposition $\h\oplus\h\oplus\tth$.
+    </p>
+    <p>
+      For example, the $\tk{\h}{\h}$ state must be made up of the $\ka{\h}{1}$ and $\ka{\h}{2}$ states, because these transform the same way under the $J_a$. So
+      $$\tk{\h}{\h} = k_{\alpha=2,\beta=1}\,\kb{\h}{1} + k_{\alpha=2,\beta=2}\,\kb{\h}{2},$$
+      where $\beta$ labels the copy of spin $\h$ in the original basis that the state lands in. To find $\tk{\h}{\h}$ explicitly and evaluate the action of the $\Sl{l}$ (that is, to find the $k_{\alpha\beta}$), we need to expand on the $\ket{\U\D\U}$ etc. states. We do this explicitly in the <a href="#hwc">highest-weight construction</a> below.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="structure">Further notes on the structure</h3>
+
+    <p>
+      $\Sl{\pm1,0}$ acting on
+    </p>
+    <ul>
+      <li>
+      $(\h,\alpha{=}1)$ produces 6 states,
+      </li>
+      <li>
+      $(\h,\alpha{=}2)$ produces 6 states,
+      </li>
+      <li>
+      $(\tth)$ produces 12 states.
+      </li>
+    </ul>
+    <p>
+      Each set of 6, 6 and 12 states is orthonormal only symbolically. In the actual space none of the three sets is orthonormal in general, and states from different sets (for instance the first 6 and the second 6) are in general not orthogonal to one another either. What does hold: within one set, the Route-2 states with different $(J,M)$ are orthogonal or zero, since they have different eigenvalues of the Hermitian operators $J^2$ and $J_3$.
+    </p>
+    <div class="callout">
+      <span class="label">Twelve states in an eight-dimensional space</span>
+    <p>
+      $\Sl{l}$ acting on the $(\tth)$ irrep gives 12 states, but the original space is only 8-dimensional!
+    </p>
+    </div>
+    <div class="callout">
+      <span class="label">Resolution</span>
+    <p>
+      The 12 states are orthonormal only symbolically, so there is no contradiction: 12 vectors in an 8-dimensional space simply have to be linearly dependent. In Route 2 the 12 states organise as $1\otimes\tth=\h\oplus\tth\oplus\fh$, that is, $2+4+6$ states. The entire $\widetilde{J}=\fh$ tower (6 of the 12 states) is zero, because the original space contains no spin $\fh$ for it to land in (shown <a href="#five-halves-zero">below</a>). The remaining $\widetilde{J}=\tth$ and $\widetilde{J}=\h$ towers are nonzero.
+    </p>
+    <p>
+      In Route 1 only two of the product states vanish, $\Sl{+1}\ket{\tth,\tth}$ and $\Sl{-1}\ket{\tth,\mtth}$, but the 12 product states span only a 6-dimensional subspace.
+    </p>
+    </div>
+    <p>
+      Now we work through some calculations explicitly.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="five-halves-zero">The $\lvert\widetilde{5/2,m}\rangle$ states are zero</h3>
+
+    <p>
+      Start from the top state:
+      $$\tq{\fh}{\fh} = \Sl{+1}\ket{\tth,\tth}.$$
+      We know that $\ket{\tth,\tth}=\ket{\U\U\U}$ and that $\Sl{+1} = -\tfrac{1}{\sqrt2}S^{(2)}_+ = -\tfrac{1}{\sqrt2}\big(S^{(2)}_1+iS^{(2)}_2\big)$. So
+      $$\Sl{+1}\ket{\tth,\tth} = -\tfrac{1}{\sqrt2}\,S^{(2)}_+\ket{\U\U\U} = 0 .$$
+      The top state $\tq{\fh}{\fh}$ is therefore already $0$. Any lower state, such as $\tq{\fh}{\tth}$, is obtained by acting on it with $J_-$, which means they are all $0$ too.
+    </p>
+    <div class="callout">
+      <span class="label">Finding the adjacent tower</span>
+    <p>
+      But if so, how do we find $\tq{\tth}{\tth}$ in the adjacent tower? We cannot &ldquo;Gram&ndash;Schmidt&rdquo; against a vector that is $0$!
+    </p>
+    </div>
+    <div class="callout">
+      <span class="label">Resolution</span>
+    <p>
+      Nothing stops us from applying $J_-$ to $\Sl{+1}\ket{\tth,\tth}$ and working out the result <i>symbolically</i>. Only when we expand the symbolic result in the original basis do we find that it is $0$.
+    </p>
+    <p>
+      Doing this:
+      $$\begin{aligned}\text{LHS} &= J_-\tq{\fh}{\fh} = C^-(\fh,\fh)\,\tq{\fh}{\tth} = \sqrt5\,\tq{\fh}{\tth},\\[4pt]
+\text{RHS} &= J_-\Sl{+1}\ket{\tth,\tth}
+= \big[J_-,\Sl{+1}\big]\ket{\tth,\tth} + \Sl{+1}J_-\ket{\tth,\tth}\\
+&= C^-(1,1)\,\Sl{0}\ket{\tth,\tth} + \Sl{+1}\,C^-(\tth,\tth)\ket{\tth,\h}\\
+&= \sqrt2\,\Sl{0}\ket{\tth,\tth} + \sqrt3\,\Sl{+1}\ket{\tth,\h}.\end{aligned}$$
+      So
+      $$\tq{\fh}{\tth} = \sqrt{\tfrac25}\,\Sl{0}\ket{\tth,\tth} + \sqrt{\tfrac35}\,\Sl{+1}\ket{\tth,\h} \;\;(=0).$$
+      $\tq{\tth}{\tth}$, being symbolically orthogonal to $\tq{\fh}{\tth}$, must then be (with the Condon&ndash;Shortley sign)
+      $$\tq{\tth}{\tth} = \sqrt{\tfrac25}\,\Sl{+1}\ket{\tth,\h} - \sqrt{\tfrac35}\,\Sl{0}\ket{\tth,\tth},$$
+      which, although only &ldquo;symbolically orthonormal&rdquo;, is not $0$. Explicitly, $\Sl{+1}\ket{\tth,\h} = -\tfrac{1}{\sqrt6}\ket{\U\U\U}$ and $\Sl{0}\ket{\tth,\tth}=\h\ket{\U\U\U}$, so $\tq{\tth}{\tth} = -\tfrac{\sqrt{15}}{6}\ket{\tth,\tth}$.
+    </p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="hwc">Highest-weight construction for the $(\tfrac12,\alpha{=}2)$ irrep</h3>
+
+    <p>
+      We now apply the highest-weight construction to the $(\h,\alpha{=}2)$ irrep. The steps are:
+    </p>
+    <ol>
+      <li>
+      Find the states $\ka{\pm\h}{2}$ (and the rest of the original basis) in the $\ket{\U\D\U}$ basis.
+      </li>
+      <li>
+      Express the $\tk{\h}{m}$ and $\tk{\tth}{m}$ states in terms of the $\Sl{l}\ka{\pm\h}{2}$ states.
+      </li>
+      <li>
+      Plug the results of step 1 into the results of step 2.
+      </li>
+      <li>
+      Project onto the original irrep states to find the <i>reduced matrix elements</i>.
+      </li>
+    </ol>
+    <p>
+      The reason for first converting to the $\ket{\U\D\U}$ basis is that the operators
+      $$\Sl{\pm1,0} = \Big\{\mp\tfrac{1}{\sqrt2}S^{(2)}_\pm,\; S^{(2)}_3\Big\}$$
+      are easiest to evaluate in this basis.
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Step 1: the original basis in terms of single spins</h3>
+
+    <p>
+      Write $\ket{j_{12},m_{12}}$ for the states of particles 1 and 2, and $\ket{\h,m}$ for particle 3. Start from
+      $$\ket{\tth,\tth} = \underbrace{\ket{1,1}}_{(1)\text{ and }(2)}\underbrace{\ket{\h,\h}}_{(3)}$$
+      and lower both sides.
+    </p>
+    <p>
+      LHS: $J_-\ket{\tth,\tth} = C^-(\tth,\tth)\ket{\tth,\h} = \sqrt3\,\ket{\tth,\h}$.
+    </p>
+    <p>
+      RHS:
+      $$\begin{aligned}\big(J_-\ket{1,1}\big)\ket{\h,\h} + \ket{1,1}\big(J_-\ket{\h,\h}\big)
+&= C^-(1,1)\ket{1,0}\ket{\h,\h} + C^-(\h,\h)\ket{1,1}\ket{\h,\mh}\\
+&= \sqrt2\,\ket{1,0}\ket{\h,\h} + \ket{1,1}\ket{\h,\mh}.\end{aligned}$$
+      So
+      $$\ket{\tth,\h} = \sqrt{\tfrac23}\,\ket{1,0}\ket{\h,\h} + \tfrac{1}{\sqrt3}\,\ket{1,1}\ket{\h,\mh}.$$
+    </p>
+    <p>
+      The states $\ka{\h}{1}$, $\ka{\h}{2}$ and $\ket{\tth,\h}$ live in the subspace spanned by
+      $$\big\{\ket{1,1}\ket{\h,\mh},\; \ket{1,0}\ket{\h,\h},\; \ket{0,0}\ket{\h,\h}\big\}.$$
+      So a convenient choice is
+      $$\begin{aligned}\ka{\h}{1} &= \ket{0,0}\ket{\h,\h},\\
+\ka{\h}{2} &= \sqrt{\tfrac23}\,\ket{1,1}\ket{\h,\mh} - \tfrac{1}{\sqrt3}\,\ket{1,0}\ket{\h,\h}.\end{aligned}$$
+    </p>
+    <p>
+      <b>The remaining $\ket{\tth,m}$ states.</b> We need
+      $$C^-(\tth,\h)=\sqrt{\big(\tth+\h\big)\big(\tth-\h+1\big)}=\sqrt{2\times2}=2,\qquad C^-(1,0)=\sqrt{(1+0)(1-0+1)}=\sqrt2 .$$
+      Then
+      $$\begin{aligned}\underbrace{J_-\ket{\tth,\h}}_{=\,2\ket{\tth,\mh}}
+&= \sqrt{\tfrac23}\Big(\big(J_-\ket{1,0}\big)\ket{\h,\h} + \ket{1,0}\big(J_-\ket{\h,\h}\big)\Big)
+ + \tfrac{1}{\sqrt3}\Big(\big(J_-\ket{1,1}\big)\ket{\h,\mh} + \ket{1,1}\underbrace{\big(J_-\ket{\h,\mh}\big)}_{=0}\Big)\\
+&= \sqrt{\tfrac23}\Big(C^-(1,0)\ket{1,-1}\ket{\h,\h} + C^-(\h,\h)\ket{1,0}\ket{\h,\mh}\Big) + \tfrac{1}{\sqrt3}\,C^-(1,1)\ket{1,0}\ket{\h,\mh}\\
+&= \sqrt{\tfrac23}\Big(\sqrt2\,\ket{1,-1}\ket{\h,\h} + \ket{1,0}\ket{\h,\mh} + \ket{1,0}\ket{\h,\mh}\Big)\\
+&= 2\Big(\tfrac{1}{\sqrt3}\,\ket{1,-1}\ket{\h,\h} + \sqrt{\tfrac23}\,\ket{1,0}\ket{\h,\mh}\Big).\end{aligned}$$
+      So
+      $$\ket{\tth,\mh} = \sqrt{\tfrac23}\,\ket{1,0}\ket{\h,\mh} + \tfrac{1}{\sqrt3}\,\ket{1,-1}\ket{\h,\h},$$
+      and of course $\ket{\tth,\mtth} = \ket{1,-1}\ket{\h,\mh}$.
+    </p>
+    <p>
+      <b>The $m=-\tfrac12$ states of the two spin-$\tfrac12$ irreps.</b> For $\alpha=1$, obviously $\ka{\mh}{1} = \ket{0,0}\ket{\h,\mh}$. For $\alpha=2$, lower
+      $$\ka{\h}{2} = \sqrt{\tfrac23}\,\ket{1,1}\ket{\h,\mh} - \tfrac{1}{\sqrt3}\,\ket{1,0}\ket{\h,\h}.$$
+      LHS: $J_-\ka{\h}{2} = C^-(\h,\h)\,\ka{\mh}{2} = \ka{\mh}{2}$.
+    </p>
+    <p>
+      RHS:
+      $$\begin{aligned}&\sqrt{\tfrac23}\Big(\big(J_-\ket{1,1}\big)\ket{\h,\mh} + \ket{1,1}\underbrace{\big(J_-\ket{\h,\mh}\big)}_{=0}\Big)
+ - \tfrac{1}{\sqrt3}\Big(\big(J_-\ket{1,0}\big)\ket{\h,\h} + \ket{1,0}\big(J_-\ket{\h,\h}\big)\Big)\\
+&\quad= \sqrt{\tfrac23}\Big(\sqrt2\,\ket{1,0}\ket{\h,\mh}\Big) - \tfrac{1}{\sqrt3}\Big(\sqrt2\,\ket{1,-1}\ket{\h,\h} + \ket{1,0}\ket{\h,\mh}\Big)\\
+&\quad= \tfrac{1}{\sqrt3}\,\ket{1,0}\ket{\h,\mh} - \sqrt{\tfrac23}\,\ket{1,-1}\ket{\h,\h}.\end{aligned}$$
+    </p>
+    <p>
+      <b>Tabulating in the $\ket{\U\D\U}$ basis.</b> Using $\ket{1,1}=\ket{\U\U}$, $\ket{1,0}=\tfrac{1}{\sqrt2}\big(\ket{\U\D}+\ket{\D\U}\big)$, $\ket{1,-1}=\ket{\D\D}$, $\ket{0,0}=\tfrac{1}{\sqrt2}\big(\ket{\U\D}-\ket{\D\U}\big)$ for particles 1 and 2:
+    </p>
+    <p>
+      <i>$(\h,\alpha{=}1)$ irrep:</i>
+      $$\begin{aligned}\ka{\h}{1} &= \ket{0,0}\ket{\h,\h} = \tfrac{1}{\sqrt2}\big(\ket{\U\D}-\ket{\D\U}\big)\otimes\ket{\U} = \tfrac{1}{\sqrt2}\big(\ket{\U\D\U}-\ket{\D\U\U}\big),\\
+\ka{\mh}{1} &= \ket{0,0}\ket{\h,\mh} = \tfrac{1}{\sqrt2}\big(\ket{\U\D\D}-\ket{\D\U\D}\big).\end{aligned}$$
+      <i>$(\h,\alpha{=}2)$ irrep:</i>
+      $$\begin{aligned}\ka{\h}{2} &= \sqrt{\tfrac23}\,\ket{\U\U}\otimes\ket{\D} - \tfrac{1}{\sqrt3}\cdot\tfrac{1}{\sqrt2}\big(\ket{\U\D}+\ket{\D\U}\big)\otimes\ket{\U}
+ = \tfrac{1}{\sqrt6}\big(-\ket{\U\D\U}-\ket{\D\U\U}+2\ket{\U\U\D}\big),\\
+\ka{\mh}{2} &= \tfrac{1}{\sqrt3}\cdot\tfrac{1}{\sqrt2}\big(\ket{\U\D}+\ket{\D\U}\big)\otimes\ket{\D} - \sqrt{\tfrac23}\,\ket{\D\D}\otimes\ket{\U}
+ = \tfrac{1}{\sqrt6}\big(\ket{\U\D\D}+\ket{\D\U\D}-2\ket{\D\D\U}\big).\end{aligned}$$
+      <i>$(\tth)$ irrep:</i>
+      $$\begin{aligned}\ket{\tth,\tth} &= \ket{\U\U\U},\\
+\ket{\tth,\h} &= \sqrt{\tfrac23}\cdot\tfrac{1}{\sqrt2}\big(\ket{\U\D}+\ket{\D\U}\big)\otimes\ket{\U} + \tfrac{1}{\sqrt3}\,\ket{\U\U}\otimes\ket{\D}
+ = \tfrac{1}{\sqrt3}\big(\ket{\U\D\U}+\ket{\D\U\U}+\ket{\U\U\D}\big),\\
+\ket{\tth,\mh} &= \tfrac{1}{\sqrt3}\big(\ket{\U\D\D}+\ket{\D\U\D}+\ket{\D\D\U}\big),\\
+\ket{\tth,\mtth} &= \ket{\D\D\D}.\end{aligned}$$
+    </p>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Step 2: the tilde states in terms of $S^1_l\lvert\frac12,m,\alpha{=}2\rangle$</h3>
+
+    <p>
+      <b>The $\widetilde{J}=\tfrac32$ tower.</b> The top state is
+      $$\tk{\tth}{\tth} = \Sl{+1}\ka{\h}{2}.$$
+      Lowering (as in the <a href="#two-routes">general construction</a>): the LHS gives $J_-\tk{\tth}{\tth}=\sqrt3\,\tk{\tth}{\h}$ and the RHS gives $\sqrt2\,\Sl{0}\ka{\h}{2} + \Sl{+1}\ka{\mh}{2}$, so
+      $$\tk{\tth}{\h} = \sqrt{\tfrac23}\,\Sl{0}\ka{\h}{2} + \tfrac{1}{\sqrt3}\,\Sl{+1}\ka{\mh}{2}.$$
+      Lower again. LHS: $J_-\tk{\tth}{\h} = C^-(\tth,\h)\,\tk{\tth}{\mh} = 2\,\tk{\tth}{\mh}$, using $C^-(\tth,\h)=\sqrt{2\times2}=2$. RHS:
+      $$\begin{aligned}&\sqrt{\tfrac23}\Big(\big[J_-,\Sl{0}\big]\ka{\h}{2} + \Sl{0}J_-\ka{\h}{2}\Big)\\
+&\qquad + \tfrac{1}{\sqrt3}\Big(\big[J_-,\Sl{+1}\big]\ka{\mh}{2} + \Sl{+1}J_-\ka{\mh}{2}\Big)\\
+&\quad= \sqrt{\tfrac23}\Big(C^-(1,0)\,\Sl{-1}\ka{\h}{2} + C^-(\h,\h)\,\Sl{0}\ka{\mh}{2}\Big)\\
+&\qquad + \tfrac{1}{\sqrt3}\Big(C^-(1,1)\,\Sl{0}\ka{\mh}{2} + 0\Big)\\
+&\quad= \sqrt{\tfrac23}\Big(\sqrt2\,\Sl{-1}\ka{\h}{2} + \Sl{0}\ka{\mh}{2}\Big)\\
+&\qquad + \sqrt{\tfrac23}\,\Sl{0}\ka{\mh}{2}.\end{aligned}$$
+      So
+      $$\tk{\tth}{\mh} = \tfrac{1}{\sqrt3}\,\Sl{-1}\ka{\h}{2} + \sqrt{\tfrac23}\,\Sl{0}\ka{\mh}{2},$$
+      and of course $\tk{\tth}{\mtth} = \Sl{-1}\ka{\mh}{2}$.
+    </p>
+    <p>
+      <b>The $\widetilde{J}=\tfrac12$ tower.</b> From the <a href="#two-routes">general construction</a>,
+      $$\tk{\h}{\h} = -\tfrac{1}{\sqrt3}\,\Sl{0}\ka{\h}{2} + \sqrt{\tfrac23}\,\Sl{+1}\ka{\mh}{2}.$$
+      Lower both sides. LHS: $J_-\tk{\h}{\h} = C^-(\h,\h)\,\tk{\h}{\mh} = \tk{\h}{\mh}$. RHS:
+      $$\begin{aligned}&-\tfrac{1}{\sqrt3}\Big(\big[J_-,\Sl{0}\big]\ka{\h}{2} + \Sl{0}J_-\ka{\h}{2}\Big)\\
+&\qquad + \sqrt{\tfrac23}\Big(\big[J_-,\Sl{+1}\big]\ka{\mh}{2} + \Sl{+1}\underbrace{J_-\ka{\mh}{2}}_{=0}\Big)\\
+&\quad= -\tfrac{1}{\sqrt3}\Big(\sqrt2\,\Sl{-1}\ka{\h}{2} + \Sl{0}\ka{\mh}{2}\Big)\\
+&\qquad + \sqrt{\tfrac23}\Big(\sqrt2\,\Sl{0}\ka{\mh}{2}\Big)\\
+&\quad= -\sqrt{\tfrac23}\,\Sl{-1}\ka{\h}{2} + \tfrac{1}{\sqrt3}\,\Sl{0}\ka{\mh}{2}.\end{aligned}$$
+    </p>
+    <div class="callout">
+      <span class="label">Summary of Step 2</span>
+    <p>
+      $$\begin{aligned}\tk{\tth}{\tth} &= \Sl{+1}\ka{\h}{2}\\
+\tk{\tth}{\h} &= \sqrt{\tfrac23}\,\Sl{0}\ka{\h}{2} + \tfrac{1}{\sqrt3}\,\Sl{+1}\ka{\mh}{2}\\
+\tk{\tth}{\mh} &= \tfrac{1}{\sqrt3}\,\Sl{-1}\ka{\h}{2} + \sqrt{\tfrac23}\,\Sl{0}\ka{\mh}{2}\\
+\tk{\tth}{\mtth} &= \Sl{-1}\ka{\mh}{2}\\[4pt]
+\tk{\h}{\h} &= -\tfrac{1}{\sqrt3}\,\Sl{0}\ka{\h}{2} + \sqrt{\tfrac23}\,\Sl{+1}\ka{\mh}{2}\\
+\tk{\h}{\mh} &= -\sqrt{\tfrac23}\,\Sl{-1}\ka{\h}{2} + \tfrac{1}{\sqrt3}\,\Sl{0}\ka{\mh}{2}\end{aligned}$$
+    </p>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor">Step 3: combining Steps 1 and 2</h3>
+
+    <p>
+      Recall from the conventions that $\Sl{\pm1} = \mp\tfrac{1}{\sqrt2}S^{(2)}_\pm$, so evaluating $\Sl{\pm1}$ on single spins brings in an additional signed factor of $\tfrac{1}{\sqrt2}$ relative to $C^\pm(j,m)$.
+    </p>
+    <p>
+      <b>The $\widetilde{J}=\tfrac32$ tower.</b> Let us calculate $\tk{\tth}{\tth}$ and $\tk{\tth}{\h}$ in the $\ket{\U\D\U}$ basis first; we will notice a pattern.
+      $$\begin{aligned}\tk{\tth}{\tth} &= \Sl{+1}\ka{\h}{2}
+= -\tfrac{1}{\sqrt2}S^{(2)}_+\Big(\tfrac{1}{\sqrt6}\big(-\ket{\U\D\U}\underbrace{-\ket{\D\U\U}+2\ket{\U\U\D}}_{\text{annihilated by }S^{(2)}_+}\big)\Big)\\
+&= \tfrac{1}{\sqrt{12}}\,S^{(2)}_+\ket{\U\D\U} = \tfrac{1}{\sqrt{12}}\,\ket{\U\U\U} = \tfrac{1}{\sqrt{12}}\,\ket{\tth,\tth}.\end{aligned}$$
+      $$\begin{aligned}\tk{\tth}{\h} &= \sqrt{\tfrac23}\,\Sl{0}\ka{\h}{2} + \tfrac{1}{\sqrt3}\,\Sl{+1}\ka{\mh}{2}\\
+&= \sqrt{\tfrac23}\,S^{(2)}_3\Big(\tfrac{1}{\sqrt6}\big(-\ket{\U\D\U}-\ket{\D\U\U}+2\ket{\U\U\D}\big)\Big)\\
+&\qquad + \tfrac{1}{\sqrt3}\Big(-\tfrac{1}{\sqrt2}S^{(2)}_+\Big)\Big(\tfrac{1}{\sqrt6}\big(\ket{\U\D\D}+\ket{\D\U\D}-2\ket{\D\D\U}\big)\Big)\\
+&= \sqrt{\tfrac23}\cdot\tfrac{1}{\sqrt6}\Big(\tfrac12\ket{\U\D\U}-\tfrac12\ket{\D\U\U}+\ket{\U\U\D}\Big)
+ - \tfrac{1}{\sqrt6}\cdot\tfrac{1}{\sqrt6}\Big(\ket{\U\U\D}-2\ket{\D\U\U}\Big)\\
+&= \tfrac13\Big(\tfrac12\ket{\U\D\U}-\tfrac12\ket{\D\U\U}+\ket{\U\U\D}\Big) - \tfrac16\Big(\ket{\U\U\D}-2\ket{\D\U\U}\Big)\\
+&= \tfrac16\Big(\ket{\U\D\U}-\ket{\D\U\U}+2\ket{\U\U\D}-\ket{\U\U\D}+2\ket{\D\U\U}\Big)\\
+&= \tfrac16\Big(\ket{\U\D\U}+\ket{\D\U\U}+\ket{\U\U\D}\Big)
+ = \tfrac{1}{\sqrt{12}}\cdot\tfrac{1}{\sqrt3}\Big(\ket{\U\D\U}+\ket{\D\U\U}+\ket{\U\U\D}\Big)
+ = \tfrac{1}{\sqrt{12}}\,\ket{\tth,\h}.\end{aligned}$$
+    </p>
+    <div class="callout">
+      <span class="label">Two observations</span>
+    <ol type="a">
+      <li>
+      $\tk{\tth}{M}$ is proportional to $\ket{\tth,M}$ only. It must be: there is no other state in the original $\h\oplus\h\oplus\tth$ irreps that transforms like $\tk{\tth}{M}$.
+      </li>
+      <li>
+      The proportionality constant is $\tfrac{1}{\sqrt{12}}$ regardless of $M$. Reason: if $\tk{\tth}{\tth} = k\,\ket{\tth,\tth}$, then applying $J_-$ to both sides pulls out the same $C^-(j,m)$ (here $C^-(\tth,\tth)$) on each side, so we get $\tk{\tth}{\h} = k\,\ket{\tth,\h}$ with the same $k$, and so on down the ladder. The same story holds if the RHS has several $k$'s.
+      </li>
+    </ol>
+    <p>
+      So we conclude
+      $$\tk{\tth}{M} = \tfrac{1}{\sqrt{12}}\,\ket{\tth,M}.$$
+    </p>
+    </div>
+    <p>
+      <b>The $\widetilde{J}=\tfrac12$ tower.</b> Now let us move on to the $\tk{\h}{\pm\h}$ states.
+      $$\begin{aligned}\tk{\h}{\h} &= -\tfrac{1}{\sqrt3}\,\Sl{0}\ka{\h}{2} + \sqrt{\tfrac23}\,\Sl{+1}\ka{\mh}{2}\\
+&= -\tfrac{1}{\sqrt3}\,S^{(2)}_3\Big(\tfrac{1}{\sqrt6}\big(-\ket{\U\D\U}-\ket{\D\U\U}+2\ket{\U\U\D}\big)\Big)\\
+&\qquad + \sqrt{\tfrac23}\Big(-\tfrac{1}{\sqrt2}S^{(2)}_+\Big)\Big(\tfrac{1}{\sqrt6}\big(\ket{\U\D\D}+\ket{\D\U\D}-2\ket{\D\D\U}\big)\Big)\\
+&= -\tfrac{1}{\sqrt{18}}\Big(\tfrac12\ket{\U\D\U}-\tfrac12\ket{\D\U\U}+\ket{\U\U\D}\Big)
+ - \tfrac{1}{\sqrt{18}}\Big(\ket{\U\U\D}-2\ket{\D\U\U}\Big)\\
+&= \tfrac{1}{\sqrt{18}}\Big(-\tfrac12\ket{\U\D\U} - 2\ket{\U\U\D} + \tfrac52\ket{\D\U\U}\Big).\end{aligned}$$
+      $\tk{\h}{\h}$ must be a linear combination of the $\ka{\h}{1}$ and $\ka{\h}{2}$ states. Find the coefficients by calculating inner products:
+      $$\begin{aligned}\big\langle \h,\h,\alpha{=}1 \big\vert \widetilde{\h,\h}\big\rangle^{(2)}
+&= \tfrac{1}{\sqrt2}\big(\bra{\U\D\U}-\bra{\D\U\U}\big)\cdot\tfrac{1}{\sqrt{18}}\Big(-\tfrac12\ket{\U\D\U}-2\ket{\U\U\D}+\tfrac52\ket{\D\U\U}\Big)\\
+&= \tfrac{1}{\sqrt2}\cdot\tfrac{1}{\sqrt{18}}\cdot\big(-\tfrac12\big) - \tfrac{1}{\sqrt2}\cdot\tfrac{1}{\sqrt{18}}\cdot\tfrac52
+ = \tfrac{1}{\sqrt{36}}\,(-3) = -\tfrac12,\\[6pt]
+\big\langle \h,\h,\alpha{=}2 \big\vert \widetilde{\h,\h}\big\rangle^{(2)}
+&= \tfrac{1}{\sqrt6}\big(-\bra{\U\D\U}-\bra{\D\U\U}+2\bra{\U\U\D}\big)\cdot\tfrac{1}{\sqrt{18}}\Big(-\tfrac12\ket{\U\D\U}-2\ket{\U\U\D}+\tfrac52\ket{\D\U\U}\Big)\\
+&= \tfrac{1}{\sqrt6}\cdot\tfrac{1}{\sqrt{18}}\Big(\tfrac12-4-\tfrac52\Big) = \tfrac{1}{\sqrt{108}}\,(-6) = -\tfrac{1}{\sqrt3}.\end{aligned}$$
+      So
+      $$\tk{\h}{\h} = -\tfrac12\,\ka{\h}{1} - \tfrac{1}{\sqrt3}\,\ka{\h}{2}.$$
+    </p>
+    <p>
+      As discussed in point (b) above, if $\tk{\h}{\h} = -\tfrac12\,\ka{\h}{1} - \tfrac{1}{\sqrt3}\,\ka{\h}{2}$, then we expect
+      $$\tk{\h}{\mh} = -\tfrac12\,\ka{\mh}{1} - \tfrac{1}{\sqrt3}\,\ka{\mh}{2}.$$
+      Let us check this explicitly:
+      $$\begin{aligned}\tk{\h}{\mh} &= \tfrac{1}{\sqrt3}\,\Sl{0}\ka{\mh}{2} - \sqrt{\tfrac23}\,\Sl{-1}\ka{\h}{2}\\
+&= \tfrac{1}{\sqrt3}\,S^{(2)}_3\Big(\tfrac{1}{\sqrt6}\big(\ket{\U\D\D}+\ket{\D\U\D}-2\ket{\D\D\U}\big)\Big)\\
+&\qquad - \sqrt{\tfrac23}\cdot\tfrac{1}{\sqrt2}S^{(2)}_-\Big(\tfrac{1}{\sqrt6}\big(-\ket{\U\D\U}-\ket{\D\U\U}+2\ket{\U\U\D}\big)\Big)\\
+&= \tfrac{1}{\sqrt{18}}\Big(-\tfrac12\ket{\U\D\D}+\tfrac12\ket{\D\U\D}+\ket{\D\D\U}\Big) - \tfrac{1}{\sqrt{18}}\Big(0-\ket{\D\D\U}+2\ket{\U\D\D}\Big)\\
+&= \tfrac{1}{\sqrt{18}}\Big(-\tfrac52\ket{\U\D\D}+\tfrac12\ket{\D\U\D}+2\ket{\D\D\U}\Big).\end{aligned}$$
+      So
+      $$\begin{aligned}\big\langle \h,\mh,\alpha{=}1 \big\vert \widetilde{\h,\mh}\big\rangle^{(2)}
+&= \tfrac{1}{\sqrt2}\big(\bra{\U\D\D}-\bra{\D\U\D}\big)\cdot\tfrac{1}{\sqrt{18}}\Big(-\tfrac52\ket{\U\D\D}+\tfrac12\ket{\D\U\D}+2\ket{\D\D\U}\Big)\\
+&= \tfrac{1}{\sqrt2}\cdot\tfrac{1}{\sqrt{18}}\Big(-\tfrac52-\tfrac12\Big) = -\tfrac{3}{\sqrt{36}} = -\tfrac12,\\[6pt]
+\big\langle \h,\mh,\alpha{=}2 \big\vert \widetilde{\h,\mh}\big\rangle^{(2)}
+&= \tfrac{1}{\sqrt6}\big(\bra{\U\D\D}+\bra{\D\U\D}-2\bra{\D\D\U}\big)\cdot\tfrac{1}{\sqrt{18}}\Big(-\tfrac52\ket{\U\D\D}+\tfrac12\ket{\D\U\D}+2\ket{\D\D\U}\Big)\\
+&= \tfrac{1}{\sqrt6}\cdot\tfrac{1}{\sqrt{18}}\Big(-\tfrac52+\tfrac12-4\Big) = \tfrac{1}{\sqrt3}\cdot\tfrac16\cdot(-6) = -\tfrac{1}{\sqrt3}.\end{aligned}$$
+      This agrees with the claim above. &#10003;
+    </p>
+    <p>
+      Note that the tilde states are not unit vectors:
+      $$\big\lVert\tk{\tth}{M}\big\rVert^2 = \tfrac1{12},\qquad
+\big\lVert\tk{\h}{M}\big\rVert^2 = \big(\tfrac12\big)^2+\big(\tfrac1{\sqrt3}\big)^2 = \tfrac{7}{12}.$$
+      The symbolic orthonormality of Route 2 is not inherited by the actual vectors; only their mutual orthogonality is.
+    </p>
+    <p>
+      <b>Reduced matrix elements.</b> Therefore:
+      $$\tk{\tth}{M} = k^{3/2,\,1/2}_{2,\,3/2}\,\ket{\tth,M} = \tfrac{1}{\sqrt{12}}\,\ket{\tth,M},$$
+      $$\begin{aligned}\tk{\h}{M} &= k^{1/2,\,1/2}_{2,\,\beta=1}\,\kb{M}{1} + k^{1/2,\,1/2}_{2,\,\beta=2}\,\kb{M}{2}\\
+&= -\tfrac12\,\kb{M}{1} - \tfrac{1}{\sqrt3}\,\kb{M}{2}.\end{aligned}$$
+    </p>
+    <div class="callout">
+      <span class="label">The reduced matrix element $k^{J,j}_{\alpha,\beta}$</span>
+    <p>
+      In $k^{J,j}_{\alpha,\beta}$:
+    </p>
+    <ul>
+      <li>
+      $\alpha$ is the degeneracy index of the irrep used in the highest-weight construction (HWC). Here $\alpha=2$: the tilde states come from the HWC on the $\alpha=2$ spin-$\h$ irrep.
+      </li>
+      <li>
+      $\beta$ is the degeneracy index of the irreps in the original basis that the tilde states land in. The $\tth$ irrep occurs only once, so it is labelled simply by its spin, $\beta=\tth$.
+      </li>
+      <li>
+      $J$ is the total spin of the tilde states, i.e. of (tensor operator)&thinsp;$\otimes$&thinsp;(HWC irrep), which is also the spin of the original basis states they land in.
+      </li>
+      <li>
+      $j$ is the total spin of the HWC irrep.
+      </li>
+    </ul>
+    </div>
+
+    <!-- ================================================================ -->
+    <hr class="section-divider">
+    <h3 class="section-anchor" id="matrix-elements">Step 4: connecting back to matrix elements</h3>
+
+    <p>
+      Ultimately we want to compute matrix elements
+      $$\big\langle J,M,\beta \big\vert\, \Sl{l} \,\big\vert j,m,\alpha \big\rangle ,$$
+      and we want to connect these quantities to the reduced matrix elements $k^{J,j}_{\alpha,\beta}$.
+    </p>
+    <p>
+      Recall the &ldquo;isomorphism&rdquo;
+      $$O^s_l\ket{j,m} \;\longleftrightarrow\; \ket{s,l}\ket{j,m},
+\qquad\text{which implies}\qquad
+\lvert\widetilde{J,M}\rangle \;\longleftrightarrow\; \ket{J,M}.$$
+      Therefore the Clebsch&ndash;Gordan coefficients relate both $\ket{J,M}$ to $\ket{s,l}\ket{j,m}$ <i>and</i> $\lvert\widetilde{J,M}\rangle$ to $O^s_l\ket{j,m}$; only linearity of the correspondence is needed for this. So using Clebsch&ndash;Gordan coefficients we can express $\lvert\widetilde{J,M}\rangle$ in terms of $O^s_l\ket{j,m}$, and vice versa.
+    </p>
+    <p>
+      So the plan is:
+    </p>
+    <ol>
+      <li>
+      Express $O^s_l\ket{j,m}$ in terms of the $\lvert\widetilde{J,M}\rangle$ states.
+      </li>
+      <li>
+      Expand the $\lvert\widetilde{J,M}\rangle$ states in terms of the $k^{J,j}_{\alpha,\beta}$ and the original $\ket{J,M,\beta}$ states.
+      </li>
+      <li>
+      Hit both sides with $\bra{J,M,\beta}$.
+      </li>
+    </ol>
+    <p>
+      <b>Step 1 of the plan.</b> Copy the Clebsch&ndash;Gordan coefficients for $1\otimes\h$ (rows $\ket{J,M}$, columns $\ket{1,l}\ket{\h,m}$):
+      $$\begin{array}{c|cccccc}
+ & \ket{1,1}\ket{\h,\h} & \ket{1,1}\ket{\h,\mh} & \ket{1,0}\ket{\h,\h} & \ket{1,0}\ket{\h,\mh} & \ket{1,-1}\ket{\h,\h} & \ket{1,-1}\ket{\h,\mh}\\ \hline
+\ket{\tth,\tth} & 1 & 0 & 0 & 0 & 0 & 0\\
+\ket{\tth,\h} & 0 & \sqrt{\tfrac13} & \sqrt{\tfrac23} & 0 & 0 & 0\\
+\ket{\tth,\mh} & 0 & 0 & 0 & \sqrt{\tfrac23} & \sqrt{\tfrac13} & 0\\
+\ket{\tth,\mtth} & 0 & 0 & 0 & 0 & 0 & 1\\
+\ket{\h,\h} & 0 & \sqrt{\tfrac23} & -\sqrt{\tfrac13} & 0 & 0 & 0\\
+\ket{\h,\mh} & 0 & 0 & 0 & \sqrt{\tfrac13} & -\sqrt{\tfrac23} & 0
+\end{array}$$
+      Reading along a row gives a coupled state in terms of product states; for example
+      $$\ket{\tth,\h} = \sqrt{\tfrac13}\,\ket{1,1}\ket{\h,\mh} + \sqrt{\tfrac23}\,\ket{1,0}\ket{\h,\h}.$$
+      The matrix is real orthogonal, so reading down a column gives the inverse expansion; for example
+      $$\ket{1,0}\ket{\h,\mh} = \sqrt{\tfrac23}\,\ket{\tth,\mh} + \sqrt{\tfrac13}\,\ket{\h,\mh}.$$
+      And by the &ldquo;isomorphism&rdquo; we have, for example,
+      $$\Sl{0}\ka{\mh}{2} = \sqrt{\tfrac23}\,\tk{\tth}{\mh} + \sqrt{\tfrac13}\,\tk{\h}{\mh}.$$
+    </p>
+    <p>
+      <b>Steps 2 and 3 of the plan.</b> Now plug in the expansion in terms of reduced matrix elements:
+      $$\begin{aligned}\underbrace{\Sl{0}}_{l}\,\big\vert\underbrace{\tfrac12}_{j},\underbrace{-\tfrac12}_{m},\alpha{=}2\big\rangle
+&= \underbrace{\sqrt{\tfrac23}}_{\text{CG}}\Big(\underbrace{k^{J=3/2,\,j=1/2}_{\alpha=2,\,\beta=3/2}}_{\text{RME}}\,\big\vert\underbrace{\tfrac32}_{J},-\tfrac12\big\rangle\Big)\\
+&\quad+ \underbrace{\tfrac{1}{\sqrt3}}_{\text{CG}}\Big(\underbrace{k^{J=1/2,\,j=1/2}_{\alpha=2,\,\beta=1}}_{\text{RME}}\,\kb{\mh}{1} + \underbrace{k^{J=1/2,\,j=1/2}_{\alpha=2,\,\beta=2}}_{\text{RME}}\,\kb{\mh}{2}\Big).\end{aligned}$$
+      So, for example, if we hit this with $\big\langle J{=}\tfrac12,M{=}{-}\tfrac12,\beta{=}1\big\vert$, we get
+      $$\begin{aligned}&\big\langle J{=}\tfrac12,M{=}{-}\tfrac12,\beta{=}1 \big\vert\, \Sl{0} \,\big\vert j{=}\tfrac12,m{=}{-}\tfrac12,\alpha{=}2\big\rangle\\[2pt]
+&\qquad= \underbrace{\big\langle J{=}\tfrac12,M{=}{-}\tfrac12 \,\big\vert\, s{=}1,l{=}0;\, j{=}\tfrac12,m{=}{-}\tfrac12\big\rangle}_{=\,1/\sqrt3}\;\cdot\;\underbrace{k^{J=1/2,\,j=1/2}_{\alpha=2,\,\beta=1}}_{=\,-1/2}\\[4pt]
+&\qquad= \big\langle J{=}\tfrac12,M{=}{-}\tfrac12 \,\big\vert\, s{=}1,l{=}0;\, j{=}\tfrac12,m{=}{-}\tfrac12\big\rangle\,
+\big\langle J{=}\tfrac12,\beta{=}1 \,\big\Vert\, S^1 \,\big\Vert\, j{=}\tfrac12,\alpha{=}2\big\rangle,\end{aligned}$$
+      exactly as in the statement of the Wigner&ndash;Eckart theorem. As a direct check,
+      $$S^{(2)}_3\ka{\mh}{2} = \tfrac{1}{\sqrt6}\Big(-\tfrac12\ket{\U\D\D}+\tfrac12\ket{\D\U\D}+\ket{\D\D\U}\Big),$$
+      whose overlap with $\ka{\mh}{1}=\tfrac1{\sqrt2}\big(\ket{\U\D\D}-\ket{\D\U\D}\big)$ is
+      $$\tfrac{1}{\sqrt{12}}\Big(-\tfrac12-\tfrac12\Big) = -\tfrac{1}{2\sqrt3} = \tfrac{1}{\sqrt3}\cdot\Big(-\tfrac12\Big). \;\checkmark$$
+    </p>
+    <div class="callout">
+      <span class="label">Conclusion</span>
+    <p>
+      $k^{J,j}_{\alpha,\beta}$ as defined above is exactly the reduced matrix element
+      $$k^{J,j}_{\alpha,\beta} = \big\langle J,\beta \,\big\Vert\, O^s \,\big\Vert\, j,\alpha \big\rangle$$
+      as it appears in the Wigner&ndash;Eckart theorem.
+    </p>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1em 0;">
+
+  </main>
+
+  <script>
+    const tocList = document.getElementById("toc-list");
+    const headers = document.querySelectorAll("h3");
+
+    headers.forEach((header, index) => {
+      if (!header.id) {
+        header.id = `section-${index + 1}`;
+      }
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${header.id}`;
+      a.textContent = header.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  </script>
+</body>
+</html>
